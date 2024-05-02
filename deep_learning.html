@@ -1,0 +1,2522 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Deep Learning para la predicción de series temporales &#8212; Análisis y Predicción de Series de Tiempo</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'deep_learning';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bibliografía" href="biblio.html" />
+    <link rel="prev" title="Modelos autorregresivos integrados de media móvil" href="arima_model.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo-uninorte.png" class="logo__image only-light" alt="Análisis y Predicción de Series de Tiempo - Home"/>
+    <script>document.write(`<img src="_static/logo-uninorte.png" class="logo__image only-dark" alt="Análisis y Predicción de Series de Tiempo - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Análisis y Predicción de Series de Tiempo
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="statistical_background.html">Introducción a las Series de Tiempo</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="exponential_smoothing.html">Métodos de Suavización Exponencial</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="arima_model.html">Modelos autorregresivos integrados de media móvil</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Deep Learning para la predicción de series temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fdeep_learning.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/deep_learning.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Deep Learning para la predicción de series temporales</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perceptrones-multicapa">Perceptrones multicapa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-de-mlp">Entrenamiento de MLP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlp-para-la-prevision-de-series-temporales">MLP para la previsión de series temporales</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="deep-learning-para-la-prediccion-de-series-temporales">
+<h1>Deep Learning para la predicción de series temporales<a class="headerlink" href="#deep-learning-para-la-prediccion-de-series-temporales" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Hasta ahora, en este curso hemos descrito <code class="docutils literal notranslate"><span class="pre">métodos</span> <span class="pre">estadísticos</span></code> tradicionales para el análisis de series temporales. En los capítulos anteriores, hemos analizado varios métodos para predecir la serie en un momento futuro a partir de observaciones tomadas en el pasado. Uno de estos métodos para realizar predicciones es el <code class="docutils literal notranslate"><span class="pre">modelo</span> <span class="pre">autorregresivo</span></code> (<span class="math notranslate nohighlight">\(AR\)</span>), que expresa la serie en el tiempo <span class="math notranslate nohighlight">\(t\)</span> como una <code class="docutils literal notranslate"><span class="pre">regresión</span> <span class="pre">lineal</span></code> de <span class="math notranslate nohighlight">\(p\)</span> observaciones anteriores</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+y_{t}=\omega_{0}+\sum_{i=1}^{p}\omega_{i}y_{t-i}+\varepsilon_{t}.
+\]</div>
+<ul class="simple">
+<li><p>Aquí, <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span> es el término de <code class="docutils literal notranslate"><span class="pre">error</span> <span class="pre">residual</span></code> del modelo <span class="math notranslate nohighlight">\(AR\)</span>. La idea que subyace al modelo lineal puede generalizarse en el sentido de que el objetivo de la predicción de series temporales es <code class="docutils literal notranslate"><span class="pre">desarrollar</span> <span class="pre">una</span> <span class="pre">función</span></code> <span class="math notranslate nohighlight">\(f\)</span> <code class="docutils literal notranslate"><span class="pre">que</span> <span class="pre">prediga</span></code> <span class="math notranslate nohighlight">\(y_{t}\)</span> <code class="docutils literal notranslate"><span class="pre">en</span> <span class="pre">función</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">observaciones</span> <span class="pre">en</span></code> <span class="math notranslate nohighlight">\(p\)</span> <code class="docutils literal notranslate"><span class="pre">valores</span> <span class="pre">previos</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">tiempo</span></code></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+y_{t}=f(y_{t-1}, y_{t-2}, \dots, y_{t-p}).
+\]</div>
+<ul class="simple">
+<li><p>En este capítulo, exploraremos tres <code class="docutils literal notranslate"><span class="pre">métodos</span> <span class="pre">basados</span> <span class="pre">en</span> <span class="pre">redes</span> <span class="pre">neuronales</span> <span class="pre">para</span> <span class="pre">desarrollar</span> <span class="pre">la</span> <span class="pre">función</span></code> <span class="math notranslate nohighlight">\(f\)</span>. Cada método incluye la definición de una <code class="docutils literal notranslate"><span class="pre">arquitectura</span> <span class="pre">de</span> <span class="pre">red</span> <span class="pre">neuronal</span></code> (en términos del <code class="docutils literal notranslate"><span class="pre">número</span> <span class="pre">de</span> <span class="pre">capas</span> <span class="pre">ocultas,</span> <span class="pre">número</span> <span class="pre">de</span> <span class="pre">neuronas</span> <span class="pre">en</span> <span class="pre">cada</span> <span class="pre">capa</span> <span class="pre">oculta</span></code>, etc.) y luego el algoritmo <code class="docutils literal notranslate"><span class="pre">backpropagation</span></code> o su variante adecuada para la arquitectura de red utilizada.</p></li>
+</ul>
+<ul class="simple">
+<li><p>En los últimos años ha resurgido el interés por las redes neuronales. Esto ha sido posible gracias a la disponibilidad de abundantes datos de entrenamiento procedentes de medios digitales y a un acceso más económico a la <code class="docutils literal notranslate"><span class="pre">computación</span> <span class="pre">paralela</span> <span class="pre">basada</span> <span class="pre">en</span> <span class="pre">GPU</span></code>. Estos factores han permitido entrenar redes neuronales con cientos de miles y, en algunos casos, millones de parámetros. Redes neuronales de distintas arquitecturas se han aplicado con éxito para resolver <code class="docutils literal notranslate"><span class="pre">problemas</span> <span class="pre">de</span> <span class="pre">visión</span> <span class="pre">por</span> <span class="pre">computadora,</span> <span class="pre">reconocimiento</span> <span class="pre">de</span> <span class="pre">voz</span> <span class="pre">y</span> <span class="pre">traducción</span> <span class="pre">de</span> <span class="pre">lenguaje</span> <span class="pre">natural</span></code>. Investigaciones y practicas de diseño y entrenamiento de redes neuronales en estas áreas se conoce popularmente como <code class="docutils literal notranslate"><span class="pre">aprendizaje</span> <span class="pre">profundo</span></code> que, como el nombre, es indicativo de las <code class="docutils literal notranslate"><span class="pre">numerosas</span> <span class="pre">capas</span> <span class="pre">ocultas</span> <span class="pre">utilizadas</span> <span class="pre">en</span> <span class="pre">estos</span> <span class="pre">modelos</span></code>.</p></li>
+</ul>
+<ul class="simple">
+<li><p>El aprendizaje profundo ha dado lugar a interesantes arquitecturas neuronales diseñadas para abordar las <code class="docutils literal notranslate"><span class="pre">características</span> <span class="pre">estructurales</span> <span class="pre">especiales</span> <span class="pre">de</span> <span class="pre">datos</span> <span class="pre">sobre</span> <span class="pre">imagenes</span> <span class="pre">y</span> <span class="pre">lenguaje</span></code>. Por ejemplo las <code class="docutils literal notranslate"><span class="pre">redes</span> <span class="pre">neuronales</span> <span class="pre">convolucionales</span> <span class="pre">(CNN)</span> <span class="pre">están</span> <span class="pre">diseñadas</span> <span class="pre">para</span> <span class="pre">aprovechar</span> <span class="pre">las</span> <span class="pre">estructuras</span> <span class="pre">bidimensionales</span> <span class="pre">o</span> <span class="pre">tridimensionales</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">imágenes</span></code>, mientras que la mayoría de <code class="docutils literal notranslate"><span class="pre">los</span> <span class="pre">modelos</span> <span class="pre">lingüísticos</span> <span class="pre">utilizan</span> <span class="pre">redes</span> <span class="pre">neuronales</span> <span class="pre">recurrentes</span> <span class="pre">(RNN)</span> <span class="pre">que</span> <span class="pre">admiten</span> <span class="pre">secuencias</span> <span class="pre">y</span> <span class="pre">memoria</span> <span class="pre">inherente</span> <span class="pre">a</span> <span class="pre">las</span> <span class="pre">idiomas</span> <span class="pre">hablados</span> <span class="pre">y</span> <span class="pre">escritos</span></code>. Estos nuevos avances también se han aplicado a ámbitos en los que tradicionalmente dominaba el aprendizaje automático estadístico. Uno de ellos es la <code class="docutils literal notranslate"><span class="pre">predicción</span> <span class="pre">de</span> <span class="pre">series</span> <span class="pre">temporales</span></code>.</p></li>
+</ul>
+<ul class="simple">
+<li><p>En este capítulo <code class="docutils literal notranslate"><span class="pre">exploraremos</span> <span class="pre">tres</span> <span class="pre">tipos</span> <span class="pre">diferentes</span> <span class="pre">de</span> <span class="pre">redes</span> <span class="pre">neuronales</span> <span class="pre">para</span> <span class="pre">la</span> <span class="pre">predicción</span> <span class="pre">de</span> <span class="pre">series</span> <span class="pre">temporales</span></code>. Empezaremos con los <code class="docutils literal notranslate"><span class="pre">perceptrones</span> <span class="pre">multicapa</span> <span class="pre">(MLP)</span></code>. A continuación <code class="docutils literal notranslate"><span class="pre">redes</span> <span class="pre">neuronales</span> <span class="pre">recurrentes</span></code> que se adaptan a la disposición secuencial de los puntos de datos. Por último, las <code class="docutils literal notranslate"><span class="pre">redes</span> <span class="pre">neuronales</span> <span class="pre">convolucionales</span></code>, que se utilizan sobre todo con imágenes, pero discutiremos como formas especiales de <code class="docutils literal notranslate"><span class="pre">CNN</span></code> pueden ser usadas para la predicción de series temporales. Estos temas se tratarán explicando la arquitectura de la red y cómo puede aplicarse a la previsión de series temporales. Las demostraciones de código muestran cómo utilizar las bibliotecas de aprendizaje automático para desarrollar modelos de predicción de series temporales.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Los ejemplos de este capítulo serán implementados utilizando la <code class="docutils literal notranslate"><span class="pre">API</span> <span class="pre">Keras</span></code> para el aprendizaje profundo. <code class="docutils literal notranslate"><span class="pre">Keras</span></code> es una <code class="docutils literal notranslate"><span class="pre">API</span></code> de alto nivel que permite <code class="docutils literal notranslate"><span class="pre">definir</span> <span class="pre">diferentes</span> <span class="pre">arquitecturas</span> <span class="pre">de</span> <span class="pre">redes</span> <span class="pre">neuronales</span> <span class="pre">y</span> <span class="pre">entrenarlas</span> <span class="pre">utilizando</span> <span class="pre">varios</span> <span class="pre">optimizadores</span> <span class="pre">basados</span> <span class="pre">en</span> <span class="pre">gradientes</span></code>. En el <code class="docutils literal notranslate"><span class="pre">backend,</span> <span class="pre">Keras</span></code> utiliza un marco computacional de bajo nivel implementado en <code class="docutils literal notranslate"><span class="pre">C,</span> <span class="pre">C++</span></code> y <code class="docutils literal notranslate"><span class="pre">FORTRAN</span></code>. Varios de estos entornos de bajo nivel están disponibles en código abierto. <code class="docutils literal notranslate"><span class="pre">Keras</span></code> soporta los tres siguientes entornos: <code class="docutils literal notranslate"><span class="pre">TensorFlow,</span> <span class="pre">que</span> <span class="pre">fue</span> <span class="pre">desarrollado</span> <span class="pre">por</span> <span class="pre">Google</span></code> y es el <code class="docutils literal notranslate"><span class="pre">backend</span></code> por defecto de <code class="docutils literal notranslate"><span class="pre">Keras,</span> <span class="pre">CNTK,</span> <span class="pre">un</span> <span class="pre">marco</span> <span class="pre">de</span> <span class="pre">código</span> <span class="pre">abierto</span> <span class="pre">de</span> <span class="pre">Microsoft</span></code>, y <code class="docutils literal notranslate"><span class="pre">Theano,</span> <span class="pre">desarrollado</span> <span class="pre">originalmente</span> <span class="pre">en</span> <span class="pre">la</span> <span class="pre">Universidad</span> <span class="pre">de</span> <span class="pre">Montreal,</span> <span class="pre">Canadá</span></code>. Los ejemplos de este libro utilizan <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> como backend. Por lo tanto, para ejecutar los ejemplos, necesitarás tanto <code class="docutils literal notranslate"><span class="pre">Keras</span></code> como <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> instalados.</p></li>
+</ul>
+<section id="perceptrones-multicapa">
+<h2>Perceptrones multicapa<a class="headerlink" href="#perceptrones-multicapa" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Los <code class="docutils literal notranslate"><span class="pre">perceptrones</span> <span class="pre">multicapa</span> <span class="pre">(MLP)</span></code> son las formas más básicas de las redes neuronales. Un <code class="docutils literal notranslate"><span class="pre">MLP</span></code> consta de tres componentes: una <code class="docutils literal notranslate"><span class="pre">capa</span> <span class="pre">de</span> <span class="pre">entrada</span></code>, varias <code class="docutils literal notranslate"><span class="pre">capas</span> <span class="pre">ocultas</span></code> y una <code class="docutils literal notranslate"><span class="pre">capa</span> <span class="pre">de</span> <span class="pre">salida</span></code>. Una <code class="docutils literal notranslate"><span class="pre">capa</span> <span class="pre">de</span> <span class="pre">entrada</span> <span class="pre">representa</span> <span class="pre">un</span> <span class="pre">vector</span> <span class="pre">de</span> <span class="pre">regresores</span> <span class="pre">o</span> <span class="pre">características</span> <span class="pre">de</span> <span class="pre">entrada</span></code>, por ejemplo, observaciones a partir de <span class="math notranslate nohighlight">\(p\)</span> puntos previos en el tiempo <span class="math notranslate nohighlight">\([y_{t-1}, y_{t-2}, \dots, y_{t-p}]\)</span>. Las <code class="docutils literal notranslate"><span class="pre">características</span> <span class="pre">de</span> <span class="pre">entrada</span> <span class="pre">se</span> <span class="pre">introducen</span> <span class="pre">en</span> <span class="pre">una</span> <span class="pre">capa</span> <span class="pre">oculta</span></code> que tiene <span class="math notranslate nohighlight">\(n\)</span> neuronas, cada una de las cuales aplica una <code class="docutils literal notranslate"><span class="pre">transformación</span> <span class="pre">lineal</span></code> y una <code class="docutils literal notranslate"><span class="pre">activación</span> <span class="pre">no</span> <span class="pre">lineal</span></code> a las características de entrada.</p></li>
+</ul>
+<ul>
+<li><p>La salida de una neurona es <span class="math notranslate nohighlight">\(g_{i} = h(\boldsymbol{w}_{i}x + b_{i})\)</span>, donde <span class="math notranslate nohighlight">\(\boldsymbol{w}_{i}\)</span> y <span class="math notranslate nohighlight">\(b_{i}\)</span> son los <code class="docutils literal notranslate"><span class="pre">pesos</span> <span class="pre">y</span> <span class="pre">el</span> <span class="pre">sesgo</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">transformación</span> <span class="pre">lineal</span></code>, y <span class="math notranslate nohighlight">\(h\)</span> es una <code class="docutils literal notranslate"><span class="pre">función</span> <span class="pre">de</span> <span class="pre">activación</span> <span class="pre">no</span> <span class="pre">lineal</span></code>. La función de activación no lineal permite a la red neuronal <code class="docutils literal notranslate"><span class="pre">modelar</span> <span class="pre">no</span> <span class="pre">linealidades</span> <span class="pre">complejas</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">relaciones</span> <span class="pre">subyacentes</span> <span class="pre">entre</span> <span class="pre">los</span> <span class="pre">regresores</span> <span class="pre">y</span> <span class="pre">la</span> <span class="pre">variable</span> <span class="pre">objetivo</span></code>. Popularmente, <span class="math notranslate nohighlight">\(h\)</span> es la función <code class="docutils literal notranslate"><span class="pre">sigmoid</span></code></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \\[1mm]
+    h(z)=\displaystyle{\frac{1}{1-e^{-z}}},
+    \end{split}\]</div>
+<p>que mapea cualquier número real al intervalo <span class="math notranslate nohighlight">\([0, 1]\)</span>.</p>
+</li>
+</ul>
+<ul>
+<li><p>Debido a esta propiedad, <code class="docutils literal notranslate"><span class="pre">la</span> <span class="pre">función</span> <span class="pre">sigmoidea</span> <span class="pre">se</span> <span class="pre">utiliza</span> <span class="pre">para</span> <span class="pre">generar</span> <span class="pre">probabilidades</span> <span class="pre">de</span> <span class="pre">clase</span> <span class="pre">binarias</span> <span class="pre">y,</span> <span class="pre">por</span> <span class="pre">tanto,</span> <span class="pre">es</span> <span class="pre">comunmente</span> <span class="pre">usada</span> <span class="pre">en</span> <span class="pre">los</span> <span class="pre">modelos</span> <span class="pre">de</span> <span class="pre">clasificación</span></code>. Otra opción de función de activación no lineal es la función <code class="docutils literal notranslate"><span class="pre">tanh</span></code></p>
+<div class="math notranslate nohighlight">
+\[
+    h(z)=\displaystyle{\frac{1-e^{-z}}{1+e^{-z}}},
+    \]</div>
+<p>la cual mapea cualquier número real al intervalo <span class="math notranslate nohighlight">\([-1, 1]\)</span>. En algunos casos la función <span class="math notranslate nohighlight">\(h\)</span> es una <code class="docutils literal notranslate"><span class="pre">función</span> <span class="pre">lineal</span> <span class="pre">o</span> <span class="pre">la</span> <span class="pre">identidad</span></code>.</p>
+</li>
+</ul>
+<ul class="simple">
+<li><p>En el caso de una <code class="docutils literal notranslate"><span class="pre">red</span> <span class="pre">neuronal</span> <span class="pre">de</span> <span class="pre">una</span> <span class="pre">sola</span> <span class="pre">capa</span> <span class="pre">oculta</span></code>, como se muestra en <a class="reference internal" href="#single-hidden-layer"><span class="std std-numref">Fig. 4</span></a>, la salida de cada neurona se pasa a la capa de salida, que aplica una <code class="docutils literal notranslate"><span class="pre">transformación</span> <span class="pre">lineal</span> <span class="pre">y</span> <span class="pre">función</span> <span class="pre">de</span> <span class="pre">activación</span> <span class="pre">para</span> <span class="pre">generar</span> <span class="pre">la</span> <span class="pre">predicción</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">variable</span> <span class="pre">objetivo</span></code>, que, en el caso de la predicción de series temporales, es el valor predicho de la serie en el tiempo <span class="math notranslate nohighlight">\(t\)</span></p></li>
+</ul>
+<figure class="align-center" id="single-hidden-layer">
+<a class="reference internal image-reference" href="_images/single_hidden_layer.png"><img alt="_images/single_hidden_layer.png" src="_images/single_hidden_layer.png" style="width: 450.0px; height: 400.5px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Red neuronal con una sola capa oculta.</span><a class="headerlink" href="#single-hidden-layer" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>En un <code class="docutils literal notranslate"><span class="pre">MLP</span></code> (ver <a class="reference internal" href="#multiple-hidden-layer"><span class="std std-numref">Fig. 5</span></a>), se agrupan varias capas ocultas. <code class="docutils literal notranslate"><span class="pre">La</span> <span class="pre">salida</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">neuronas</span> <span class="pre">de</span> <span class="pre">una</span> <span class="pre">capa</span> <span class="pre">oculta</span> <span class="pre">se</span> <span class="pre">introduce</span> <span class="pre">en</span> <span class="pre">la</span> <span class="pre">siguiente</span> <span class="pre">capa</span> <span class="pre">oculta</span></code>. Las neuronas de esta capa transforman la entrada y la pasan a la siguiente capa oculta. Finalmente, <code class="docutils literal notranslate"><span class="pre">la</span> <span class="pre">última</span> <span class="pre">capa</span> <span class="pre">oculta</span> <span class="pre">alimenta</span> <span class="pre">la</span> <span class="pre">capa</span> <span class="pre">de</span> <span class="pre">salida</span></code></p></li>
+</ul>
+<figure class="align-center" id="multiple-hidden-layer">
+<a class="reference internal image-reference" href="_images/multiple_hidden_layer.png"><img alt="_images/multiple_hidden_layer.png" src="_images/multiple_hidden_layer.png" style="width: 690.0px; height: 405.72px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Red neuronal con múltiples capas ocultas.</span><a class="headerlink" href="#multiple-hidden-layer" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>Las capas ocultas del <code class="docutils literal notranslate"><span class="pre">MLP</span></code> también se denominan <code class="docutils literal notranslate"><span class="pre">capas</span> <span class="pre">densas</span> <span class="pre">o,</span> <span class="pre">a</span> <span class="pre">veces,</span> <span class="pre">capas</span> <span class="pre">totalmente</span> <span class="pre">conectadas</span></code>. El nombre denso tiene su significado en el hecho de que todas <code class="docutils literal notranslate"><span class="pre">las</span> <span class="pre">neuronas</span> <span class="pre">de</span> <span class="pre">una</span> <span class="pre">capa</span> <span class="pre">densa</span> <span class="pre">están</span> <span class="pre">conectadas</span> <span class="pre">a</span> <span class="pre">todas</span> <span class="pre">las</span> <span class="pre">neuronas</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">capa</span> <span class="pre">anterior</span> <span class="pre">y</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">siguiente</span></code>. Si la capa anterior es la capa de entrada, todas las características de entrada alimentan a cada una de las neuronas de la capa oculta. <code class="docutils literal notranslate"><span class="pre">Debido</span> <span class="pre">a</span> <span class="pre">las</span> <span class="pre">conexiones</span> <span class="pre">múltiples</span> <span class="pre">entre</span> <span class="pre">la</span> <span class="pre">capa</span> <span class="pre">de</span> <span class="pre">entrada</span> <span class="pre">y</span> <span class="pre">la</span> <span class="pre">primera</span> <span class="pre">capa</span> <span class="pre">densa</span> <span class="pre">y</span> <span class="pre">entre</span> <span class="pre">las</span> <span class="pre">capas</span> <span class="pre">densas</span> <span class="pre">intermedias,</span> <span class="pre">un</span> <span class="pre">MLP</span> <span class="pre">tiene</span> <span class="pre">un</span> <span class="pre">número</span> <span class="pre">enorme</span> <span class="pre">de</span> <span class="pre">pesos</span> <span class="pre">entrenables</span></code>. Por ejemplo, si el número de características de entrada es <span class="math notranslate nohighlight">\(p\)</span> y hay tres capas densas que tienen número de neuronas <span class="math notranslate nohighlight">\(n_{1}, n_{2}\)</span> y <span class="math notranslate nohighlight">\(n_{3}\)</span> respectivamente, entonces el número de pesos entrenables es</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+p\times n_{1}+n_{1}\times n_{2}+n_{2}\times n_{3}+n_{3}.
+\]</div>
+<ul class="simple">
+<li><p>El último elemento de este cálculo es el número de pesos que conectan la tercera capa oculta y la capa de salida. Los <code class="docutils literal notranslate"><span class="pre">MLP</span> <span class="pre">profundos</span> <span class="pre">tienen</span> <span class="pre">varias</span> <span class="pre">capas</span> <span class="pre">densas</span> <span class="pre">y</span> <span class="pre">cientos,</span> <span class="pre">incluso</span> <span class="pre">miles,</span> <span class="pre">de</span> <span class="pre">neuronas</span> <span class="pre">en</span> <span class="pre">cada</span> <span class="pre">capa</span></code>. Por lo tanto, el número de pesos entrenables en los MLP profundos es muy grande.</p></li>
+</ul>
+</section>
+<section id="entrenamiento-de-mlp">
+<h2>Entrenamiento de MLP<a class="headerlink" href="#entrenamiento-de-mlp" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Los pesos <span class="math notranslate nohighlight">\(w\)</span> de una red neuronal se calculan mediante un algoritmo de optimización basado en el gradiente, como el <code class="docutils literal notranslate"><span class="pre">gradiente</span> <span class="pre">decendiente</span> <span class="pre">estocástico,</span> <span class="pre">que</span> <span class="pre">minimiza</span> <span class="pre">iterativamente</span> <span class="pre">la</span> <span class="pre">función</span> <span class="pre">de</span> <span class="pre">pérdida</span> <span class="pre">o</span> <span class="pre">el</span> <span class="pre">error</span></code> (<span class="math notranslate nohighlight">\(L\)</span>) en que incurre la red al hacer predicciones sobre los datos de entrenamiento. El <code class="docutils literal notranslate"><span class="pre">error</span> <span class="pre">cuadrático</span> <span class="pre">medio</span></code> (<span class="math notranslate nohighlight">\(MSE\)</span>) y el <code class="docutils literal notranslate"><span class="pre">error</span> <span class="pre">absoluto</span> <span class="pre">medio</span></code> (<span class="math notranslate nohighlight">\(MAE\)</span>) se utilizan para <code class="docutils literal notranslate"><span class="pre">tareas</span> <span class="pre">de</span> <span class="pre">regresión</span></code>, mientras que la pérdida binaria y categórica logarítmica son funciones de pérdida habituales en los problemas de clasificación.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Para la previsión de series temporales, <span class="math notranslate nohighlight">\(MSE\)</span> y <span class="math notranslate nohighlight">\(MAE\)</span> serían aptos para entrenar los modelos neuronales. <code class="docutils literal notranslate"><span class="pre">Los</span> <span class="pre">algoritmos</span> <span class="pre">gradiente</span> <span class="pre">descendiente</span> <span class="pre">funcionan</span> <span class="pre">moviendo</span> <span class="pre">los</span> <span class="pre">pesos,</span> <span class="pre">en</span> <span class="pre">iteraciones</span></code> <span class="math notranslate nohighlight">\(i\)</span><code class="docutils literal notranslate"><span class="pre">,</span> <span class="pre">a</span> <span class="pre">lo</span> <span class="pre">largo</span> <span class="pre">de</span> <span class="pre">su</span> <span class="pre">trayectoria</span> <span class="pre">de</span> <span class="pre">gradiente</span></code>. El gradiente es la derivada parcial de la función de pérdida <span class="math notranslate nohighlight">\(L\)</span> con respecto al peso. La regla de actualización más sencilla para cambiar un peso <span class="math notranslate nohighlight">\(w\)</span> requiere los valores de los pesos, la derivada parcial de <span class="math notranslate nohighlight">\(L\)</span> con respecto a los pesos, y una tasa de aprendizaje <span class="math notranslate nohighlight">\(\alpha\)</span> que <code class="docutils literal notranslate"><span class="pre">controla</span> <span class="pre">la</span> <span class="pre">rapidez</span> <span class="pre">con</span> <span class="pre">la</span> <span class="pre">que</span> <span class="pre">el</span> <span class="pre">punto</span> <span class="pre">desciende</span> <span class="pre">a</span> <span class="pre">lo</span> <span class="pre">largo</span> <span class="pre">del</span> <span class="pre">gradiente</span></code></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\omega_{i+1}=\omega_{i}-\alpha\left(\frac{\partial L}{\partial\omega}\right)_{\omega = \omega_{i}}
+\]</div>
+<ul class="simple">
+<li><p>Esta regla básica de actualización tiene diversas variantes que influyen en la convergencia del algoritmo. Sin embargo, <code class="docutils literal notranslate"><span class="pre">una</span> <span class="pre">entrada</span> <span class="pre">crucial</span> <span class="pre">para</span> <span class="pre">todos</span> <span class="pre">los</span> <span class="pre">algoritmos</span> <span class="pre">basados</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">gradiente</span> <span class="pre">es</span> <span class="pre">la</span> <span class="pre">derivada</span> <span class="pre">parcial</span> <span class="pre">que</span> <span class="pre">debe</span> <span class="pre">calcularse</span> <span class="pre">para</span> <span class="pre">todos</span> <span class="pre">los</span> <span class="pre">pesos</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">red</span></code>. En redes neuronales profundas, algunas de las cuales tienen millones de pesos, el cálculo de la derivada puede ser una tarea computacional gigantesca. En esta dirección es exactamente donde entra en juego el famoso <code class="docutils literal notranslate"><span class="pre">algoritmo</span> <span class="pre">backpropagation</span></code> que resuelve este problema de forma eficiente.</p></li>
+<li><p>Para entender el algoritmo backpropagation, primero hay que conocer los <code class="docutils literal notranslate"><span class="pre">grafos</span> <span class="pre">computacionales</span> <span class="pre">y</span> <span class="pre">cómo</span> <span class="pre">se</span> <span class="pre">utilizan</span> <span class="pre">para</span> <span class="pre">realizar</span> <span class="pre">cálculos</span> <span class="pre">en</span> <span class="pre">una</span> <span class="pre">red</span> <span class="pre">neuronal</span></code>. Consideremos una <code class="docutils literal notranslate"><span class="pre">red</span> <span class="pre">neuronal</span> <span class="pre">simple</span> <span class="pre">de</span> <span class="pre">una</span> <span class="pre">sola</span> <span class="pre">capa</span> <span class="pre">oculta,</span> <span class="pre">que</span> <span class="pre">tiene</span> <span class="pre">dos</span> <span class="pre">unidades</span> <span class="pre">ocultas,</span> <span class="pre">cada</span> <span class="pre">una</span> <span class="pre">con</span> <span class="pre">una</span> <span class="pre">activación</span> <span class="pre">sigmoidea</span></code>. La unidad de salida es una transformación lineal de sus entradas. La red se alimenta con dos variables de entrada, <span class="math notranslate nohighlight">\([y_{1},y_{2}]\)</span>. Los pesos se muestran a lo largo de los bordes de la red</p></li>
+</ul>
+<figure class="align-center" id="twoinput-single-hidden-layer">
+<a class="reference internal image-reference" href="_images/twoinput_single_hidden_layer.png"><img alt="_images/twoinput_single_hidden_layer.png" src="_images/twoinput_single_hidden_layer.png" style="width: 390.0px; height: 269.88px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Red neuronal con una sola capa oculta y dos entradas.</span><a class="headerlink" href="#twoinput-single-hidden-layer" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>La red realiza una serie de <code class="docutils literal notranslate"><span class="pre">sumas,</span> <span class="pre">multiplicaciones</span> <span class="pre">y</span> <span class="pre">un</span> <span class="pre">par</span> <span class="pre">evaluaciones</span> <span class="pre">de</span> <span class="pre">funciones</span> <span class="pre">sigmoidales</span> <span class="pre">para</span> <span class="pre">transformar</span> <span class="pre">la</span> <span class="pre">entrada</span> <span class="pre">en</span> <span class="pre">una</span> <span class="pre">predicción</span></code>. La transformación de la entrada en una predicción se denomina paso hacia delante de la red neuronal. La <a class="reference internal" href="#forwardprop-single-hidden-layer"><span class="std std-numref">Fig. 7</span></a> muestra cómo se consigue un pase hacia adelante mediante un grafo computacional para un par de entrada <span class="math notranslate nohighlight">\([-1, 2]\)</span>. Cada cálculo da como resultado una salida intermedia <span class="math notranslate nohighlight">\(p_{i}\)</span>. <code class="docutils literal notranslate"><span class="pre">Los</span> <span class="pre">resultados</span> <span class="pre">intermedios</span></code> <span class="math notranslate nohighlight">\(p_{7}\)</span> <code class="docutils literal notranslate"><span class="pre">y</span></code> <span class="math notranslate nohighlight">\(p_{8}\)</span> <code class="docutils literal notranslate"><span class="pre">son</span> <span class="pre">la</span> <span class="pre">salida</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">neuronas</span> <span class="pre">ocultas</span></code> <span class="math notranslate nohighlight">\(g_{1}\)</span> y <span class="math notranslate nohighlight">\(g_{2}\)</span>. Durante el entrenamiento, la función de pérdida <span class="math notranslate nohighlight">\(L\)</span> también se calcula en el paso hacia delante</p></li>
+</ul>
+<figure class="align-center" id="forwardprop-single-hidden-layer">
+<img alt="_images/forwardprop_single_hidden_layer.png" src="_images/forwardprop_single_hidden_layer.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Gráfico computacional de un perceptrón con una capa y dos neuronas ocultas.</span><a class="headerlink" href="#forwardprop-single-hidden-layer" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>En este punto, <code class="docutils literal notranslate"><span class="pre">se</span> <span class="pre">aplica</span> <span class="pre">el</span> <span class="pre">algoritmo</span> <span class="pre">de</span> <span class="pre">backpropagation</span> <span class="pre">para</span> <span class="pre">calcular</span> <span class="pre">las</span> <span class="pre">derivadas</span> <span class="pre">parciales</span> <span class="pre">entre</span> <span class="pre">dos</span> <span class="pre">nodos</span> <span class="pre">conectados</span> <span class="pre">por</span> <span class="pre">una</span> <span class="pre">arista</span></code>. El recorrido hacia atrás en el grafo para calcular la derivada parcial también se conoce como paso hacia atrás (<code class="docutils literal notranslate"><span class="pre">backward</span> <span class="pre">pass</span></code>). <code class="docutils literal notranslate"><span class="pre">El</span> <span class="pre">operador</span> <span class="pre">de</span> <span class="pre">diferenciación</span> <span class="pre">parcial</span> <span class="pre">se</span> <span class="pre">aplica</span> <span class="pre">en</span> <span class="pre">cada</span> <span class="pre">nodo</span> <span class="pre">y</span> <span class="pre">las</span> <span class="pre">derivadas</span> <span class="pre">parciales</span> <span class="pre">se</span> <span class="pre">asignan</span> <span class="pre">a</span> <span class="pre">las</span> <span class="pre">respectivas</span> <span class="pre">aristas</span> <span class="pre">que</span> <span class="pre">conectan</span> <span class="pre">el</span> <span class="pre">nodo</span> <span class="pre">descendente</span> <span class="pre">a</span> <span class="pre">lo</span> <span class="pre">largo</span> <span class="pre">del</span> <span class="pre">grafo</span> <span class="pre">computacional</span></code>.</p></li>
+<li><p>Siguiendo la regla de la cadena la derivada parcial <span class="math notranslate nohighlight">\(\partial_{\omega} L\)</span> se calcula <code class="docutils literal notranslate"><span class="pre">multiplicando</span> <span class="pre">las</span> <span class="pre">derivadas</span> <span class="pre">parciales</span> <span class="pre">en</span> <span class="pre">todas</span> <span class="pre">las</span> <span class="pre">aristas</span> <span class="pre">que</span> <span class="pre">conectan</span> <span class="pre">el</span> <span class="pre">nodo</span> <span class="pre">de</span> <span class="pre">peso</span> <span class="pre">y</span> <span class="pre">el</span> <span class="pre">nodo</span> <span class="pre">de</span> <span class="pre">pérdida</span></code>. Si existen varios caminos entre un nodo de peso y el nodo de pérdida, las derivadas parciales a lo largo de cada camino se suman para obtener la <code class="docutils literal notranslate"><span class="pre">derivada</span> <span class="pre">parcial</span> <span class="pre">total</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">pérdida</span> <span class="pre">con</span> <span class="pre">respecto</span> <span class="pre">al</span> <span class="pre">peso</span></code>. Esta técnica gráfica de implementar los pasos hacia delante y hacia atrás es la técnica computacional subyacente utilizada en potentes bibliotecas de aprendizaje profundo. El paso hacia atrás se ilustra en <a class="reference internal" href="#partialderivates-single-hidden-layer"><span class="std std-numref">Fig. 8</span></a></p></li>
+</ul>
+<figure class="align-center" id="partialderivates-single-hidden-layer">
+<img alt="_images/partialderivates_single_hidden_layer.png" src="_images/partialderivates_single_hidden_layer.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Cálculo de derivadas parciales en un grafo computacional.</span><a class="headerlink" href="#partialderivates-single-hidden-layer" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>Las derivadas parciales de la función de pérdida con respecto a los pesos se obtienen aplicando la <code class="docutils literal notranslate"><span class="pre">regla</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">cadena</span></code>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\frac{\partial L}{\partial\omega_{5}} &amp;= -2(y-\hat{y})\times 1\times p_{7}\\
+\frac{\partial L}{\partial\omega_{6}} &amp;= -2(y-\hat{y})\times 1\times p_{8}\\
+\frac{\partial L}{\partial\omega_{1}} = \frac{\partial L}{\partial\hat{y}}\frac{\partial\hat{y}}{\partial p_{9}}\frac{\partial p_{9}}{\partial p_{7}}\frac{\partial p_{7}}{\partial p_{5}}\frac{\partial p_{5}}{\partial p_{1}}\frac{\partial p_{1}}{\partial\omega_{1}} &amp;= -2(y-\hat{y})\times 1\times\omega_{5}\times p_{7}^{2}e^{-p_{5}}\times 1\times -1\\
+\frac{\partial L}{\partial\omega_{2}} = \frac{\partial L}{\partial\hat{y}}\frac{\partial\hat{y}}{\partial p_{9}}\frac{\partial p_{9}}{\partial p_{7}}\frac{\partial p_{7}}{\partial p_{5}}\frac{\partial p_{5}}{\partial p_{2}}\frac{\partial p_{2}}{\partial\omega_{2}} &amp;= -2(y-\hat{y})\times 1\times\omega_{5}\times p_{7}^{2}e^{-p_{5}}\times 1\times 2\\
+\frac{\partial L}{\partial\omega_{3}} = \frac{\partial L}{\partial\hat{y}}\frac{\partial\hat{y}}{\partial p_{10}}\frac{\partial p_{10}}{\partial p_{8}}\frac{\partial p_{8}}{\partial p_{6}}\frac{\partial p_{6}}{\partial p_{3}}\frac{\partial p_{3}}{\partial\omega_{3}} &amp;= -2(y-\hat{y})\times 1\times\omega_{6}\times p_{8}^{2}e^{-p_{6}}\times 1\times -1\\
+\frac{\partial L}{\partial\omega_{4}} = \frac{\partial L}{\partial\hat{y}}\frac{\partial\hat{y}}{\partial p_{10}}\frac{\partial p_{10}}{\partial p_{8}}\frac{\partial p_{8}}{\partial p_{6}}\frac{\partial p_{6}}{\partial p_{4}}\frac{\partial p_{4}}{\partial\omega_{4}} &amp;= -2(y-\hat{y})\times 1\times\omega_{6}\times p_{8}^{2}e^{-p_{6}}\times 1\times 2.
+\end{align*}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Durante el entrenamiento, <code class="docutils literal notranslate"><span class="pre">los</span> <span class="pre">pesos</span> <span class="pre">se</span> <span class="pre">inicializan</span> <span class="pre">con</span> <span class="pre">números</span> <span class="pre">aleatorios</span> <span class="pre">comúnmente</span> <span class="pre">muestreados</span> <span class="pre">a</span> <span class="pre">partir</span> <span class="pre">de</span> <span class="pre">una</span> <span class="pre">distribución</span> <span class="pre">uniforme</span> <span class="pre">con</span> <span class="pre">límites</span> <span class="pre">superior</span> <span class="pre">e</span> <span class="pre">inferior</span> <span class="pre">en</span></code> <span class="math notranslate nohighlight">\([-1, 1]\)</span> o una <code class="docutils literal notranslate"><span class="pre">distribución</span> <span class="pre">normal</span> <span class="pre">que</span> <span class="pre">tiene</span> <span class="pre">media</span> <span class="pre">cero</span> <span class="pre">y</span> <span class="pre">varianza</span> <span class="pre">unitaria</span></code>. Estos esquemas de inicialización aleatoria tienen algunas variantes que mejoran la convergencia de la optimización. En este caso, vamos a suponer que los pesos son inicializados a partir de una distribución aleatoria uniforme y, por tanto, <span class="math notranslate nohighlight">\(w_{1} = -0.33, w_{2} = -0.33, w_{3} = 0.57, w_{4} = -0.01, w_{5}=0.07\)</span>, y <span class="math notranslate nohighlight">\(w_{6} = 0.82\)</span>.</p></li>
+<li><p>Con estos valores, vamos a realizar pasos hacia adelante y hacia atrás sobre el grafo computacional. Actualizamos la figura anterior con los valores calculados durante la <code class="docutils literal notranslate"><span class="pre">pasada</span> <span class="pre">hacia</span> <span class="pre">adelante</span> <span class="pre">en</span> <span class="pre">azul</span> <span class="pre">y</span> <span class="pre">los</span> <span class="pre">gradientes</span> <span class="pre">calculados</span> <span class="pre">durante</span> <span class="pre">la</span> <span class="pre">pasada</span> <span class="pre">hacia</span> <span class="pre">atrás</span> <span class="pre">en</span> <span class="pre">rojo</span></code>. Para este ejemplo, fijamos el <code class="docutils literal notranslate"><span class="pre">valor</span> <span class="pre">real</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">variable</span> <span class="pre">objetivo</span> <span class="pre">como</span></code> <span class="math notranslate nohighlight">\(y = 1\)</span></p></li>
+</ul>
+<figure class="align-center" id="forward-backward-single-hidden-layer">
+<img alt="_images/forward_backward_single_hidden_layer.png" src="_images/forward_backward_single_hidden_layer.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Pasos hacia delante (en azul) y hacia atrás (en rojo) sobre un grafo computacional.</span><a class="headerlink" href="#forward-backward-single-hidden-layer" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>Una vez calculados los gradientes a lo largo de las aristas, <code class="docutils literal notranslate"><span class="pre">las</span> <span class="pre">derivadas</span> <span class="pre">parciales</span> <span class="pre">con</span> <span class="pre">respecto</span> <span class="pre">a</span> <span class="pre">los</span> <span class="pre">pesos</span> <span class="pre">no</span> <span class="pre">son</span> <span class="pre">más</span> <span class="pre">que</span> <span class="pre">una</span> <span class="pre">aplicación</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">regla</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">cadena</span></code>, de la que ya hemos hablado. Los valores de las derivadas parciales son los siguientes:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\frac{\partial L}{\partial\omega_{5}} &amp;= -0.919\times 1\times 0.418 = -0.384\\
+\frac{\partial L}{\partial\omega_{6}} &amp;= -0.919\times 1\times 0.357 = -0.328\\
+\frac{\partial L}{\partial\omega_{1}} &amp;= -0.919\times 1\times 0.07\times 0.243\times 1\times -1 = 0.016\\
+\frac{\partial L}{\partial\omega_{2}} &amp;= -0.919\times 1\times 0.07\times 0.243\times 1\times 2 = -0.032\\
+\frac{\partial L}{\partial\omega_{3}} &amp;= -0.919\times 1\times 0.82\times 0.229\times 1\times -1 = 0.173\\
+\frac{\partial L}{\partial\omega_{4}} &amp;= -0.919\times 1\times 0.82\times 0.229\times 1\times 2 = -0.346\\
+\end{align*}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>El siguiente paso consiste en <code class="docutils literal notranslate"><span class="pre">actualizar</span> <span class="pre">los</span> <span class="pre">pesos</span> <span class="pre">mediante</span> <span class="pre">el</span> <span class="pre">algoritmo</span> <span class="pre">de</span> <span class="pre">gradiente</span> <span class="pre">descendiente</span></code>. Así, con una <code class="docutils literal notranslate"><span class="pre">tasa</span> <span class="pre">de</span> <span class="pre">aprendizaje</span> <span class="pre">de</span></code> <span class="math notranslate nohighlight">\(\alpha = 0.01\)</span>, el nuevo valor de</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+w_{5} = 0.07 - 0.01\times -0.384 = 0.0738.
+\]</div>
+<ul class="simple">
+<li><p>El resto de pesos también pueden actualizarse utilizando una regla de actualización similar. El proceso de actualización iterativa de los pesos se repite varias veces. <code class="docutils literal notranslate"><span class="pre">El</span> <span class="pre">número</span> <span class="pre">de</span> <span class="pre">veces</span> <span class="pre">que</span> <span class="pre">se</span> <span class="pre">actualizan</span> <span class="pre">los</span> <span class="pre">pesos</span> <span class="pre">se</span> <span class="pre">conoce</span> <span class="pre">como</span> <span class="pre">número</span> <span class="pre">de</span> <span class="pre">épocas</span></code> o pasadas sobre los datos de entrenamiento. Normalmente, un criterio de tolerancia sobre el cambio de la función de pérdida en comparación con la época anterior controla el número de épocas.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Para</span> <span class="pre">determinar</span> <span class="pre">los</span> <span class="pre">pesos</span> <span class="pre">de</span> <span class="pre">una</span> <span class="pre">red</span> <span class="pre">neuronal</span> <span class="pre">se</span> <span class="pre">utiliza</span> <span class="pre">el</span> <span class="pre">algoritmo</span> <span class="pre">backpropagation</span> <span class="pre">junto</span> <span class="pre">con</span> <span class="pre">un</span> <span class="pre">optimizador</span> <span class="pre">basado</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">gradiente</span></code>. Afortunadamente, existen potentes bibliotecas de aprendizaje profundo, como <code class="docutils literal notranslate"><span class="pre">Tensorflow,</span> <span class="pre">Theano</span></code> y <code class="docutils literal notranslate"><span class="pre">CNTK</span></code> que implementan gráficos computacionales para entrenar redes neuronales de cualquier arquitectura y complejidad. Estas bibliotecas vienen con soporte para ejecutar los cálculos como operaciones matemáticas en matrices multidimensionales y también pueden aprovechar las <code class="docutils literal notranslate"><span class="pre">GPU</span></code> para realizar cálculos más rápidos.</p></li>
+</ul>
+</section>
+<section id="mlp-para-la-prevision-de-series-temporales">
+<h2>MLP para la previsión de series temporales<a class="headerlink" href="#mlp-para-la-prevision-de-series-temporales" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>En esta sección, utilizaremos <code class="docutils literal notranslate"><span class="pre">MLP</span></code> para desarrollar <code class="docutils literal notranslate"><span class="pre">modelos</span> <span class="pre">de</span> <span class="pre">predicción</span> <span class="pre">de</span> <span class="pre">series</span> <span class="pre">temporales</span></code>. El conjunto de datos utilizado para estos ejemplos es sobre la <code class="docutils literal notranslate"><span class="pre">contaminación</span> <span class="pre">atmosférica</span> <span class="pre">medida</span> <span class="pre">por</span> <span class="pre">la</span> <span class="pre">concentración</span> <span class="pre">de</span> <span class="pre">partículas</span> <span class="pre">(PM)</span> <span class="pre">de</span> <span class="pre">diámetro</span> <span class="pre">inferior</span> <span class="pre">o</span> <span class="pre">igual</span> <span class="pre">a</span> <span class="pre">2.5</span> <span class="pre">micrómetros</span></code>. Hay otras variables, como la presión atmosférica, temperatura del aire, punto de rocío, etc. Se han desarrollado un par de modelos de series temporales uno sobre la presión atmosférica y otro sobre <code class="docutils literal notranslate"><span class="pre">pm</span> <span class="pre">2.5</span></code>. El conjunto de datos se ha descargado del repositorio de aprendizaje automático de la <a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/Beijing+PM2.5+Data">UCI</a>.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Empezaremos importando los paquetes necesarios para ejecutar el código:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dropout</span>
+<span class="kn">from</span> <span class="nn">keras.optimizers</span> <span class="kn">import</span> <span class="n">SGD</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">load_model</span>
+<span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="kn">import</span> <span class="n">ModelCheckpoint</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_absolute_error</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/PRSA_data_2010.1.1-2014.12.31.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of the dataframe:&#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of the dataframe: (43824, 13)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>No</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>pm2.5</th>
+      <th>DEWP</th>
+      <th>TEMP</th>
+      <th>PRES</th>
+      <th>cbwd</th>
+      <th>Iws</th>
+      <th>Is</th>
+      <th>Ir</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>-21</td>
+      <td>-11.0</td>
+      <td>1021.0</td>
+      <td>NW</td>
+      <td>1.79</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>-21</td>
+      <td>-12.0</td>
+      <td>1020.0</td>
+      <td>NW</td>
+      <td>4.92</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>-21</td>
+      <td>-11.0</td>
+      <td>1019.0</td>
+      <td>NW</td>
+      <td>6.71</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>NaN</td>
+      <td>-21</td>
+      <td>-14.0</td>
+      <td>1019.0</td>
+      <td>NW</td>
+      <td>9.84</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>-20</td>
+      <td>-12.0</td>
+      <td>1018.0</td>
+      <td>NW</td>
+      <td>12.97</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<ul class="simple">
+<li><p>Para asegurarse de que las filas están en el orden correcto de fecha y hora de las observaciones, <code class="docutils literal notranslate"><span class="pre">se</span> <span class="pre">crea</span> <span class="pre">una</span> <span class="pre">nueva</span> <span class="pre">columna</span> <span class="pre">datetime</span> <span class="pre">a</span> <span class="pre">partir</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">columnas</span> <span class="pre">relacionadas</span> <span class="pre">con</span> <span class="pre">la</span> <span class="pre">fecha</span> <span class="pre">y</span> <span class="pre">la</span> <span class="pre">hora</span> <span class="pre">del</span> <span class="pre">DataFrame</span></code>. La nueva columna se compone de objetos <code class="docutils literal notranslate"><span class="pre">datetime.datetime</span> <span class="pre">de</span> <span class="pre">Python</span></code>. El DataFrame se ordena en orden ascendente sobre esta columna</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;datetime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">month</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">],</span> <span class="n">day</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">],</span>
+                                                                                          <span class="n">hour</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;hour&#39;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>No</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>pm2.5</th>
+      <th>DEWP</th>
+      <th>TEMP</th>
+      <th>PRES</th>
+      <th>cbwd</th>
+      <th>Iws</th>
+      <th>Is</th>
+      <th>Ir</th>
+      <th>datetime</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>-21</td>
+      <td>-11.0</td>
+      <td>1021.0</td>
+      <td>NW</td>
+      <td>1.79</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2010-01-01 00:00:00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>-21</td>
+      <td>-12.0</td>
+      <td>1020.0</td>
+      <td>NW</td>
+      <td>4.92</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2010-01-01 01:00:00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>-21</td>
+      <td>-11.0</td>
+      <td>1019.0</td>
+      <td>NW</td>
+      <td>6.71</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2010-01-01 02:00:00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>NaN</td>
+      <td>-21</td>
+      <td>-14.0</td>
+      <td>1019.0</td>
+      <td>NW</td>
+      <td>9.84</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2010-01-01 03:00:00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>-20</td>
+      <td>-12.0</td>
+      <td>1018.0</td>
+      <td>NW</td>
+      <td>12.97</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2010-01-01 04:00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<ul class="simple">
+<li><p>Dibujamos un diagrama de cajas para visualizar la tendencia central y la dispersión de por ejemplo la columna <code class="docutils literal notranslate"><span class="pre">PRES</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;PRES&#39;</span><span class="p">],</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set2&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Box plot of Air Pressure&#39;</span><span class="p">);</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;PRESS&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">yticklabels</span><span class="o">=</span><span class="p">[])</span>
+<span class="n">g</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d81c0cf2a190b9ce0c8c6520427f42203ede2e1282bc0a8727ac33008964b6bf.png" src="_images/d81c0cf2a190b9ce0c8c6520427f42203ede2e1282bc0a8727ac33008964b6bf.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;PRES&#39;</span><span class="p">])</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Time series of Air Pressure&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Index&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Air Pressure readings in hPa&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1efb58c2ddc8ca60ddd68afdff603529ac355a1628135bc8d42bec42bf333a76.png" src="_images/1efb58c2ddc8ca60ddd68afdff603529ac355a1628135bc8d42bec42bf333a76.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Los</span> <span class="pre">algoritmos</span> <span class="pre">de</span> <span class="pre">gradiente</span> <span class="pre">descendiente</span> <span class="pre">funcionan</span> <span class="pre">mejor</span> <span class="pre">(por</span> <span class="pre">ejemplo,</span> <span class="pre">convergen</span> <span class="pre">más</span> <span class="pre">rápido)</span> <span class="pre">si</span> <span class="pre">las</span> <span class="pre">variables</span> <span class="pre">están</span> <span class="pre">dentro</span> <span class="pre">del</span> <span class="pre">intervalo</span></code> <span class="math notranslate nohighlight">\([-1, 1]\)</span>. Muchas fuentes relajan el límite hasta <span class="math notranslate nohighlight">\([-3, 3]\)</span>. La variable <code class="docutils literal notranslate"><span class="pre">PRES</span></code> es escalada con <code class="docutils literal notranslate"><span class="pre">minmax</span></code> para limitar la variable transformada dentro de <span class="math notranslate nohighlight">\([0,1]\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">(</span><span class="n">feature_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;scaled_PRES&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;PRES&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Antes de entrenar el modelo, el conjunto de datos se divide en dos partes: el conjunto de <code class="docutils literal notranslate"><span class="pre">entrenamiento</span></code> y el conjunto de <code class="docutils literal notranslate"><span class="pre">validación</span></code>. La red neuronal se entrena en el conjunto de entrenamiento. Esto significa que <code class="docutils literal notranslate"><span class="pre">el</span> <span class="pre">cálculo</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">función</span> <span class="pre">de</span> <span class="pre">pérdida,</span> <span class="pre">la</span> <span class="pre">propagación</span> <span class="pre">hacia</span> <span class="pre">atrás</span> <span class="pre">y</span> <span class="pre">los</span> <span class="pre">pesos</span> <span class="pre">actualizados</span> <span class="pre">mediante</span> <span class="pre">un</span> <span class="pre">algoritmo</span> <span class="pre">de</span> <span class="pre">gradiente</span> <span class="pre">descendiente</span> <span class="pre">se</span> <span class="pre">realizan</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">conjunto</span> <span class="pre">de</span> <span class="pre">entrenamiento</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">El</span> <span class="pre">conjunto</span> <span class="pre">de</span> <span class="pre">validación</span> <span class="pre">se</span> <span class="pre">utiliza</span> <span class="pre">para</span> <span class="pre">evaluar</span> <span class="pre">el</span> <span class="pre">modelo</span> <span class="pre">y</span> <span class="pre">determinar</span> <span class="pre">el</span> <span class="pre">número</span> <span class="pre">de</span> <span class="pre">épocas</span> <span class="pre">en</span> <span class="pre">su</span> <span class="pre">entrenamiento</span></code>. Aumentar el número de épocas reducirá aún más la función de pérdida en el conjunto de entrenamiento, pero no necesariamente tendrá el mismo efecto en el conjunto de validación debido al sobreajuste en el conjunto de entrenamiento, por lo que <code class="docutils literal notranslate"><span class="pre">el</span> <span class="pre">número</span> <span class="pre">de</span> <span class="pre">épocas</span> <span class="pre">se</span> <span class="pre">controla</span> <span class="pre">manteniendo</span> <span class="pre">una</span> <span class="pre">evaluación</span> <span class="pre">y</span> <span class="pre">verificación</span> <span class="pre">sobre</span> <span class="pre">la</span> <span class="pre">función</span> <span class="pre">de</span> <span class="pre">pérdida</span> <span class="pre">calculada</span> <span class="pre">para</span> <span class="pre">el</span> <span class="pre">conjunto</span> <span class="pre">de</span> <span class="pre">validación</span></code>.</p></li>
+<li><p>Utilizamos <code class="docutils literal notranslate"><span class="pre">Keras</span></code> con el backend <code class="docutils literal notranslate"><span class="pre">Tensorflow</span></code> para definir y entrenar el modelo. Todos los pasos implicados en el entrenamiento y validación del modelo se realizan llamando a las funciones apropiadas de la <code class="docutils literal notranslate"><span class="pre">API</span></code> de <code class="docutils literal notranslate"><span class="pre">Keras</span></code>.</p></li>
+</ul>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Los</span> <span class="pre">cuatro</span> <span class="pre">primeros</span> <span class="pre">años,</span> <span class="pre">de</span> <span class="pre">2010</span> <span class="pre">a</span> <span class="pre">2013,</span> <span class="pre">se</span> <span class="pre">utilizan</span> <span class="pre">como</span> <span class="pre">entrenamiento</span> <span class="pre">y</span> <span class="pre">2014</span> <span class="pre">se</span> <span class="pre">utiliza</span> <span class="pre">para</span> <span class="pre">la</span> <span class="pre">validación</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">split_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2014</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;datetime&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="n">split_date</span><span class="p">]</span>
+<span class="n">df_val</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;datetime&#39;</span><span class="p">]</span><span class="o">&gt;=</span><span class="n">split_date</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of train:&#39;</span><span class="p">,</span> <span class="n">df_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of test:&#39;</span><span class="p">,</span> <span class="n">df_val</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of train: (35064, 15)
+Shape of test: (8760, 15)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>No</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>pm2.5</th>
+      <th>DEWP</th>
+      <th>TEMP</th>
+      <th>PRES</th>
+      <th>cbwd</th>
+      <th>Iws</th>
+      <th>Is</th>
+      <th>Ir</th>
+      <th>datetime</th>
+      <th>scaled_PRES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>-21</td>
+      <td>-11.0</td>
+      <td>1021.0</td>
+      <td>NW</td>
+      <td>1.79</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2010-01-01 00:00:00</td>
+      <td>0.545455</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>-21</td>
+      <td>-12.0</td>
+      <td>1020.0</td>
+      <td>NW</td>
+      <td>4.92</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2010-01-01 01:00:00</td>
+      <td>0.527273</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>-21</td>
+      <td>-11.0</td>
+      <td>1019.0</td>
+      <td>NW</td>
+      <td>6.71</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2010-01-01 02:00:00</td>
+      <td>0.509091</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>NaN</td>
+      <td>-21</td>
+      <td>-14.0</td>
+      <td>1019.0</td>
+      <td>NW</td>
+      <td>9.84</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2010-01-01 03:00:00</td>
+      <td>0.509091</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>-20</td>
+      <td>-12.0</td>
+      <td>1018.0</td>
+      <td>NW</td>
+      <td>12.97</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2010-01-01 04:00:00</td>
+      <td>0.490909</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_val</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>No</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>pm2.5</th>
+      <th>DEWP</th>
+      <th>TEMP</th>
+      <th>PRES</th>
+      <th>cbwd</th>
+      <th>Iws</th>
+      <th>Is</th>
+      <th>Ir</th>
+      <th>datetime</th>
+      <th>scaled_PRES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>35064</th>
+      <td>35065</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>24.0</td>
+      <td>-20</td>
+      <td>7.0</td>
+      <td>1014.0</td>
+      <td>NW</td>
+      <td>143.48</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014-01-01 00:00:00</td>
+      <td>0.418182</td>
+    </tr>
+    <tr>
+      <th>35065</th>
+      <td>35066</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>53.0</td>
+      <td>-20</td>
+      <td>7.0</td>
+      <td>1013.0</td>
+      <td>NW</td>
+      <td>147.50</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014-01-01 01:00:00</td>
+      <td>0.400000</td>
+    </tr>
+    <tr>
+      <th>35066</th>
+      <td>35067</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>65.0</td>
+      <td>-20</td>
+      <td>6.0</td>
+      <td>1013.0</td>
+      <td>NW</td>
+      <td>151.52</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014-01-01 02:00:00</td>
+      <td>0.400000</td>
+    </tr>
+    <tr>
+      <th>35067</th>
+      <td>35068</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>70.0</td>
+      <td>-20</td>
+      <td>6.0</td>
+      <td>1013.0</td>
+      <td>NW</td>
+      <td>153.31</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014-01-01 03:00:00</td>
+      <td>0.400000</td>
+    </tr>
+    <tr>
+      <th>35068</th>
+      <td>35069</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>79.0</td>
+      <td>-18</td>
+      <td>3.0</td>
+      <td>1012.0</td>
+      <td>cv</td>
+      <td>0.89</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014-01-01 04:00:00</td>
+      <td>0.381818</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<ul class="simple">
+<li><p>Restablecemos los <code class="docutils literal notranslate"><span class="pre">índices</span> <span class="pre">del</span> <span class="pre">conjunto</span> <span class="pre">de</span> <span class="pre">validación</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_val</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_val</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>No</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>pm2.5</th>
+      <th>DEWP</th>
+      <th>TEMP</th>
+      <th>PRES</th>
+      <th>cbwd</th>
+      <th>Iws</th>
+      <th>Is</th>
+      <th>Ir</th>
+      <th>datetime</th>
+      <th>scaled_PRES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>35065</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>24.0</td>
+      <td>-20</td>
+      <td>7.0</td>
+      <td>1014.0</td>
+      <td>NW</td>
+      <td>143.48</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014-01-01 00:00:00</td>
+      <td>0.418182</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>35066</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>53.0</td>
+      <td>-20</td>
+      <td>7.0</td>
+      <td>1013.0</td>
+      <td>NW</td>
+      <td>147.50</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014-01-01 01:00:00</td>
+      <td>0.400000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>35067</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>65.0</td>
+      <td>-20</td>
+      <td>6.0</td>
+      <td>1013.0</td>
+      <td>NW</td>
+      <td>151.52</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014-01-01 02:00:00</td>
+      <td>0.400000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>35068</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>70.0</td>
+      <td>-20</td>
+      <td>6.0</td>
+      <td>1013.0</td>
+      <td>NW</td>
+      <td>153.31</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014-01-01 03:00:00</td>
+      <td>0.400000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>35069</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>79.0</td>
+      <td>-18</td>
+      <td>3.0</td>
+      <td>1012.0</td>
+      <td>cv</td>
+      <td>0.89</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014-01-01 04:00:00</td>
+      <td>0.381818</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<ul class="simple">
+<li><p>También <code class="docutils literal notranslate"><span class="pre">se</span> <span class="pre">grafican</span> <span class="pre">las</span> <span class="pre">series</span> <span class="pre">temporales</span> <span class="pre">de</span> <span class="pre">entrenamiento</span> <span class="pre">y</span> <span class="pre">validación</span> <span class="pre">normalizadas</span> <span class="pre">para</span> <span class="pre">PRES</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;scaled_PRES&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Time series of scaled Air Pressure in train set&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Index&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Scaled Air Pressure readings&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/fbb3a777ebdb9d52d132eb831b5621ba8856eae4a0eaf780e53121bbf86c0246.png" src="_images/fbb3a777ebdb9d52d132eb831b5621ba8856eae4a0eaf780e53121bbf86c0246.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">df_val</span><span class="p">[</span><span class="s1">&#39;scaled_PRES&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Time series of scaled Air Pressure in validation set&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Index&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Scaled Air Pressure readings&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f444e7ce3b9ea45baa8d92aebe044b8163683d134914ac70bec19a6d3027b8d3.png" src="_images/f444e7ce3b9ea45baa8d92aebe044b8163683d134914ac70bec19a6d3027b8d3.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Ahora necesitamos generar los <code class="docutils literal notranslate"><span class="pre">regresores</span></code> (<span class="math notranslate nohighlight">\(X\)</span>) y la <code class="docutils literal notranslate"><span class="pre">variable</span> <span class="pre">objetivo</span></code> (<span class="math notranslate nohighlight">\(y\)</span>) para el entrenamiento y la validación. <code class="docutils literal notranslate"><span class="pre">La</span> <span class="pre">matriz</span> <span class="pre">bidimensional</span> <span class="pre">de</span> <span class="pre">regresores</span> <span class="pre">y</span> <span class="pre">la</span> <span class="pre">matriz</span> <span class="pre">unidimensional</span> <span class="pre">de</span> <span class="pre">objetivo</span> <span class="pre">se</span> <span class="pre">crean</span> <span class="pre">a</span> <span class="pre">partir</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">matriz</span> <span class="pre">unidimensional</span> <span class="pre">original</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">columna</span> <span class="pre">standardized_PRES</span></code> en el <em>DataFrame</em>. Para el modelo de predicción de series temporales, <code class="docutils literal notranslate"><span class="pre">se</span> <span class="pre">utilizan</span> <span class="pre">las</span> <span class="pre">observaciones</span> <span class="pre">de</span> <span class="pre">los</span> <span class="pre">últimos</span> <span class="pre">siete</span> <span class="pre">días</span> <span class="pre">para</span> <span class="pre">predecir</span> <span class="pre">el</span> <span class="pre">día</span> <span class="pre">siguiente</span></code>. Esto equivale a un modelo <span class="math notranslate nohighlight">\(AR(7)\)</span>. Definimos una función que toma la serie temporal original y el número de pasos temporales en regresores como entrada para generar las matrices de <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(y\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">makeXy</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">nb_timesteps</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Input: </span>
+<span class="sd">           ts: original time series</span>
+<span class="sd">           nb_timesteps: number of time steps in the regressors</span>
+<span class="sd">    Output: </span>
+<span class="sd">           X: 2-D array of regressors</span>
+<span class="sd">           y: 1-D array of target </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_timesteps</span><span class="p">,</span> <span class="n">ts</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">X</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">nb_timesteps</span><span class="p">:</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">makeXy</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;scaled_PRES&#39;</span><span class="p">],</span> <span class="mi">7</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of train arrays:&#39;</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of train arrays: (35057, 7) (35057,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">makeXy</span><span class="p">(</span><span class="n">df_val</span><span class="p">[</span><span class="s1">&#39;scaled_PRES&#39;</span><span class="p">],</span> <span class="mi">7</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of validation arrays:&#39;</span><span class="p">,</span> <span class="n">X_val</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_val</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of validation arrays: (8753, 7) (8753,)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Ahora definimos el <code class="docutils literal notranslate"><span class="pre">MLP</span></code> utilizando la <code class="docutils literal notranslate"><span class="pre">API</span></code> funcional de <code class="docutils literal notranslate"><span class="pre">Keras</span></code>. En este enfoque <code class="docutils literal notranslate"><span class="pre">una</span> <span class="pre">capa</span> <span class="pre">puede</span> <span class="pre">ser</span> <span class="pre">declarada</span> <span class="pre">como</span> <span class="pre">la</span> <span class="pre">entrada</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">siguiente</span> <span class="pre">capa</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">momento</span> <span class="pre">de</span> <span class="pre">definir</span> <span class="pre">la</span> <span class="pre">siguiente</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_layer</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Las capas densas las definimos en esta caso con <code class="docutils literal notranslate"><span class="pre">activación</span> <span class="pre">lineal</span></code>. Puede utilizar un <code class="docutils literal notranslate"><span class="pre">GridSearch</span></code> tal como se hizo en el curso de <code class="docutils literal notranslate"><span class="pre">Machine</span> <span class="pre">Learning</span></code> para encontrar hiperparámetros adecuados minimizando las métricas de regresión.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dense1</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)(</span><span class="n">input_layer</span><span class="p">)</span>
+<span class="n">dense2</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)(</span><span class="n">dense1</span><span class="p">)</span>
+<span class="n">dense3</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)(</span><span class="n">dense2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Las <code class="docutils literal notranslate"><span class="pre">múltiples</span> <span class="pre">capas</span> <span class="pre">ocultas</span> <span class="pre">y</span> <span class="pre">el</span> <span class="pre">gran</span> <span class="pre">número</span> <span class="pre">de</span> <span class="pre">neuronas</span> <span class="pre">en</span> <span class="pre">cada</span> <span class="pre">capa</span> <span class="pre">oculta</span> <span class="pre">le</span> <span class="pre">dan</span> <span class="pre">a</span> <span class="pre">las</span> <span class="pre">redes</span> <span class="pre">neuronales</span> <span class="pre">la</span> <span class="pre">capacidad</span> <span class="pre">de</span> <span class="pre">modelar</span> <span class="pre">la</span> <span class="pre">compleja</span> <span class="pre">no</span> <span class="pre">linealidad</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">relaciones</span> <span class="pre">subyacentes</span> <span class="pre">entre</span> <span class="pre">los</span> <span class="pre">regresores</span> <span class="pre">y</span> <span class="pre">el</span> <span class="pre">objetivo</span></code>. Sin embargo, las redes neuronales profundas también pueden sobreajustar los datos de entrenamiento y dar malos resultados en el conjunto de validación o prueba. El <code class="docutils literal notranslate"><span class="pre">Dropout</span></code> se ha utilizado eficazmente para regularizar las redes neuronales profundas.</p></li>
+<li><p>En este ejemplo, se añade una capa <code class="docutils literal notranslate"><span class="pre">Dropout</span></code> antes de la capa de salida. <code class="docutils literal notranslate"><span class="pre">Dropout</span> <span class="pre">aleatoriamente</span> <span class="pre">establece</span></code> <span class="math notranslate nohighlight">\(p\)</span> <code class="docutils literal notranslate"><span class="pre">fracción</span> <span class="pre">de</span> <span class="pre">neuronas</span> <span class="pre">de</span> <span class="pre">entrada</span> <span class="pre">a</span> <span class="pre">cero</span> <span class="pre">antes</span> <span class="pre">de</span> <span class="pre">pasar</span> <span class="pre">a</span> <span class="pre">la</span> <span class="pre">siguiente</span> <span class="pre">capa</span></code>. La eliminación aleatoria de entradas actúa esencialmente como un tipo de ensamblaje de modelos de agregación <code class="docutils literal notranslate"><span class="pre">bootstrap</span></code>. Por ejemplo, <code class="docutils literal notranslate"><span class="pre">el</span> <span class="pre">bosque</span> <span class="pre">aleatorio</span> <span class="pre">utiliza</span> <span class="pre">el</span> <span class="pre">ensamblaje</span> <span class="pre">mediante</span> <span class="pre">la</span> <span class="pre">construcción</span> <span class="pre">de</span> <span class="pre">árboles</span> <span class="pre">en</span> <span class="pre">subconjuntos</span> <span class="pre">aleatorios</span> <span class="pre">de</span> <span class="pre">características</span> <span class="pre">de</span> <span class="pre">entrada</span></code>. Utilizamos <span class="math notranslate nohighlight">\(p=0.2\)</span> para descartar el 20% de las características de entrada seleccionadas aleatoriamente.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dropout_layer</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)(</span><span class="n">dense3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Por último, la capa de salida predice la presión atmosférica del día siguiente</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_layer</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)(</span><span class="n">dropout_layer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Las capas de entrada, densa y de salida se empaquetarán ahora dentro de un modelo, que es una clase envolvente para entrenar y hacer predicciones. <code class="docutils literal notranslate"><span class="pre">Como</span> <span class="pre">función</span> <span class="pre">de</span> <span class="pre">pérdida</span> <span class="pre">se</span> <span class="pre">utiliza</span> <span class="pre">el</span> <span class="pre">error</span> <span class="pre">cuadrático</span> <span class="pre">medio</span></code> (<span class="math notranslate nohighlight">\(MSE\)</span>). Los pesos de la red se optimizan mediante el algoritmo <code class="docutils literal notranslate"><span class="pre">Adam</span></code>. <code class="docutils literal notranslate"><span class="pre">Adam</span></code> significa <code class="docutils literal notranslate"><span class="pre">estimación</span> <span class="pre">adaptativa</span> <span class="pre">de</span> <span class="pre">momentos</span></code> y ha sido una opción popular para el entrenamiento de redes neuronales profundas.</p></li>
+<li><p>A diferencia del <code class="docutils literal notranslate"><span class="pre">gradiente</span> <span class="pre">descendiente</span> <span class="pre">estocástico,</span> <span class="pre">Adam</span> <span class="pre">utiliza</span> <span class="pre">diferentes</span> <span class="pre">tasas</span> <span class="pre">de</span> <span class="pre">aprendizaje</span> <span class="pre">para</span> <span class="pre">cada</span> <span class="pre">peso</span> <span class="pre">y</span> <span class="pre">las</span> <span class="pre">actualiza</span> <span class="pre">por</span> <span class="pre">separado</span> <span class="pre">a</span> <span class="pre">medida</span> <span class="pre">que</span> <span class="pre">avanza</span> <span class="pre">el</span> <span class="pre">entrenamiento</span></code>. La tasa de aprendizaje de un peso se actualiza basándose en medias móviles ponderadas exponencialmente de los gradientes del peso y los gradientes al cuadrado.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">input_layer</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">output_layer</span><span class="p">)</span>
+<span class="n">ts_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mean_squared_error&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">)</span>
+<span class="n">ts_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Layer (type)                Output Shape              Param #   
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=================================================================
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> input_1 (InputLayer)        [(None, 7)]               0         
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dense (Dense)               (None, 32)                256       
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dense_1 (Dense)             (None, 16)                528       
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dense_2 (Dense)             (None, 16)                272       
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dropout (Dropout)           (None, 16)                0         
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dense_3 (Dense)             (None, 1)                 17        
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=================================================================
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total params: 1,073
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trainable params: 1,073
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Non-trainable params: 0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>El modelo se entrena llamando a la función <code class="docutils literal notranslate"><span class="pre">fit()</span></code> en el objeto modelo y pasándole <code class="docutils literal notranslate"><span class="pre">X_train</span></code> y <code class="docutils literal notranslate"><span class="pre">y_train</span></code>. El entrenamiento se realiza para un número predefinido de épocas. Además, <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> define el número de muestras del conjunto de entrenamiento que se utilizarán para una instancia de backpropagation. El conjunto de datos de validación también se pasa para evaluar el modelo después de cada <code class="docutils literal notranslate"><span class="pre">epoch</span></code> completa. Un objeto <code class="docutils literal notranslate"><span class="pre">ModelCheckpoint</span> <span class="pre">rastrea</span> <span class="pre">la</span> <span class="pre">función</span> <span class="pre">de</span> <span class="pre">pérdida</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">conjunto</span> <span class="pre">de</span> <span class="pre">validación</span> <span class="pre">y</span> <span class="pre">guarda</span> <span class="pre">el</span> <span class="pre">modelo</span> <span class="pre">para</span> <span class="pre">la</span> <span class="pre">época</span> <span class="pre">en</span> <span class="pre">la</span> <span class="pre">que</span> <span class="pre">la</span> <span class="pre">función</span> <span class="pre">de</span> <span class="pre">pérdida</span> <span class="pre">ha</span> <span class="pre">sido</span> <span class="pre">mínima</span></code>.</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">save_weights_at</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>os.path.join<span class="o">(</span><span class="s1">&#39;keras_models&#39;</span>,<span class="w"> </span><span class="s1">&#39;PRSA_data_Air_Pressure_MLP_weights.{epoch:02d}-{val_loss:.4f}.hdf5&#39;</span><span class="o">)</span>
+<span class="nv">save_best</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>ModelCheckpoint<span class="o">(</span>save_weights_at,<span class="w"> </span><span class="nv">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span>,<span class="w"> </span><span class="nv">verbose</span><span class="o">=</span><span class="m">0</span>,
+<span class="w">                            </span><span class="nv">save_best_only</span><span class="o">=</span>True,<span class="w"> </span><span class="nv">save_weights_only</span><span class="o">=</span>False,<span class="w"> </span><span class="nv">mode</span><span class="o">=</span><span class="s1">&#39;min&#39;</span>,
+<span class="w">                            </span><span class="nv">period</span><span class="o">=</span><span class="m">1</span><span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ts_model.fit<span class="o">(</span><span class="nv">x</span><span class="o">=</span>X_train,<span class="w"> </span><span class="nv">y</span><span class="o">=</span>y_train,<span class="w"> </span><span class="nv">batch_size</span><span class="o">=</span><span class="m">16</span>,<span class="w"> </span><span class="nv">epochs</span><span class="o">=</span><span class="m">20</span>,
+<span class="w">             </span><span class="nv">verbose</span><span class="o">=</span><span class="m">2</span>,<span class="w"> </span><span class="nv">callbacks</span><span class="o">=[</span>save_best<span class="o">]</span>,<span class="w"> </span><span class="nv">validation_data</span><span class="o">=(</span>X_val,<span class="w"> </span>y_val<span class="o">)</span>,
+<span class="w">             </span><span class="nv">shuffle</span><span class="o">=</span>True<span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+<figure class="align-center" id="epochs-mlp">
+<img alt="_images/epochs_mlp.png" src="_images/epochs_mlp.png" />
+</figure>
+<ul class="simple">
+<li><p>Se hacen predicciones para la presión atmosférica a partir del modelo mejor guardado. <code class="docutils literal notranslate"><span class="pre">Las</span> <span class="pre">predicciones</span> <span class="pre">del</span> <span class="pre">modelo,</span> <span class="pre">que</span> <span class="pre">son</span> <span class="pre">sobre</span> <span class="pre">la</span> <span class="pre">presión</span> <span class="pre">atmosférica</span> <span class="pre">escalada,</span> <span class="pre">se</span> <span class="pre">transforman</span> <span class="pre">inversamente</span> <span class="pre">para</span> <span class="pre">obtener</span> <span class="pre">predicciones</span> <span class="pre">sobre</span> <span class="pre">la</span> <span class="pre">presión</span> <span class="pre">atmosférica</span> <span class="pre">original</span></code>. También se calcula la bondad de ajuste o <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">cuadrado</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># best_model = load_model(os.path.join(&#39;keras_models&#39;, &#39;PRSA_data_Air_Pressure_MLP_weights.12-0.0001.hdf5&#39;))</span>
+<span class="c1"># preds = best_model.predict(X_val)</span>
+<span class="c1"># pred_PRES = scaler.inverse_transform(preds)</span>
+<span class="c1"># pred_PRES = np.squeeze(pred_PRES)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># r2 = r2_score(df_val[&#39;PRES&#39;].loc[7:], pred_PRES)</span>
+<span class="c1"># print(&#39;R-squared for the validation set:&#39;, round(r2,4))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># #Let&#39;s plot the first 50 actual and predicted values of air pressure.</span>
+<span class="c1"># plt.figure(figsize=(5.5, 5.5))</span>
+<span class="c1"># plt.plot(range(50), df_val[&#39;PRES&#39;].loc[7:56], linestyle=&#39;-&#39;, marker=&#39;*&#39;, color=&#39;r&#39;)</span>
+<span class="c1"># plt.plot(range(50), pred_PRES[:50], linestyle=&#39;-&#39;, marker=&#39;.&#39;, color=&#39;b&#39;)</span>
+<span class="c1"># plt.legend([&#39;Actual&#39;,&#39;Predicted&#39;], loc=2)</span>
+<span class="c1"># plt.title(&#39;Actual vs Predicted Air Pressure&#39;)</span>
+<span class="c1"># plt.ylabel(&#39;Air Pressure&#39;)</span>
+<span class="c1"># plt.xlabel(&#39;Index&#39;);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>También se ha entrenado un modelo de previsión de series temporales mediante <code class="docutils literal notranslate"><span class="pre">MLP</span></code> para la variable <code class="docutils literal notranslate"><span class="pre">pm2.5</span></code> y la implementación detallada se presenta a continuación</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/PRSA_data_2010.1.1-2014.12.31.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of the dataframe:&#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of the dataframe: (43824, 13)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Let&#39;s see the first five rows of the DataFrame</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>No</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>pm2.5</th>
+      <th>DEWP</th>
+      <th>TEMP</th>
+      <th>PRES</th>
+      <th>cbwd</th>
+      <th>Iws</th>
+      <th>Is</th>
+      <th>Ir</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>-21</td>
+      <td>-11.0</td>
+      <td>1021.0</td>
+      <td>NW</td>
+      <td>1.79</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>-21</td>
+      <td>-12.0</td>
+      <td>1020.0</td>
+      <td>NW</td>
+      <td>4.92</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>-21</td>
+      <td>-11.0</td>
+      <td>1019.0</td>
+      <td>NW</td>
+      <td>6.71</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>NaN</td>
+      <td>-21</td>
+      <td>-14.0</td>
+      <td>1019.0</td>
+      <td>NW</td>
+      <td>9.84</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>NaN</td>
+      <td>-20</td>
+      <td>-12.0</td>
+      <td>1018.0</td>
+      <td>NW</td>
+      <td>12.97</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Rows having NaN values in column pm2.5 are dropped.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pm2.5&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;datetime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">month</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">],</span> <span class="n">day</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">],</span>
+                                                                                          <span class="n">hour</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;hour&#39;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Let us draw a box plot to visualize the central tendency and dispersion of pm2.5</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pm2.5&#39;</span><span class="p">],</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;h&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set2&quot;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Box plot of pm2.5&#39;</span><span class="p">);</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;pm2.5&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">yticklabels</span><span class="o">=</span><span class="p">[])</span>
+<span class="n">g</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9a40f9c34bf36f7db20ff8d22ed674acf5c7b125ef484b11b6b3f41bd7dac0bb.png" src="_images/9a40f9c34bf36f7db20ff8d22ed674acf5c7b125ef484b11b6b3f41bd7dac0bb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pm2.5&#39;</span><span class="p">])</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Time series of pm2.5&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Index&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;pm2.5 readings&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/974418f03a95ac4e2eee9a5b93b4f62dc86d10ee38c5189391304f84c5ab29f7.png" src="_images/974418f03a95ac4e2eee9a5b93b4f62dc86d10ee38c5189391304f84c5ab29f7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Let&#39;s plot the series for six months to check if any pattern apparently exists.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pm2.5&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;datetime&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2010</span><span class="p">,</span><span class="n">month</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">day</span><span class="o">=</span><span class="mi">30</span><span class="p">)],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;pm2.5 during 2010&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Index&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;pm2.5 readings&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c6e6b551a5aaab7f3b2a3ec52b290fb48609ffc3b4071ee4b9d400e97b4ddd12.png" src="_images/c6e6b551a5aaab7f3b2a3ec52b290fb48609ffc3b4071ee4b9d400e97b4ddd12.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Let&#39;s zoom in on one month.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pm2.5&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;datetime&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2010</span><span class="p">,</span><span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">day</span><span class="o">=</span><span class="mi">31</span><span class="p">)],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;pm2.5 during Jan 2010&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Index&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;pm2.5 readings&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/85833ec803a90bbd2729946983dbc07e5a7a64b4beaf741a89efc2498b38abdb.png" src="_images/85833ec803a90bbd2729946983dbc07e5a7a64b4beaf741a89efc2498b38abdb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">(</span><span class="n">feature_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;scaled_pm2.5&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pm2.5&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Let&#39;s start by splitting the dataset into train and validation. The dataset&#39;s time period if from</span>
+<span class="sd">Jan 1st, 2010 to Dec 31st, 2014. The first fours years - 2010 to 2013 is used as train and</span>
+<span class="sd">2014 is kept for validation.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">split_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2014</span><span class="p">,</span> <span class="n">month</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;datetime&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="n">split_date</span><span class="p">]</span>
+<span class="n">df_val</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;datetime&#39;</span><span class="p">]</span><span class="o">&gt;=</span><span class="n">split_date</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of train:&#39;</span><span class="p">,</span> <span class="n">df_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of test:&#39;</span><span class="p">,</span> <span class="n">df_val</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of train: (33096, 15)
+Shape of test: (8661, 15)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#First five rows of train</span>
+<span class="n">df_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>No</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>pm2.5</th>
+      <th>DEWP</th>
+      <th>TEMP</th>
+      <th>PRES</th>
+      <th>cbwd</th>
+      <th>Iws</th>
+      <th>Is</th>
+      <th>Ir</th>
+      <th>datetime</th>
+      <th>scaled_pm2.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>25</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>129.0</td>
+      <td>-16</td>
+      <td>-4.0</td>
+      <td>1020.0</td>
+      <td>SE</td>
+      <td>1.79</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2010-01-02 00:00:00</td>
+      <td>0.129779</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>26</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>148.0</td>
+      <td>-15</td>
+      <td>-4.0</td>
+      <td>1020.0</td>
+      <td>SE</td>
+      <td>2.68</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2010-01-02 01:00:00</td>
+      <td>0.148893</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>27</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+      <td>159.0</td>
+      <td>-11</td>
+      <td>-5.0</td>
+      <td>1021.0</td>
+      <td>SE</td>
+      <td>3.57</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2010-01-02 02:00:00</td>
+      <td>0.159960</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>28</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>181.0</td>
+      <td>-7</td>
+      <td>-5.0</td>
+      <td>1022.0</td>
+      <td>SE</td>
+      <td>5.36</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2010-01-02 03:00:00</td>
+      <td>0.182093</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>29</td>
+      <td>2010</td>
+      <td>1</td>
+      <td>2</td>
+      <td>4</td>
+      <td>138.0</td>
+      <td>-7</td>
+      <td>-5.0</td>
+      <td>1022.0</td>
+      <td>SE</td>
+      <td>6.25</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2010-01-02 04:00:00</td>
+      <td>0.138833</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_val</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>No</th>
+      <th>year</th>
+      <th>month</th>
+      <th>day</th>
+      <th>hour</th>
+      <th>pm2.5</th>
+      <th>DEWP</th>
+      <th>TEMP</th>
+      <th>PRES</th>
+      <th>cbwd</th>
+      <th>Iws</th>
+      <th>Is</th>
+      <th>Ir</th>
+      <th>datetime</th>
+      <th>scaled_pm2.5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>33096</th>
+      <td>35065</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>24.0</td>
+      <td>-20</td>
+      <td>7.0</td>
+      <td>1014.0</td>
+      <td>NW</td>
+      <td>143.48</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014-01-01 00:00:00</td>
+      <td>0.024145</td>
+    </tr>
+    <tr>
+      <th>33097</th>
+      <td>35066</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>53.0</td>
+      <td>-20</td>
+      <td>7.0</td>
+      <td>1013.0</td>
+      <td>NW</td>
+      <td>147.50</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014-01-01 01:00:00</td>
+      <td>0.053320</td>
+    </tr>
+    <tr>
+      <th>33098</th>
+      <td>35067</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>65.0</td>
+      <td>-20</td>
+      <td>6.0</td>
+      <td>1013.0</td>
+      <td>NW</td>
+      <td>151.52</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014-01-01 02:00:00</td>
+      <td>0.065392</td>
+    </tr>
+    <tr>
+      <th>33099</th>
+      <td>35068</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>70.0</td>
+      <td>-20</td>
+      <td>6.0</td>
+      <td>1013.0</td>
+      <td>NW</td>
+      <td>153.31</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014-01-01 03:00:00</td>
+      <td>0.070423</td>
+    </tr>
+    <tr>
+      <th>33100</th>
+      <td>35069</td>
+      <td>2014</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>79.0</td>
+      <td>-18</td>
+      <td>3.0</td>
+      <td>1012.0</td>
+      <td>cv</td>
+      <td>0.89</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2014-01-01 04:00:00</td>
+      <td>0.079477</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Reset the indices of the validation set</span>
+<span class="n">df_val</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The train and validation time series of scaled pm2.5 is also plotted.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;scaled_pm2.5&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Time series of scaled pm2.5 in train set&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Index&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Scaled pm2.5 readings&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d4526d64d7381652c5a5d7f6ef0d799ec4b345b177bbf33353e10f57ba7fb922.png" src="_images/d4526d64d7381652c5a5d7f6ef0d799ec4b345b177bbf33353e10f57ba7fb922.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">df_val</span><span class="p">[</span><span class="s1">&#39;scaled_pm2.5&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Time series of scaled pm2.5 in validation set&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Index&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Scaled pm2.5 readings&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/bdedb1ef06e7094f2224f23b4388a65ebed93d3d63620c983dbd93bdaf24f653.png" src="_images/bdedb1ef06e7094f2224f23b4388a65ebed93d3d63620c983dbd93bdaf24f653.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">makeXy</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;scaled_pm2.5&#39;</span><span class="p">],</span> <span class="mi">7</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of train arrays:&#39;</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of train arrays: (33089, 7) (33089,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">makeXy</span><span class="p">(</span><span class="n">df_val</span><span class="p">[</span><span class="s1">&#39;scaled_pm2.5&#39;</span><span class="p">],</span> <span class="mi">7</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of validation arrays:&#39;</span><span class="p">,</span> <span class="n">X_val</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_val</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of validation arrays: (8654, 7) (8654,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Define input layer which has shape (None, 7) and of type float32. None indicates the number of instances</span>
+<span class="n">input_layer</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Dense layers are defined with linear activation</span>
+<span class="n">dense1</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">)(</span><span class="n">input_layer</span><span class="p">)</span>
+<span class="n">dense2</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">)(</span><span class="n">dense1</span><span class="p">)</span>
+<span class="n">dense3</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">)(</span><span class="n">dense2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dropout_layer</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)(</span><span class="n">dense3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Finally the output layer gives prediction for the next day&#39;s air pressure.</span>
+<span class="n">output_layer</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)(</span><span class="n">dropout_layer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">input_layer</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">output_layer</span><span class="p">)</span>
+<span class="n">ts_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mean_absolute_error&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">)</span>
+<span class="n">ts_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model_1&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Layer (type)                Output Shape              Param #   
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=================================================================
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> input_2 (InputLayer)        [(None, 7)]               0         
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dense_4 (Dense)             (None, 32)                256       
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dense_5 (Dense)             (None, 16)                528       
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dense_6 (Dense)             (None, 16)                272       
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dropout_1 (Dropout)         (None, 16)                0         
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dense_7 (Dense)             (None, 1)                 17        
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=================================================================
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total params: 1,073
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trainable params: 1,073
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Non-trainable params: 0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">save_weights_at</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>os.path.join<span class="o">(</span><span class="s1">&#39;keras_models&#39;</span>,<span class="w"> </span><span class="s1">&#39;PRSA_data_PM2.5_MLP_weights.{epoch:02d}-{val_loss:.4f}.hdf5&#39;</span><span class="o">)</span>
+<span class="nv">save_best</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>ModelCheckpoint<span class="o">(</span>save_weights_at,<span class="w"> </span><span class="nv">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span>,<span class="w"> </span><span class="nv">verbose</span><span class="o">=</span><span class="m">0</span>,
+<span class="w">                            </span><span class="nv">save_best_only</span><span class="o">=</span>True,<span class="w"> </span><span class="nv">save_weights_only</span><span class="o">=</span>False,<span class="w"> </span><span class="nv">mode</span><span class="o">=</span><span class="s1">&#39;min&#39;</span>,
+<span class="w">                            </span><span class="nv">period</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+ts_model.fit<span class="o">(</span><span class="nv">x</span><span class="o">=</span>X_train,<span class="w"> </span><span class="nv">y</span><span class="o">=</span>y_train,<span class="w"> </span><span class="nv">batch_size</span><span class="o">=</span><span class="m">16</span>,<span class="w"> </span><span class="nv">epochs</span><span class="o">=</span><span class="m">20</span>,
+<span class="w">             </span><span class="nv">verbose</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">callbacks</span><span class="o">=[</span>save_best<span class="o">]</span>,<span class="w"> </span><span class="nv">validation_data</span><span class="o">=(</span>X_val,<span class="w"> </span>y_val<span class="o">)</span>,
+<span class="w">             </span><span class="nv">shuffle</span><span class="o">=</span>True<span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+<figure class="align-center" id="epochs-mlp2">
+<img alt="_images/epochs_mlp2.png" src="_images/epochs_mlp2.png" />
+</figure>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># best_model = load_model(os.path.join(&#39;keras_models&#39;, &#39;PRSA_data_PM2.5_MLP_weights.19-0.0118.hdf5&#39;))</span>
+<span class="c1"># preds = best_model.predict(X_val)</span>
+<span class="c1"># pred_pm25 = scaler.inverse_transform(preds)</span>
+<span class="c1"># pred_pm25 = np.squeeze(pred_pm25)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mae = mean_absolute_error(df_val[&#39;pm2.5&#39;].loc[7:], pred_pm25)</span>
+<span class="c1"># print(&#39;MAE for the validation set:&#39;, round(mae, 4))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Trazamos los 50 primeros valores reales y previstos de <code class="docutils literal notranslate"><span class="pre">pm2.5</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plt.figure(figsize=(5.5, 5.5))</span>
+<span class="c1"># plt.plot(range(50), df_val[&#39;pm2.5&#39;].loc[7:56], linestyle=&#39;-&#39;, marker=&#39;*&#39;, color=&#39;r&#39;)</span>
+<span class="c1"># plt.plot(range(50), pred_pm25[:50], linestyle=&#39;-&#39;, marker=&#39;.&#39;, color=&#39;b&#39;)</span>
+<span class="c1"># plt.legend([&#39;Actual&#39;,&#39;Predicted&#39;], loc=2)</span>
+<span class="c1"># plt.title(&#39;Actual vs Predicted pm2.5&#39;)</span>
+<span class="c1"># plt.ylabel(&#39;pm2.5&#39;)</span>
+<span class="c1"># plt.xlabel(&#39;Index&#39;);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="arima_model.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Modelos autorregresivos integrados de media móvil</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="biblio.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bibliografía</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perceptrones-multicapa">Perceptrones multicapa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-de-mlp">Entrenamiento de MLP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mlp-para-la-prevision-de-series-temporales">MLP para la previsión de series temporales</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Lihki Rubio PhD in Mathematical Engineering
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright Lihki Rubio PhD.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
