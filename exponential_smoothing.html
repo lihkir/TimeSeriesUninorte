@@ -424,12 +424,12 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="metodos-de-suavizacion-exponencial">
 <h1>Métodos de Suavización Exponencial<a class="headerlink" href="#metodos-de-suavizacion-exponencial" title="Link to this heading">#</a></h1>
 <ul class="simple">
-<li><p>El presente capítulo trata del <code class="docutils literal notranslate"><span class="pre">suavizado</span> <span class="pre">de</span> <span class="pre">datos</span> <span class="pre">en</span> <span class="pre">la</span> <span class="pre">señal</span> <span class="pre">de</span> <span class="pre">series</span> <span class="pre">temporales</span></code>. El capítulo está organizado como sigue:</p>
+<li><p>El presente capítulo trata del <em><strong>suavizado de datos en la señal de series temporales</strong></em>. El capítulo está organizado como sigue:</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">Introducción</span> <span class="pre">al</span> <span class="pre">suavizado</span> <span class="pre">de</span> <span class="pre">series</span> <span class="pre">temporales</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Suavizado</span> <span class="pre">exponencial</span> <span class="pre">de</span> <span class="pre">primer</span> <span class="pre">orden</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Suavizado</span> <span class="pre">exponencial</span> <span class="pre">de</span> <span class="pre">segundo</span> <span class="pre">orden</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Suavizado</span> <span class="pre">exponencial</span> <span class="pre">de</span> <span class="pre">orden</span> <span class="pre">superior</span></code></p></li>
+<li><p><em><strong>Introducción al suavizado de series temporales</strong></em></p></li>
+<li><p><em><strong>Suavizado exponencial de primer orden</strong></em></p></li>
+<li><p><em><strong>Suavizado exponencial de segundo orden</strong></em></p></li>
+<li><p><em><strong>Suavizado exponencial de orden superior</strong></em></p></li>
 </ul>
 </li>
 </ul>
@@ -439,14 +439,14 @@ document.write(`
 <section id="introduccion-al-suavizado-de-series-temporales">
 <h2>Introducción al suavizado de series temporales<a class="headerlink" href="#introduccion-al-suavizado-de-series-temporales" title="Link to this heading">#</a></h2>
 <ul>
-<li><p>Los datos de las series temporales se componen de <code class="docutils literal notranslate"><span class="pre">señal</span> <span class="pre">y</span> <span class="pre">ruido</span></code>, donde la <code class="docutils literal notranslate"><span class="pre">señal</span> <span class="pre">captura</span> <span class="pre">la</span> <span class="pre">dinámica</span> <span class="pre">intrínseca</span> <span class="pre">del</span> <span class="pre">proceso</span></code>; sin embargo, el <code class="docutils literal notranslate"><span class="pre">ruido</span> <span class="pre">representa</span> <span class="pre">el</span> <span class="pre">componente</span> <span class="pre">no</span> <span class="pre">modelado</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">señal</span> <span class="pre">o</span> <span class="pre">error</span> <span class="pre">aleatorio</span> <span class="pre">no</span> <span class="pre">correlacionado,</span> <span class="pre">el</span> <span class="pre">cual</span> <span class="pre">en</span> <span class="pre">diferentes</span> <span class="pre">tiempos</span> <span class="pre">es</span> <span class="pre">estadísticamente</span> <span class="pre">independiente</span></code>.</p></li>
-<li><p>La dinámica intrínseca de una señal de serie temporal puede ser tan simple como <code class="docutils literal notranslate"><span class="pre">la</span> <span class="pre">media</span> <span class="pre">del</span> <span class="pre">proceso</span></code> o puede ser una <code class="docutils literal notranslate"><span class="pre">forma</span> <span class="pre">funcional</span> <span class="pre">compleja</span></code> dentro de las observaciones, como se representa aquí:</p>
+<li><p>Los datos de las series temporales se componen de <em><strong>señal y ruido</strong></em>, donde la <em><strong>señal captura la dinámica intrínseca del proceso</strong></em>; sin embargo, el <em><strong>ruido representa el componente no modelado de la señal o error aleatorio no correlacionado, el cual en diferentes tiempos es estadísticamente independiente</strong></em>.</p></li>
+<li><p>La dinámica intrínseca de una señal de serie temporal puede ser tan simple como <em><strong>la media del proceso</strong></em> o puede ser una <em><strong>forma funcional compleja</strong></em> dentro de las observaciones, como se representa aquí:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
     \\[1mm]
     y_{t}=f(t, \boldsymbol{\beta})+\varepsilon_{t},\quad\text{para}\quad i=1,2,3,\dots,T,
 \end{split}\]</div>
-<p>donde <span class="math notranslate nohighlight">\(y_{t}\)</span> representa las observaciones, <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span> es un vector de parámetros desconocidos, y <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span> es el <code class="docutils literal notranslate"><span class="pre">error</span> <span class="pre">aleatorio</span> <span class="pre">no</span> <span class="pre">correlacionado</span></code>, usualmente con media 0 y desviación 1.</p>
+<p>donde <span class="math notranslate nohighlight">\(y_{t}\)</span> representa las observaciones, <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span> es un vector de parámetros desconocidos, y <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span> es el <em><strong>error aleatorio no correlacionado</strong></em>, usualmente con media 0 y desviación 1.</p>
 </li>
 </ul>
 <figure class="align-center" id="signal-noise-fig">
@@ -454,15 +454,15 @@ document.write(`
 </a>
 </figure>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(f(t, \boldsymbol{\beta})\)</span> <code class="docutils literal notranslate"><span class="pre">denota</span> <span class="pre">la</span> <span class="pre">forma</span> <span class="pre">funcional</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">señal</span></code>. Un ejemplo puede ser una constante (<code class="docutils literal notranslate"><span class="pre">media</span></code>) como forma funcional:</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(t, \boldsymbol{\beta})\)</span> <em><strong>denota la forma funcional de la señal</strong></em>. Un ejemplo puede ser una constante (<em><strong>media</strong></em>) como forma funcional:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
     y_{t}=\mu+\varepsilon_{t}
 \]</div>
 <ul class="simple">
-<li><p>Dado que <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span> es <code class="docutils literal notranslate"><span class="pre">ruido</span> <span class="pre">blanco</span></code>, este enfoque basado en el suavizado ayuda a <code class="docutils literal notranslate"><span class="pre">separar</span> <span class="pre">la</span> <span class="pre">forma</span> <span class="pre">funcional</span> <span class="pre">intrínseca</span> <span class="pre">del</span> <span class="pre">ruido</span> <span class="pre">aleatorio,</span> <span class="pre">cancelándolo</span></code>.</p></li>
-<li><p>Los métodos predictivos de suavización pueden considerarse como <code class="docutils literal notranslate"><span class="pre">filtros</span></code> que toman datos de entrada y <code class="docutils literal notranslate"><span class="pre">separan</span> <span class="pre">los</span> <span class="pre">componentes</span> <span class="pre">de</span> <span class="pre">tendencia</span> <span class="pre">y</span> <span class="pre">de</span> <span class="pre">ruido</span></code>, como se muestra en la <a class="reference internal" href="#fig1-chapter2"><span class="std std-numref">Fig. 2</span></a></p></li>
+<li><p>Dado que <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span> es <em><strong>ruido blanco</strong></em>, este enfoque basado en el suavizado ayuda a <em><strong>separar la forma funcional intrínseca del ruido aleatorio, cancelándolo</strong></em>.</p></li>
+<li><p>Los métodos predictivos de suavización pueden considerarse como <em><strong>filtros</strong></em> que toman datos de entrada y <em><strong>separan los componentes de tendencia y de ruido</strong></em>, como se muestra en la <a class="reference internal" href="#fig1-chapter2"><span class="std std-numref">Fig. 2</span></a></p></li>
 </ul>
 <figure class="align-center" id="fig1-chapter2">
 <img alt="_images/fig1_chapter2.png" src="_images/fig1_chapter2.png" />
@@ -471,44 +471,41 @@ document.write(`
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>Un <code class="docutils literal notranslate"><span class="pre">proceso</span> <span class="pre">constante</span></code> puede ser suavizado reemplazando la observación actual con el mejor estimador para <span class="math notranslate nohighlight">\(\mu\)</span>. Usando el criterio de <code class="docutils literal notranslate"><span class="pre">mínimos</span> <span class="pre">cuadrados</span></code>, definimos la <code class="docutils literal notranslate"><span class="pre">suma</span> <span class="pre">de</span> <span class="pre">cuadrados</span> <span class="pre">de</span> <span class="pre">los</span> <span class="pre">errores</span></code> <span class="math notranslate nohighlight">\(SS_{E}\)</span>, para el proceso constante como</p></li>
+<li><p>Un <em><strong>proceso constante</strong></em> puede ser suavizado reemplazando la observación actual con el mejor estimador para <span class="math notranslate nohighlight">\(\mu\)</span>. Usando el criterio de <em><strong>mínimos cuadrados</strong></em>, definimos la <em><strong>suma de cuadrados de los errores</strong></em> <span class="math notranslate nohighlight">\(SS_{E}\)</span>, para el proceso constante como</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 SS_{E}=\sum_{t=1}^{T}(y_{t}-\mu)^{2}.
 \]</div>
-<ul class="simple">
-<li><p>La estimación por mínimos cuadrados de <span class="math notranslate nohighlight">\(\mu\)</span> puede ser calculada derivando <span class="math notranslate nohighlight">\(SS_{E}\)</span> con respecto a <span class="math notranslate nohighlight">\(\mu\)</span> el igualar a cero (<code class="docutils literal notranslate"><span class="pre">verifíquelo</span></code>). Esto entrega</p></li>
-</ul>
+<ul>
+<li><p>La estimación por mínimos cuadrados de <span class="math notranslate nohighlight">\(\mu\)</span> puede ser calculada derivando <span class="math notranslate nohighlight">\(SS_{E}\)</span> con respecto a <span class="math notranslate nohighlight">\(\mu\)</span> el igualar a cero (<em><strong>verifíquelo</strong></em>). Esto entrega</p>
 <div class="math notranslate nohighlight" id="equation-constant-process-ols">
 <span class="eqno">(7)<a class="headerlink" href="#equation-constant-process-ols" title="Link to this equation">#</a></span>\[
-    \hat{\mu}=\frac{1}{T}\sum_{t=1}^{T}y_{t},
-\]</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>donde $\hat{\mu}$ es la estimación por mínimos cuadrados de $\mu$.
-</pre></div>
-</div>
-<ul class="simple">
+  \hat{\mu}=\frac{1}{T}\sum_{t=1}^{T}y_{t},
+  \]</div>
+<p>donde <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> es la estimación por mínimos cuadrados de <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+</li>
 <li><p>La Ecuación <a class="reference internal" href="#equation-constant-process-ols">(7)</a> muestra que la estimación por mínimos cuadrado de <span class="math notranslate nohighlight">\(\mu\)</span>, es en efecto, el promedio de las observaciones hasta el tiempo <span class="math notranslate nohighlight">\(T\)</span>.</p></li>
 </ul>
 <div class="admonition-observacion admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p>El principal problema con el suavizador de la Ecuación <a class="reference internal" href="#equation-constant-process-ols">(7)</a> es que <code class="docutils literal notranslate"><span class="pre">reacciona</span> <span class="pre">lentamente</span> <span class="pre">a</span> <span class="pre">procesos</span> <span class="pre">de</span> <span class="pre">cambios</span></code>, debido a que <code class="docutils literal notranslate"><span class="pre">acumula</span> <span class="pre">mas</span> <span class="pre">y</span> <span class="pre">mas</span> <span class="pre">puntos</span> <span class="pre">de</span> <span class="pre">datos</span> <span class="pre">ganando</span> <span class="pre">algún</span> <span class="pre">tipo</span> <span class="pre">de</span> <span class="pre">inercia</span></code>. La solución mas obvia es de alguna forma descontar datos mas antiguos.</p></li>
-<li><p>Una solución común es usar la <code class="docutils literal notranslate"><span class="pre">media</span> <span class="pre">móvil</span> <span class="pre">simple</span></code> definida por</p></li>
+<li><p>El principal problema con el suavizador de la Ecuación <a class="reference internal" href="#equation-constant-process-ols">(7)</a> es que <em><strong>reacciona lentamente a procesos de cambios</strong></em>, debido a que <em><strong>acumula mas y mas puntos de datos ganando algún tipo de inercia</strong></em>. La solución mas obvia es de alguna forma descontar datos mas antiguos.</p></li>
+<li><p>Una solución común es usar la <em><strong>media móvil simple</strong></em> definida por</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-simple-moving-avg">
 <span class="eqno">(8)<a class="headerlink" href="#equation-simple-moving-avg" title="Link to this equation">#</a></span>\[
 M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{t}.
 \]</div>
 <ul>
-<li><p>Una media reaccionará mas rápido a cambios si <span class="math notranslate nohighlight">\(N\)</span> es pequeño. Dado que para observaciones no correlacionadas con varianza constante <span class="math notranslate nohighlight">\(\sigma^{2}\)</span> se tiene que (<code class="docutils literal notranslate"><span class="pre">verifíquelo</span></code>)</p>
+<li><p>Una media reaccionará mas rápido a cambios si <span class="math notranslate nohighlight">\(N\)</span> es pequeño. Dado que para observaciones no correlacionadas con varianza constante <span class="math notranslate nohighlight">\(\sigma^{2}\)</span> se tiene que (<em><strong>verifíquelo</strong></em>)</p>
 <div class="math notranslate nohighlight" id="equation-variance-sma">
 <span class="eqno">(9)<a class="headerlink" href="#equation-variance-sma" title="Link to this equation">#</a></span>\[
     \text{Var}(M_{T})=\frac{\sigma^{2}}{N}.
     \]</div>
 </li>
 <li><p>Dada la Ecuación <a class="reference internal" href="#equation-variance-sma">(9)</a>. Si se espera que el proceso es constante, un valor grande de <span class="math notranslate nohighlight">\(N\)</span> puede ser usado, mientras que, un valor pequeño de <span class="math notranslate nohighlight">\(N\)</span> es preferido si el proceso es cambiante.</p></li>
-<li><p>Queda como ejercicio para el lector verificar que la <code class="docutils literal notranslate"><span class="pre">función</span> <span class="pre">de</span> <span class="pre">autocorrelación</span> <span class="pre">(ACF)</span></code> de la media móvil con <span class="math notranslate nohighlight">\(k\)</span>-lags está dada por</p></li>
+<li><p>Queda como ejercicio para el lector verificar que la <em><strong>función de autocorrelación (ACF)</strong></em> de la media móvil con <span class="math notranslate nohighlight">\(k\)</span>-lags está dada por</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-acf-moving-average">
 <span class="eqno">(10)<a class="headerlink" href="#equation-acf-moving-average" title="Link to this equation">#</a></span>\[\begin{split}
@@ -525,17 +522,17 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 <div class="proof theorem admonition" id="th-simple_exp_smoothing">
 <p class="admonition-title"><span class="caption-number">Theorem 2 </span> (Suavización exponencial simple)</p>
 <section class="theorem-content" id="proof-content">
-<p>Dada una serie de tiempo <span class="math notranslate nohighlight">\((y_{t})_{t=1}^{T}\)</span>. Una <code class="docutils literal notranslate"><span class="pre">suavización</span> <span class="pre">exponencial</span> <span class="pre">ponderada</span></code> está definida por:</p>
+<p>Dada una serie de tiempo <span class="math notranslate nohighlight">\((y_{t})_{t=1}^{T}\)</span>. Una <em><strong>suavización exponencial ponderada</strong></em> está definida por:</p>
 <div class="math notranslate nohighlight" id="equation-eq-simple-exp-smoothing">
 <span class="eqno">(11)<a class="headerlink" href="#equation-eq-simple-exp-smoothing" title="Link to this equation">#</a></span>\[
 \sum_{t=1}^{T-1}\theta^{t}y_{T-t}=y_{T}+\theta y_{T-1}+\theta^{2}y_{t-2}+\cdots+\theta^{T-1}y_{1}
 \]</div>
-<p>donde <span class="math notranslate nohighlight">\(\theta\)</span> satisface <span class="math notranslate nohighlight">\(|\theta|&lt;1\)</span>. Esto es, observaciones pasadas son descontadas de manera geométricamente descendiente. Entonces, la <code class="docutils literal notranslate"><span class="pre">suavización</span> <span class="pre">exponencial</span> <span class="pre">simple</span></code> está representada por:</p>
+<p>donde <span class="math notranslate nohighlight">\(\theta\)</span> satisface <span class="math notranslate nohighlight">\(|\theta|&lt;1\)</span>. Esto es, observaciones pasadas son descontadas de manera geométricamente descendiente. Entonces, la <em><strong>suavización exponencial simple</strong></em> está representada por:</p>
 <div class="math notranslate nohighlight">
 \[
 \tilde{y}_{T}=\lambda y_{T}+(1-\lambda)\tilde{y}_{T-1},\quad\text{donde}\quad\lambda=1-\theta.
 \]</div>
-<p><span class="math notranslate nohighlight">\(\lambda\)</span> es conocido como el <code class="docutils literal notranslate"><span class="pre">factor</span> <span class="pre">de</span> <span class="pre">descuento</span></code>. Nótese que el factor de descuento <span class="math notranslate nohighlight">\(\lambda\)</span>, representa el peso colocado sobre la última observación <span class="math notranslate nohighlight">\(y_{T}\)</span> y <span class="math notranslate nohighlight">\(1-\lambda\)</span> el peso asignado al valor suavizado de la previa observación <span class="math notranslate nohighlight">\(\tilde{y}_{T-1}\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\lambda\)</span> es conocido como el <em><strong>factor de descuento</strong></em>. Nótese que el factor de descuento <span class="math notranslate nohighlight">\(\lambda\)</span>, representa el peso colocado sobre la última observación <span class="math notranslate nohighlight">\(y_{T}\)</span> y <span class="math notranslate nohighlight">\(1-\lambda\)</span> el peso asignado al valor suavizado de la previa observación <span class="math notranslate nohighlight">\(\tilde{y}_{T-1}\)</span>.</p>
 </section>
 </div><p><strong><code class="docutils literal notranslate"><span class="pre">Demostración</span></code></strong></p>
 <ul class="simple">
@@ -571,7 +568,7 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 \end{align*}
 \end{split}\]</div>
 <ul class="simple">
-<li><p>Entonces la <code class="docutils literal notranslate"><span class="pre">suavización</span> <span class="pre">exponencial</span> <span class="pre">simple</span></code> está dada por</p></li>
+<li><p>Entonces la <em><strong>suavización exponencial simple</strong></em> está dada por</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-eq-simple-exp-smoothing2">
 <span class="eqno">(12)<a class="headerlink" href="#equation-eq-simple-exp-smoothing2" title="Link to this equation">#</a></span>\[
@@ -590,7 +587,7 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 \end{align*}
 \end{split}\]</div>
 <ul class="simple">
-<li><p>Esto es, la suavización exponencial de primer orden, puede verse como combianción lineal de la observación actual y la observación suavizada en un tiempo previo. Definiendo <span class="math notranslate nohighlight">\(\lambda=1-\theta\)</span>, (<code class="docutils literal notranslate"><span class="pre">factor</span> <span class="pre">de</span> <span class="pre">corrección</span></code>) se tiene que:</p></li>
+<li><p>Esto es, la suavización exponencial de primer orden, puede verse como combianción lineal de la observación actual y la observación suavizada en un tiempo previo. Definiendo <span class="math notranslate nohighlight">\(\lambda=1-\theta\)</span>, (<em><strong>factor de corrección</strong></em>) se tiene que:</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-eq-simple-exp-smoothing3">
 <span class="eqno">(13)<a class="headerlink" href="#equation-eq-simple-exp-smoothing3" title="Link to this equation">#</a></span>\[
@@ -598,12 +595,12 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 \]</div>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
-<p>Análogamente a la longitud del periodo en la media movil, <code class="docutils literal notranslate"><span class="pre">un</span> <span class="pre">asunto</span> <span class="pre">importante</span> <span class="pre">para</span> <span class="pre">la</span> <span class="pre">suavización</span> <span class="pre">exponencial</span> <span class="pre">es</span> <span class="pre">la</span> <span class="pre">selección</span> <span class="pre">del</span> <span class="pre">factor</span> <span class="pre">de</span> <span class="pre">descuento</span></code> <span class="math notranslate nohighlight">\(\lambda\)</span>. Además, a partir de la ecuación <a class="reference internal" href="#equation-eq-simple-exp-smoothing3">(13)</a> podemos observa que el cálculo de <span class="math notranslate nohighlight">\(\tilde{y}_{1}\)</span> va a requerir conocer <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span>.</p>
+<p>Análogamente a la longitud del periodo en la media movil, <em><strong>un asunto importante para la suavización exponencial es la selección del factor de descuento</strong></em> <span class="math notranslate nohighlight">\(\lambda\)</span>. Además, a partir de la ecuación <a class="reference internal" href="#equation-eq-simple-exp-smoothing3">(13)</a> podemos observa que el cálculo de <span class="math notranslate nohighlight">\(\tilde{y}_{1}\)</span> va a requerir conocer <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span>.</p>
 </div>
 <div class="proof theorem admonition" id="th-initial-value-simple-exp-smoothing">
 <p class="admonition-title"><span class="caption-number">Theorem 3 </span> (Selección de <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span>)</p>
 <section class="theorem-content" id="proof-content">
-<p>Dada una serie de tiempo <span class="math notranslate nohighlight">\((y_{t})_{t=1}^{T}\)</span>, donde <span class="math notranslate nohighlight">\(T\)</span> es grande, la contribución de <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span> a <span class="math notranslate nohighlight">\(\tilde{y}_{T}\)</span> es mínima. Por lo tanto, <code class="docutils literal notranslate"><span class="pre">la</span> <span class="pre">estimación</span> <span class="pre">de</span></code> <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span> <code class="docutils literal notranslate"><span class="pre">tiene</span> <span class="pre">poca</span> <span class="pre">influencia</span> <span class="pre">sobre</span> <span class="pre">la</span> <span class="pre">suavización</span></code>. Sin embargo, dos estimaciones de <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span> comunmente usadas en las aplicaciones son las siguientes:</p>
+<p>Dada una serie de tiempo <span class="math notranslate nohighlight">\((y_{t})_{t=1}^{T}\)</span>, donde <span class="math notranslate nohighlight">\(T\)</span> es grande, la contribución de <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span> a <span class="math notranslate nohighlight">\(\tilde{y}_{T}\)</span> es mínima. Por lo tanto, <em><strong>la estimación de</strong></em> <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span> <em><strong>tiene poca influencia sobre la suavización</strong></em>. Sin embargo, dos estimaciones de <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span> comunmente usadas en las aplicaciones son las siguientes:</p>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(\tilde{y}_{0}=y_{1}\)</span>: Si los cambios esperados del proceso ocurren temprano y rápido, esta selección para el valor inicial de <span class="math notranslate nohighlight">\(\tilde{y}_{T}\)</span> es razonable.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\tilde{y}_{0}=\overline{y}\)</span>: Tomar el promedio de los datos disponibles. Si el proceso es constante, al menos al inicio, este sería el valor mas adecuado.</p></li>
@@ -633,9 +630,9 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 <div class="admonition-observacion admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p>En general, cuando <span class="math notranslate nohighlight">\(\lambda\)</span> tiende a 1, y se hace mas hincapié en la ultima observación, los <code class="docutils literal notranslate"><span class="pre">valores</span> <span class="pre">suavizados</span> <span class="pre">se</span> <span class="pre">aproximarán</span> <span class="pre">a</span> <span class="pre">las</span> <span class="pre">observaciones</span> <span class="pre">originales</span></code>.</p></li>
-<li><p>Si <span class="math notranslate nohighlight">\(\lambda=0\)</span>, los valores suavizados serán todos igual a una constante, a saber <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span>. Esta línea constantes sería la <code class="docutils literal notranslate"><span class="pre">versión</span> <span class="pre">mas</span> <span class="pre">suavizada</span></code> de cualquier patron que siga la serie de tiempo original.</p></li>
-<li><p>Para <span class="math notranslate nohighlight">\(\lambda=1\)</span>, tenemos <span class="math notranslate nohighlight">\(\tilde{y}_{T}=y_{T}\)</span> y este representará la <code class="docutils literal notranslate"><span class="pre">versión</span> <span class="pre">menos</span> <span class="pre">suavizada</span></code> de la serie de tiempo original.</p></li>
+<li><p>En general, cuando <span class="math notranslate nohighlight">\(\lambda\)</span> tiende a 1, y se hace más hincapié en la última observación, los <em><strong>valores suavizados se aproximarán a las observaciones originales</strong></em>.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(\lambda=0\)</span>, los valores suavizados serán todos igual a una constante, a saber <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span>. Esta línea constante sería la <em><strong>versión más suavizada</strong></em> de cualquier patrón que siga la serie de tiempo original.</p></li>
+<li><p>Para <span class="math notranslate nohighlight">\(\lambda=1\)</span>, tenemos <span class="math notranslate nohighlight">\(\tilde{y}_{T}=y_{T}\)</span> y este representará la <em><strong>versión menos suavizada</strong></em> de la serie de tiempo original.</p></li>
 <li><p>Con base en la selección de <span class="math notranslate nohighlight">\(\lambda\)</span>, esperamos acordemente que la varianza varíe entre 0 y la varianza de la serie de tiempo original.</p></li>
 </ul>
 </div>
@@ -682,21 +679,21 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 <ul class="simple">
 <li><p>Nótese que si <span class="math notranslate nohighlight">\(\lambda\rightarrow1\)</span>, <span class="math notranslate nohighlight">\(\text{Var}(\tilde{y}_{T})\rightarrow\text{Var}(y_{T})\)</span>, y si <span class="math notranslate nohighlight">\(\lambda\rightarrow0\)</span>, <span class="math notranslate nohighlight">\(\text{Var}(\tilde{y}_{T}\rightarrow0)\)</span>. La pregunta ahora es, ¿cuánto suavizado se necesita?. En la literatura se recomienda <span class="math notranslate nohighlight">\(\lambda\)</span> entre 0.1 y 0.4 y, de hecho, funcionan bien en la práctica. Un método más riguroso para encontrar el valor <span class="math notranslate nohighlight">\(\lambda\)</span> se discutirá mas adelante en este capítulo.</p></li>
 <li><p>Como medidas de precisión usaremos las siguientes métricas que vienen ya implementadas en <code class="docutils literal notranslate"><span class="pre">Python</span></code>; <code class="docutils literal notranslate"><span class="pre">MAPE,</span> <span class="pre">MAD</span></code> y <code class="docutils literal notranslate"><span class="pre">MSD</span></code>.</p></li>
-<li><p>El <code class="docutils literal notranslate"><span class="pre">error</span> <span class="pre">porcentual</span> <span class="pre">medio</span> <span class="pre">absoluto</span> <span class="pre">(MAPE)</span></code> es el cambio porcentual medio absoluto entre el valor predicho, esto es <span class="math notranslate nohighlight">\(\tilde{y}_{t-1}:=\tilde{y}_{t}(t-1)\)</span>, para una predicción <code class="docutils literal notranslate"><span class="pre">one-step-ahead</span></code> y el valor real dado por</p></li>
+<li><p>El <em><strong>error porcentual medio absoluto (MAPE)</strong></em> es el cambio porcentual medio absoluto entre el valor predicho, esto es <span class="math notranslate nohighlight">\(\tilde{y}_{t-1}:=\tilde{y}_{t}(t-1)\)</span>, para una predicción <em><strong>one-step-ahead</strong></em> y el valor real dado por</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 \text{MAPE}=\frac{\displaystyle{\sum_{t=1}^{T}|(y_{t}-\tilde{y}_{t-1})/y_{t}|}}{T}\times 100,\quad (y_{t}\neq 0).
 \]</div>
 <ul class="simple">
-<li><p>La <code class="docutils literal notranslate"><span class="pre">desviación</span> <span class="pre">media</span> <span class="pre">absoluta</span> <span class="pre">(MAD)</span></code> es la diferencia absoluta media entre los valores predichos y los verdaderos, dada por</p></li>
+<li><p>La <em><strong>desviación media absoluta (MAD)</strong></em> es la diferencia absoluta media entre los valores predichos y los verdaderos, dada por</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 \text{MAD}=\frac{\displaystyle{\sum_{t=1}^{T}|(y_{t}-\tilde{y}_{t-1})|}}{T}.
 \]</div>
 <ul class="simple">
-<li><p>La <code class="docutils literal notranslate"><span class="pre">desviación</span> <span class="pre">cuadrática</span> <span class="pre">media</span> <span class="pre">(MSD)</span></code> es la diferencia cuadrática media entre los valores predichos y los verdaderos, dada por</p></li>
+<li><p>La <em><strong>desviación cuadrática media (MSD)</strong></em> es la diferencia cuadrática media entre los valores predichos y los verdaderos, dada por</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -709,7 +706,7 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 <p class="admonition-title"><span class="caption-number">Theorem 4 </span></p>
 <section class="theorem-content" id="proof-content">
 <ul>
-<li><p>Considere un <code class="docutils literal notranslate"><span class="pre">proceso</span> <span class="pre">constante</span></code>, esto es, un proceso donde los datos de series de tiempo se espera que varíen en torno a un nivel constante, con fluctuaciones aleatorias, las cuales son caracterizadas usualmente por <code class="docutils literal notranslate"><span class="pre">errores</span> <span class="pre">no</span> <span class="pre">correlacionados</span> <span class="pre">con</span> <span class="pre">media</span> <span class="pre">0</span> <span class="pre">y</span> <span class="pre">varianza</span> <span class="pre">constante</span></code>.</p></li>
+<li><p>Considere un <em><strong>proceso constante</strong></em>, esto es, un proceso donde los datos de series de tiempo se espera que varíen en torno a un nivel constante, con fluctuaciones aleatorias, las cuales son caracterizadas usualmente por <em><strong>errores no correlacionados con media 0 y varianza constante</strong></em>.</p></li>
 <li><p>La clase general de modelos puede expresarse como</p>
 <div class="math notranslate nohighlight">
 \[
@@ -717,14 +714,14 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
     \]</div>
 <p>donde <span class="math notranslate nohighlight">\(\boldsymbol{\beta}\)</span> es un vector de parámetros desconocidos y <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span> representa errores no correlacionados.</p>
 </li>
-<li><p>El <code class="docutils literal notranslate"><span class="pre">proceso</span> <span class="pre">constante</span></code> es miembro de esta clase general:</p>
+<li><p>El <em><strong>proceso constante</strong></em> es miembro de esta clase general:</p>
 <div class="math notranslate nohighlight">
 \[
     y_{t}=\beta_{0}+\varepsilon_{t},
     \]</div>
 <p>donde <span class="math notranslate nohighlight">\(\beta_{0}\)</span> es igual a <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
 </li>
-<li><p>Entonces, la <code class="docutils literal notranslate"><span class="pre">estimación</span> <span class="pre">de</span> <span class="pre">mínimos</span> <span class="pre">cuadrados</span> <span class="pre">ponderada</span></code> de <span class="math notranslate nohighlight">\(\beta_{0}\)</span> en el proceso constante, con <code class="docutils literal notranslate"><span class="pre">pesos</span> <span class="pre">exponencialmente</span> <span class="pre">decrecientes</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">tiempo</span></code> es</p></li>
+<li><p>Entonces, la <em><strong>estimación de mínimos cuadrados ponderada</strong></em> de <span class="math notranslate nohighlight">\(\beta_{0}\)</span> en el proceso constante, con <em><strong>pesos exponencialmente decrecientes en el tiempo</strong></em> es</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -733,14 +730,14 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 </section>
 </div><p><strong><code class="docutils literal notranslate"><span class="pre">Demostración</span></code></strong></p>
 <ul class="simple">
-<li><p>Consideremos la <code class="docutils literal notranslate"><span class="pre">suma</span> <span class="pre">de</span> <span class="pre">errores</span> <span class="pre">cuadráticos</span></code> para el proceso constante, dada por</p></li>
+<li><p>Consideremos la <em><strong>suma de errores cuadráticos</strong></em> para el proceso constante, dada por</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 SS_{E}=\sum_{t=1}^{T}(y_{t}-\mu)^{2}
 \]</div>
 <ul class="simple">
-<li><p>Si afirmamos que no todas las observaciones deberían tener igual influencia sobre la suma, introducimos una cadena de <code class="docutils literal notranslate"><span class="pre">pesos</span> <span class="pre">geométricamente</span> <span class="pre">decrecientes</span> <span class="pre">en</span> <span class="pre">tiempo</span></code></p></li>
+<li><p>Si afirmamos que no todas las observaciones deberían tener igual influencia sobre la suma, introducimos una cadena de <em><strong>pesos geométricamente decrecientes en tiempo</strong></em></p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-error-sq-sum1">
 <span class="eqno">(14)<a class="headerlink" href="#equation-error-sq-sum1" title="Link to this equation">#</a></span>\[
@@ -763,13 +760,13 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 \hat{\beta}_{0}=\frac{1-\theta}{1-\theta^{T}}\sum_{t=0}^{T-1}\theta^{t}y_{T-t}\xrightarrow[T\rightarrow\infty]{}(1-\theta)\sum_{t=0}^{T-1}\theta^{t}y_{T-t}.
 \]</div>
 <ul class="simple">
-<li><p>Nótese que <span class="math notranslate nohighlight">\(\hat{\beta}_{0}=\tilde{y}_{T}\)</span>. Esto es, el proceso de suavización exponencial simple en efecto provee una <code class="docutils literal notranslate"><span class="pre">estimación</span> <span class="pre">de</span> <span class="pre">mínimos</span> <span class="pre">cuadrados</span> <span class="pre">ponderada</span></code> de <span class="math notranslate nohighlight">\(\beta_{0}\)</span>, para el proceso constante con pesos que son exponencialmente decrecientes en el tiempo.</p></li>
+<li><p>Nótese que <span class="math notranslate nohighlight">\(\hat{\beta}_{0}=\tilde{y}_{T}\)</span>. Esto es, el proceso de suavización exponencial simple en efecto provee una <em><strong>estimación de mínimos cuadrados ponderada</strong></em> de <span class="math notranslate nohighlight">\(\beta_{0}\)</span>, para el proceso constante con pesos que son exponencialmente decrecientes en el tiempo.</p></li>
 </ul>
 <div class="admonition-observacion admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
 <li><p>Retomando con nuestra clase de modelo general <span class="math notranslate nohighlight">\(y_{t}=f(t; \boldsymbol{\beta})+\varepsilon_{t},~f(t, \boldsymbol{\beta})\)</span> puede ser cualquier función de <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
-<li><p>Por ejemplo, para <code class="docutils literal notranslate"><span class="pre">series</span> <span class="pre">de</span> <span class="pre">tiempo</span> <span class="pre">no</span> <span class="pre">estacionarias</span></code>, es mas conveniente considerar una <code class="docutils literal notranslate"><span class="pre">familia</span> <span class="pre">polinómica</span></code>, donde el proceso constante es el modelos mas simple que podemos considerar.</p></li>
+<li><p>Por ejemplo, para <em><strong>series de tiempo no estacionarias</strong></em>, es mas conveniente considerar una <em><strong>familia polinómica</strong></em>, donde el proceso constante es el modelos mas simple que podemos considerar.</p></li>
 </ul>
 </div>
 <div class="proof theorem admonition" id="theorem-3">
@@ -783,14 +780,14 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
     \]</div>
 <p>donde <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span> es no correlacionado con media 0 y varianza constante <span class="math notranslate nohighlight">\(\sigma_{\varepsilon}^{2}\)</span>.</p>
 </li>
-<li><p>Además, el suavizador exponencial simple es un estimador sesgado para el <code class="docutils literal notranslate"><span class="pre">modelo</span> <span class="pre">de</span> <span class="pre">tendencia</span> <span class="pre">lineal</span></code> y la cantidad de sesgo es: <span class="math notranslate nohighlight">\(-(1-\lambda)\beta_{1}/\lambda\)</span>, donde</p></li>
+<li><p>Además, el suavizador exponencial simple es un estimador sesgado para el <em><strong>modelo de tendencia lineal</strong></em> y la cantidad de sesgo es: <span class="math notranslate nohighlight">\(-(1-\lambda)\beta_{1}/\lambda\)</span>, donde</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 \text{E}(\tilde{y}_{T})=\beta_{0}+\beta_{1}T-\frac{1-\lambda}{\lambda}\beta_{1}=\text{E}(y_{T})-\frac{1-\lambda}{\lambda}\beta_{1}.
 \]</div>
 <ul>
-<li><p>Dada la <code class="docutils literal notranslate"><span class="pre">suavización</span> <span class="pre">exponencial</span> <span class="pre">de</span> <span class="pre">segundo</span> <span class="pre">orden</span></code> definida por:</p>
+<li><p>Dada la <em><strong>suavización exponencial de segundo orden</strong></em> definida por:</p>
 <div class="math notranslate nohighlight">
 \[
     \tilde{y}_{T}^{(2)}=\lambda\tilde{y}_{T}^{(1)}+(1-\lambda)\tilde{y}_{T-1}^{(2)},
@@ -844,7 +841,7 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 \text{E}(\tilde{y}_{T})=(\beta_{0}+\beta_{1}T)\lambda\left(\frac{1}{\lambda}\right)-\lambda\beta_{1}\left(\frac{1-\lambda}{\lambda^{2}}\right)=(\beta_{0}+\beta_{1}T)-\frac{1-\lambda}{\lambda}\beta_{1}=\text{E}(y_{T})-\frac{1-\lambda}{\lambda}\beta_{1}.
 \]</div>
 <ul class="simple">
-<li><p>Esto es, la suavización exponencial simple es <code class="docutils literal notranslate"><span class="pre">sesgada</span> <span class="pre">como</span> <span class="pre">estimador</span></code> y la cantidad de sesgo está dada por <span class="math notranslate nohighlight">\(-(1-\lambda)\beta_{1}/\lambda\)</span>, la cual puede generar errores de subestimación.</p></li>
+<li><p>Esto es, la suavización exponencial simple es <em><strong>sesgada como estimador</strong></em> y la cantidad de sesgo está dada por <span class="math notranslate nohighlight">\(-(1-\lambda)\beta_{1}/\lambda\)</span>, la cual puede generar errores de subestimación.</p></li>
 <li><p>Una solución puede ser usar <span class="math notranslate nohighlight">\(\lambda\)</span> grande ya que <span class="math notranslate nohighlight">\((1-\lambda)/\lambda\rightarrow0\)</span> cuando <span class="math notranslate nohighlight">\(\lambda\rightarrow1\)</span>. Técnicas autoadaptativas para <span class="math notranslate nohighlight">\(\lambda\)</span> pueden ser estudiadas, las cuales sigan los cambios en el proceso.</p></li>
 </ul>
 <ul>
@@ -857,7 +854,7 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 </li>
 </ul>
 <ul class="simple">
-<li><p>Por motivos de derivación de la expresión, consideramos el mismo <span class="math notranslate nohighlight">\(\lambda\)</span> para <span class="math notranslate nohighlight">\(\tilde{y}_{T}^{(1)}\)</span> y <span class="math notranslate nohighlight">\(\tilde{y}_{t}^{(2)}\)</span>. Dado que la suavización exponencial de primer orden es sesgada, su suavización (<code class="docutils literal notranslate"><span class="pre">suavización</span> <span class="pre">de</span> <span class="pre">segundo</span> <span class="pre">orden</span></code>) también es sesgada. Entonces</p></li>
+<li><p>Por motivos de derivación de la expresión, consideramos el mismo <span class="math notranslate nohighlight">\(\lambda\)</span> para <span class="math notranslate nohighlight">\(\tilde{y}_{T}^{(1)}\)</span> y <span class="math notranslate nohighlight">\(\tilde{y}_{t}^{(2)}\)</span>. Dado que la suavización exponencial de primer orden es sesgada, su suavización (<em><strong>suavización de segundo orden</strong></em>) también es sesgada. Entonces</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -957,7 +954,7 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 \end{align*}
 \end{split}\]</div>
 <ul class="simple">
-<li><p>La <code class="docutils literal notranslate"><span class="pre">estimación</span> <span class="pre">de</span> <span class="pre">los</span> <span class="pre">parámetros</span> <span class="pre">iniciales</span></code> es obtenida usualmente por medio del <code class="docutils literal notranslate"><span class="pre">método</span> <span class="pre">de</span> <span class="pre">mínimos</span> <span class="pre">cuadrado</span></code>. Por ejemplo, los parámetros <span class="math notranslate nohighlight">\(\hat{\beta}_{0, 0}, \hat{\beta}_{1, 0}\)</span> asociados al <code class="docutils literal notranslate"><span class="pre">US</span> <span class="pre">Consumer</span> <span class="pre">Prices</span> <span class="pre">Index</span> <span class="pre">(CPI)</span></code> de Enero 1995 a Diciembre 2004, obtenidos por mínimos cuadrados están dados por <span class="math notranslate nohighlight">\(\hat{\beta}_{0, 0}=149.89\)</span> y <span class="math notranslate nohighlight">\(\hat{\beta}_{1, 0}=0.3\)</span>. Usando <span class="math notranslate nohighlight">\(\lambda=0.3\)</span> se tiene que</p></li>
+<li><p>La <em><strong>estimación de los parámetros iniciales</strong></em> es obtenida usualmente por medio del <em><strong>método de mínimos cuadrado</strong></em>. Por ejemplo, los parámetros <span class="math notranslate nohighlight">\(\hat{\beta}_{0, 0}, \hat{\beta}_{1, 0}\)</span> asociados al <em><strong>US Consumer Prices Index (CPI)</strong></em> de Enero 1995 a Diciembre 2004, obtenidos por mínimos cuadrados están dados por <span class="math notranslate nohighlight">\(\hat{\beta}_{0, 0}=149.89\)</span> y <span class="math notranslate nohighlight">\(\hat{\beta}_{1, 0}=0.3\)</span>. Usando <span class="math notranslate nohighlight">\(\lambda=0.3\)</span> se tiene que</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -970,7 +967,7 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 <section id="suavizacion-exponencial-de-alto-orden">
 <h2>Suavización exponencial de alto orden<a class="headerlink" href="#suavizacion-exponencial-de-alto-orden" title="Link to this heading">#</a></h2>
 <ul>
-<li><p>Hasta ahora hemos discutido el uso de suavizadores exponenciales al estimar los <code class="docutils literal notranslate"><span class="pre">modelos</span> <span class="pre">de</span> <span class="pre">tendencia</span> <span class="pre">constante</span> <span class="pre">y</span> <span class="pre">lineal</span></code>. Para el primero empleamos el suavizador exponencial simple o de primer orden y para el segundo el suavizador exponencial de segundo orden. Además, se puede demostrar que para el <code class="docutils literal notranslate"><span class="pre">modelo</span> <span class="pre">polinómico</span> <span class="pre">general</span> <span class="pre">de</span></code> <span class="math notranslate nohighlight">\(n\text{th}\)</span>-ésimo grado de la forma</p>
+<li><p>Hasta ahora hemos discutido el uso de suavizadores exponenciales al estimar los <em><strong>modelos de tendencia constante y lineal</strong></em>. Para el primero empleamos el suavizador exponencial simple o de primer orden y para el segundo el suavizador exponencial de segundo orden. Además, se puede demostrar que para el <em><strong>modelo polinómico general de</strong></em> <span class="math notranslate nohighlight">\(n\text{th}\)</span>-ésimo grado de la forma</p>
 <div class="math notranslate nohighlight" id="equation-highorder-exponential-smoothing">
 <span class="eqno">(19)<a class="headerlink" href="#equation-highorder-exponential-smoothing" title="Link to this equation">#</a></span>\[
     y_{t}=\beta_{0}+\beta_{1}t+\frac{\beta_{2}}{2!}t^{2}+\cdots+\frac{\beta_{n}}{n!}t^{n}+\varepsilon_{t},
@@ -991,8 +988,8 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p>Incluso para el modelo cuadrático, los cálculos se vuelven bastante complicados. Consulte <span id="id1">[<a class="reference internal" href="biblio.html#id5" title="D.C. Montgomery, L.A. Johnson, and J.S. Gardiner. Forecasting and Time Series Analysis. Industrial engineering series. McGraw-Hill, 1990. ISBN 9780070428584. URL: https://books.google.com.co/books?id=t9HuAAAAMAAJ.">Montgomery <em>et al.</em>, 1990</a>]</span>, <span id="id2">[<a class="reference internal" href="biblio.html#id6" title="Robert Goodell Brown. Smoothing, forecasting and prediction of discrete time series. Courier Corporation, 2004.">Brown, 2004</a>]</span> y <span id="id3">[<a class="reference internal" href="biblio.html#id9" title="B. Abraham and J. Ledolter. Statistical Methods for Forecasting. Wiley Series in Probability and Statistics. Wiley, 2009. ISBN 9780470317297. URL: https://books.google.com.co/books?id=WIPxdb2P8sAC.">Abraham and Ledolter, 2009</a>]</span> para las <code class="docutils literal notranslate"><span class="pre">soluciones</span> <span class="pre">a</span> <span class="pre">problemas</span> <span class="pre">de</span> <span class="pre">suavizamiento</span> <span class="pre">exponencial</span> <span class="pre">de</span> <span class="pre">orden</span> <span class="pre">superior</span></code>.</p></li>
-<li><p>Si un polinomio de alto orden parece ser necesario para la serie de tiempo, los <code class="docutils literal notranslate"><span class="pre">modelos</span> <span class="pre">autorregresivos</span> <span class="pre">de</span> <span class="pre">media</span> <span class="pre">móvil</span> <span class="pre">integrada</span> <span class="pre">(ARIMA)</span> <span class="pre">pueden</span> <span class="pre">considerarse</span> <span class="pre">en</span> <span class="pre">cambio</span></code>.</p></li>
+<li><p>Incluso para el modelo cuadrático, los cálculos se vuelven bastante complicados. Consulte <span id="id1">[<a class="reference internal" href="biblio.html#id5" title="D.C. Montgomery, L.A. Johnson, and J.S. Gardiner. Forecasting and Time Series Analysis. Industrial engineering series. McGraw-Hill, 1990. ISBN 9780070428584. URL: https://books.google.com.co/books?id=t9HuAAAAMAAJ.">Montgomery <em>et al.</em>, 1990</a>]</span>, <span id="id2">[<a class="reference internal" href="biblio.html#id6" title="Robert Goodell Brown. Smoothing, forecasting and prediction of discrete time series. Courier Corporation, 2004.">Brown, 2004</a>]</span> y <span id="id3">[<a class="reference internal" href="biblio.html#id9" title="B. Abraham and J. Ledolter. Statistical Methods for Forecasting. Wiley Series in Probability and Statistics. Wiley, 2009. ISBN 9780470317297. URL: https://books.google.com.co/books?id=WIPxdb2P8sAC.">Abraham and Ledolter, 2009</a>]</span> para las <em><strong>soluciones a problemas de suavizamiento exponencial de orden superior</strong></em>.</p></li>
+<li><p>Si un polinomio de alto orden parece ser necesario para la serie de tiempo, los <em><strong>modelos autorregresivos de media móvil integrada (ARIMA) pueden considerarse en cambio</strong></em>.</p></li>
 </ul>
 </div>
 </section>
@@ -1021,7 +1018,7 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 \hat{y}_{T+\tau}(T)=\tilde{y}_{T}=\hat{\beta}_{0}.
 \]</div>
 <ul class="simple">
-<li><p>Dado que pronósticos constantes pueden no ser correctos a medida que vamos acumulando observaciones, actualizamos nuestra predicción por medio de técnicas como el <code class="docutils literal notranslate"><span class="pre">rolling</span></code>.</p></li>
+<li><p>Dado que pronósticos constantes pueden no ser correctos a medida que vamos acumulando observaciones, actualizamos nuestra predicción por medio de técnicas como el <em><strong>rolling</strong></em>.</p></li>
 <li><p>Por ejemplo, si la observación en el tiempo <span class="math notranslate nohighlight">\(T+1\)</span> está disponible, nuestro pronostico para futuras observaciones sería</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-fc-in-tplustau-eq">
@@ -1045,13 +1042,13 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
     &amp;= \tilde{y}_{T+1}(T)+\lambda e_{T+1}(1),
     \end{align*}
     \end{split}\]</div>
-<p>donde <span class="math notranslate nohighlight">\(e_{T+1}(1):=y_{T+1}-\tilde{y}_{T+1}(T)\)</span> es llamado, predicción de un paso hacia adelante (<code class="docutils literal notranslate"><span class="pre">one-step-ahead</span></code>) o error de predicción.</p>
+<p>donde <span class="math notranslate nohighlight">\(e_{T+1}(1):=y_{T+1}-\tilde{y}_{T+1}(T)\)</span> es llamado, predicción de un paso hacia adelante (<em><strong>one-step-ahead</strong></em>) o error de predicción.</p>
 </li>
 </ul>
 <div class="admonition-observacion admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p>Pronostico para la observación siguiente es simplemente, el <code class="docutils literal notranslate"><span class="pre">pronostico</span> <span class="pre">actual</span> <span class="pre">mas</span> <span class="pre">una</span> <span class="pre">fracción</span> <span class="pre">del</span> <span class="pre">error</span> <span class="pre">cometido</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">pronostico</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">observación</span> <span class="pre">actual</span></code></p></li>
+<li><p>Pronostico para la observación siguiente es simplemente, el <em><strong>pronostico actual mas una fracción del error cometido en el pronostico de la observación actual</strong></em></p></li>
 <li><p>Nótese que la velocidad de reacción del pronostico al error de predicción depende del factor de descuento <span class="math notranslate nohighlight">\(\lambda\)</span></p></li>
 </ul>
 </div>
@@ -1069,14 +1066,14 @@ SS_{E}(\lambda)=\sum_{t=1}^{T}e_{t}^{2}(1).
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p>Para un conjunto histórico de datos, podemos en general calcular <span class="math notranslate nohighlight">\(SS_{E}(\lambda)\)</span> para varios valores de <span class="math notranslate nohighlight">\(\lambda\)</span> y <code class="docutils literal notranslate"><span class="pre">seleccionar</span> <span class="pre">aquel</span> <span class="pre">con</span> <span class="pre">la</span> <span class="pre">menor</span> <span class="pre">suma</span> <span class="pre">de</span> <span class="pre">errores</span> <span class="pre">de</span> <span class="pre">predicción</span> <span class="pre">al</span> <span class="pre">cuadrado</span></code>.</p></li>
+<li><p>Para un conjunto histórico de datos, podemos en general calcular <span class="math notranslate nohighlight">\(SS_{E}(\lambda)\)</span> para varios valores de <span class="math notranslate nohighlight">\(\lambda\)</span> y <em><strong>seleccionar aquel con la menor suma de errores de predicción al cuadrado</strong></em>.</p></li>
 </ul>
 </div>
 </section>
 <section id="intervalo-de-prediccion">
 <h2>Intervalo de predicción<a class="headerlink" href="#intervalo-de-prediccion" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>El cálculo de intervalos de predicción requiere de la <code class="docutils literal notranslate"><span class="pre">estimación</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">varianza</span> <span class="pre">del</span> <span class="pre">error</span> <span class="pre">de</span> <span class="pre">predicción</span></code>. Este tipo de técnicas serán estudiadas mas adelante en la presente sección</p></li>
+<li><p>El cálculo de intervalos de predicción requiere de la <em><strong>estimación de la varianza del error de predicción</strong></em>. Este tipo de técnicas serán estudiadas mas adelante en la presente sección</p></li>
 </ul>
 <div class="admonition-proceso-contante admonition">
 <p class="admonition-title">Proceso contante</p>
@@ -1096,7 +1093,7 @@ SS_{E}(\lambda)=\sum_{t=1}^{T}e_{t}^{2}(1).
 <div class="admonition-proceso-de-tendencia-lineal admonition">
 <p class="admonition-title">Proceso de tendencia lineal</p>
 <ul class="simple">
-<li><p>El pronóstico de horizonte <span class="math notranslate nohighlight">\(\tau\)</span> para el <code class="docutils literal notranslate"><span class="pre">modelo</span> <span class="pre">de</span> <span class="pre">tendencia</span> <span class="pre">lineal</span></code> está dado por</p></li>
+<li><p>El pronóstico de horizonte <span class="math notranslate nohighlight">\(\tau\)</span> para el <em><strong>modelo de tendencia lineal</strong></em> está dado por</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -1124,7 +1121,7 @@ SS_{E}(\lambda)=\sum_{t=1}^{T}e_{t}^{2}(1).
 <section id="estimacion-de-sigma-e-2">
 <h2>Estimación de <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span><a class="headerlink" href="#estimacion-de-sigma-e-2" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>En el proceso de estimar la varianza de los errores de pronóstico, representada como <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span>, frecuentemente se postula que el modelo subyacente (por ejemplo, constante, tendencia lineal) es <code class="docutils literal notranslate"><span class="pre">correcto</span> <span class="pre">e</span> <span class="pre">invariante</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">tiempo</span></code>. Bajo estas condiciones, dos metodologías distintas están disponibles para estimar <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span></p></li>
+<li><p>En el proceso de estimar la varianza de los errores de pronóstico, representada como <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span>, frecuentemente se postula que el modelo subyacente (por ejemplo, constante, tendencia lineal) es <em><strong>correcto e invariante en el tiempo</strong></em>. Bajo estas condiciones, dos metodologías distintas están disponibles para estimar <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span></p></li>
 </ul>
 <div class="tip admonition">
 <p class="admonition-title">Assignment</p>

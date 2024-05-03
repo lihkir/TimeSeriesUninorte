@@ -64,7 +64,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Bibliografía" href="biblio.html" />
+    <link rel="next" title="Métodos de Suavización Exponencial" href="exponential_smoothing.html" />
     <link rel="prev" title="Análisis y Predicción de Series de Tiempo" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -183,6 +183,10 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Introducción a las Series de Tiempo</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="exponential_smoothing.html">Métodos de Suavización Exponencial</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="arima_model.html">Modelos autorregresivos integrados de media móvil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deep_learning.html">Deep Learning para la predicción de series temporales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliografía</a></li>
 </ul>
 
@@ -444,9 +448,9 @@ document.write(`
 <h2>Diferentes tipos de datos<a class="headerlink" href="#diferentes-tipos-de-datos" title="Link to this heading">#</a></h2>
 <p>Los analistas de negocio y científicos de datos se encuentran con <em><strong>diferentes tipos de datos en sus proyectos de análisis</strong></em>. La mayoría de los datos que se suelen encontrar en proyectos académicos e industriales se pueden clasificar a grandes rasgos en las siguientes categorías:</p>
 <ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Datos</span> <span class="pre">transversales</span></code></strong></p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Datos</span> <span class="pre">de</span> <span class="pre">series</span> <span class="pre">temporales</span></code></strong></p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Datos</span> <span class="pre">de</span> <span class="pre">panel</span></code></strong></p></li>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Datos</span> <span class="pre">transversales</span></code></strong></em></p></li>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Datos</span> <span class="pre">de</span> <span class="pre">series</span> <span class="pre">temporales</span></code></strong></em></p></li>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Datos</span> <span class="pre">de</span> <span class="pre">panel</span></code></strong></em></p></li>
 </ul>
 <p>Comprender qué tipo de datos se necesitan para resolver un problema y qué tipo de datos pueden obtenerse de las fuentes disponibles es importante para formular el problema y elegir el tipo de modelo más adecuado.</p>
 </section>
@@ -462,7 +466,7 @@ document.write(`
 </ul>
 </div>
 <ul class="simple">
-<li><p>A menudo, el análisis de datos transversales comienza con un gráfico de las variables, para visualizar sus propiedades estadísticas como la <em><strong>tendencia central, la dispersión, la asimetría y la curtosis</strong></em>. En el siguiente ejemplo univariado se muestra el <em><strong>gasto militar como porcentaje del Producto Interno Bruto</strong></em> de 85 países en el año 2010. Los <em><strong>datos usados en el presente curso se encuentran en el repositorio</strong></em> <a class="reference external" href="https://github.com/lihkir/Data/blob/main/datasets.zip">datasets.zip</a>.</p></li>
+<li><p>A menudo, el análisis de datos transversales comienza con un gráfico de las variables, para visualizar sus propiedades estadísticas como la <em><strong>tendencia central, la dispersión, la asimetría y la curtosis</strong></em>. En el siguiente ejemplo univariado se muestra el <em><strong><code class="docutils literal notranslate"><span class="pre">Gasto</span> <span class="pre">militar</span> <span class="pre">como</span> <span class="pre">porcentaje</span> <span class="pre">del</span> <span class="pre">Producto</span> <span class="pre">Interno</span> <span class="pre">Bruto</span></code></strong></em> de 85 países en el año 2010. Los <em><strong>datos usados en el presente curso se encuentran en el repositorio</strong></em> <a class="reference external" href="https://github.com/lihkir/Data/blob/main/datasets.zip">Dataset for TSF</a>.</p></li>
 <li><p><em><strong>Al tomar los datos de un solo año aseguramos su naturaleza transversal</strong></em>. La figura combina un <em><strong>histograma normalizado</strong></em> y un <em><strong>gráfico de densidad de kernel</strong></em> para resaltar las diferentes propiedades estadísticas de los datos de gasto militar. Utilizaremos <code class="docutils literal notranslate"><span class="pre">seaborn</span></code> en este caso para realizar las visualizaciones. Para temas diferentes al seleccionado (ver <a class="reference external" href="https://www.python-graph-gallery.com/104-seaborn-themes">seaborn templates</a>). Para descargar todos los datos que serán utilizados en este curso (ver <a class="reference external" href="https://github.com/lihkir/Data/blob/main/datasets.zip">Dataset for TSF</a>)</p></li>
 </ul>
 <div class="cell docutils container">
@@ -543,7 +547,7 @@ document.write(`
 </div>
 </div>
 <ul class="simple">
-<li><p>Como se desprende de la estructura de los datos, cada fila ofrece las observaciones sobre un indicador, que se identifica mediante las columnas <code class="docutils literal notranslate"><span class="pre">Indicator</span> <span class="pre">Name</span></code> y <code class="docutils literal notranslate"><span class="pre">Indicator</span> <span class="pre">Code</span></code>, y sobre el país, que se indica mediante las columnas <code class="docutils literal notranslate"><span class="pre">Country</span> <span class="pre">Name</span></code> y <code class="docutils literal notranslate"><span class="pre">Country</span> <span class="pre">Code</span></code>.</p></li>
+<li><p>Como se desprende de la estructura de los datos, <em><strong>cada fila ofrece las observaciones sobre un indicador</strong></em>, que se identifica mediante las columnas <code class="docutils literal notranslate"><span class="pre">Indicator</span> <span class="pre">Name</span></code> y <code class="docutils literal notranslate"><span class="pre">Indicator</span> <span class="pre">Code</span></code>, y sobre el país, que se indica mediante las columnas <code class="docutils literal notranslate"><span class="pre">Country</span> <span class="pre">Name</span></code> y <code class="docutils literal notranslate"><span class="pre">Country</span> <span class="pre">Code</span></code>.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -598,7 +602,7 @@ Shape of military_exp: (264, 62)
 </div>
 </div>
 <ul class="simple">
-<li><p>Estos <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> contienen toda la información que necesitamos. Para trazar los datos univariantes y transversales necesitaremos la columna 2010. Antes de ejecutar el código para el trazado, comprobemos rápidamente si falta la columna 2010. Esto se hace mediante las dos líneas siguientes</p></li>
+<li><p>Estos <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> contienen toda la información que necesitamos. Para <em><strong>trazar los datos univariantes y transversales necesitaremos la columna 2010</strong></em>. Antes de ejecutar el código para el trazado, comprobemos rápidamente si falta la columna 2010. Esto se hace mediante las dos líneas siguientes</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -641,7 +645,7 @@ Name: 2010, dtype: float64
 </div>
 </div>
 <ul class="simple">
-<li><p>Además, queremos que la columna <code class="docutils literal notranslate"><span class="pre">Country</span> <span class="pre">Code</span></code> sea el índice de las filas. Así que se ejecuta el siguiente par de líneas</p></li>
+<li><p>Además, queremos que la columna <code class="docutils literal notranslate"><span class="pre">Country</span> <span class="pre">Code</span></code> sea <em><strong>el índice de las filas</strong></em>. Así que se ejecuta el siguiente par de líneas</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -658,7 +662,61 @@ Name: 2010, dtype: float64
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">central_govt_debt_2010</span> <span class="o">=</span> <span class="n">central_govt_debt</span><span class="p">[</span><span class="s1">&#39;2010&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">central_govt_debt</span><span class="p">[</span><span class="s1">&#39;2010&#39;</span><span class="p">])]</span>
 <span class="n">military_exp_2010</span> <span class="o">=</span> <span class="n">military_exp</span><span class="p">[</span><span class="s1">&#39;2010&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">military_exp</span><span class="p">[</span><span class="s1">&#39;2010&#39;</span><span class="p">])]</span>
-<span class="n">data_to_plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">central_govt_debt_2010</span><span class="p">,</span> <span class="n">military_exp_2010</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">central_govt_debt_2010</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Country Code
+CEB    47.446156
+EMU    72.414709
+ECS    63.137736
+ECA    22.338687
+TEC    27.287492
+         ...    
+UGA    27.552595
+UKR    29.969556
+GBR    83.406797
+USA    85.601594
+URY    44.222702
+Name: 2010, Length: 94, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">military_exp_2010</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Country Code
+ARB    5.117807
+CEB    1.482543
+EAR    2.335511
+EAS    1.563325
+EAP    1.724963
+         ...   
+VEN    0.853924
+VNM    2.305049
+YEM    4.685557
+ZMB    1.382593
+ZWE    0.977841
+Name: 2010, Length: 192, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_to_plot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">central_govt_debt_2010</span><span class="p">,</span> <span class="n">military_exp_2010</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">data_to_plot</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;central_govt_debt&#39;</span><span class="p">,</span> <span class="s1">&#39;military_exp&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -741,7 +799,7 @@ Name: 2010, dtype: float64
 </div>
 </div>
 <ul class="simple">
-<li><p>Para graficar, tenemos que tomar solo aquellos países que tienen las columnas <code class="docutils literal notranslate"><span class="pre">central_govt_debt</span></code> y <code class="docutils literal notranslate"><span class="pre">military_exp</span></code> diferentes de cero. Ejecute la línea siguiente para filtrar las filas con valores omitidos</p></li>
+<li><p>Para graficar, tenemos que tomar solo aquellos <em><strong>países que tienen las columnas</strong></em> <code class="docutils literal notranslate"><span class="pre">central_govt_debt</span></code> <em><strong>y</strong></em> <code class="docutils literal notranslate"><span class="pre">military_exp</span></code> <em><strong>diferentes de cero</strong></em>. Ejecute la línea siguiente para filtrar las filas con valores omitidos</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -974,13 +1032,13 @@ Skew=1.916
 <div class="admonition-observacion admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Kurtosis</span> <span class="pre">mayor</span> <span class="pre">que</span> <span class="pre">0</span></code>: Indica una <em><strong>distribución <code class="docutils literal notranslate"><span class="pre">leptocúrtica</span></code></strong></em>, lo que significa que <em><strong>la distribución tiene colas más pesadas y es más picuda en comparación con una distribución normal</strong></em>. Esto implica que hay una <em><strong>mayor concentración de datos alrededor de la media, con valores extremos más frecuentes</strong></em>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Kurtosis</span> <span class="pre">menor</span> <span class="pre">que</span> <span class="pre">0</span></code>: Indica una <em><strong>distribución <code class="docutils literal notranslate"><span class="pre">platicúrtica</span></code></strong></em>, lo que significa que <em><strong>la distribución es más aplanada y tiene colas más ligeras en comparación con una distribución normal</strong></em>. Esto implica que <em><strong>los datos están más dispersos y hay menos valores en la región de la media, con valores extremos menos frecuentes</strong></em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Kurtosis</span> <span class="pre">mayor</span> <span class="pre">que</span> <span class="pre">0</span></code>: Indica una <em><strong>distribución <code class="docutils literal notranslate"><span class="pre">leptocúrtica</span></code></strong></em>, lo que significa que la distribución tiene <em><strong>colas más pesadas</strong></em> y es <em><strong>más puntiaguda en comparación con una distribución normal</strong></em>. Esto implica que hay una <em>mayor concentración de datos alrededor de la media, con valores extremos más frecuentes</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Kurtosis</span> <span class="pre">menor</span> <span class="pre">que</span> <span class="pre">0</span></code>: Indica una <em><strong>distribución <code class="docutils literal notranslate"><span class="pre">platicúrtica</span></code></strong></em>, lo que significa que la distribución es <em><strong>más aplanada</strong></em> y tiene <em><strong>colas más ligeras en comparación con una distribución normal</strong></em>. Esto implica que <em>los datos están más dispersos y hay menos valores en la región de la media, con valores extremos menos frecuentes</em>.</p></li>
 </ul>
 </div>
 <ul class="simple">
 <li><p>La figura anterior, también puede realizarse para múltiples variables, a fin de comprender su distribución conjunta. Ilustremos un <em><strong>análisis bivariante</strong></em> considerando la deuda total de los gobiernos centrales de los países junto con su gasto militar en 2010.</p></li>
-<li><p>La siguiente figura muestra las distribuciones conjuntas de estas variables en forma de <em><strong>gráficos de densidad de kernel</strong></em>. La distribución conjunta bivariante <em><strong>no muestra una correlación clara entre ambas</strong></em> los valores del gasto militar y la deuda del gobierno central.</p></li>
+<li><p>La siguiente figura muestra las distribuciones conjuntas de estas variables en forma de <em><strong>gráficos de densidad de kernel</strong></em>. La distribución conjunta bivariante <em><strong>no muestra una correlación clara entre</strong></em> <code class="docutils literal notranslate"><span class="pre">'Military</span> <span class="pre">expenditures</span> <span class="pre">&amp;</span> <span class="pre">Debt</span> <span class="pre">of</span> <span class="pre">central</span> <span class="pre">governments</span> <span class="pre">in</span> <span class="pre">2010'</span></code></p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -996,22 +1054,30 @@ Skew=1.916
 <img alt="_images/3c51e1b39b233456d5d73df11032a49828f6d0cf8dcfdabb5506079ea1067945.png" src="_images/3c51e1b39b233456d5d73df11032a49828f6d0cf8dcfdabb5506079ea1067945.png" />
 </div>
 </div>
+<div class="tip admonition">
+<p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p>Cabe destacar que el análisis de datos transversales va más allá del análisis exploratorio de datos y la visualización, como se muestra en el ejemplo anterior. Métodos avanzados como la regresión transversal <em><strong>ajustan un modelo de regresión lineal entre varias variables explicativas y una variable dependiente</strong></em>. Por ejemplo, en el caso del análisis de la pérdida de clientes, el objetivo podría ser <em><strong>ajustar un modelo de regresión logística entre varias variables explicativas y una variable dependiente</strong></em>, por ejemplo, entre los atributos del cliente y su comportamiento, descrito como si hubiera abandonado o no.</p></li>
-<li><p>El modelo de <em><strong>regresión logística</strong></em> es un caso especial de <em><strong>modelo lineal generalizado</strong></em> para resultados discretos y binarios. Explica los factores que ocasionan la pérdida de clientes y puede predecir el resultado para un nuevo cliente. <em><strong>Dado que el tiempo no es un elemento crucial, pueden obtenerse predicciones para un nuevo cliente en el futuro</strong></em>. En este curso, se discuten <em><strong>técnicas de modelamiento de datos de series temporales, en las que el tiempo y el carácter secuencial de las observaciones son factores cruciales para el análisis</strong></em>.</p></li>
+<li><p>El análisis de datos transversales no se limita al análisis exploratorio y visualización, sino que también <em><strong>incluye métodos avanzados como la regresión transversal</strong></em>, que ajusta modelos entre múltiples variables y una variable dependiente, como en el análisis de pérdida de clientes.</p></li>
+<li><p>La <em><strong>regresión logística</strong></em>, un caso especial de <em><strong>modelo lineal generalizado</strong></em>, se utiliza para <em><strong>explicar y predecir la pérdida de clientes, sin depender del tiempo</strong></em>. En este curso, <em><strong>se tratan técnicas de modelado de datos de series temporales, donde el tiempo y la secuencialidad son fundamentales</strong></em>.</p></li>
 </ul>
+</div>
 </section>
 <section id="datos-de-series-temporales">
 <h2>Datos de series temporales<a class="headerlink" href="#datos-de-series-temporales" title="Link to this heading">#</a></h2>
+<div class="admonition-introduccion admonition">
+<p class="admonition-title">Introducción</p>
 <ul class="simple">
-<li><p>El ejemplo de datos transversales comentado anteriormente corresponde únicamente al año 2010. Sin embargo, en cambio, si consideramos un solo país, por ejemplo Estados Unidos (<code class="docutils literal notranslate"><span class="pre">USA</span></code>), y echamos un vistazo a sus <code class="docutils literal notranslate"><span class="pre">Federal</span> <span class="pre">Military</span> <span class="pre">Expenditure</span></code>, <code class="docutils literal notranslate"><span class="pre">Debt</span> <span class="pre">of</span> <span class="pre">Federal</span> <span class="pre">Government</span></code>, durante un periodo de 10 años, de 2001 a 2010, obtendríamos dos series temporales:</p>
+<li><p>El ejemplo de datos transversales comentado anteriormente <em><strong>corresponde únicamente al año 2010</strong></em>. Sin embargo, en cambio, si consideramos un solo país, por ejemplo Estados Unidos (<code class="docutils literal notranslate"><span class="pre">USA</span></code>), y echamos un vistazo a sus <code class="docutils literal notranslate"><span class="pre">Federal</span> <span class="pre">Military</span> <span class="pre">Expenditure</span></code>, <code class="docutils literal notranslate"><span class="pre">Debt</span> <span class="pre">of</span> <span class="pre">Federal</span> <span class="pre">Government</span></code>, durante un <em><strong>periodo de 10 años, de 2001 a 2010</strong></em>, obtendríamos dos series temporales:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">Federal</span> <span class="pre">Military</span> <span class="pre">Expenditure</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Debt</span> <span class="pre">of</span> <span class="pre">Federal</span> <span class="pre">Government</span></code></p></li>
 </ul>
 </li>
-<li><p>Por lo tanto, en esencia, <em><strong>una serie temporal se compone de observaciones cuantitativas sobre una o más características medibles de una entidad individual y tomadas en múltiples puntos en el tiempo</strong></em>.</p></li>
-<li><p>En este caso, los datos representan <code class="docutils literal notranslate"><span class="pre">Federal</span> <span class="pre">Military</span> <span class="pre">Expenditure</span></code>, <code class="docutils literal notranslate"><span class="pre">Debt</span> <span class="pre">of</span> <span class="pre">Federal</span> <span class="pre">Government</span></code>. Los datos de series temporales suelen caracterizarse por varias estructuras internas interesantes, como la <em><strong>tendencia</strong></em>, la <em><strong>estacionalidad</strong></em>, <em><strong>estacionariedad</strong></em>, <em><strong>autocorrelación</strong></em>, etc. Las estructuras internas de los datos de series temporales requieren una formulación y técnicas especiales para su análisis. Estas técnicas se tratarán en los siguientes capítulos con estudios de casos e implementación de código de trabajo en <code class="docutils literal notranslate"><span class="pre">Python</span></code>.</p></li>
+<li><p>Por lo tanto, en esencia, <em><strong>una serie temporal se compone de observaciones cuantitativas sobre una o más características medibles de una entidad individual y tomadas en múltiples puntos en el tiempo</strong></em>. En este caso, los datos representan <code class="docutils literal notranslate"><span class="pre">Federal</span> <span class="pre">Military</span> <span class="pre">Expenditure</span></code>, <code class="docutils literal notranslate"><span class="pre">Debt</span> <span class="pre">of</span> <span class="pre">Federal</span> <span class="pre">Government</span></code>.</p></li>
+</ul>
+</div>
+<ul class="simple">
+<li><p>Los datos de series temporales suelen caracterizarse por varias estructuras internas interesantes, como la <em><strong>tendencia</strong></em>, la <em><strong>estacionalidad</strong></em>, <em><strong>estacionariedad</strong></em>, <em><strong>autocorrelación</strong></em>, etc. Las estructuras internas de los datos de series temporales requieren una formulación y técnicas especiales para su análisis. Estas técnicas se tratarán en los siguientes capítulos con estudios de casos e implementación de código de trabajo en <code class="docutils literal notranslate"><span class="pre">Python</span></code>.</p></li>
 </ul>
 <ul class="simple">
 <li><p>Para generar los gráficos anteriores usaremos el código que se desarrolló para obtener los gráficos para los datos transversales. Comenzaremos creando <em><strong>dos nuevas series para representar las series temporales de</strong></em>  <code class="docutils literal notranslate"><span class="pre">Federal</span> <span class="pre">Military</span> <span class="pre">Expenditure</span></code> y <code class="docutils literal notranslate"><span class="pre">Debt</span> <span class="pre">of</span> <span class="pre">Federal</span> <span class="pre">Government</span></code>, desde 1960 hasta 2010</p></li>
@@ -1092,7 +1158,7 @@ Skew=1.916
 </div></div></div>
 </div>
 <ul class="simple">
-<li><p>Podemos utilizar los métodos <code class="docutils literal notranslate"><span class="pre">isna()</span></code> o <code class="docutils literal notranslate"><span class="pre">isnull()</span></code> para <em><strong>detectar datos faltantes en los datos</strong></em>. Podemos obtener el total de valores perdidos en cada columna con la función <code class="docutils literal notranslate"><span class="pre">sum()</span></code> o tomar la media con <code class="docutils literal notranslate"><span class="pre">mean()</span></code>.</p></li>
+<li><p>Podemos utilizar los métodos <code class="docutils literal notranslate"><span class="pre">isna()</span></code> o <code class="docutils literal notranslate"><span class="pre">isnull()</span></code> para <em><strong>contabilizar datos faltantes en los datos</strong></em>. Podemos obtener el total de valores perdidos en cada columna con la función <code class="docutils literal notranslate"><span class="pre">sum()</span></code> o tomar la media con <code class="docutils literal notranslate"><span class="pre">mean()</span></code>. <em><strong>Técnicas de imputación de datos faltantes</strong></em> pueden ser utilizadas del módulo de <a class="reference external" href="https://lihkir.github.io/DataVizPythonRUninorte/common_errors.html#imputacion-multiple-iterativa">DataViz</a></p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1576,7 +1642,7 @@ dtype: float64
 </div></div></div>
 </div>
 <ul class="simple">
-<li><p>Por último, las series temporales se generan ejecutando el siguiente código:</p></li>
+<li><p>Por último, las <em><strong>series temporales</strong></em> se generan ejecutando el siguiente código</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1596,10 +1662,13 @@ dtype: float64
 </section>
 <section id="datos-de-panel">
 <h2>Datos de panel<a class="headerlink" href="#datos-de-panel" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Introducción</p>
 <ul class="simple">
-<li><p>Hasta ahora, hemos visto <em>datos tomados de múltiples individuos pero en un punto en el tiempo</em> (<em><strong>transversales</strong></em>) o <em>tomados de una entidad individual pero a lo largo de múltiples puntos en el tiempo</em> (<em><strong>series temporales</strong></em>).</p></li>
-<li><p>Sin embargo, <em><strong>si observamos múltiples entidades a lo largo de múltiples puntos en el tiempo, obtenemos un panel de datos, también conocidos como datos longitudinales</strong></em>. Ampliando nuestro ejemplo anterior sobre el gasto militar, consideremos ahora cuatro países durante el mismo periodo de 1960-2010. Los datos resultantes serán un conjunto de datos de panel.</p></li>
+<li><p>Hemos visto <em><strong>datos transversales (de múltiples individuos en un solo punto en el tiempo)</strong></em> y <em><strong>series temporales (de una entidad a lo largo de múltiples puntos en el tiempo)</strong></em>. Si observamos <em><strong>múltiples entidades a lo largo de múltiples puntos en el tiempo</strong></em>, obtenemos un <em><strong>panel de datos o datos longitudinales</strong></em>.</p></li>
+<li><p>Tomando como ejemplo para <em><strong>cuatro países</strong></em> <code class="docutils literal notranslate"><span class="pre">'Military</span> <span class="pre">expenditure</span> <span class="pre">(%</span> <span class="pre">of</span> <span class="pre">GDP)'</span></code> durante el periodo 1960-2010, creamos un <em><strong>conjunto de datos de panel</strong></em>. Ahora, prepararemos los datos para trazar la figura correspondiente, siguiendo un proceso similar al utilizado para los datos transversales y de series temporales en este capítulo.</p></li>
 </ul>
+</div>
 <ul class="simple">
 <li><p>Preparemos los datos necesarios para trazar la figura correspondiente. Seguiremos el código que hemos utilizado para los datos transversales y de series temporales en este capítulo. Empezaremos creando un <em><strong>DataFrame con los datos de las cuatro empresas mencionadas en el gráfico anterior</strong></em>. Esto se hace de la siguiente manera:</p></li>
 </ul>
@@ -2124,10 +2193,13 @@ dtype: object
 <img alt="_images/fbbc28710e3aabdd68aab8a747f963379b3ebb0986c976a72d97a16c482b134f.png" src="_images/fbbc28710e3aabdd68aab8a747f963379b3ebb0986c976a72d97a16c482b134f.png" />
 </div>
 </div>
+<div class="tip admonition">
+<p class="admonition-title">Observación</p>
 <ul class="simple">
 <li><p>La tendencia general de la serie temporal se debe a <em><strong>cambios fundamentales o sistémicos del proceso o sistema que representa</strong></em>. Por ejemplo, el movimiento ascendente de las concentraciones de CO2 entre 1974 y 1987 puede atribuirse al <em><strong>aumento gradual de los automóviles y la industrialización durante esos años</strong></em>.</p></li>
-<li><p><em><strong>Una tendencia general se suele modelar estableciendo la serie temporal como una regresión frente al tiempo y otros factores conocidos como variables explicativas</strong></em>. La regresión o línea de tendencia puede ser usada para la predicción del movimiento a largo plazo de la serie temporal. Los <em><strong>residuos que deja la línea de tendencia se analizan en busca de otras propiedades interesantes, como la estacionalidad, el comportamiento cíclico y las variaciones irregulares</strong></em>.</p></li>
+<li><p>La <em><strong>tendencia</strong></em> de una serie temporal <em><strong>se modela comúnmente mediante una regresión respecto al tiempo</strong></em> y otras variables conocidas como explicativas. Esta regresión se usa para <em><strong>predecir el movimiento a largo plazo de la serie</strong></em>. Los <em><strong>residuos</strong></em> de esta regresión <em><strong>revelan otras características como la estacionalidad, ciclos y variaciones irregulares</strong></em>.</p></li>
 </ul>
+</div>
 <ul class="simple">
 <li><p>A continuación, vamos a <em><strong>ajustar la línea de tendencia</strong></em>. Para ello importamos la clase <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> de <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> y ajustamos un modelo lineal al índice temporal. Para instalar la librería, utilice la orden</p></li>
 </ul>
@@ -2192,9 +2264,10 @@ dtype: object
 </section>
 <section id="estacionalidad">
 <h2>Estacionalidad<a class="headerlink" href="#estacionalidad" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Introducción</p>
 <ul class="simple">
-<li><p>La <em><strong>estacionalidad</strong></em> se manifiesta como <em><strong>variaciones repetitivas y periódicas en una serie temporal</strong></em>. En la mayoría de los casos, <em><strong>el análisis exploratorio de datos revela la presencia de estacionalidad</strong></em>. Volvamos a la serie temporal de las concentraciones de CO2.</p></li>
-<li><p><em><strong>La estacionalidad se manifiesta en forma de desviaciones periódicas, como las que se observan en las observaciones sin tendencia de las emisiones de CO2</strong></em>. Máximos y mínimos en el volumen mensual de <em><strong>ventas de productos estacionales</strong></em> como los regalos de Navidad o la ropa de temporada es otro ejemplo de serie temporal con estacionalidad.</p></li>
+<li><p>La <em><strong>estacionalidad muestra variaciones repetitivas y periódicas en una serie temporal</strong></em>, comúnmente reveladas durante el <em>análisis exploratorio de datos</em>. Por ejemplo, las <em><strong>fluctuaciones mensuales en las emisiones de CO2</strong></em> o en las <em><strong>ventas de productos estacionales como los regalos navideños</strong></em> evidencian esta estacionalidad.</p></li>
 <li><p>Una técnica práctica para <em><strong>determinar la estacionalidad</strong></em> es el análisis exploratorio de datos mediante los siguientes gráficos:</p>
 <ul>
 <li><p><em><strong>Gráfico de secuencia de series</strong></em></p></li>
@@ -2203,18 +2276,21 @@ dtype: object
 </ul>
 </li>
 </ul>
+</div>
 </section>
 <section id="grafico-de-secuencia-de-series">
 <h2>Gráfico de secuencia de series<a class="headerlink" href="#grafico-de-secuencia-de-series" title="Link to this heading">#</a></h2>
-<ul>
-<li><p>Un simple <em><strong>gráfico de secuencia de ejecución de la serie temporal original</strong></em> con el tiempo en el eje <span class="math notranslate nohighlight">\(x\)</span> y la variable en el eje <span class="math notranslate nohighlight">\(y\)</span> sirve para indicar las siguientes propiedades de la serie temporal:</p>
 <ul class="simple">
+<li><p>Un simple <em><strong>gráfico de secuencia de ejecución de la serie temporal original</strong></em> con el tiempo en el eje <span class="math notranslate nohighlight">\(x\)</span> y la variable en el eje <span class="math notranslate nohighlight">\(y\)</span> sirve para indicar las siguientes propiedades de la serie temporal:</p>
+<ul>
 <li><p><em><strong>Movimientos en la media de la serie</strong></em></p></li>
 <li><p><em><strong>Cambios en la varianza</strong></em></p></li>
 <li><p><em><strong>Presencia de valores atípicos</strong></em></p></li>
 </ul>
 </li>
-<li><p>Por ejemplo, el gráfico de la secuencia de ejecución de una serie temporal hipotética que se obtiene a partir de la formulación matemática</p>
+</ul>
+<ul>
+<li><p>Por ejemplo, el gráfico de la <em><strong>secuencia de ejecución de una serie temporal</strong></em> hipotética que se obtiene a partir de la formulación matemática</p>
 <div class="math notranslate nohighlight">
 \[
     y_{t} = (At + B)\sin(t) + \varepsilon(t)
@@ -2226,6 +2302,8 @@ dtype: object
 </section>
 <section id="grafico-de-subserie-estacional">
 <h2>Gráfico de subserie estacional<a class="headerlink" href="#grafico-de-subserie-estacional" title="Link to this heading">#</a></h2>
+<div class="admonition-subseries-estacionales admonition">
+<p class="admonition-title">Subseries estacionales</p>
 <ul class="simple">
 <li><p>Para una <em><strong>periodicidad conocida de variaciones estacionales</strong></em>, las <em><strong>subseries estacionales vuelven a dibujar la serie original en lotes de períodos sucesivos</strong></em>. Por ejemplo, la periodicidad de las concentraciones de CO2 es de <em><strong>12 meses</strong></em> y, basándose en ella, se traza una <em><strong>subserie estacional de la media y la desviación estándar de los residuos</strong></em>.</p></li>
 <li><p><em><strong>Para visualizar estacionalidad en los residuos, creamos medias y desviaciones estándar trimestrales</strong></em>. Una subserie estacional revela dos propiedades:</p>
@@ -2235,6 +2313,7 @@ dtype: object
 </ul>
 </li>
 </ul>
+</div>
 <ul class="simple">
 <li><p>En primer lugar, tenemos que <em><strong>añadir los residuos y las etiquetas trimestrales al DataFrame de concentraciones de CO2</strong></em> de la siguiente forma</p></li>
 </ul>
@@ -2435,9 +2514,13 @@ dtype: object
 </section>
 <section id="graficos-de-cajas-multiples">
 <h2>Gráficos de cajas múltiples<a class="headerlink" href="#graficos-de-cajas-multiples" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Boxplot</p>
 <ul class="simple">
-<li><p>El gráfico de la subserie estacional puede ser más informativo si se redibuja con <em><strong>gráficos de caja estacionales</strong></em> como se muestra en la siguiente figura. Un gráfico de cajas muestra tanto la <em><strong>tendencia central</strong></em> como la <em><strong>dispersión de los datos</strong></em> estacionales en un lote de unidades temporales. Además, la <em><strong>separación entre dos gráficos de caja adyacentes revela las variaciones dentro de la temporada</strong></em></p></li>
+<li><p>El gráfico de la subserie estacional puede ser más informativo si se redibuja con <em><strong>gráficos de caja estacionales</strong></em> como se muestra en la siguiente figura.</p></li>
+<li><p>Un gráfico de cajas muestra tanto la <em><strong>tendencia central</strong></em> como la <em><strong>dispersión de los datos</strong></em> estacionales en un lote de unidades temporales. Además, la <em><strong>separación entre dos gráficos de caja adyacentes revela las variaciones dentro de la temporada</strong></em></p></li>
 </ul>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
@@ -2455,8 +2538,14 @@ dtype: object
 </section>
 <section id="cambios-ciclicos">
 <h2>Cambios cíclicos<a class="headerlink" href="#cambios-ciclicos" title="Link to this heading">#</a></h2>
+<div class="admonition-cambios-ciclicos admonition">
+<p class="admonition-title">Cambios cíclicos</p>
 <ul class="simple">
-<li><p>Los cambios cíclicos son <em><strong>movimientos que se observan cada pocas unidades de tiempo</strong></em>, menos frecuentes que las fluctuaciones estacionales, <em><strong>pueden no tener un período fijo</strong></em> y suelen <em><strong>ocurrir cada pocos años</strong></em>. Se necesitan <em><strong>datos a largo plazo para identificarlos</strong></em>, como los ciclos económicos recurrentes. La inflación del IPC en India y Estados Unidos muestra patrones cíclicos cada 2-2.5 años. Los datos se obtuvieron de <code class="docutils literal notranslate"><span class="pre">datamarket</span></code>.</p></li>
+<li><p>Los cambios cíclicos son <em><strong>movimientos que se observan cada pocas unidades de tiempo</strong></em>, menos frecuentes que las fluctuaciones estacionales, <em><strong>pueden no tener un período fijo</strong></em> y suelen <em><strong>ocurrir cada pocos años</strong></em>. Se necesitan <em><strong>datos a largo plazo para identificarlos</strong></em>, como los ciclos económicos recurrentes.</p></li>
+</ul>
+</div>
+<ul class="simple">
+<li><p>La inflación del <em><strong>CPI en India y Estados Unidos</strong></em> (<a class="reference external" href="https://en.wikipedia.org/wiki/Consumer_price_index">consumer price index (CPI)</a>) muestra patrones cíclicos cada 2-2.5 años. Los datos se obtuvieron de <code class="docutils literal notranslate"><span class="pre">datamarket</span></code>.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2546,18 +2635,27 @@ dtype: object
 <img alt="_images/0b4a22de156b126dbb223513e6498a02446dd32f59465f740cd8eb67a9a46dc5.png" src="_images/0b4a22de156b126dbb223513e6498a02446dd32f59465f740cd8eb67a9a46dc5.png" />
 </div>
 </div>
+<ul class="simple">
+<li><p>La <em><strong>alta inflación en Estados Unidos e India entre 1970 y 1980</strong></em> se debió principalmente a los <em><strong>aumentos en los precios del petróleo</strong></em> a nivel mundial, <em><strong>políticas económicas expansivas</strong></em> y <em><strong>presión sobre los precios por aumento de la demanda</strong></em> debido al rápido crecimiento económico.</p></li>
+</ul>
 </section>
 <section id="componentes-irregulares">
 <h2>Componentes irregulares<a class="headerlink" href="#componentes-irregulares" title="Link to this heading">#</a></h2>
+<div class="admonition-variaciones-irregulares admonition">
+<p class="admonition-title">Variaciones irregulares</p>
 <ul class="simple">
-<li><p>Con respecto a nuestro modelo, que expresa una serie temporal como una <em><strong>suma de cuatro componentes</strong></em>, cabe señalar que, a pesar de poder tener en cuenta los otros tres componentes, <em><strong>es posible que se produzcan componentes irregulares</strong></em>. A pesar de poder tener en cuenta los otros tres componentes, es posible que nos quedemos con un <em><strong>componente de error irreducible que es aleatorio y que no muestra una dependencia sistemática del índice temporal</strong></em>.</p></li>
-<li><p>Este cuarto componente refleja <em><strong>variaciones inesperadas en la serie temporal</strong></em>. Las variaciones inesperadas son estocásticas y no pueden enmarcarse en un modelo matemático para una predicción futura definitiva. Este tipo de error se debe a la <em><strong>falta de información sobre variables explicativas que puedan modelar estas variaciones o por la presencia de un ruido aleatorio</strong></em>.</p></li>
+<li><p>A pesar de que nuestro modelo que <em><strong>incluye cuatro componentes para expresar una serie temporal</strong></em>, aún puede haber un <em><strong>componente irregular</strong></em>. Este componente es un <em><strong>error irreducible que es aleatorio y no muestra una relación sistemática con el tiempo</strong></em>.</p></li>
+<li><p>Refleja <em><strong>variaciones inesperadas en la serie temporal que son estocásticas</strong></em> y no pueden predecirse definitivamente con un modelo matemático, debido a la falta de información sobre variables explicativas o la presencia de ruido aleatorio.</p></li>
 </ul>
+</div>
 </section>
 <section id="modelos-de-analisis-de-series-temporales">
 <h2>Modelos de análisis de series temporales<a class="headerlink" href="#modelos-de-analisis-de-series-temporales" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Introducción</p>
 <ul class="simple">
-<li><p>El objetivo del análisis de series temporales es <em><strong>desarrollar un modelo matemático que pueda explicar el comportamiento observado de una serie temporal y, posiblemente, predecir su estado futuro</strong></em>. El modelo elegido debe ser capaz de dar cuenta de una o más de las estructuras internas que pueden estar presentes. Con este fin, daremos una visión general de los siguientes modelos que se utilizan a menudo como componentes básicos del análisis de series temporales:</p>
+<li><p>El objetivo del análisis de series temporales es <em><strong>desarrollar un modelo matemático que pueda explicar el comportamiento observado de una serie temporal y, posiblemente, predecir su estado futuro</strong></em>.</p></li>
+<li><p>El modelo elegido debe ser capaz de dar cuenta de una o más de las estructuras internas que pueden estar presentes. Con este fin, daremos una <em><strong>visión general</strong></em> de los siguientes modelos que se utilizan a menudo como <em><strong>componentes básicos del análisis de series temporales</strong></em>:</p>
 <ul>
 <li><p><em><strong>Modelos de media cero</strong></em></p></li>
 <li><p><em><strong>Recorrido aleatorio</strong></em></p></li>
@@ -2566,11 +2664,17 @@ dtype: object
 </ul>
 </li>
 </ul>
+</div>
 </section>
 <section id="modelos-de-media-cero">
 <h2>Modelos de media cero<a class="headerlink" href="#modelos-de-media-cero" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Definición</p>
 <ul class="simple">
 <li><p>Los <em><strong>modelos de media cero tienen una media y una varianza constantes y no muestran tendencias predecibles ni estacionalidad</strong></em>. Se supone que las observaciones de un modelo de media cero son <em><strong>independientes e idénticamente distribuidas (iid)</strong></em> y representan el <em><strong>ruido aleatorio en torno a una media fija</strong></em>, que se ha deducido de la serie temporal como un término constante.</p></li>
+</ul>
+</div>
+<ul class="simple">
 <li><p>Consideremos que <span class="math notranslate nohighlight">\(Y_{1}, Y_{2},\dots, Y_{T}\)</span> representan las <em><strong>variables aleatorias correspondientes a</strong></em> <span class="math notranslate nohighlight">\(T\)</span> <em><strong>observaciones</strong></em> de un modelo de media cero. Si <span class="math notranslate nohighlight">\(y_{1}, y_{2},\dots, y_{T}\)</span> son <span class="math notranslate nohighlight">\(t\)</span> observaciones de la serie temporal de media cero, la <em><strong>distribución conjunta de las observaciones</strong></em> viene dada por el producto de las funciones de masa de probabilidad para cada índice temporal</p></li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -2612,7 +2716,7 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 </div>
 <ul>
 <li><p><em><strong>La media cero con varianza constante representa un ruido aleatorio</strong></em> que puede asumir infinitos posibles valores reales y es adecuado para <em><strong>representar variaciones irregulares en la serie temporal de una variable continua</strong></em>.</p></li>
-<li><p>Sin embargo, en muchos casos, el estado observable del sistema o proceso puede ser de naturaleza discreta y limitarse a un número finito de valores posibles <span class="math notranslate nohighlight">\(s_{1}, s_{2}, \dots, s_{m}\)</span>. En tales casos, se supone que la <em><strong>variable observada</strong></em> <span class="math notranslate nohighlight">\(X\)</span> <em><strong>obedece a la distribución multinomial</strong></em>,</p>
+<li><p>Sin embargo, en muchos casos, el estado observable del sistema o proceso puede ser de <em><strong>naturaleza discreta y limitarse a un número finito de valores posibles</strong></em> <span class="math notranslate nohighlight">\(s_{1}, s_{2}, \dots, s_{m}\)</span>. En tales casos, se supone que la <em><strong>variable observada</strong></em> <span class="math notranslate nohighlight">\(X\)</span> <em><strong>obedece a la</strong></em> <a class="reference external" href="https://es.wikipedia.org/wiki/Distribuci%C3%B3n_multinomial">distribución multinomial</a>,</p>
 <div class="math notranslate nohighlight">
 \[
   P(X = s_{1}) = p_{1}, P(X = s_{2}) = p_{2}, \dots, P(X = s_{m}) = p_{m}~\text{tal que}~p_{1} + p_{2} + \cdots + p_{m} = 1.
@@ -2624,15 +2728,26 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 </section>
 <section id="camino-aleatorio">
 <h2>Camino aleatorio<a class="headerlink" href="#camino-aleatorio" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Definición</p>
 <ul>
 <li><p>Un paseo aleatorio viene dado como una <em><strong>suma de</strong></em> <span class="math notranslate nohighlight">\(n\)</span> <em><strong>iids, que tiene media cero y varianza constante</strong></em>. A partir de esta definición, la <em><strong>realización de un paseo aleatorio en el índice de tiempo</strong></em> <span class="math notranslate nohighlight">\(t\)</span> viene dada por la suma</p>
 <div class="math notranslate nohighlight">
 \[
-  S = y_{1} + y_{2} + \cdots + y_{T}
+  S = y_{1} + y_{2} + \cdots + y_{T}.
   \]</div>
 </li>
+</ul>
+</div>
+<ul>
 <li><p>La siguiente figura muestra el paseo aleatorio obtenido a partir de las <em>iids</em>, que varían según una <em><strong>distribución normal de media cero y varianza unitaria</strong></em>.</p></li>
-<li><p>El paseo aleatorio es importante porque si se encuentra un comportamiento de este tipo en una serie temporal, <em><strong>se puede fácilmente reducir a un modelo de media cero tomando las diferencias de las observaciones de dos índices temporales consecutivos como</strong></em> <span class="math notranslate nohighlight">\(S_{t}-S_{t-1} = y_{t}\)</span> obteniendo así una serie iid con media cero y varianza constante.</p></li>
+<li><p>El paseo aleatorio es importante porque si se encuentra un comportamiento de este tipo en una serie temporal, <em><strong>se puede fácilmente reducir a un modelo de media cero tomando las diferencias de las observaciones de dos índices temporales consecutivos como</strong></em></p>
+<div class="math notranslate nohighlight">
+\[
+  S_{t}-S_{t-1} = y_{t}
+  \]</div>
+<p>obteniendo así una <em><strong>serie iid con media cero y varianza constante</strong></em>.</p>
+</li>
 <li><p>El paseo aleatorio puede generarse tomando la <em><strong>suma acumulada del modelo de media cero discutido en la sección anterior</strong></em>. El siguiente código lo implementa</p></li>
 </ul>
 <div class="cell docutils container">
@@ -2658,6 +2773,8 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 </section>
 <section id="modelos-de-tendencia">
 <h2>Modelos de tendencia<a class="headerlink" href="#modelos-de-tendencia" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Introducción</p>
 <ul>
 <li><p>Este tipo de modelo pretende <em><strong>captar la tendencia a largo plazo de la serie temporal que puede ajustarse como regresión lineal del índice temporal</strong></em>. Cuando la serie temporal no presenta fluctuaciones periódicas o estacionales, puede expresarse simplemente como la suma de la tendencia y la media nula como</p>
 <div class="math notranslate nohighlight">
@@ -2666,21 +2783,30 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
   \]</div>
 <p>donde <span class="math notranslate nohighlight">\(\mu(t)\)</span> es la <em><strong>tendencia a largo plazo</strong></em> dependiente del tiempo de la serie.</p>
 </li>
-<li><p>La elección del modelo de tendencia <span class="math notranslate nohighlight">\(\mu(t)\)</span> es fundamental para <em><strong>captar correctamente el comportamiento de la serie temporal</strong></em>. El análisis exploratorio de datos suele proporcionar pistas para plantear la hipótesis de si el modelo debería ser lineal o no lineal en <span class="math notranslate nohighlight">\(t\)</span>. Un <em><strong>modelo lineal es simplemente</strong></em> <span class="math notranslate nohighlight">\(\mu(t) = wt + b\)</span>, mientras que un <em><strong>modelo cuadrático es</strong></em> <span class="math notranslate nohighlight">\(\mu(t) = w_{1}t + w_{2}t^{2} + b\)</span>. A veces, la tendencia se puede hipotetizar mediante una relación compleja en términos del índice temporal, como <span class="math notranslate nohighlight">\(\mu(t) = w_{0}t^{p} + b\)</span>.</p></li>
+<li><p>La elección del modelo de tendencia <span class="math notranslate nohighlight">\(\mu(t)\)</span> es fundamental para <em><strong>captar correctamente el comportamiento de la serie temporal</strong></em>. El análisis exploratorio de datos suele proporcionar pistas para plantear la hipótesis de si el modelo debería ser lineal o no lineal en <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>Un <em><strong>modelo lineal es simplemente</strong></em> <span class="math notranslate nohighlight">\(\mu(t) = wt + b\)</span>, mientras que un <em><strong>modelo cuadrático es</strong></em> <span class="math notranslate nohighlight">\(\mu(t) = w_{1}t + w_{2}t^{2} + b\)</span>. A veces, la tendencia se puede hipotetizar mediante una relación compleja en términos del índice temporal, como <span class="math notranslate nohighlight">\(\mu(t) = w_{0}t^{p} + b\)</span>.</p></li>
+</ul>
+</div>
+<ul class="simple">
 <li><p>Los pesos y sesgos en los modos de tendencia como los discutidos anteriormente se obtienen ejecutando una <em><strong>regresión con</strong></em> <span class="math notranslate nohighlight">\(t\)</span> <em><strong>como variable explicativa y</strong></em> <span class="math notranslate nohighlight">\(\mu(t)\)</span> <em><strong>como respuesta</strong></em>. Los <em><strong>residuos</strong></em> <span class="math notranslate nohighlight">\(y_{t} - \mu(t)\)</span> del modelo de tendencia es considerado el <em><strong>ruido irreducible</strong></em> y como realización del componente de media cero <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span>.</p></li>
 </ul>
 </section>
 <section id="modelos-de-estacionalidad">
 <h2>Modelos de estacionalidad<a class="headerlink" href="#modelos-de-estacionalidad" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Definición</p>
 <ul>
-<li><p>La estacionalidad se manifiesta como <em><strong>fluctuaciones periódicas y repetitivas en una serie temporal</strong></em> y, por tanto, se <em><strong>modelan como una suma ponderada de ondas senoidales de periodicidad conocida</strong></em>. Suponiendo que la tendencia a largo plazo se ha eliminado mediante una línea de tendencia, el <em><strong>modelo de estacionalidad puede expresarse como</strong></em> <span class="math notranslate nohighlight">\(y_{t} = s_{t}+ \varepsilon_{t}\)</span>, donde la variación estacional es</p>
+<li><p>La estacionalidad se manifiesta como <em><strong>fluctuaciones periódicas y repetitivas en una serie temporal</strong></em> y, por tanto, se <em><strong>modelan como una suma ponderada de ondas senoidales de periodicidad conocida</strong></em>.</p></li>
+<li><p>Suponiendo que la tendencia a largo plazo se ha eliminado mediante una línea de tendencia, el <em><strong>modelo de estacionalidad puede expresarse como</strong></em> <span class="math notranslate nohighlight">\(y_{t} = s_{t}+ \varepsilon_{t}\)</span>, donde la variación estacional es</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-    \\[1mm]
+\[
     s_{t}=\sum_{k=1}^{L}(w_{k}\cos(\alpha t)+v_{k}\sin(\alpha t))+b,
-    \end{split}\]</div>
+    \]</div>
 <p>con periocidad <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
 </li>
+</ul>
+</div>
+<ul class="simple">
 <li><p>Los modelos de estacionalidad también se conocen como <strong><strong>modelos de regresión armónica</strong></strong>, ya que intentan ajustar la suma de múltiples ondas senoidales. <em><strong>Los cuatro modelos descritos aquí son los componentes básicos de un modelo de series temporales completo</strong></em>.</p></li>
 </ul>
 <div class="admonition-observacion admonition">
@@ -2708,16 +2834,15 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 <div class="tip admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
-<li><p>Tras aplicar las transformaciones matemáticas comentadas en el apartado anterior, a menudo nos encontramos con lo que se conoce como una <em><strong>serie temporal estacionaria</strong></em> (o <em><strong>débilmente estacionaria</strong></em>), que se caracteriza por una <em><strong>media constante</strong></em> <span class="math notranslate nohighlight">\(\text{E}(y_{t})\)</span> y una <em><strong>correlación que solo depende del desfase entre dos pasos temporales, pero independiente del valor del paso temporal, esto es, su distribución de probabilidad es completamente independiente del tiempo</strong></em>.</p></li>
+<li><p>Tras aplicar las transformaciones matemáticas comentadas en el apartado anterior, a menudo nos encontramos con lo que se conoce como una <em><strong>serie temporal estacionaria</strong></em> (o <em><strong>débilmente estacionaria</strong></em>), que se caracteriza por una <em><strong>media constante</strong></em> <span class="math notranslate nohighlight">\(\text{E}(y_{t})\)</span> y una <em><strong>correlación que solo depende del desfase entre dos pasos temporales, pero independiente del valor del paso temporal</strong></em>, esto es, <em>su distribución de probabilidad es completamente independiente del tiempo</em>.</p></li>
 </ul>
 </div>
 <ul class="simple">
 <li><p>Este tipo de covarianza es la clave en el análisis de series temporales y se denomina autocovarianza o autocorrelación, cuando se normaliza en el intervalo de -1 a 1. La <em><strong>autocorrelación refleja el grado de dependencia lineal entre la serie temporal en el índice</strong></em> <span class="math notranslate nohighlight">\(t\)</span> <em><strong>y las series temporales de los índices</strong></em> <span class="math notranslate nohighlight">\(t-k\)</span> o <span class="math notranslate nohighlight">\(t+k\)</span>.</p></li>
-<li><p><em><strong>Una autocorrelación positiva indica que los valores presentes y futuros de la serie temporal se mueven en la misma dirección</strong></em>, mientras que los <em><strong>valores negativos significan que los valores presentes y futuros se mueven en sentido contrario</strong></em>. Si la <em><strong>autocorrelación es cercana a cero, las dependencias temporales dentro de la serie pueden ser difíciles de encontrar</strong></em>. Debido a esta propiedad, la autocorrelación es útil para predecir el estado futuro de una serie temporal a <span class="math notranslate nohighlight">\(h\)</span> pasos por delante.</p></li>
+<li><p>Una <em><strong>autocorrelación positiva</strong></em> indica que los <em><strong>valores presentes y futuros de la serie temporal se mueven en la misma dirección</strong></em>, mientras que los <em><strong>valores negativos</strong></em> significan que los <em><strong>valores presentes y futuros se mueven en sentido contrario</strong></em>. Si la <em><strong>autocorrelación es cercana a cero</strong></em>, las <em><strong>dependencias temporales dentro de la serie pueden ser difíciles de encontrar</strong></em>. Debido a esta propiedad, la autocorrelación es útil para predecir el estado futuro de una serie temporal a <span class="math notranslate nohighlight">\(h\)</span> pasos por delante.</p></li>
 </ul>
-<div class="proof definition admonition" id="def_autocorr_func">
-<p class="admonition-title"><span class="caption-number">Definition 1 </span></p>
-<section class="definition-content" id="proof-content">
+<div class="admonition-definicion admonition">
+<p class="admonition-title">Definición</p>
 <ul class="simple">
 <li><p>La <em><strong>covarianza</strong></em> entre <span class="math notranslate nohighlight">\(y_{t}\)</span> y su valor en otro período de tiempo, digamos, <span class="math notranslate nohighlight">\(y_{t+k}\)</span> se denomina <em><strong>autocovarianza en el desfase (lag)</strong></em> <span class="math notranslate nohighlight">\(k\)</span> y se define como</p></li>
 </ul>
@@ -2735,7 +2860,6 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 \]</div>
 <ul>
 <li><p>El conjunto de los valores de <span class="math notranslate nohighlight">\(\rho_{k}, k = 0, 1, 2, \dots\)</span> se denomina <em><strong>función de autocorrelación (ACF)</strong></em>. Obsérvese que, por definición, <span class="math notranslate nohighlight">\(\rho_{0} = 1\)</span>. Además, la <em><strong>ACF</strong></em> es independiente de la escala de medición de la serie temporal, por lo que <em><strong>es una cantidad adimensional</strong></em>. Adicionalmente, <span class="math notranslate nohighlight">\(\rho_{k} = \rho_{-k}\)</span><em><strong>; es decir, la ACF es simétrica en torno a cero</strong></em>, por lo que solo es necesario calcular la mitad positiva (o negativa).</p></li>
-<li><p>Si una serie temporal tiene una media y una función de autocovarianza finitas, se dice que es <em><strong>estacionaria de segundo orden (o débilmente estacionaria de orden 2)</strong></em>. Si, además, la distribución de probabilidad conjunta de las observaciones en todo momento es <em><strong>normal, multivariante</strong></em>, entonces eso sería suficiente para dar lugar a una serie temporal estrictamente estacionaria.</p></li>
 <li><p>Es necesario estimar la <em><strong>autocovarianza</strong></em> y los <em><strong>ACF</strong></em> a partir de una serie temporal de longitud finita, digamos, <span class="math notranslate nohighlight">\(y_{1}, y_{2}, \dots, y_{T}\)</span>. La estimación habitual de la función de autocovarianza es</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -2750,9 +2874,9 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
     \end{split}\]</div>
 </li>
 </ul>
-</section>
-</div><ul class="simple">
-<li><p>El siguiente <em><strong>tutorial</strong></em> puede ser de utilidad para quienes gozan usar <code class="docutils literal notranslate"><span class="pre">Excel</span></code>. En esta oportunidad puede ser usado como <em><strong>calculadora para obtener de forma manual la función ACF</strong></em> (ver <a class="reference external" href="https://www.youtube.com/watch?v=H3iHEJkh3A8&amp;amp;ab_channel=Sangwoo.StatisticsKim">How to calculate ACF by 2 ways in Excel</a>)</p></li>
+</div>
+<ul class="simple">
+<li><p>El siguiente <em><strong>tutorial</strong></em> puede ser de utilidad para quienes gozan usar <em><strong><code class="docutils literal notranslate"><span class="pre">Excel</span></code></strong></em>. En esta oportunidad puede ser usado como <em><strong>calculadora para obtener de forma manual la función ACF</strong></em> (ver <a class="reference external" href="https://www.youtube.com/watch?v=H3iHEJkh3A8&amp;amp;ab_channel=Sangwoo.StatisticsKim">How to calculate ACF by 2 ways in Excel</a>)</p></li>
 </ul>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
@@ -2799,7 +2923,7 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 <h2>Experimentos numéricos ACF<a class="headerlink" href="#experimentos-numericos-acf" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>La presencia de autocorrelación puede identificarse <em><strong>trazando los valores observados de la función de autocorrelación (ACF) de una serie temporal determinada</strong></em>. Este gráfico suele denominarse <code class="docutils literal notranslate"><span class="pre">ACF</span></code>. Ilustremos cómo el trazado de los valores observados de la <code class="docutils literal notranslate"><span class="pre">ACF</span></code> puede ayudar a <em><strong>detectar la presencia de autocorrelación</strong></em>.</p></li>
-<li><p>Para ello, trazaremos primero el valor diario del <code class="docutils literal notranslate"><span class="pre">Dow</span> <span class="pre">Jones</span> <span class="pre">Industrial</span> <span class="pre">Average</span> <span class="pre">(DJIA)</span></code> <em><strong>observado durante enero de 2016 a diciembre de 2016</strong></em></p></li>
+<li><p>Para ello, trazaremos primero el valor diario del <a class="reference external" href="https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average">Dow Jones Industrial Average (DJIA)</a> <em><strong>observado durante enero de 2016 a diciembre de 2016</strong></em></p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3006,10 +3130,13 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="analisis-de-datos-de-series-temporales">
 <h1>Análisis de datos de series temporales<a class="headerlink" href="#analisis-de-datos-de-series-temporales" title="Link to this heading">#</a></h1>
+<div class="admonition-observacion admonition">
+<p class="admonition-title">Observación</p>
 <ul class="simple">
 <li><p>El <em><strong>análisis de series temporales</strong></em> implica dos pasos clave: <em><strong>visualizar los datos para identificar tendencias y patrones, y ajustar estas tendencias y estacionalidades para crear series estacionarias</strong></em>. Las <em><strong>fluctuaciones irregulares restantes se modelan como observaciones independientes e idénticamente distribuidas (iid) mediante regresión lineal</strong></em> sobre variables exógenas.</p></li>
 <li><p>Este enfoque mejora las predicciones futuras. La metodología se presenta en un diagrama de flujo y se cubren los primeros tres pasos, incluyendo <em><strong>procesamiento avanzado de datos, pruebas estadísticas para estacionariedad y descomposición de series temporales</strong></em>. Estos conceptos son fundamentales para desarrollar modelos predictivos de series temporales.</p></li>
 </ul>
+</div>
 <figure class="align-center" id="fig1-chapter1">
 <a class="reference internal image-reference" href="_images/fig1_chapter1.png"><img alt="_images/fig1_chapter1.png" src="_images/fig1_chapter1.png" style="width: 320.0px; height: 362.40000000000003px;" />
 </a>
@@ -3700,7 +3827,7 @@ M_{T}=\frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{T}y_{t
 <li><p>Cualquier versión suavizada razonable de los datos también debería aumentar de forma constante de 15 a 25 y <em><strong>no hacer hincapié en el valor 200</strong></em>. Ahora, incluso si 200 es una observación legítima, y no el <em><strong>resultado de un error de registro de datos (¡quizás debería ser 20!)</strong></em>, es tan inusual que <em><strong>merece una atención especial y probablemente no debería analizarse junto con el resto de los datos</strong></em>.</p></li>
 </ul>
 <div class="proof definition admonition" id="moving_median">
-<p class="admonition-title"><span class="caption-number">Definition 2 </span> (Medianas moviles corridas)</p>
+<p class="admonition-title"><span class="caption-number">Definition 1 </span> (Medianas moviles corridas)</p>
 <section class="definition-content" id="proof-content">
 <ul>
 <li><p>Las medianas móviles impares (también denominadas <em><strong>medianas móviles corridas</strong></em>) son una <em><strong>alternativa a las medias móviles que suavizan eficazmente los datos cuando la serie puede estar contaminada con valores inusuales o valores atípicos</strong></em>. La mediana de intervalo <span class="math notranslate nohighlight">\(N\)</span> se define como</p>
@@ -3752,7 +3879,7 @@ M_{T}=\frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{T}y_{t
 <li><p>En el <em><strong>contexto de series temporales, la estacionariedad implica que las propiedades de la serie, como la media, la varianza y la autocorrelación, no cambien con el tiempo</strong></em>. En resumen, la estacionariedad <em><strong>requiere que la serie tenga una media y una varianza constantes</strong></em>, <em>sin patrones predecibles o repetitivos</em>.</p></li>
 </ul>
 <div class="proof definition admonition" id="def_stationarity">
-<p class="admonition-title"><span class="caption-number">Definition 3 </span> (Serie temporal estacionaria)</p>
+<p class="admonition-title"><span class="caption-number">Definition 2 </span> (Serie temporal estacionaria)</p>
 <section class="definition-content" id="proof-content">
 <ul>
 <li><p>Una serie de tiempo se dice que es <em><strong>estrictamente estacionaria si sus propiedades no se ven afectadas por un cambio en el origen temporal</strong></em>. Es decir, si la <em><strong>distribución de probabilidad conjunta de las observaciones</strong></em> <span class="math notranslate nohighlight">\(y_{t}, y_{t+1}, y_{t+2}, \dots, y_{t+n}\)</span> <em><strong>es exactamente igual a la distribución de las observaciones</strong></em> <span class="math notranslate nohighlight">\(y_{t+k}, y_{t+k+1}, y_{t+k+2}, \dots, y_{t+k+n}\)</span> entonces la es estrictamente estacionaria.</p></li>
@@ -3853,8 +3980,8 @@ dtype: float64
 <ul class="simple">
 <li><p>Las <em><strong>transformaciones de datos</strong></em> son comunes en estadística y se utilizan principalmente para <em><strong>estabilizar la varianza de los datos</strong></em>. La <em><strong>varianza no constante, conocida como <code class="docutils literal notranslate"><span class="pre">heteroscedasticidad</span></code>, es frecuente en series temporales</strong></em>. Para abordar esto, se emplean modelos como <code class="docutils literal notranslate"><span class="pre">GARCH</span></code>. Ejemplos incluyen <em><strong>series relacionadas con la volatilidad de acciones como Tesla o la criptomoneda BTC</strong></em>, donde una transformación logarítmica puede reducir la varianza.</p></li>
 </ul>
-<div class="proof definition admonition" id="definition-4">
-<p class="admonition-title"><span class="caption-number">Definition 4 </span> (Transformaciones de potencia)</p>
+<div class="proof definition admonition" id="definition-3">
+<p class="admonition-title"><span class="caption-number">Definition 3 </span> (Transformaciones de potencia)</p>
 <section class="definition-content" id="proof-content">
 <ul>
 <li><p>Un tipo muy popular de transformación de datos para tratar con la varianza es la <em><strong>familia de transformaciones de potencia</strong></em>, dada por</p>
@@ -3912,8 +4039,8 @@ x_{t}=\frac{100(y_{t}-y_{t-1})}{y_{t-1}}.
 <ul class="simple">
 <li><p>Los <em><strong>ajustes de tendencia y estacionales son esenciales en el modelado y la predicción de series temporales</strong></em>. Una serie temporal con tendencia se considera no estacionaria. Para simplificar el análisis, es común <em><strong>eliminar la tendencia ajustando los datos a un modelo de regresión y luego sustraerlo de las observaciones originales</strong></em>, dejando residuos sin tendencia.</p></li>
 </ul>
-<div class="proof definition admonition" id="definition-5">
-<p class="admonition-title"><span class="caption-number">Definition 5 </span></p>
+<div class="proof definition admonition" id="definition-4">
+<p class="admonition-title"><span class="caption-number">Definition 4 </span></p>
 <section class="definition-content" id="proof-content">
 <ul>
 <li><p>Los modelos de tendencia que se suelen considerar son la <em><strong>tendencia lineal</strong></em>, en la que se espera que la media de <span class="math notranslate nohighlight">\(y_{t}\)</span> cambie linealmente con el tiempo, como en</p>
@@ -6024,7 +6151,7 @@ Shape after removing missing values: (154, 2)
 <section id="residual-y-error-de-prediccion">
 <h2>Residual y error de predicción<a class="headerlink" href="#residual-y-error-de-prediccion" title="Link to this heading">#</a></h2>
 <div class="proof definition admonition" id="forecast_error">
-<p class="admonition-title"><span class="caption-number">Definition 6 </span></p>
+<p class="admonition-title"><span class="caption-number">Definition 5 </span></p>
 <section class="definition-content" id="proof-content">
 <ul>
 <li><p>Supongamos que se dispone de <span class="math notranslate nohighlight">\(T\)</span> <em><strong>periodos de datos disponibles</strong></em>, siendo el periodo <span class="math notranslate nohighlight">\(T\)</span> <em><strong>el más reciente</strong></em>. Denotemos por <span class="math notranslate nohighlight">\(y_{t}\)</span> la <em><strong>observación de esta variable en el periodo de tiempo</strong></em> <span class="math notranslate nohighlight">\(t,~t = 1,2,\dots, T\)</span>.</p></li>
@@ -6241,12 +6368,13 @@ e_{t}=y_{t}-\hat{y}_{t}.
 <div class="admonition-aic-corregido admonition">
 <p class="admonition-title">AIC corregido</p>
 <ul>
-<li><p>Existen varias <em><strong>variaciones y extensiones de estos criterios</strong></em>. El AIC es un estimador sesgado de la discrepancia entre todos los modelos candidatos y el verdadero modelo. Esto ha llevado al desarrollo de una <em><strong>versión “corregida” del AIC</strong></em>:</p>
+<li><p>Existen varias <em><strong>variaciones y extensiones de estos criterios</strong></em>. El AIC es un estimador sesgado de la discrepancia entre todos los modelos candidatos y el verdadero modelo. Esto ha llevado al desarrollo de una <em><strong>versión “corregida” del AIC</strong></em> <span id="id9">[<a class="reference internal" href="biblio.html#id28" title="Clifford M Hurvich and Chih-Ling Tsai. Regression and time series model selection in small samples. Biometrika, 76(2):297–307, 1989.">Hurvich and Tsai, 1989</a>]</span>:</p>
 <div class="math notranslate nohighlight">
 \[
     AIC_{c}=\ln\left(\frac{\displaystyle{\sum_{t=1}^{T}e_{t}^{2}}}{T}\right)+\frac{2T(p+1)}{T-p-2}.
     \]</div>
 </li>
+<li><p>Así, <span class="math notranslate nohighlight">\(AIC_{c}\)</span> <em><strong>es esencialmente AIC con un término adicional de penalización</strong></em> por el número de parámetros.</p></li>
 </ul>
 </div>
 <div class="admonition-observacion admonition">
@@ -6306,11 +6434,11 @@ e_{t}=y_{t}-\hat{y}_{t}.
       </div>
     </a>
     <a class="right-next"
-       href="biblio.html"
+       href="exponential_smoothing.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Bibliografía</p>
+        <p class="prev-next-title">Métodos de Suavización Exponencial</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
