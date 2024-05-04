@@ -185,8 +185,6 @@
 
 <li class="toctree-l1"><a class="reference internal" href="exponential_smoothing.html">Métodos de Suavización Exponencial</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="arima_model.html">Modelos autorregresivos integrados de media móvil</a></li>
-<li class="toctree-l1"><a class="reference internal" href="deep_learning.html">Deep Learning para la predicción de series temporales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliografía</a></li>
 </ul>
 
@@ -2784,7 +2782,7 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 <p>donde <span class="math notranslate nohighlight">\(\mu(t)\)</span> es la <em><strong>tendencia a largo plazo</strong></em> dependiente del tiempo de la serie.</p>
 </li>
 <li><p>La elección del modelo de tendencia <span class="math notranslate nohighlight">\(\mu(t)\)</span> es fundamental para <em><strong>captar correctamente el comportamiento de la serie temporal</strong></em>. El análisis exploratorio de datos suele proporcionar pistas para plantear la hipótesis de si el modelo debería ser lineal o no lineal en <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
-<li><p>Un <em><strong>modelo lineal es simplemente</strong></em> <span class="math notranslate nohighlight">\(\mu(t) = wt + b\)</span>, mientras que un <em><strong>modelo cuadrático es</strong></em> <span class="math notranslate nohighlight">\(\mu(t) = w_{1}t + w_{2}t^{2} + b\)</span>. A veces, la tendencia se puede hipotetizar mediante una relación compleja en términos del índice temporal, como <span class="math notranslate nohighlight">\(\mu(t) = w_{0}t^{p} + b\)</span>.</p></li>
+<li><p>Un <em><strong>modelo lineal es simplemente</strong></em> <span class="math notranslate nohighlight">\(\mu(t) = wt + b\)</span>, mientras que un <em><strong>modelo cuadrático es</strong></em> <span class="math notranslate nohighlight">\(\mu(t) = w_{1}t + w_{2}t^{2} + b\)</span>. A veces, la tendencia se puede hipotetizar mediante una relación compleja en términos del índice temporal, como <span class="math notranslate nohighlight">\(\mu(t) = w_{0}t^{p} + b\)</span> o <span class="math notranslate nohighlight">\(\mu(t)=w_{0}e^{w_{1}t}\)</span>.</p></li>
 </ul>
 </div>
 <ul class="simple">
@@ -3876,14 +3874,14 @@ M_{T}=\frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{T}y_{t
 <h2>Procesos estacionarios<a class="headerlink" href="#procesos-estacionarios" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>La <em><strong>estacionariedad es un supuesto fundamental en la teoría estadística y el análisis de series temporales</strong></em>. Asegura que los <em><strong>estadísticos muestrales, como la media y la varianza, se mantengan constantes a lo largo del tiempo</strong></em>, lo que permite su uso como <em><strong>estimaciones confiables para futuras ocurrencias</strong></em>.</p></li>
-<li><p>En el <em><strong>contexto de series temporales, la estacionariedad implica que las propiedades de la serie, como la media, la varianza y la autocorrelación, no cambien con el tiempo</strong></em>. En resumen, la estacionariedad <em><strong>requiere que la serie tenga una media y una varianza constantes</strong></em>, <em>sin patrones predecibles o repetitivos</em>.</p></li>
+<li><p>En el contexto de series temporales, la <em><strong>estacionariedad implica que las propiedades de la serie, como: la media, la varianza y la autocorrelación, no cambien con el tiempo</strong></em>. En resumen, la estacionariedad requiere que la serie tenga una <em><strong>media y una varianza constantes</strong></em>, <em>sin patrones predecibles o repetitivos</em>.</p></li>
 </ul>
 <div class="proof definition admonition" id="def_stationarity">
 <p class="admonition-title"><span class="caption-number">Definition 2 </span> (Serie temporal estacionaria)</p>
 <section class="definition-content" id="proof-content">
 <ul>
 <li><p>Una serie de tiempo se dice que es <em><strong>estrictamente estacionaria si sus propiedades no se ven afectadas por un cambio en el origen temporal</strong></em>. Es decir, si la <em><strong>distribución de probabilidad conjunta de las observaciones</strong></em> <span class="math notranslate nohighlight">\(y_{t}, y_{t+1}, y_{t+2}, \dots, y_{t+n}\)</span> <em><strong>es exactamente igual a la distribución de las observaciones</strong></em> <span class="math notranslate nohighlight">\(y_{t+k}, y_{t+k+1}, y_{t+k+2}, \dots, y_{t+k+n}\)</span> entonces la es estrictamente estacionaria.</p></li>
-<li><p>Cuando <span class="math notranslate nohighlight">\(n = 0\)</span>, el supuesto de estacionariedad significa que la distribución de probabilidad de <span class="math notranslate nohighlight">\(y_{t}\)</span> es la misma en todos los periodos de tiempo y puede escribirse como <span class="math notranslate nohighlight">\(f(y)\)</span>.</p></li>
+<li><p>Cuando <span class="math notranslate nohighlight">\(n = 0\)</span>, el supuesto de estacionariedad significa que la <em><strong>distribución de probabilidad de</strong></em> <span class="math notranslate nohighlight">\(y_{t}\)</span> <em><strong>es la misma en todos los periodos de tiempo</strong></em> y puede escribirse como <span class="math notranslate nohighlight">\(f(y)\)</span>.</p></li>
 <li><p>Estacionarieda implica un tipo de <em><strong>equilibrio estadístico o estabilidad en los datos</strong></em>. En consecuencia, la serie temporal tiene una <em><strong>media constante</strong></em> definida de la forma habitual como</p>
 <div class="math notranslate nohighlight">
 \[
@@ -3920,6 +3918,7 @@ M_{T}=\frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{T}y_{t
 <span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">Series</span>
 <span class="kn">import</span> <span class="nn">random</span> 
 <span class="kn">from</span> <span class="nn">pandas.plotting</span> <span class="kn">import</span> <span class="n">autocorrelation_plot</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
@@ -3952,22 +3951,31 @@ dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">series</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">series</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/46d7f5c01bcb9429d135059adaec63bb409ebeb759b23cad5401347da7215e66.png" src="_images/46d7f5c01bcb9429d135059adaec63bb409ebeb759b23cad5401347da7215e66.png" />
+<img alt="_images/cd5b99cca00605914efc15580251861a1bff76120e0a3566abff300d109be2da.png" src="_images/cd5b99cca00605914efc15580251861a1bff76120e0a3566abff300d109be2da.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">series</span><span class="o">.</span><span class="n">hist</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;text.usetex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axs</span><span class="o">.</span><span class="n">flat</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">series</span><span class="p">[</span><span class="n">i</span><span class="p">:],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Histogram $\{y_{t+</span><span class="si">%d</span><span class="s1">}\}_{t=1}^</span><span class="si">{T}</span><span class="s1">$&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">))</span> 
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;text.usetex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ce9d18edd2c50e5942b18f15304ea7a3fa714101dec24589978ac37028b1373f.png" src="_images/ce9d18edd2c50e5942b18f15304ea7a3fa714101dec24589978ac37028b1373f.png" />
+<img alt="_images/53d4e0c9dd9be6d08bf265a2f5472b9532f71df3984cf75d3a8a5bdf51b7c3d6.png" src="_images/53d4e0c9dd9be6d08bf265a2f5472b9532f71df3984cf75d3a8a5bdf51b7c3d6.png" />
 </div>
 </div>
 <ul class="simple">
@@ -4000,16 +4008,15 @@ dtype: float64
 </div><div class="tip admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p>Si <span class="math notranslate nohighlight">\(\lambda=1\)</span>, no hay transformación. Los valores típicos de <span class="math notranslate nohighlight">\(\lambda\)</span> utilizados con datos de series temporales son:</p>
-<ul>
+<li><p>Si <span class="math notranslate nohighlight">\(\lambda=1\)</span>, <em><strong>no hay transformación</strong></em>. Los valores típicos de <span class="math notranslate nohighlight">\(\lambda\)</span> utilizados con datos de series temporales son:</p>
+<ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(\lambda=0.5\)</span> (<em><strong>transformación de raíz cuadrada</strong></em>)</p></li>
-<li><p><span class="math notranslate nohighlight">\(\lambda=0\)</span> (<em><strong>transformación logarítmica</strong></em> <span class="math notranslate nohighlight">\((y^{\lambda}-1)/\lambda\xrightarrow{\lambda\rightarrow 0}\log(y)\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda=0\)</span> (<em><strong>transformación logarítmica</strong></em> <span class="math notranslate nohighlight">\((y^{\lambda}-1)/\lambda\rightarrow\log(y)\)</span> cuando <span class="math notranslate nohighlight">\(\lambda\rightarrow 0\)</span>)</p></li>
 <li><p><span class="math notranslate nohighlight">\(\lambda=-0.5\)</span> (<em><strong>transformación recíproca de raíz cuadrada</strong></em>)</p></li>
 <li><p><span class="math notranslate nohighlight">\(\lambda=-1\)</span> (<em><strong>transformación inversa</strong></em>).</p></li>
-</ul>
+</ol>
 </li>
-<li><p>El divisor <span class="math notranslate nohighlight">\(\dot{y}^{\lambda-1}\)</span> <em><strong>es simplemente un factor de escala</strong></em>, el cual asegura que cuando se ajustan diferentes modelos para investigar la utilidad de diferentes transformaciones (valores de <span class="math notranslate nohighlight">\(\lambda\)</span>), la <em><strong>suma residual de cuadrados para estos modelos pueda compararse de forma significativa</strong></em>.</p></li>
-<li><p>La transformación logarítmica se utiliza con frecuencia en situaciones en las que la variabilidad en la serie temporal original aumenta con el nivel medio de la serie. <em><strong>Cuando la desviación típica de la serie original aumenta linealmente con la media, la transformación logarítmica es, de hecho, una transformación óptima de estabilización de la varianza</strong></em>.</p></li>
+<li><p>El <em><strong>divisor es un factor de escala</strong></em> que permite comparar la suma residual de cuadrados al ajustar diferentes modelos con diferentes transformaciones. La <em><strong>transformación logarítmica se usa cuando la variabilidad de la serie temporal original aumenta con su nivel medio</strong></em>, siendo óptima cuando la desviación típica aumenta linealmente con la media.</p></li>
 </ul>
 </div>
 <ul class="simple">
@@ -4039,30 +4046,7 @@ x_{t}=\frac{100(y_{t}-y_{t-1})}{y_{t-1}}.
 <ul class="simple">
 <li><p>Los <em><strong>ajustes de tendencia y estacionales son esenciales en el modelado y la predicción de series temporales</strong></em>. Una serie temporal con tendencia se considera no estacionaria. Para simplificar el análisis, es común <em><strong>eliminar la tendencia ajustando los datos a un modelo de regresión y luego sustraerlo de las observaciones originales</strong></em>, dejando residuos sin tendencia.</p></li>
 </ul>
-<div class="proof definition admonition" id="definition-4">
-<p class="admonition-title"><span class="caption-number">Definition 4 </span></p>
-<section class="definition-content" id="proof-content">
-<ul>
-<li><p>Los modelos de tendencia que se suelen considerar son la <em><strong>tendencia lineal</strong></em>, en la que se espera que la media de <span class="math notranslate nohighlight">\(y_{t}\)</span> cambie linealmente con el tiempo, como en</p>
-<div class="math notranslate nohighlight">
-\[
-    \textsf{E}(y_{t})=\beta_{0}+\beta_{1}t,
-    \]</div>
-<p>o como una <em><strong>función cuadrática</strong></em> del tiempo.</p>
-<div class="math notranslate nohighlight">
-\[
-    \textsf{E}(y_{t})=\beta_{0}+\beta_{1}t+\beta_{2}t^{2},
-    \]</div>
-<p>o incluso posiblemente como una <em><strong>función exponencial</strong></em> del tiempo como</p>
-<div class="math notranslate nohighlight">
-\[
-    \textsf{E}(y_{t})=\beta_{0}e^{\beta_{1}t}.
-    \]</div>
-</li>
-<li><p>Cada uno de estos modelos son usualmente <em><strong>ajustados a los datos usando mínimos cuadrados ordinarios</strong></em>.</p></li>
-</ul>
 </section>
-</div></section>
 <section id="diferenciacion">
 <h2>Diferenciación<a class="headerlink" href="#diferenciacion" title="Link to this heading">#</a></h2>
 <ul>
@@ -4345,7 +4329,7 @@ x_{t}=\frac{100(y_{t}-y_{t-1})}{y_{t-1}}.
 </div>
 <ul class="simple">
 <li><p>A continuación, se calcula el <em><strong>ACF para diferentes rezagos y se verifica la prueba de Ljung-Box</strong></em>. La figura siguiente muestra la <code class="docutils literal notranslate"><span class="pre">ACF</span></code> de los valores de cierre del <code class="docutils literal notranslate"><span class="pre">DJIA</span></code> y <em><strong>también para la serie temporal de diferencias de primer orden</strong></em>.</p></li>
-<li><p>Obsérvese que <em><strong>para las series diferenciadas, la <code class="docutils literal notranslate"><span class="pre">ACF</span></code> no muestra un patrón predecible y cae repentinamente cerca de cero</strong></em>. Además, el valor <span class="math notranslate nohighlight">\(p\)</span> de la prueba es de <span class="math notranslate nohighlight">\(0.894\)</span> para el <span class="math notranslate nohighlight">\(lag=10\)</span> nos hace <em><strong>aceptar la hipótesis nula de la prueba de Ljung-Box</strong></em> (<em>aleatoriedad e independencia</em>) para las series diferenciadas</p></li>
+<li><p>Obsérvese que <em><strong>para las series diferenciadas, la <code class="docutils literal notranslate"><span class="pre">ACF</span></code> no muestra un patrón predecible y cae repentinamente cerca de cero</strong></em>. Además, el valor <span class="math notranslate nohighlight">\(p\)</span> de la prueba nos hace <em><strong>aceptar la hipótesis nula de la prueba de Ljung-Box</strong></em> (<em>aleatoriedad e independencia</em>) para las series diferenciadas</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4377,7 +4361,7 @@ x_{t}=\frac{100(y_{t}-y_{t-1})}{y_{t-1}}.
 </div>
 </div>
 <ul class="simple">
-<li><p>Comprobemos si con un <em><strong>nivel de confianza del</strong></em> 95% (<span class="math notranslate nohighlight">\(\alpha=0.05\)</span>) <em><strong>si se rechaza la hipótesis nula</strong></em> en cualquiera de los rezagos</p></li>
+<li><p>Comprobemos si con un <em><strong>nivel de confianza del</strong></em> 95% (<span class="math notranslate nohighlight">\(\alpha=0.05\)</span>) <em><strong>si se rechaza la hipótesis nula</strong></em> en cualquiera de los rezagos para los <em><strong>valores no diferenciados</strong></em> del <code class="docutils literal notranslate"><span class="pre">DJIA</span> <span class="pre">Close</span></code></p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -4754,7 +4738,7 @@ Freq: M, Name: Mean_Temperature, dtype: float64
 <section id="prueba-de-dickey-fuller">
 <h2>Prueba de Dickey-Fuller<a class="headerlink" href="#prueba-de-dickey-fuller" title="Link to this heading">#</a></h2>
 <ul>
-<li><p>Dada serie temporal generada por un proceso con una estructura <em><strong>Autorsegresiva de Primer Orden, AR(1)</strong></em>, también conocida como proceso de primer orden de Markov, y es ampliamente utilizada en diversas disciplinas</p>
+<li><p>Dada serie temporal generada por un proceso con una estructura <em><strong>Autorregresiva de Primer Orden, AR(1)</strong></em>, también conocida como proceso de primer orden de Markov, y es ampliamente utilizada en diversas disciplinas</p>
 <div class="math notranslate nohighlight" id="equation-ar1-dickey-fuller">
 <span class="eqno">(4)<a class="headerlink" href="#equation-ar1-dickey-fuller" title="Link to this equation">#</a></span>\[
   y_{t}=\phi y_{t-1}+\varepsilon_{t},
@@ -6151,7 +6135,7 @@ Shape after removing missing values: (154, 2)
 <section id="residual-y-error-de-prediccion">
 <h2>Residual y error de predicción<a class="headerlink" href="#residual-y-error-de-prediccion" title="Link to this heading">#</a></h2>
 <div class="proof definition admonition" id="forecast_error">
-<p class="admonition-title"><span class="caption-number">Definition 5 </span></p>
+<p class="admonition-title"><span class="caption-number">Definition 4 </span></p>
 <section class="definition-content" id="proof-content">
 <ul>
 <li><p>Supongamos que se dispone de <span class="math notranslate nohighlight">\(T\)</span> <em><strong>periodos de datos disponibles</strong></em>, siendo el periodo <span class="math notranslate nohighlight">\(T\)</span> <em><strong>el más reciente</strong></em>. Denotemos por <span class="math notranslate nohighlight">\(y_{t}\)</span> la <em><strong>observación de esta variable en el periodo de tiempo</strong></em> <span class="math notranslate nohighlight">\(t,~t = 1,2,\dots, T\)</span>.</p></li>
