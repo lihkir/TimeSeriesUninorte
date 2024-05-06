@@ -386,7 +386,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-al-suavizado-de-series-temporales">Introducción al suavizado de series temporales</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suavizacion-exponencial-de-primer-orden">Suavización exponencial de primer orden</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-valor-de-lambda">El valor de <span class="math notranslate nohighlight">\(\lambda\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-ses">Implementación <span class="math notranslate nohighlight">\(SES\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelado-de-datos-de-series-temporales">Modelado de datos de series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suavizacion-exponencial-de-segundo-orden">Suavización exponencial de segundo orden</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-des">Implementación <span class="math notranslate nohighlight">\(DES\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suavizacion-exponencial-de-alto-orden">Suavización exponencial de alto orden</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting">Forecasting</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-constante">Proceso constante</a></li>
@@ -403,7 +406,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">Implementación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suavizacion-exponencial-de-segundo-orden">Suavización exponencial de segundo orden</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Suavización exponencial de segundo orden</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suavizacion-exponencial-de-orden-superior">Suavización exponencial de orden superior</a></li>
 </ul>
 </li>
@@ -701,6 +704,346 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 \text{MSD}=\frac{\displaystyle{\sum_{t=1}^{T}(y_{t}-\tilde{y}_{t-1})^{2}}}{T}.
 \]</div>
 </section>
+<section id="implementacion-ses">
+<h2>Implementación <span class="math notranslate nohighlight">\(SES\)</span><a class="headerlink" href="#implementacion-ses" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;darkgrid&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">djia_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;C:/Data/DJIA_Jan2016_Dec2016.xlsx&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">djia_df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">djia_df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">djia_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">djia_df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span>
+<span class="n">djia_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">djia_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Adj Close</th>
+      <th>Volume</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2016-01-04</th>
+      <td>17405.480469</td>
+      <td>17405.480469</td>
+      <td>16957.630859</td>
+      <td>17148.939453</td>
+      <td>17148.939453</td>
+      <td>148060000</td>
+    </tr>
+    <tr>
+      <th>2016-01-05</th>
+      <td>17147.500000</td>
+      <td>17195.839844</td>
+      <td>17038.609375</td>
+      <td>17158.660156</td>
+      <td>17158.660156</td>
+      <td>105750000</td>
+    </tr>
+    <tr>
+      <th>2016-01-06</th>
+      <td>17154.830078</td>
+      <td>17154.830078</td>
+      <td>16817.619141</td>
+      <td>16906.509766</td>
+      <td>16906.509766</td>
+      <td>120250000</td>
+    </tr>
+    <tr>
+      <th>2016-01-07</th>
+      <td>16888.359375</td>
+      <td>16888.359375</td>
+      <td>16463.630859</td>
+      <td>16514.099609</td>
+      <td>16514.099609</td>
+      <td>176240000</td>
+    </tr>
+    <tr>
+      <th>2016-01-08</th>
+      <td>16519.169922</td>
+      <td>16651.890625</td>
+      <td>16314.570313</td>
+      <td>16346.450195</td>
+      <td>16346.450195</td>
+      <td>141850000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">djia_ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">djia_df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">djia_df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">djia_ts</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Date
+2016-01-04    17148.939453
+2016-01-05    17158.660156
+2016-01-06    16906.509766
+2016-01-07    16514.099609
+2016-01-08    16346.450195
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;text.usetex&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<span class="n">djia_ts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Dow Jones Industrial Average between Jan 2016 - Dec 2016&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Closing Value&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d9672adbac4cc6a394578303be80d97901f3c1f824e54f0f985af4d200f8da39.png" src="_images/d9672adbac4cc6a394578303be80d97901f3c1f824e54f0f985af4d200f8da39.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">firstsmooth</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">ytilde</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ytilde</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lambda_</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">lambda_</span><span class="p">)</span> <span class="o">*</span> <span class="n">start</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)):</span>
+        <span class="n">ytilde</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">lambda_</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">lambda_</span><span class="p">)</span> <span class="o">*</span> <span class="n">ytilde</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">ytilde</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dji_smooth1</span> <span class="o">=</span> <span class="n">firstsmooth</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">djia_ts</span><span class="p">,</span> <span class="n">lambda_</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">djia_ts</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Dow Jones&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dji_smooth1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;SES $\lambda=0.4$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Dow Jones&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e72bb8afc3b2c5313196591ebe8a6a8fc4f50fbb0b6c33af67dff2990157f385.png" src="_images/e72bb8afc3b2c5313196591ebe8a6a8fc4f50fbb0b6c33af67dff2990157f385.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">measacc_fs</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">):</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">firstsmooth</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">yh</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]]),</span> <span class="n">out</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">prederr</span> <span class="o">=</span> <span class="n">yh</span> <span class="o">-</span> <span class="n">out</span>
+    <span class="n">SSE</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">prederr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">MAPE</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">prederr</span> <span class="o">/</span> <span class="n">yh</span><span class="p">))</span> <span class="o">/</span> <span class="n">T</span>
+    <span class="n">MAD</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">prederr</span><span class="p">))</span> <span class="o">/</span> <span class="n">T</span>
+    <span class="n">MSD</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">prederr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">T</span>
+    <span class="n">ret1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s2">&quot;SSE&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">SSE</span><span class="p">],</span>
+        <span class="s2">&quot;MAPE&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">MAPE</span><span class="p">],</span>
+        <span class="s2">&quot;MAD&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">MAD</span><span class="p">],</span>
+        <span class="s2">&quot;MSD&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">MSD</span><span class="p">]</span>
+    <span class="p">})</span>
+    <span class="n">ret1</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ret1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">measacc_fs</span><span class="p">(</span><span class="n">djia_ts</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SSE</th>
+      <th>MAPE</th>
+      <th>MAD</th>
+      <th>MSD</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6.844383e+06</td>
+      <td>0.689939</td>
+      <td>121.602389</td>
+      <td>27160.251204</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.tsa.holtwinters</span> <span class="kn">import</span> <span class="n">ExponentialSmoothing</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">measacc_hw</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">fit</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="n">lambda_</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">yh</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">fit</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">y</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]]),</span> <span class="n">y_pred</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">prederr</span> <span class="o">=</span> <span class="n">yh</span> <span class="o">-</span> <span class="n">out</span>
+    <span class="n">SSE</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">prederr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">MAPE</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">prederr</span> <span class="o">/</span> <span class="n">yh</span><span class="p">))</span> <span class="o">/</span> <span class="n">T</span>
+    <span class="n">MAD</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">prederr</span><span class="p">))</span> <span class="o">/</span> <span class="n">T</span>
+    <span class="n">MSD</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">prederr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">T</span>
+    <span class="n">ret1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s2">&quot;SSE&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">SSE</span><span class="p">],</span>
+        <span class="s2">&quot;MAPE&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">MAPE</span><span class="p">],</span>
+        <span class="s2">&quot;MAD&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">MAD</span><span class="p">],</span>
+        <span class="s2">&quot;MSD&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">MSD</span><span class="p">]</span>
+    <span class="p">})</span>
+    <span class="n">ret1</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ret1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">measacc_hw</span><span class="p">(</span><span class="n">djia_ts</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SSE</th>
+      <th>MAPE</th>
+      <th>MAD</th>
+      <th>MSD</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.084430e+07</td>
+      <td>0.876061</td>
+      <td>154.763858</td>
+      <td>43032.945974</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
 <section id="modelado-de-datos-de-series-temporales">
 <h2>Modelado de datos de series temporales<a class="headerlink" href="#modelado-de-datos-de-series-temporales" title="Link to this heading">#</a></h2>
 <div class="proof theorem admonition" id="theorem-2">
@@ -770,11 +1113,14 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 <li><p>Por ejemplo, para <em><strong>series de tiempo no estacionarias</strong></em>, es mas conveniente considerar una <em><strong>familia polinómica</strong></em>, donde el proceso constante es el modelos mas simple que podemos considerar.</p></li>
 </ul>
 </div>
+</section>
+<section id="suavizacion-exponencial-de-segundo-orden">
+<h2>Suavización exponencial de segundo orden<a class="headerlink" href="#suavizacion-exponencial-de-segundo-orden" title="Link to this heading">#</a></h2>
 <div class="proof theorem admonition" id="theorem-3">
 <p class="admonition-title"><span class="caption-number">Theorem 5 </span></p>
 <section class="theorem-content" id="proof-content">
 <ul>
-<li><p>Un modelo apropiado en tiempo para tendencias lineales está dado por:</p>
+<li><p>Un modelo apropiado en tiempo para <em><strong>tendencias lineales</strong></em> está dado por:</p>
 <div class="math notranslate nohighlight">
 \[
     y_{t}=\beta_{0}+\beta_{1}t+\varepsilon_{t},
@@ -799,7 +1145,7 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
     \tilde{y}_{T}=2\tilde{y}_{T}^{(1)}-\tilde{y}_{T}^{(2)}.
     \]</div>
 </li>
-<li><p>Pude demostrarse que <span class="math notranslate nohighlight">\(\tilde{y}_{T}\)</span> es insesgado.</p></li>
+<li><p>Puede demostrarse  además que <span class="math notranslate nohighlight">\(\tilde{y}_{T}\)</span> es insesgado.</p></li>
 </ul>
 </section>
 </div><p><strong><code class="docutils literal notranslate"><span class="pre">Demostración</span></code></strong></p>
@@ -965,6 +1311,46 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 \end{align}
 \end{split}\]</div>
 </section>
+<section id="implementacion-des">
+<h2>Implementación <span class="math notranslate nohighlight">\(DES\)</span><a class="headerlink" href="#implementacion-des" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpi_smooth1</span> <span class="o">=</span> <span class="n">firstsmooth</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">djia_ts</span><span class="p">,</span> <span class="n">lambda_</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">cpi_smooth2</span> <span class="o">=</span> <span class="n">firstsmooth</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">cpi_smooth1</span><span class="p">,</span> <span class="n">lambda_</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpi_hat</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cpi_smooth1</span> <span class="o">-</span> <span class="n">cpi_smooth2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">djia_ts</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Dow Jones&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cpi_hat</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;DES $\lambda=0.3$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Dow Jones&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e270f307f866c68a9322a37264415b9e0b6e38d45cf68e4d68d47753bcc30819.png" src="_images/e270f307f866c68a9322a37264415b9e0b6e38d45cf68e4d68d47753bcc30819.png" />
+</div>
+</div>
+</section>
 <section id="suavizacion-exponencial-de-alto-orden">
 <h2>Suavización exponencial de alto orden<a class="headerlink" href="#suavizacion-exponencial-de-alto-orden" title="Link to this heading">#</a></h2>
 <ul>
@@ -1058,7 +1444,7 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 <section id="seleccion-de-lambda">
 <h2>Selección de <span class="math notranslate nohighlight">\(\lambda\)</span><a class="headerlink" href="#seleccion-de-lambda" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Definimos la suma de cuadrado para los errores de predicción de horizonte 1 como</p></li>
+<li><p>Definimos la <em><strong>suma de cuadrado para los errores de predicción de horizonte 1</strong></em> como</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -1069,6 +1455,165 @@ SS_{E}(\lambda)=\sum_{t=1}^{T}e_{t}^{2}(1).
 <ul class="simple">
 <li><p>Para un conjunto histórico de datos, podemos en general calcular <span class="math notranslate nohighlight">\(SS_{E}(\lambda)\)</span> para varios valores de <span class="math notranslate nohighlight">\(\lambda\)</span> y <em><strong>seleccionar aquel con la menor suma de errores de predicción al cuadrado</strong></em>.</p></li>
 </ul>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">speed_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;weekly_average_speed.csv&quot;</span><span class="p">)</span>
+<span class="n">speed_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>week</th>
+      <th>speed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>47.12</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>45.01</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>44.69</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>45.41</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>45.45</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">speed_ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">speed_df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">speed_df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">speed_ts</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    47.12
+1    45.01
+2    44.69
+3    45.41
+4    45.45
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<span class="n">speed_ts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;The weekly average speed during nonrush hours.&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Week&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Speed&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1f2a66e89a5ee0b4ab1ff5f061759664d1e0fed1fa4bd0aa735899bb2acafc66.png" src="_images/1f2a66e89a5ee0b4ab1ff5f061759664d1e0fed1fa4bd0aa735899bb2acafc66.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lambda_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sse_speed</span><span class="p">(</span><span class="n">sc</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">measacc_fs</span><span class="p">(</span><span class="n">speed_ts</span><span class="p">,</span> <span class="n">sc</span><span class="p">)[</span><span class="s1">&#39;SSE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sse_vec</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">lambda_</span> <span class="ow">in</span> <span class="n">lambda_vec</span><span class="p">:</span>
+    <span class="n">sse_vec</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">sse_vec</span><span class="p">)]</span> <span class="o">=</span> <span class="n">sse_speed</span><span class="p">(</span><span class="n">lambda_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">opt_lambda</span> <span class="o">=</span> <span class="n">sse_vec</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lambda_vec</span><span class="p">,</span> <span class="n">sse_vec</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$SSE$ vs. $\lambda$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$\lambda$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$SSE$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">lambda_vec</span><span class="p">[</span><span class="n">sse_vec</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b9de3be68312681fc922f73d455a732826512f9a8071cadbe151f9efc2f57279.png" src="_images/b9de3be68312681fc922f73d455a732826512f9a8071cadbe151f9efc2f57279.png" />
+</div>
 </div>
 </section>
 <section id="intervalo-de-prediccion">
@@ -1416,506 +1961,6 @@ $<span class="math notranslate nohighlight">\(
 <section id="implementacion">
 <h2>Implementación<a class="headerlink" href="#implementacion" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>La eficacia de la extracción de la tendencia y ruido estimados depende de otros parámetros relacionados con la composición de la señal de la serie temporal, como la presencia de <code class="docutils literal notranslate"><span class="pre">tendencia,</span> <span class="pre">estacionalidad</span> <span class="pre">y</span> <span class="pre">residual</span> <span class="pre">(ruido)</span></code>. Para tratar cada uno de estos componentes de las series temporales, se requieren diferentes tratamientos. En este capítulo se tratarán <code class="docutils literal notranslate"><span class="pre">múltiples</span> <span class="pre">enfoques</span> <span class="pre">de</span> <span class="pre">suavización</span> <span class="pre">para</span> <span class="pre">manejar</span> <span class="pre">los</span> <span class="pre">diferentes</span> <span class="pre">componentes</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">señal</span></code> de la serie temporal.</p></li>
-</ul>
-<ul class="simple">
-<li><p>Un ejemplo de una señal de serie temporal compuesta por <code class="docutils literal notranslate"><span class="pre">tendencia,</span> <span class="pre">estacionalidad</span> <span class="pre">y</span> <span class="pre">ruido</span> <span class="pre">blanco</span></code>, es el conjunto de datos de <code class="docutils literal notranslate"><span class="pre">nacimientos</span> <span class="pre">mensuales</span> <span class="pre">en</span> <span class="pre">Nueva</span> <span class="pre">York</span> <span class="pre">desde</span> <span class="pre">enero</span> <span class="pre">de</span> <span class="pre">1946</span> <span class="pre">hasta</span> <span class="pre">diciembre</span> <span class="pre">de</span> <span class="pre">1959</span></code>:</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">io</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">pmdarima</span> <span class="kn">import</span> <span class="n">arima</span>
-<span class="kn">from</span> <span class="nn">pmdarima</span> <span class="kn">import</span> <span class="n">datasets</span>
-<span class="kn">from</span> <span class="nn">pmdarima</span> <span class="kn">import</span> <span class="n">utils</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;darkgrid&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fopen</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://robjhyndman.com/tsdldata/data/nybirths.dat&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
-<span class="n">ds</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">fopen</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)),</span>  <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;birthcount&#39;</span><span class="p">])</span>
-<span class="n">ds</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>birthcount</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>403 - Forbidden | Access to this page is forbi...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">date</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s2">&quot;1946-01-01&quot;</span><span class="p">,</span> <span class="s2">&quot;1959-12-31&quot;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;1M&quot;</span><span class="p">)</span>
-<span class="n">ds</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
-<span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>birthcount</th>
-    </tr>
-    <tr>
-      <th>Date</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1946-01-31</th>
-      <td>403 - Forbidden | Access to this page is forbi...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">birthcount</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/703cbdee213ac2f06592e33d9e79d0507d8040aaeee5034b848fa50627d3e2ed.png" src="_images/703cbdee213ac2f06592e33d9e79d0507d8040aaeee5034b848fa50627d3e2ed.png" />
-</div>
-</div>
-<ul class="simple">
-<li><p>Observar el cambio en la <code class="docutils literal notranslate"><span class="pre">magnitud</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">fluctuaciones</span></code> de manera visual, suele ser una tarea tediosa para ciertas series de tiempo. Por lo tanto, utilizaremos técnicas basadas en el cálculo del término (<span class="math notranslate nohighlight">\(s_{t}+\varepsilon_{t}\)</span>) o factor (<span class="math notranslate nohighlight">\(s_{t}\times\varepsilon_{t}\)</span>) y su respectiva visualización. Si la magnitud de las fluctuaciones obtenidas son similares entonces concluimos que la serie de tiempo es aditiva o multiplicativa según sea el caso. <code class="docutils literal notranslate"><span class="pre">Es</span> <span class="pre">un</span> <span class="pre">buen</span> <span class="pre">ejercicio</span> <span class="pre">para</span> <span class="pre">el</span> <span class="pre">estudiante</span> <span class="pre">calcular</span> <span class="pre">la</span> <span class="pre">magnitud</span> <span class="pre">de</span> <span class="pre">dichas</span> <span class="pre">fluctuaciones</span> <span class="pre">y</span> <span class="pre">visualizarlas</span></code></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">figure_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;figsize&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">)}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># decomposed = arima.decompose(ds.birthcount.values, &#39;multiplicative&#39;, m=12)</span>
-<span class="c1"># axes = utils.decomposed_plot(decomposed, figure_kwargs=figure_kwargs, show=False)</span>
-<span class="c1"># axes[0].set_title(&quot;Seasonal Multiplicative Decomposition&quot;);</span>
-</pre></div>
-</div>
-</div>
-</div>
-<ul class="simple">
-<li><p>Las diferentes funciones del código se utilizan como sigue:</p>
-<ul>
-<li><p>La función <code class="docutils literal notranslate"><span class="pre">requests.get</span></code> del script anterior se utiliza para obtener los datos del url <code class="docutils literal notranslate"><span class="pre">DATA_URL</span></code>.</p></li>
-<li><p>Para manejar el conjunto de datos, se utiliza un <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> de <code class="docutils literal notranslate"><span class="pre">pandas</span></code>.</p></li>
-</ul>
-</li>
-<li><p>La función <code class="docutils literal notranslate"><span class="pre">seasonal_decompose</span></code> del módulo <code class="docutils literal notranslate"><span class="pre">stats</span> <span class="pre">models</span></code> se utiliza para <code class="docutils literal notranslate"><span class="pre">descomponer</span> <span class="pre">la</span> <span class="pre">señal</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">serie</span> <span class="pre">temporal</span> <span class="pre">en</span> <span class="pre">componentes</span> <span class="pre">de</span> <span class="pre">tendencia,</span> <span class="pre">estacionalidad</span> <span class="pre">y</span> <span class="pre">residual</span></code>. La descomposición puede ser <code class="docutils literal notranslate"><span class="pre">aditiva</span> <span class="pre">o</span> <span class="pre">multiplicativa</span></code>. Un ejemplo de las diferentes componentes de una señal se muestra en el siguiente script</p></li>
-</ul>
-<div class="tip admonition">
-<p class="admonition-title">Observación</p>
-<p>Normalmente, podemos identificar una serie temporal <code class="docutils literal notranslate"><span class="pre">aditiva</span></code></p>
-<div class="math notranslate nohighlight">
-\[y_{t}=f_{t}+s_{t}+\varepsilon_{t}\]</div>
-<p>o <code class="docutils literal notranslate"><span class="pre">multiplicativa</span></code></p>
-<div class="math notranslate nohighlight">
-\[y_{t}=f_{t}\times s_{t}\times\varepsilon_{t}\]</div>
-<p>a partir de su variación. <code class="docutils literal notranslate"><span class="pre">Si</span> <span class="pre">la</span> <span class="pre">magnitud</span> <span class="pre">del</span> <span class="pre">componente</span> <span class="pre">estacional</span> <span class="pre">cambia</span> <span class="pre">con</span> <span class="pre">el</span> <span class="pre">tiempo,</span> <span class="pre">la</span> <span class="pre">serie</span> <span class="pre">es</span> <span class="pre">multiplicativa</span></code>. En caso contrario, la serie es aditiva.</p>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dates_airpass</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s1">&#39;1949-01&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">datasets</span><span class="o">.</span><span class="n">load_airpassengers</span><span class="p">()),</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m&#39;</span><span class="p">)</span>
-<span class="n">air_pass_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Date&#39;</span><span class="p">:</span> <span class="n">dates_airpass</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
-                            <span class="s1">&#39;Passengers&#39;</span><span class="p">:</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_airpassengers</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()})</span>
-<span class="n">air_pass_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Date</th>
-      <th>Passengers</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1949-01</td>
-      <td>112.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1949-02</td>
-      <td>118.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1949-03</td>
-      <td>132.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1949-04</td>
-      <td>129.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1949-05</td>
-      <td>121.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beer_aust</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/quarterly-beer-production-in-aus-March 1956-June 1994.csv&#39;</span><span class="p">)</span>
-<span class="n">beer_aust</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Quarterly beer production in Australia: megalitres. March 1956 ? June 1994&quot;</span><span class="p">:</span> <span class="s2">&quot;beer_prod&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">beer_aust</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Quarter</th>
-      <th>beer_prod</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1956Q1</td>
-      <td>284.4</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1956Q2</td>
-      <td>212.8</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1956Q3</td>
-      <td>226.9</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1956Q4</td>
-      <td>308.4</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1957Q1</td>
-      <td>262.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">decomposed</span> <span class="o">=</span> <span class="n">arima</span><span class="o">.</span><span class="n">decompose</span><span class="p">(</span><span class="n">beer_aust</span><span class="o">.</span><span class="n">beer_prod</span><span class="p">,</span> <span class="s1">&#39;additive&#39;</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">axes</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">decomposed_plot</span><span class="p">(</span><span class="n">decomposed</span><span class="p">,</span> <span class="n">figure_kwargs</span><span class="o">=</span><span class="n">figure_kwargs</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Ausbeer Seasonal Additive Decomposition&quot;</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/a09f3081540ae84cafac289a52d323beabb25e9b6a94e7de6b85786ba1a7d408.png" src="_images/a09f3081540ae84cafac289a52d323beabb25e9b6a94e7de6b85786ba1a7d408.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">decomposed</span> <span class="o">=</span> <span class="n">arima</span><span class="o">.</span><span class="n">decompose</span><span class="p">(</span><span class="n">datasets</span><span class="o">.</span><span class="n">load_airpassengers</span><span class="p">(),</span> <span class="s1">&#39;multiplicative&#39;</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
-<span class="n">axes</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">decomposed_plot</span><span class="p">(</span><span class="n">decomposed</span><span class="p">,</span> <span class="n">figure_kwargs</span><span class="o">=</span><span class="n">figure_kwargs</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Airpassengers Seasonal Multiplicative Decomposition&quot;</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/0f8b04456cb311645130a39c54952aba8a295d419be101fe46fcdd3b89a1b5cf.png" src="_images/0f8b04456cb311645130a39c54952aba8a295d419be101fe46fcdd3b89a1b5cf.png" />
-</div>
-</div>
-<ul class="simple">
-<li><p>Las propiedades de estacionalidad aditiva y multiplicativa, se pueden estimar de manera experimental de la siguiente forma: <code class="docutils literal notranslate"><span class="pre">si</span> <span class="pre">la</span> <span class="pre">estacionalidad</span> <span class="pre">es</span> <span class="pre">aditiva,</span> <span class="pre">entonces</span> <span class="pre">el</span> <span class="pre">resultado</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">resta</span> <span class="pre">entre</span> <span class="pre">la</span> <span class="pre">serie</span> <span class="pre">de</span> <span class="pre">tiempo</span> <span class="pre">origina</span> <span class="pre">y</span> <span class="pre">su</span> <span class="pre">media</span> <span class="pre">movil</span> <span class="pre">tendrá</span> <span class="pre">fluctuaciones</span> <span class="pre">casi</span> <span class="pre">similares</span> <span class="pre">en</span> <span class="pre">magnitud.</span> <span class="pre">Si</span> <span class="pre">es</span> <span class="pre">multiplicativa,</span> <span class="pre">entonces</span> <span class="pre">el</span> <span class="pre">resultado</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">división</span> <span class="pre">tiene</span> <span class="pre">esta</span> <span class="pre">propiedad</span></code>. Veamos esto en el siguiente ejemplo</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">movingaverage</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="n">window_size</span><span class="p">):</span>
-    <span class="n">window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">window_size</span><span class="p">))</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">window_size</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="s1">&#39;same&#39;</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;MA&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dates_airpassl</span> <span class="o">=</span> <span class="n">dates_airpass</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates_airpassl</span><span class="p">,</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_airpassengers</span><span class="p">())</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates_airpassl</span><span class="p">,</span> <span class="n">movingaverage</span><span class="p">(</span><span class="n">datasets</span><span class="o">.</span><span class="n">load_airpassengers</span><span class="p">(),</span> <span class="mi">12</span><span class="p">));</span>
-<span class="n">freq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">dates_airpassl</span><span class="p">[::</span><span class="n">freq</span><span class="p">]);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">dates_airpassl</span><span class="p">[::</span><span class="n">freq</span><span class="p">]);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Passengers&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/47f006ebc4258b9865df6b7fa79a2018ba7e8a9733d194e85b6f5eb41a531519.png" src="_images/47f006ebc4258b9865df6b7fa79a2018ba7e8a9733d194e85b6f5eb41a531519.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates_airpassl</span><span class="p">,</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_airpassengers</span><span class="p">()</span><span class="o">/</span><span class="n">movingaverage</span><span class="p">(</span><span class="n">datasets</span><span class="o">.</span><span class="n">load_airpassengers</span><span class="p">(),</span> <span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">MA</span><span class="o">.</span><span class="n">values</span><span class="p">);</span>
-<span class="n">freq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">dates_airpassl</span><span class="p">[::</span><span class="n">freq</span><span class="p">]);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">dates_airpassl</span><span class="p">[::</span><span class="n">freq</span><span class="p">]);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residual&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/1c49b7eff3aa6028536e9be5d712bbd2d0310ba04d06bcb4312c10f46cd4c915.png" src="_images/1c49b7eff3aa6028536e9be5d712bbd2d0310ba04d06bcb4312c10f46cd4c915.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dates_beerpl</span> <span class="o">=</span> <span class="n">beer_aust</span><span class="o">.</span><span class="n">Quarter</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates_beerpl</span><span class="p">,</span> <span class="n">beer_aust</span><span class="o">.</span><span class="n">beer_prod</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">movingaverage</span><span class="p">(</span><span class="n">beer_aust</span><span class="o">.</span><span class="n">beer_prod</span><span class="p">,</span> <span class="mi">4</span><span class="p">));</span>
-<span class="n">freq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">19</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">dates_beerpl</span><span class="p">[::</span><span class="n">freq</span><span class="p">]);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">dates_beerpl</span><span class="p">[::</span><span class="n">freq</span><span class="p">]);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Beer Production&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/2e65ae113507936d647449cce0398f14b0b0b997ad3e6e033243ac688977f23b.png" src="_images/2e65ae113507936d647449cce0398f14b0b0b997ad3e6e033243ac688977f23b.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates_beerpl</span><span class="p">,</span> <span class="n">beer_aust</span><span class="o">.</span><span class="n">beer_prod</span><span class="o">-</span><span class="n">movingaverage</span><span class="p">(</span><span class="n">beer_aust</span><span class="o">.</span><span class="n">beer_prod</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">MA</span><span class="o">.</span><span class="n">values</span><span class="p">);</span>
-<span class="n">freq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">19</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">dates_beerpl</span><span class="p">[::</span><span class="n">freq</span><span class="p">]);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">dates_beerpl</span><span class="p">[::</span><span class="n">freq</span><span class="p">]);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residual&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/eb2d15f1ac9b8e6752a523a5721b44c72ffdbc149a39f3a42e3ee964c0f81cfc.png" src="_images/eb2d15f1ac9b8e6752a523a5721b44c72ffdbc149a39f3a42e3ee964c0f81cfc.png" />
-</div>
-</div>
-<ul class="simple">
-<li><p>Nótese que si calculamos el <code class="docutils literal notranslate"><span class="pre">residuo</span> <span class="pre">para</span> <span class="pre">una</span> <span class="pre">serie</span> <span class="pre">temporal</span> <span class="pre">con</span> <span class="pre">estacionalidad</span> <span class="pre">multiplicativa</span></code>, la serie resultante contiene componentes estacionales cuya <code class="docutils literal notranslate"><span class="pre">varianza</span> <span class="pre">aumenta</span> <span class="pre">cada</span> <span class="pre">periodo</span> <span class="pre">de</span> <span class="pre">frecuencia</span></code>.</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates_airpassl</span><span class="p">,</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_airpassengers</span><span class="p">()</span><span class="o">-</span><span class="n">movingaverage</span><span class="p">(</span><span class="n">datasets</span><span class="o">.</span><span class="n">load_airpassengers</span><span class="p">(),</span> <span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">MA</span><span class="o">.</span><span class="n">values</span><span class="p">);</span>
-<span class="n">freq</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">dates_airpassl</span><span class="p">[::</span><span class="n">freq</span><span class="p">]);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">dates_airpassl</span><span class="p">[::</span><span class="n">freq</span><span class="p">]);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residual&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/0ccd7154c5e60bb58153b1b9e859cd81e1e9ff43de4fb9c6bf64f11dd5099824.png" src="_images/0ccd7154c5e60bb58153b1b9e859cd81e1e9ff43de4fb9c6bf64f11dd5099824.png" />
-</div>
-</div>
-<ul class="simple">
-<li><p>Una alternativa para verificar estacionalidad sin usar visualziaciones, es utilizar una <code class="docutils literal notranslate"><span class="pre">prueba</span> <span class="pre">no</span> <span class="pre">paramétrica</span></code> (ver <a class="reference external" href="https://jdemetradocumentation.github.io/JDemetra-documentation/pages/theory/Tests_KW.html">Kruskal-Wallis test</a>). Este test comprueba la <code class="docutils literal notranslate"><span class="pre">correlación</span> <span class="pre">entre</span> <span class="pre">la</span> <span class="pre">observación</span> <span class="pre">real</span> <span class="pre">y</span> <span class="pre">la</span> <span class="pre">observación</span> <span class="pre">retardada</span></code>. <code class="docutils literal notranslate"><span class="pre">Si</span> <span class="pre">las</span> <span class="pre">observaciones</span> <span class="pre">son</span> <span class="pre">independientes</span> <span class="pre">entre</span> <span class="pre">sí,</span> <span class="pre">siguen</span> <span class="pre">una</span> <span class="pre">distribución</span></code> <span class="math notranslate nohighlight">\(\chi^2\)</span>. <code class="docutils literal notranslate"><span class="pre">Cuando</span> <span class="pre">se</span> <span class="pre">rechaza</span> <span class="pre">esta</span> <span class="pre">hipótesis,</span> <span class="pre">se</span> <span class="pre">confirma</span> <span class="pre">una</span> <span class="pre">autocorrelación</span> <span class="pre">significativa,</span> <span class="pre">que</span> <span class="pre">es</span> <span class="pre">señal</span> <span class="pre">de</span> <span class="pre">movimientos</span> <span class="pre">estacionales</span> <span class="pre">en</span> <span class="pre">la</span> <span class="pre">serie</span></code>.</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">kruskal</span>
-
-<span class="k">def</span> <span class="nf">seasonality_test</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">period</span><span class="p">):</span>
-        <span class="n">seasonal</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">series</span><span class="p">))</span> <span class="o">%</span> <span class="n">period</span>
-        <span class="n">H_statistic</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">kruskal</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">p_value</span> <span class="o">&lt;=</span> <span class="mf">0.05</span><span class="p">:</span>
-            <span class="n">seasonal</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="n">seasonal</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is the Air Passengers time series seasonal?:&quot;</span><span class="p">,</span> <span class="n">seasonality_test</span><span class="p">(</span><span class="n">dates_airpassl</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Is the Air Passengers time series seasonal?: True
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Is the Beer production time series seasonal?:&quot;</span><span class="p">,</span> <span class="n">seasonality_test</span><span class="p">(</span><span class="n">beer_aust</span><span class="o">.</span><span class="n">beer_prod</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Is the Beer production time series seasonal?: True
-</pre></div>
-</div>
-</div>
-</div>
-<ul class="simple">
-<li><p>La señal de la serie temporal anterior está compuesta por la tendencia, la estacionalidad y el residuo (ruido blanco). <code class="docutils literal notranslate"><span class="pre">El</span> <span class="pre">suavizado</span> <span class="pre">ayuda</span> <span class="pre">a</span> <span class="pre">eliminar</span> <span class="pre">el</span> <span class="pre">componente</span> <span class="pre">residual</span> <span class="pre">y</span> <span class="pre">capta</span> <span class="pre">los</span> <span class="pre">componentes</span> <span class="pre">de</span> <span class="pre">tendencia</span> <span class="pre">y</span> <span class="pre">estacionalidad</span> <span class="pre">para</span> <span class="pre">la</span> <span class="pre">predicción</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">señal</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">El</span> <span class="pre">primer</span> <span class="pre">paso</span> <span class="pre">del</span> <span class="pre">modelo</span> <span class="pre">para</span> <span class="pre">incluir</span> <span class="pre">la</span> <span class="pre">media,</span> <span class="pre">la</span> <span class="pre">tendencia</span> <span class="pre">y</span> <span class="pre">los</span> <span class="pre">patrones</span> <span class="pre">no</span> <span class="pre">estacionales</span> <span class="pre">es</span> <span class="pre">extrapolarla</span> <span class="pre">mediante</span> <span class="pre">la</span> <span class="pre">suavización</span></code>. La suavización básica mediante la media móvil se discutió en el capítulo anterior. El suavizado de media móvil evalúa las esperanzas <span class="math notranslate nohighlight">\(\textsf{E}(y_{t})\)</span> utilizando todas las observaciones anteriores, como sigue:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\hat{y}_{t}=\frac{1}{N}\sum_{i=1}^{T}y_{t-i}\]</div>
-<ul class="simple">
-<li><p>Por lo general, <code class="docutils literal notranslate"><span class="pre">la</span> <span class="pre">media</span> <span class="pre">móvil</span> <span class="pre">simple</span> <span class="pre">se</span> <span class="pre">realiza</span> <span class="pre">sobre</span> <span class="pre">ventanas</span> <span class="pre">de</span> <span class="pre">predicción</span></code>; así, la predicción estimada se evalua en ventanas óptimas con el objetivo de minimizar la función de error</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\min\left(\sum_{i=1}^{T}(y_{t}-\hat{y}_{t})^{2}\right)=\min\sum_{i=1}^{T}\left(y_{t}-\frac{1}{N}\sum_{i=1}^{T}y_{t-i}\right)^{2}\]</div>
-<ul class="simple">
-<li><p>Los métodos de suavización se basan en el <code class="docutils literal notranslate"><span class="pre">supuesto</span> <span class="pre">de</span> <span class="pre">que</span> <span class="pre">los</span> <span class="pre">datos</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">series</span> <span class="pre">temporales</span> <span class="pre">son</span> <span class="pre">localmente</span> <span class="pre">estacionarios</span> <span class="pre">con</span> <span class="pre">pequeñas</span> <span class="pre">variaciones</span> <span class="pre">en</span> <span class="pre">la</span> <span class="pre">media</span></code>. Así, podemos utilizar la media en el momento <span class="math notranslate nohighlight">\(t\)</span> para predecir en <span class="math notranslate nohighlight">\(t+1\)</span> cuando el <span class="math notranslate nohighlight">\(\Delta t\)</span> es lo suficientemente pequeño como para mantener la señal estacionaria. Este modelo es un compromiso entre la media y el modelo de paseo aleatorio sin desviación.</p></li>
-<li><p>Los modelos también se denominan modelos de suavización, ya que <code class="docutils literal notranslate"><span class="pre">suavizan</span> <span class="pre">choques</span> <span class="pre">del</span> <span class="pre">conjunto</span> <span class="pre">de</span> <span class="pre">datos</span></code>. La principal limitación de estos métodos basados en la media móvil es que tratan todas las <span class="math notranslate nohighlight">\(n\)</span> muestras utilizadas en el suavizado dando mayor peso a las observaciones recientes, como se muestra en la siguiente ecuación:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\hat{y}_{t}=\frac{1}{N}\sum_{i=1}^{T}w_{i}y_{t-i}.\]</div>
-<ul class="simple">
-<li><p>Aquí <span class="math notranslate nohighlight">\(w_{1}&gt;w_{2}&gt;\cdots&gt;w_{T}\)</span> y <span class="math notranslate nohighlight">\(T\)</span> es la <code class="docutils literal notranslate"><span class="pre">longitud</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">ventana</span></code>. Esto supone otro reto para la evaluación de las ponderaciones. La limitación de la media móvil y la media móvil ponderada se aborda mediante la <code class="docutils literal notranslate"><span class="pre">suavización</span> <span class="pre">exponencial</span> <span class="pre">aplicando</span> <span class="pre">ponderaciones</span> <span class="pre">con</span> <span class="pre">decaimiento</span> <span class="pre">exponencial</span> <span class="pre">en</span> <span class="pre">las</span> <span class="pre">observaciones</span></code>.</p></li>
-</ul>
-<ul class="simple">
 <li><p>Tomemos ahora como ejemplo el <code class="docutils literal notranslate"><span class="pre">precio</span> <span class="pre">de</span> <span class="pre">cierre</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">acciones</span> <span class="pre">de</span> <span class="pre">IBM</span></code> para pronosticarlo utilizando el método de suavizado simple. El primer paso es cargar los módulos necesarios</p></li>
 </ul>
 <div class="cell docutils container">
@@ -2093,7 +2138,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/fcda07d3f4e717c2017b989e1e60d3655547a9f8f16705ec3cba46bb0665f961.png" src="_images/fcda07d3f4e717c2017b989e1e60d3655547a9f8f16705ec3cba46bb0665f961.png" />
+<img alt="_images/5f089b0dd1301f4083a055bd90e010468d618a604d958c02909b0756f1a9916a.png" src="_images/5f089b0dd1301f4083a055bd90e010468d618a604d958c02909b0756f1a9916a.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2128,7 +2173,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/97927f7fa43907687d141f1b3839b7fccd8d0b43befa0007cf0b85d48847f582.png" src="_images/97927f7fa43907687d141f1b3839b7fccd8d0b43befa0007cf0b85d48847f582.png" />
+<img alt="_images/2421ed43bdbd46c2cc7dea4aedb6f4df14836f7e48c2b45ae9c0bf6086462e46.png" src="_images/2421ed43bdbd46c2cc7dea4aedb6f4df14836f7e48c2b45ae9c0bf6086462e46.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2158,8 +2203,8 @@ $<span class="math notranslate nohighlight">\(
 <li><p>Aquí, <span class="math notranslate nohighlight">\(T\)</span> es la longitud de la serie temporal. Para una varianza unitaria de la serie <span class="math notranslate nohighlight">\(y_{T}\)</span>, la varianza captada por la serie pronosticada variará en función del parámetro de suavización α</p></li>
 </ul>
 </section>
-<section id="suavizacion-exponencial-de-segundo-orden">
-<h2>Suavización exponencial de segundo orden<a class="headerlink" href="#suavizacion-exponencial-de-segundo-orden" title="Link to this heading">#</a></h2>
+<section id="id8">
+<h2>Suavización exponencial de segundo orden<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <ul>
 <li><p>Si la suavización exponencial de primer orden no entrega la mejor bondad de ajuste, entonces <code class="docutils literal notranslate"><span class="pre">existe</span> <span class="pre">tendencia</span> <span class="pre">en</span> <span class="pre">los</span> <span class="pre">datos</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">serie</span> <span class="pre">temporal</span></code>. La tendencia se observa habitualmente en muchos ámbitos, como cuando en las empresas de comercio electrónico o de marketing existe un <code class="docutils literal notranslate"><span class="pre">aumento</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">ventas</span></code> o cuando cualquier <code class="docutils literal notranslate"><span class="pre">buen</span> <span class="pre">rendimiento</span> <span class="pre">anual</span> <span class="pre">de</span> <span class="pre">una</span> <span class="pre">empresa</span> <span class="pre">tendrá</span> <span class="pre">un</span> <span class="pre">efecto</span> <span class="pre">alcista</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">precio</span> <span class="pre">de</span> <span class="pre">sus</span> <span class="pre">acciones</span></code>. La <code class="docutils literal notranslate"><span class="pre">tendencia</span> <span class="pre">lineal</span></code> puede ocurrir entre el tiempo y la respuesta:</p>
 <div class="math notranslate nohighlight">
@@ -2336,7 +2381,7 @@ Dimensiones después de eliminar los valores perdidos: (154, 2)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1d96f2d108517baf227d493ed2e7795bde17fcaebc14cd6a4af3557f5787583a.png" src="_images/1d96f2d108517baf227d493ed2e7795bde17fcaebc14cd6a4af3557f5787583a.png" />
+<img alt="_images/538771782d9e321479b0949ab01a54c02cf9ff4a58dbbff6189b572e2f2faff5.png" src="_images/538771782d9e321479b0949ab01a54c02cf9ff4a58dbbff6189b572e2f2faff5.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2387,7 +2432,7 @@ T_{t}&amp;=(F_{t-1}-F_{t-2})=y_{t-2}-y_{t-3}\\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f1e00867785b9cadfd41ec89a1a48886ade99f3c6d393166b394332434b5fc00.png" src="_images/f1e00867785b9cadfd41ec89a1a48886ade99f3c6d393166b394332434b5fc00.png" />
+<img alt="_images/286df335146cfde4f7298ee4231e0eb9ee3c08a23ac7b82f3bc36e9effe1a1c1.png" src="_images/286df335146cfde4f7298ee4231e0eb9ee3c08a23ac7b82f3bc36e9effe1a1c1.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2462,7 +2507,7 @@ S_{t}&amp;=\gamma(y_{t}-F_{t})+(1-\gamma)S_{t-C}
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of the DataFrame: (178, 2)
 </pre></div>
 </div>
-<img alt="_images/a9b7c8b8ec760bb3d5f356b657b1961ae9076f6f64ad89ce7bc52ed37694bdf4.png" src="_images/a9b7c8b8ec760bb3d5f356b657b1961ae9076f6f64ad89ce7bc52ed37694bdf4.png" />
+<img alt="_images/24c091fc1e61df65e335539a6e020cbb0e7859126f38c85a874da4e43374106f.png" src="_images/24c091fc1e61df65e335539a6e020cbb0e7859126f38c85a874da4e43374106f.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2598,7 +2643,7 @@ T_{0}=\frac{1}{C}\left(\frac{y_{C+1}-y_{1}}{C}+\frac{y_{C+2}-y_{2}}{C}+\frac{y_{
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/080d39064ce095450092715ff431630de8c71a0b0eea1268a2ba9519a0ef88e7.png" src="_images/080d39064ce095450092715ff431630de8c71a0b0eea1268a2ba9519a0ef88e7.png" />
+<img alt="_images/3897c24da051185b51cf757f32954c889ef5a471182237452b42f8b57bd34fd3.png" src="_images/3897c24da051185b51cf757f32954c889ef5a471182237452b42f8b57bd34fd3.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2627,7 +2672,7 @@ T_{0}=\frac{1}{C}\left(\frac{y_{C+1}-y_{1}}{C}+\frac{y_{C+2}-y_{2}}{C}+\frac{y_{
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/317bf52495e7e25d3fc3435baf34b4fddf993c3401c2fb0e851c5611d96c7292.png" src="_images/317bf52495e7e25d3fc3435baf34b4fddf993c3401c2fb0e851c5611d96c7292.png" />
+<img alt="_images/64b802a1ce67a161a6e8762a1810a510957604e50bbf9cf16759d0a1d23f5d57.png" src="_images/64b802a1ce67a161a6e8762a1810a510957604e50bbf9cf16759d0a1d23f5d57.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2713,7 +2758,10 @@ T_{0}=\frac{1}{C}\left(\frac{y_{C+1}-y_{1}}{C}+\frac{y_{C+2}-y_{2}}{C}+\frac{y_{
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-al-suavizado-de-series-temporales">Introducción al suavizado de series temporales</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suavizacion-exponencial-de-primer-orden">Suavización exponencial de primer orden</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-valor-de-lambda">El valor de <span class="math notranslate nohighlight">\(\lambda\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-ses">Implementación <span class="math notranslate nohighlight">\(SES\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelado-de-datos-de-series-temporales">Modelado de datos de series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suavizacion-exponencial-de-segundo-orden">Suavización exponencial de segundo orden</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-des">Implementación <span class="math notranslate nohighlight">\(DES\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suavizacion-exponencial-de-alto-orden">Suavización exponencial de alto orden</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forecasting">Forecasting</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-constante">Proceso constante</a></li>
@@ -2730,7 +2778,7 @@ T_{0}=\frac{1}{C}\left(\frac{y_{C+1}-y_{1}}{C}+\frac{y_{C+2}-y_{2}}{C}+\frac{y_{
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">Implementación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suavizacion-exponencial-de-segundo-orden">Suavización exponencial de segundo orden</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Suavización exponencial de segundo orden</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suavizacion-exponencial-de-orden-superior">Suavización exponencial de orden superior</a></li>
 </ul>
 </li>
