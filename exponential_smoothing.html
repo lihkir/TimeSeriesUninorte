@@ -403,11 +403,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suavizacion-exponencial-para-datos-estacionales">Suavización exponencial para datos estacionales</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-estacional-aditivo">Modelo estacional aditivo</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-estacional-multiplicativo">Modelo estacional multiplicativo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-exponential-smoothing">Single Exponential Smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#double-exponential-smoothing">Double Exponential Smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#triple-exponential-smoothing">Triple Exponential Smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tes-final-model-prediction">TES Final Model(Prediction)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">Implementación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Suavización exponencial de segundo orden</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suavizacion-exponencial-de-orden-superior">Suavización exponencial de orden superior</a></li>
 </ul>
 </li>
 </ul>
@@ -711,6 +712,8 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;darkgrid&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1998,20 +2001,6 @@ Length: 120, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpi_forecast</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([184.88217447, 185.02262463, 185.16307479, 185.30352495,
-       185.4439751 , 185.58442526, 185.72487542, 185.86532557,
-       186.00577573, 186.14622589, 186.28667604, 186.4271262 ])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ctau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">lcpi</span> <span class="o">/</span> <span class="p">((</span><span class="mi">2</span> <span class="o">-</span> <span class="n">lcpi</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span> <span class="o">-</span> <span class="mi">14</span> <span class="o">*</span> <span class="n">lcpi</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">lcpi</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">lcpi</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">lcpi</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">tau</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">lcpi</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
 </pre></div>
 </div>
@@ -2215,6 +2204,68 @@ Length: 120, dtype: float64
 <p>Donde <span class="math notranslate nohighlight">\(\hat{\Delta}_{T}\)</span> está dado por la Ecuación <a class="reference internal" href="#equation-mean-absolute-deviationt">(22)</a>. La Ecuación <a class="reference internal" href="#equation-adaptive-discount-factor-abs">(24)</a> <code class="docutils literal notranslate"><span class="pre">permitirá</span> <span class="pre">actualizar</span> <span class="pre">automáticamente</span> <span class="pre">el</span> <span class="pre">factor</span> <span class="pre">de</span> <span class="pre">descuento</span></code>.</p>
 </li>
 </ul>
+<ul class="simple">
+<li><p>La siguiente figura muestra <em><strong>dos suavizadores exponenciales simples</strong></em> para el <em><strong>Índice Dow Jones</strong></em>, uno con <span class="math notranslate nohighlight">\(\lambda\)</span> fijo de 0.3 y otro con actualización adaptativa basada en el <em><strong>método Trigg-Leach</strong></em> dado en la Ecuación <a class="reference internal" href="#equation-adaptive-discount-factor-abs">(24)</a>. Visualizaremos los <em><strong>últimos cien registros</strong></em> para poder apreciar mejor las predicciones de cada modelo</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tlsmooth</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">y_tilde_start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lambda_start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    
+    <span class="n">Qt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">Dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">y_tilde</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">lambd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    
+    <span class="n">lambd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lambda_start</span>
+    <span class="k">if</span> <span class="n">y_tilde_start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">y_tilde</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">y_tilde</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_tilde_start</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+        <span class="n">err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">y_tilde</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">Qt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">*</span> <span class="n">Qt</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">Dt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">gamma</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">err</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">*</span> <span class="n">Dt</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">lambd</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Qt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">Dt</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">y_tilde</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">lambd</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">lambd</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">y_tilde</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">y_tilde</span><span class="p">,</span> <span class="n">lambd</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">Qt</span><span class="p">,</span> <span class="n">Dt</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out_tl_dji</span> <span class="o">=</span> <span class="n">tlsmooth</span><span class="p">(</span><span class="n">djia_ts</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">last_fc</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">djia_ts</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="n">last_fc</span><span class="p">:],</span> <span class="n">djia_ts</span><span class="p">[</span><span class="o">-</span><span class="n">last_fc</span><span class="p">:],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Dow Jones&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">djia_ts</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="n">last_fc</span><span class="p">:],</span> <span class="n">out_tl_dji</span><span class="p">[</span><span class="o">-</span><span class="n">last_fc</span><span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;TL Smoother&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">djia_ts</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="n">last_fc</span><span class="p">:],</span> <span class="n">dji_smooth1</span><span class="p">[</span><span class="o">-</span><span class="n">last_fc</span><span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exponential Smoother&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Dow Jones&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1e11033861219061c701819702068a90e5d9b57c69364a29934ff2a0eb3a1d55.png" src="_images/1e11033861219061c701819702068a90e5d9b57c69364a29934ff2a0eb3a1d55.png" />
+</div>
+</div>
 </section>
 <section id="evaluacion-del-modelo">
 <h2>Evaluación del modelo<a class="headerlink" href="#evaluacion-del-modelo" title="Link to this heading">#</a></h2>
@@ -2414,728 +2465,357 @@ $<span class="math notranslate nohighlight">\(
 <p>Para más detalles ver <span id="id6">[<a class="reference internal" href="biblio.html#id5" title="D.C. Montgomery, L.A. Johnson, and J.S. Gardiner. Forecasting and Time Series Analysis. Industrial engineering series. McGraw-Hill, 1990. ISBN 9780070428584. URL: https://books.google.com.co/books?id=t9HuAAAAMAAJ.">Montgomery <em>et al.</em>, 1990</a>]</span> y <span id="id7">[<a class="reference internal" href="biblio.html#id9" title="B. Abraham and J. Ledolter. Statistical Methods for Forecasting. Wiley Series in Probability and Statistics. Wiley, 2009. ISBN 9780470317297. URL: https://books.google.com.co/books?id=WIPxdb2P8sAC.">Abraham and Ledolter, 2009</a>]</span>.</p>
 </li>
 </ul>
-</section>
-</section>
-<section id="implementacion">
-<h2>Implementación<a class="headerlink" href="#implementacion" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Tomemos ahora como ejemplo el <code class="docutils literal notranslate"><span class="pre">precio</span> <span class="pre">de</span> <span class="pre">cierre</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">acciones</span> <span class="pre">de</span> <span class="pre">IBM</span></code> para pronosticarlo utilizando el método de suavizado simple. El primer paso es cargar los módulos necesarios</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ibm_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/ibm-common-stock-closing-prices.csv&#39;</span><span class="p">)</span>
-<span class="n">ibm_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Date</th>
-      <th>IBM common stock closing prices</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1962-01-02</td>
-      <td>572.00</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1962-01-03</td>
-      <td>577.00</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1962-01-04</td>
-      <td>571.25</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1962-01-05</td>
-      <td>560.00</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1962-01-08</td>
-      <td>549.50</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<ul class="simple">
-<li><p>Por comodidad, cambiaremos el nombre de las columnas:</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ibm_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;IBM common stock closing prices&#39;</span><span class="p">:</span> <span class="s1">&#39;Close_Price&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ibm_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Date</th>
-      <th>Close_Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1962-01-02</td>
-      <td>572.00</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1962-01-03</td>
-      <td>577.00</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1962-01-04</td>
-      <td>571.25</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1962-01-05</td>
-      <td>560.00</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1962-01-08</td>
-      <td>549.50</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<ul class="simple">
-<li><p>En el método de <code class="docutils literal notranslate"><span class="pre">suavización</span> <span class="pre">exponencial</span> <span class="pre">simple</span></code>, los valores predichos se generan como sigue usando Ec. <a class="reference internal" href="#equation-eq-simple-exp-smoothing3">(13)</a>. Esta serie se puede implementar en <code class="docutils literal notranslate"><span class="pre">Python</span></code> de la siguiente manera:</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">single_exp_smoothing</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
-    <span class="n">F</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
-        <span class="n">F</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">F</span><span class="p">[</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">F</span>
-</pre></div>
-</div>
-</div>
-</div>
-<ul class="simple">
-<li><p>La función <code class="docutils literal notranslate"><span class="pre">single_exp_smoothing</span></code> configurada con el valor inicial previsto se asigna como el primer valor de la serie. Evaluemos primero los casos extremos de previsión con <span class="math notranslate nohighlight">\(α = 0\)</span> y <span class="math notranslate nohighlight">\(α = 1\)</span></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;SES0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">single_exp_smoothing</span><span class="p">(</span><span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;Close_Price&#39;</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;SES1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">single_exp_smoothing</span><span class="p">(</span><span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;Close_Price&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">axarr</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-
-
-<span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;Close_Price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;SES0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Suavización Exponencial Simple $\alpha=0$&#39;</span><span class="p">);</span>
-
-<span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;Close_Price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;SES1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Suavización Exponencial Simple $\alpha=1$&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/5f089b0dd1301f4083a055bd90e010468d618a604d958c02909b0756f1a9916a.png" src="_images/5f089b0dd1301f4083a055bd90e010468d618a604d958c02909b0756f1a9916a.png" />
-</div>
-</div>
-<ul class="simple">
-<li><p>La figura anterior ilustra que, para <span class="math notranslate nohighlight">\(\alpha=0\)</span>, la predicción es una constante, y para <span class="math notranslate nohighlight">\(\alpha=1\)</span>, la serie pronosticada se desplaza un desfase temporal. El pronóstico de alisamiento único para valores de suavización <span class="math notranslate nohighlight">\(0.2, 0.6, 0.8\)</span> puede evaluarse como sigue</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;SES2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">single_exp_smoothing</span><span class="p">(</span><span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;Close_Price&#39;</span><span class="p">],</span> <span class="mf">0.2</span><span class="p">)</span>
-<span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;SES6&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">single_exp_smoothing</span><span class="p">(</span><span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;Close_Price&#39;</span><span class="p">],</span> <span class="mf">0.6</span><span class="p">)</span>
-<span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;SES8&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">single_exp_smoothing</span><span class="p">(</span><span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;Close_Price&#39;</span><span class="p">],</span> <span class="mf">0.8</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">axarr</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-
-<span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;Close_Price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;SES2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Suavización Exponencial Simple $\alpha=0.2$&#39;</span><span class="p">);</span>
-
-<span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;Close_Price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;SES6&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Suavización Exponencial Simple $\alpha=0.6$&#39;</span><span class="p">);</span>
-
-<span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;Close_Price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-<span class="n">ibm_df</span><span class="p">[</span><span class="s1">&#39;SES8&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-<span class="n">axarr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Suavización Exponencial Simple $\alpha=0.8$&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/2421ed43bdbd46c2cc7dea4aedb6f4df14836f7e48c2b45ae9c0bf6086462e46.png" src="_images/2421ed43bdbd46c2cc7dea4aedb6f4df14836f7e48c2b45ae9c0bf6086462e46.png" />
-</div>
-</div>
-<ul class="simple">
-<li><p>La figura anterior ilustra que <span class="math notranslate nohighlight">\(\alpha\)</span> tiene un gran impacto en la previsión; por lo tanto, obtener el valor correcto de <span class="math notranslate nohighlight">\(\alpha\)</span> es fundamental a la hora de establecer la previsión</p></li>
-</ul>
-<ul class="simple">
-<li><p>La precisión del modelo puede evaluarse en una muestra retenida utilizando funciones objetivo estándar como el <code class="docutils literal notranslate"><span class="pre">error</span> <span class="pre">cuadrático</span> <span class="pre">medio</span> <span class="pre">(ECM)</span></code> o <code class="docutils literal notranslate"><span class="pre">el</span> <span class="pre">error</span> <span class="pre">absoluto</span> <span class="pre">medio</span> <span class="pre">(EAM)</span></code></p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align*}
-\text{MSE}&amp;=\frac{1}{N}\sum_{i=1}^{N}(y_{t}-\tilde{y}_{t})^{2}\\
-\text{MAD}&amp;=\frac{1}{N}\sum_{i=1}^{N}|y_{t}-\tilde{y}_{t}|
-\end{align*}
-\end{split}\]</div>
-<ul class="simple">
-<li><p>Como el suavizado ayuda a reducir la varianza del conjunto de datos, reducirá la varianza de serie pronosticada entre cero y la varianza real del conjunto de datos</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align*}
-\text{Var}(\tilde{y}_{T})&amp;=\text{Var}\left(\alpha\sum_{i=0}^{\infty}(1-\alpha)^{i}y_{T-i}\right)\\
-&amp;=\frac{\alpha}{2-\alpha}\text{Var}(y_{T})
-\end{align*}
-\end{split}\]</div>
-<ul class="simple">
-<li><p>Aquí, <span class="math notranslate nohighlight">\(T\)</span> es la longitud de la serie temporal. Para una varianza unitaria de la serie <span class="math notranslate nohighlight">\(y_{T}\)</span>, la varianza captada por la serie pronosticada variará en función del parámetro de suavización α</p></li>
-</ul>
-</section>
-<section id="id8">
-<h2>Suavización exponencial de segundo orden<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
-<ul>
-<li><p>Si la suavización exponencial de primer orden no entrega la mejor bondad de ajuste, entonces <code class="docutils literal notranslate"><span class="pre">existe</span> <span class="pre">tendencia</span> <span class="pre">en</span> <span class="pre">los</span> <span class="pre">datos</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">serie</span> <span class="pre">temporal</span></code>. La tendencia se observa habitualmente en muchos ámbitos, como cuando en las empresas de comercio electrónico o de marketing existe un <code class="docutils literal notranslate"><span class="pre">aumento</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">ventas</span></code> o cuando cualquier <code class="docutils literal notranslate"><span class="pre">buen</span> <span class="pre">rendimiento</span> <span class="pre">anual</span> <span class="pre">de</span> <span class="pre">una</span> <span class="pre">empresa</span> <span class="pre">tendrá</span> <span class="pre">un</span> <span class="pre">efecto</span> <span class="pre">alcista</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">precio</span> <span class="pre">de</span> <span class="pre">sus</span> <span class="pre">acciones</span></code>. La <code class="docutils literal notranslate"><span class="pre">tendencia</span> <span class="pre">lineal</span></code> puede ocurrir entre el tiempo y la respuesta:</p>
-<div class="math notranslate nohighlight">
-\[
-    y_{t}=\omega_{0}+\omega_{1}t+\varepsilon_{t}
-    \]</div>
-<p>donde, <span class="math notranslate nohighlight">\(\omega\)</span> es el coeficiente que conduce a la tendencia.</p>
-</li>
-<li><p>El <code class="docutils literal notranslate"><span class="pre">suavizado</span> <span class="pre">exponencial</span> <span class="pre">de</span> <span class="pre">segundo</span> <span class="pre">orden</span></code> ayuda a <code class="docutils literal notranslate"><span class="pre">capturar</span> <span class="pre">la</span> <span class="pre">tendencia</span> <span class="pre">en</span> <span class="pre">los</span> <span class="pre">datos</span> <span class="pre">de</span> <span class="pre">serie</span> <span class="pre">temporal</span></code> incluyendo otro término en el suavizado exponencial de primer orden como sigue</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align*}
-F_{t+1}&amp;=\alpha y_{t}+(1-\alpha)(F_{t-1}+T_{t-1})\\
-T_{t+1}&amp;=\beta(F_{t}-F_{t-1})+(1-\beta)T_{t-1}
-\end{align*}
-\end{split}\]</div>
-<ul class="simple">
-<li><p>Aquí <span class="math notranslate nohighlight">\(\alpha\)</span> es el <code class="docutils literal notranslate"><span class="pre">factor</span> <span class="pre">de</span> <span class="pre">suavización</span></code> de los datos y <span class="math notranslate nohighlight">\(\beta\)</span> es el <code class="docutils literal notranslate"><span class="pre">factor</span> <span class="pre">de</span> <span class="pre">suavización</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">tendencia</span></code> con valores en el intervalo <span class="math notranslate nohighlight">\([0, 1]\)</span>. La predicción en el tiempo posterior <span class="math notranslate nohighlight">\(t+1\)</span> puede generarse como sigue</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\hat{y}_{t+1}=F_{t}+T_{t}
-\]</div>
-<ul>
-<li><p>En la <code class="docutils literal notranslate"><span class="pre">suavización</span> <span class="pre">de</span> <span class="pre">segundo</span> <span class="pre">orden</span></code>, el <code class="docutils literal notranslate"><span class="pre">valor</span> <span class="pre">inicial</span> <span class="pre">del</span> <span class="pre">componente</span> <span class="pre">de</span> <span class="pre">tendencia</span></code> puede asignarse de múltiples maneras:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-    \begin{align*}T_{1}&amp;=y_{2}-y_{1}\\
-    T_{1}&amp;=(y_{n}-y_{1})/(n-1)
-    \end{align*}
-    \end{split}\]</div>
-<p>donde, <span class="math notranslate nohighlight">\(n\)</span> es el número de observaciones.</p>
-</li>
-<li><p>Estudiemos un ejemplo donde usemos <code class="docutils literal notranslate"><span class="pre">suavización</span> <span class="pre">de</span> <span class="pre">segundo</span> <span class="pre">orden</span></code>. Utilizaremos datos de <code class="docutils literal notranslate"><span class="pre">producción</span> <span class="pre">de</span> <span class="pre">cerveza</span></code> estudiados anteriormente</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beer_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/quarterly-beer-production-in-aus-March 1956-June 1994.csv&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensión del dataframe:&#39;</span><span class="p">,</span> <span class="n">beer_df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-
-<span class="n">beer_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Quarterly beer production in Australia: megalitres. March 1956 ? June 1994&#39;</span><span class="p">:</span><span class="s1">&#39;Beer_Prod&#39;</span><span class="p">},</span>
-               <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    
-<span class="n">missing</span> <span class="o">=</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;Quarter&#39;</span><span class="p">]))</span> <span class="o">|</span> <span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;Beer_Prod&#39;</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Número de filas con al menos un valor igual a cero:&#39;</span><span class="p">,</span> <span class="n">missing</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
-<span class="n">beer_df</span> <span class="o">=</span> <span class="n">beer_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">missing</span><span class="p">,</span> <span class="p">:]</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensiones después de eliminar los valores perdidos:&#39;</span><span class="p">,</span> <span class="n">beer_df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">beer_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dimensión del dataframe: (154, 2)
-Número de filas con al menos un valor igual a cero: 0
-Dimensiones después de eliminar los valores perdidos: (154, 2)
-</pre></div>
-</div>
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Quarter</th>
-      <th>Beer_Prod</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1956Q1</td>
-      <td>284.4</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>1956Q2</td>
-      <td>212.8</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1956Q3</td>
-      <td>226.9</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>1956Q4</td>
-      <td>308.4</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1957Q1</td>
-      <td>262.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<ul class="simple">
-<li><p>Creamos la función para el <code class="docutils literal notranslate"><span class="pre">suavizado</span> <span class="pre">exponencial</span> <span class="pre">doble</span></code></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">double_exp_smoothing</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">):</span>
-    <span class="n">yhat</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="c1"># first value is same as series</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
-        <span class="k">if</span> <span class="n">t</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
-            <span class="n">F</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">F_n_1</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="n">F</span><span class="p">,</span> <span class="n">alpha</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">F</span><span class="o">+</span><span class="n">T</span><span class="p">)</span>
-        <span class="n">T</span><span class="o">=</span><span class="n">beta</span><span class="o">*</span><span class="p">(</span><span class="n">F</span><span class="o">-</span><span class="n">F_n_1</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">beta</span><span class="p">)</span><span class="o">*</span><span class="n">T</span>
-        <span class="n">yhat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">F</span><span class="o">+</span><span class="n">T</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">yhat</span>
-</pre></div>
-</div>
-</div>
-</div>
-<ul class="simple">
-<li><p>La función anterior toma como entrada la serie temporal <code class="docutils literal notranslate"><span class="pre">x</span></code> con <code class="docutils literal notranslate"><span class="pre">alpha</span></code> y <code class="docutils literal notranslate"><span class="pre">beta</span></code>. La implementación anterior utiliza la <code class="docutils literal notranslate"><span class="pre">diferencia</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">dos</span> <span class="pre">primeras</span> <span class="pre">ocurrencias</span> <span class="pre">para</span> <span class="pre">establecer</span> <span class="pre">el</span> <span class="pre">valor</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">tendencia</span> <span class="pre">inicial</span></code>. Vamos a evaluar el rendimiento en los casos límite, es decir, <code class="docutils literal notranslate"><span class="pre">(alpha,</span> <span class="pre">beta)</span></code><span class="math notranslate nohighlight">\(\in\{(0, 0), (0, 1), (1, 0), (1, 1)\}\)</span>.</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;DEF00&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">double_exp_smoothing</span><span class="p">(</span><span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;Beer_Prod&#39;</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;DEF01&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">double_exp_smoothing</span><span class="p">(</span><span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;Beer_Prod&#39;</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;DEF10&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">double_exp_smoothing</span><span class="p">(</span><span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;Beer_Prod&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;DEF11&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">double_exp_smoothing</span><span class="p">(</span><span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;Beer_Prod&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">axarr</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-
-<span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;Beer_Prod&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;DEF00&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Suavización Exponencial Doble $\alpha=0,\,\beta=0$&#39;</span><span class="p">)</span>
-
-<span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;Beer_Prod&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;DEF01&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Suavización Exponencial Doble $\alpha=0,\,\beta=1$&#39;</span><span class="p">)</span>
-
-<span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;Beer_Prod&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;DEF10&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Suavización Exponencial Doble $\alpha=1,\,\beta=0$&#39;</span><span class="p">);</span>
-
-<span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;Beer_Prod&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;DEF11&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Suavización Exponencial Doble $\alpha=1,\,\beta=1$&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/538771782d9e321479b0949ab01a54c02cf9ff4a58dbbff6189b572e2f2faff5.png" src="_images/538771782d9e321479b0949ab01a54c02cf9ff4a58dbbff6189b572e2f2faff5.png" />
-</div>
-</div>
-<ul class="simple">
-<li><p>Cuando <code class="docutils literal notranslate"><span class="pre">alpha=0</span></code>, los <code class="docutils literal notranslate"><span class="pre">valores</span> <span class="pre">iniciales</span> <span class="pre">permanecen</span> <span class="pre">constantes</span></code>; por lo tanto, <code class="docutils literal notranslate"><span class="pre">el</span> <span class="pre">parámetro</span> <span class="pre">de</span> <span class="pre">tendencia</span> <span class="pre">no</span> <span class="pre">desempeña</span> <span class="pre">ningún</span> <span class="pre">papel</span></code>. Sin embargo, cuando <code class="docutils literal notranslate"><span class="pre">alpha</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">y</span> <span class="pre">beta</span> <span class="pre">=</span> <span class="pre">0</span></code>, la <code class="docutils literal notranslate"><span class="pre">suavización</span> <span class="pre">exponencial</span> <span class="pre">de</span> <span class="pre">segundo</span> <span class="pre">orden</span></code> puede escribirse de la siguiente manera</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align*}
-F_{t}&amp;=y_{t-1}\\
-T_{t}&amp;=T_{t-1}\\
-\hat{y}_{t}&amp;=y_{t-1}+T_{t-1}
-\end{align*}
-\end{split}\]</div>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">La</span> <span class="pre">predicción</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">tiempo</span></code> <span class="math notranslate nohighlight">\(t\)</span> <code class="docutils literal notranslate"><span class="pre">depende</span> <span class="pre">del</span> <span class="pre">valor</span> <span class="pre">anterior</span> <span class="pre">y</span> <span class="pre">de</span> <span class="pre">los</span> <span class="pre">componentes</span> <span class="pre">de</span> <span class="pre">tendencia</span></code>. Como <code class="docutils literal notranslate"><span class="pre">beta</span> <span class="pre">se</span> <span class="pre">fija</span> <span class="pre">en</span> <span class="pre">cero</span></code>, el componente de tendencia en <span class="math notranslate nohighlight">\(t-1\)</span> dependerá de <span class="math notranslate nohighlight">\(t-2\)</span>, el de <span class="math notranslate nohighlight">\(t-2\)</span> de <span class="math notranslate nohighlight">\(t-3\)</span> y así sucesivamente</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-T_{t}=T_{t-1}=T_{t-2}=T_{t-3}=\cdots=T_{0}
-\]</div>
-<ul class="simple">
-<li><p>Así, <code class="docutils literal notranslate"><span class="pre">el</span> <span class="pre">valor</span> <span class="pre">del</span> <span class="pre">componente</span> <span class="pre">de</span> <span class="pre">tendencia</span> <span class="pre">depende</span> <span class="pre">del</span> <span class="pre">valor</span> <span class="pre">inicial</span> <span class="pre">asignado</span> <span class="pre">y</span> <span class="pre">es</span> <span class="pre">una</span> <span class="pre">constante</span></code>. Del mismo modo, para <code class="docutils literal notranslate"><span class="pre">alpha</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">y</span> <span class="pre">beta</span> <span class="pre">=</span> <span class="pre">1</span></code>, la <code class="docutils literal notranslate"><span class="pre">suavización</span> <span class="pre">exponencial</span> <span class="pre">de</span> <span class="pre">segundo</span> <span class="pre">orden</span></code> puede simplificarse como sigue</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align*}
-F_{t}&amp;=y_{t-1}\\
-T_{t}&amp;=(F_{t-1}-F_{t-2})=y_{t-2}-y_{t-3}\\
-\hat{y}_{t}&amp;=y_{t-1}+(y_{t-2}-y_{t-3})
-\end{align*}
-\end{split}\]</div>
-<ul class="simple">
-<li><p>Con <code class="docutils literal notranslate"><span class="pre">alpha</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">y</span> <span class="pre">beta</span> <span class="pre">=</span> <span class="pre">1</span></code>, la diferencia de las observaciones en los tiempos <span class="math notranslate nohighlight">\(t-2\)</span> y <span class="math notranslate nohighlight">\(t-3\)</span> se añaden al valor de predicción en el tiempo <span class="math notranslate nohighlight">\(t\)</span> en comparación con la configuración de <code class="docutils literal notranslate"><span class="pre">alpha</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">y</span> <span class="pre">beta</span> <span class="pre">=</span> <span class="pre">0</span></code>, que da el desplazamiento a la predicción y <code class="docutils literal notranslate"><span class="pre">se</span> <span class="pre">acerca</span> <span class="pre">más</span> <span class="pre">a</span> <span class="pre">la</span> <span class="pre">previsión</span> <span class="pre">real</span></code></p></li>
-<li><p>Realizamos a continuación un <code class="docutils literal notranslate"><span class="pre">suavizado</span> <span class="pre">exponencial</span> <span class="pre">doble</span></code> con los datos de producción de cerveza <code class="docutils literal notranslate"><span class="pre">utilizando</span> <span class="pre">valores</span> <span class="pre">intermedios</span> <span class="pre">de</span> <span class="pre">alpha</span> <span class="pre">y</span> <span class="pre">beta</span></code> de la siguiente manera</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;DEF&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">double_exp_smoothing</span><span class="p">(</span><span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;Beer_Prod&#39;</span><span class="p">],</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">)</span>
-<span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;Single_Exponential_Forecast&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">single_exp_smoothing</span><span class="p">(</span><span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;Beer_Prod&#39;</span><span class="p">],</span> <span class="mf">0.4</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;Beer_Prod&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Beer Prod.&#39;</span><span class="p">)</span>
-<span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;DEF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;DES $\alpha=0.4,\,\beta=0.7$&#39;</span><span class="p">)</span>
-<span class="n">beer_df</span><span class="p">[</span><span class="s1">&#39;Single_Exponential_Forecast&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-.&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;SES $\alpha=0.4$&#39;</span><span class="p">)</span>
-<span class="n">leg</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/286df335146cfde4f7298ee4231e0eb9ee3c08a23ac7b82f3bc36e9effe1a1c1.png" src="_images/286df335146cfde4f7298ee4231e0eb9ee3c08a23ac7b82f3bc36e9effe1a1c1.png" />
-</div>
-</div>
-<ul class="simple">
-<li><p>La figura anterior muestra que <code class="docutils literal notranslate"><span class="pre">el</span> <span class="pre">suavizado</span> <span class="pre">exponencial</span> <span class="pre">doble</span> <span class="pre">es</span> <span class="pre">capaz</span> <span class="pre">de</span> <span class="pre">capturar</span> <span class="pre">mejor</span> <span class="pre">la</span> <span class="pre">variación</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">señal</span> <span class="pre">real</span> <span class="pre">para</span> <span class="pre">el</span> <span class="pre">conjunto</span> <span class="pre">de</span> <span class="pre">datos</span> <span class="pre">actual</span> <span class="pre">en</span> <span class="pre">comparación</span> <span class="pre">con</span> <span class="pre">el</span> <span class="pre">suavizado</span> <span class="pre">exponencial</span> <span class="pre">simple</span></code>. Sin embargo, en los escenarios en los que el componente de tendencia tienden a cero, el rendimiento del suavizado exponencial simple y doble es comparable.</p></li>
-</ul>
-</section>
-<section id="suavizacion-exponencial-de-orden-superior">
-<h2>Suavización exponencial de orden superior<a class="headerlink" href="#suavizacion-exponencial-de-orden-superior" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>El concepto puede extenderse a la <code class="docutils literal notranslate"><span class="pre">suavización</span> <span class="pre">exponencial</span> <span class="pre">de</span> <span class="pre">orden</span> <span class="pre">superior</span></code> con un modelo polinómico de <span class="math notranslate nohighlight">\(n^{\text{th}}\)</span> orden</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-y_{t}=\alpha_{0}+\alpha_{1}t+\frac{\alpha_{2}}{2!}t^{2}+\cdots+\frac{\alpha_{n}}{n!}t^{n}+\varepsilon_{t}
-\]</div>
-<ul class="simple">
-<li><p>Aquí, el error <span class="math notranslate nohighlight">\(\varepsilon_{t}\sim N(0,\sigma^{2})\)</span> se distribuye normalmente con media <span class="math notranslate nohighlight">\(0\)</span> y varianza <span class="math notranslate nohighlight">\(\sigma^{2}\)</span>. Los suavizadores exponenciales utilizados para el orden superior son los siguientes</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align*}
-\tilde{x}_{t}^{(1)}&amp;=k y_{t}+(1-k)\tilde{x}_{t-1}^{(1)}\\
-\tilde{x}_{t}^{(2)}&amp;=k \tilde{x}_{t}^{(1)}+(1-k)\tilde{x}_{t-1}^{(2)}\\
-&amp;\vdots\\
-\tilde{x}_{t}^{(n)}&amp;=k \tilde{x}_{t}^{(n-1)}+(1-k)\tilde{x}_{t-1}^{(n)}
-\end{align*}
-\end{split}\]</div>
-<ul class="simple">
-<li><p>En este caso, se trata de pesos para los suavizadores. <code class="docutils literal notranslate"><span class="pre">Normalmente,</span> <span class="pre">la</span> <span class="pre">suavización</span> <span class="pre">exponencial</span> <span class="pre">de</span> <span class="pre">orden</span> <span class="pre">superior</span> <span class="pre">no</span> <span class="pre">se</span> <span class="pre">utiliza,</span> <span class="pre">el</span> <span class="pre">cálculo</span> <span class="pre">es</span> <span class="pre">muy</span> <span class="pre">difícil</span></code>, mas bien, se utilizan modelos <code class="docutils literal notranslate"><span class="pre">Autorregrsivos</span> <span class="pre">Integrados</span> <span class="pre">de</span> <span class="pre">Media</span> <span class="pre">Movil(ARIMA)</span></code> los cuales se tratarán con más detalle en la siguiente sección.</p></li>
-</ul>
-<ul class="simple">
-<li><p>Otro suavizado exponencial muy popular es el <code class="docutils literal notranslate"><span class="pre">suavizado</span> <span class="pre">exponencial</span> <span class="pre">triple</span>&#160; <span class="pre">(Holt</span> <span class="pre">Winters)</span></code>. El <code class="docutils literal notranslate"><span class="pre">suavizado</span> <span class="pre">exponencial</span> <span class="pre">triple</span></code> permite capturar la <code class="docutils literal notranslate"><span class="pre">estacionalidad</span> <span class="pre">con</span> <span class="pre">el</span> <span class="pre">nivel</span> <span class="pre">(valor</span> <span class="pre">suavizado</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">parte</span> <span class="pre">constante</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">tiempo)</span> <span class="pre">y</span> <span class="pre">la</span> <span class="pre">tendencia</span></code>. La relación entre: <code class="docutils literal notranslate"><span class="pre">niveles,</span> <span class="pre">tendencias</span> <span class="pre">y</span> <span class="pre">la</span> <span class="pre">estacionalidad</span></code> se define mediante el siguiente conjunto de ecuaciones</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\begin{align*}
-F_{t}&amp;=\alpha(y_{t}-S_{t-L})+(1-\alpha)(F_{t-1}+T_{t-1})
-\end{align*}
-\]</div>
-<ul class="simple">
-<li><p>En estas ecuaciones, <span class="math notranslate nohighlight">\(F_{t}\)</span> <code class="docutils literal notranslate"><span class="pre">capta</span> <span class="pre">los</span> <span class="pre">niveles</span> <span class="pre">de</span> <span class="pre">observación</span> </code> en el momento <span class="math notranslate nohighlight">\(t\)</span>. Asimismo, <span class="math notranslate nohighlight">\(T_{t}\)</span> y <span class="math notranslate nohighlight">\(S_{t}\)</span> capturan <code class="docutils literal notranslate"><span class="pre">tendencia</span> <span class="pre">y</span> <span class="pre">estacionalidad</span></code> en el tiempo <span class="math notranslate nohighlight">\(t\)</span>. Los coeficientes <span class="math notranslate nohighlight">\(\alpha, \beta\)</span> <code class="docutils literal notranslate"><span class="pre">representan:</span> <span class="pre">factor</span> <span class="pre">de</span> <span class="pre">suavización</span> <span class="pre">de</span> <span class="pre">los</span> <span class="pre">datos,</span> <span class="pre">factor</span> <span class="pre">de</span> <span class="pre">suavización</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">tendencia</span> <span class="pre">y</span> <span class="pre">factor</span> <span class="pre">de</span> <span class="pre">suavización</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">estacionalidad</span></code>, respectivamente con valores en el intervalo <span class="math notranslate nohighlight">\([0,1]\)</span>. Estas ecuaciones pueden utilizarse para pronosticar el siguiente período de tiempo de la siguiente manera</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{align*}
-T_{t}&amp;=\beta(F_{t}-F_{t-1})+(1-\beta)T_{t-1}\\
-S_{t}&amp;=\gamma(y_{t}-F_{t})+(1-\gamma)S_{t-C}
-\end{align*}
-\end{split}\]</div>
-<ul class="simple">
-<li><p>El término <span class="math notranslate nohighlight">\(F_{t}\)</span> <code class="docutils literal notranslate"><span class="pre">recoge</span> <span class="pre">el</span> <span class="pre">desfase</span> <span class="pre">de</span> <span class="pre">los</span> <span class="pre">componentes</span> <span class="pre">estacionales</span> <span class="pre">con</span> <span class="pre">respecto</span> <span class="pre">a</span> <span class="pre">la</span> <span class="pre">última</span> <span class="pre">tendencia</span> <span class="pre">estacional</span> <span class="pre">observada</span></code>. Usemos <code class="docutils literal notranslate"><span class="pre">suavización</span> <span class="pre">exponencial</span> <span class="pre">triple</span> <span class="pre">para</span> <span class="pre">los</span> <span class="pre">datos</span> <span class="pre">de</span> <span class="pre">empleo</span> <span class="pre">de</span> <span class="pre">Wisconsin</span></code></p></li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_absolute_error</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tools.sm_exceptions</span> <span class="kn">import</span> <span class="n">ConvergenceWarning</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">ConvergenceWarning</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.holtwinters</span> <span class="kn">import</span> <span class="n">ExponentialSmoothing</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.holtwinters</span> <span class="kn">import</span> <span class="n">SimpleExpSmoothing</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.seasonal</span> <span class="kn">import</span> <span class="n">seasonal_decompose</span>
+<span class="kn">import</span> <span class="nn">statsmodels.tsa.api</span> <span class="k">as</span> <span class="nn">smt</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wisc_emp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/wisconsin-employment-time-series.csv&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of the DataFrame:&#39;</span><span class="p">,</span> <span class="n">wisc_emp</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">wisc_emp</span><span class="o">.</span><span class="n">head</span><span class="p">();</span>
-<span class="n">wisc_emp</span><span class="o">.</span><span class="n">plot</span><span class="p">();</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">co2</span><span class="o">.</span><span class="n">load_pandas</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">data</span>
+<span class="n">y</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of the DataFrame: (178, 2)
-</pre></div>
-</div>
-<img alt="_images/24c091fc1e61df65e335539a6e020cbb0e7859126f38c85a874da4e43374106f.png" src="_images/24c091fc1e61df65e335539a6e020cbb0e7859126f38c85a874da4e43374106f.png" />
-</div>
-</div>
-<ul class="simple">
-<li><p>La figura anterior muestra el conjunto de datos de series temporales, <code class="docutils literal notranslate"><span class="pre">Employment</span></code> de <code class="docutils literal notranslate"><span class="pre">Wisconsin</span></code>. El conjunto de datos consta de <code class="docutils literal notranslate"><span class="pre">tendencia</span> <span class="pre">anual</span> <span class="pre">y</span> <span class="pre">estacionalidad</span> <span class="pre">mensual</span></code>. Dado que el patrón de estacionalidad de los datos es conocido, la información sobre la estacionalidad puede utilizarse para <code class="docutils literal notranslate"><span class="pre">derivar</span> <span class="pre">el</span> <span class="pre">valor</span> <span class="pre">inicial</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">tendencia</span> <span class="pre">como</span> <span class="pre">el</span> <span class="pre">valor</span> <span class="pre">medio</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">estaciones</span></code> utilizando la siguiente ecuación</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-T_{0}=\frac{1}{C}\left(\frac{y_{C+1}-y_{1}}{C}+\frac{y_{C+2}-y_{2}}{C}+\frac{y_{C+3}-y_{3}}{C}+\cdots\right)
-\]</div>
-<ul class="simple">
-<li><p>La ecuación anterior puede implementarse en <code class="docutils literal notranslate"><span class="pre">Python</span></code> como sigue:</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initialize_T</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">seasonLength</span><span class="p">):</span>
-    <span class="n">total</span><span class="o">=</span><span class="mf">0.0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">seasonLength</span><span class="p">):</span>
-        <span class="n">total</span><span class="o">+=</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">seasonLength</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="n">seasonLength</span>
-    <span class="k">return</span> <span class="n">total</span>
-</pre></div>
-</div>
-</div>
-</div>
-<ul class="simple">
-<li><p>Por ejemplo, el valor de <code class="docutils literal notranslate"><span class="pre">tendencia</span> <span class="pre">inicial</span></code> generado por la función anterior es <span class="math notranslate nohighlight">\(1.69\)</span> utilizando el script <code class="docutils literal notranslate"><span class="pre">initialize_T()</span></code></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">initialize_T</span><span class="p">(</span><span class="n">wisc_emp</span><span class="p">[</span><span class="s1">&#39;Employment&#39;</span><span class="p">],</span> <span class="mi">12</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6916666666666653
-</pre></div>
-</div>
-</div>
-</div>
-<ul class="simple">
-<li><p>La <code class="docutils literal notranslate"><span class="pre">estacionalidad</span> <span class="pre">inicial</span></code> es de suma importancia y se puede calcular con la siguiente función. Los valores iniciales de las estaciones se calculan como valor medio de la respuesta <span class="math notranslate nohighlight">\(x\)</span></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initialize_seasonalilty</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">seasonLength</span><span class="p">):</span>
-    <span class="n">seasons</span><span class="o">=</span><span class="p">{}</span>
-    <span class="n">seasonsMean</span><span class="o">=</span><span class="p">[]</span>
-    <span class="n">num_season</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">seasonLength</span><span class="p">)</span>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_season</span><span class="p">):</span>
-        <span class="n">seasonsMean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">seasonLength</span><span class="o">*</span><span class="n">i</span><span class="p">:</span><span class="n">seasonLength</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="n">seasonLength</span><span class="p">])</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">seasonLength</span><span class="p">))</span>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>co2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1958-03-29</th>
+      <td>316.1</td>
+    </tr>
+    <tr>
+      <th>1958-04-05</th>
+      <td>317.3</td>
+    </tr>
+    <tr>
+      <th>1958-04-12</th>
+      <td>317.6</td>
+    </tr>
+    <tr>
+      <th>1958-04-19</th>
+      <td>317.5</td>
+    </tr>
+    <tr>
+      <th>1958-04-26</th>
+      <td>316.4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="s1">&#39;co2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;MS&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">y</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1958-03-01    316.100000
+1958-04-01    317.200000
+1958-05-01    317.433333
+1958-06-01           NaN
+1958-07-01    315.625000
+Freq: MS, Name: co2, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">bfill</span><span class="p">())</span>
+<span class="n">y</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Monthly CO2 concentrations&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;CO2 concentratition&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8517a0b08a4e6bb14d1f05e807defd45be3ceb8fd8d81c8627e7d12b35e7a269.png" src="_images/8517a0b08a4e6bb14d1f05e807defd45be3ceb8fd8d81c8627e7d12b35e7a269.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train: 478 Months and Test: 48 Months</span>
+<span class="n">h_test</span> <span class="o">=</span> <span class="mi">48</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="o">-</span><span class="n">h_test</span><span class="p">]</span>
+<span class="n">test</span>  <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="n">h_test</span><span class="p">:]</span>
+<span class="nb">print</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(478, 48)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+  <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+  <span class="n">train</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Train&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">, MAE: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">mae</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">test</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">)</span>
+  <span class="n">y_pred</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Prediction&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="single-exponential-smoothing">
+<h3>Single Exponential Smoothing<a class="headerlink" href="#single-exponential-smoothing" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ses_optimizer</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+
+    <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">:</span>
+        <span class="n">ses_model</span> <span class="o">=</span> <span class="n">SimpleExpSmoothing</span><span class="p">(</span><span class="n">train</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">optimized</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">ses_model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+        <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mae</span> <span class="o">&lt;</span> <span class="n">best_mae</span><span class="p">:</span>
+            <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">mae</span>
+
+    <span class="k">return</span> <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_mae</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ses_model_tuning</span><span class="p">(</span><span class="n">train</span> <span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Model Tuning - Single Exponential Smoothing&quot;</span><span class="p">):</span>
     
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">seasonLength</span><span class="p">):</span>
-        <span class="n">tot</span><span class="o">=</span><span class="mf">0.0</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_season</span><span class="p">):</span>
-            <span class="n">tot</span><span class="o">+=</span><span class="n">x</span><span class="p">[</span><span class="n">seasonLength</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">seasonsMean</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-        <span class="n">seasons</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">tot</span><span class="o">/</span><span class="n">num_season</span>
-    <span class="k">return</span> <span class="n">seasons</span>
+  <span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+  <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="n">ses_optimizer</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">)</span>
+  <span class="n">final_model</span> <span class="o">=</span> <span class="n">SimpleExpSmoothing</span><span class="p">(</span><span class="n">train</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="n">best_alpha</span><span class="p">,</span> <span class="n">optimized</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+  <span class="n">y_pred</span> <span class="o">=</span> <span class="n">final_model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+  <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+  <span class="n">plot_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">initialize_seasonalilty</span><span class="p">(</span><span class="n">wisc_emp</span><span class="p">[</span><span class="s1">&#39;Employment&#39;</span><span class="p">],</span> <span class="mi">12</span><span class="p">)</span>   
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ses_model_tuning</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">48</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: -11.325000000000015,
- 1: -14.48214285714287,
- 2: -12.667857142857159,
- 3: -6.403571428571445,
- 4: -1.603571428571444,
- 5: 1.5535714285714164,
- 6: 1.0821428571428413,
- 7: 2.22499999999998,
- 8: 3.539285714285705,
- 9: 6.89642857142856,
- 10: 11.774999999999986,
- 11: 19.410714285714267}
-</pre></div>
+<img alt="_images/2304cd1e30eed29a7b3918d8cfe840f040b648d939f28a7a08ca5bfaa77ec3a6.png" src="_images/2304cd1e30eed29a7b3918d8cfe840f040b648d939f28a7a08ca5bfaa77ec3a6.png" />
 </div>
 </div>
-</div>
-<ul class="simple">
-<li><p>Una vez obtenidos los valores, estamos listos para establecer la predicción utilizando <code class="docutils literal notranslate"><span class="pre">suavización</span> <span class="pre">exponencial</span> <span class="pre">triple</span></code></p></li>
-</ul>
+</section>
+<section id="double-exponential-smoothing">
+<h3>Double Exponential Smoothing<a class="headerlink" href="#double-exponential-smoothing" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">triple_exp_smoothing</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">seasonLength</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
-    <span class="n">yhat</span><span class="o">=</span><span class="p">[]</span>
-    <span class="n">S</span> <span class="o">=</span> <span class="n">initialize_seasonalilty</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">seasonLength</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="n">h</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">F</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">T</span> <span class="o">=</span> <span class="n">initialize_T</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">seasonLength</span><span class="p">)</span>
-            <span class="n">yhat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="k">continue</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-            <span class="n">m</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-            <span class="n">yhat</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">F</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="o">%</span><span class="k">seasonLength</span>])
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">obsval</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="n">F_last</span><span class="p">,</span> <span class="n">F</span><span class="o">=</span> <span class="n">F</span><span class="p">,</span> <span class="n">alpha</span><span class="o">*</span><span class="p">(</span><span class="n">obsval</span><span class="o">-</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="o">%</span><span class="k">seasonLength</span>]) + (1-alpha)*(F+T)
-            <span class="n">T</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">*</span> <span class="p">(</span><span class="n">F</span><span class="o">-</span><span class="n">F_last</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">beta</span><span class="p">)</span><span class="o">*</span><span class="n">T</span>
-            <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="o">%</span><span class="k">seasonLength</span>] = gamma*(obsval-F) + (1-gamma)*S[i%seasonLength]
-            <span class="n">yhat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">F</span><span class="o">+</span><span class="n">T</span><span class="o">+</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="o">%</span><span class="k">seasonLength</span>])
-    <span class="k">return</span> <span class="n">yhat</span>
-</pre></div>
-</div>
-</div>
-</div>
-<ul class="simple">
-<li><p>La <code class="docutils literal notranslate"><span class="pre">suavización</span> <span class="pre">exponencial</span> <span class="pre">triple</span></code> está controlada por <code class="docutils literal notranslate"><span class="pre">alpha,</span> <span class="pre">beta</span> <span class="pre">y</span> <span class="pre">gamma</span></code>. La presencia o ausencia de cualquier escenario tendrá un efecto drástico en el resultado. Hagamos una comparación empírica para diferentes escenarios extremos. Vamos a <code class="docutils literal notranslate"><span class="pre">ejecutar</span> <span class="pre">el</span> <span class="pre">suavizado</span> <span class="pre">exponencial</span> <span class="pre">con</span> <span class="pre">parámetros</span> <span class="pre">intermedios</span></code>, como se muestra en la siguiente figura</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wisc_emp</span><span class="p">[</span><span class="s1">&#39;TES&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">triple_exp_smoothing</span><span class="p">(</span><span class="n">wisc_emp</span><span class="p">[</span><span class="s1">&#39;Employment&#39;</span><span class="p">],</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">des_base_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">trend</span><span class="p">,</span> <span class="n">smoothing_level</span><span class="p">,</span> <span class="n">smoothing_trend</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Double Exponential Smoothing&quot;</span><span class="p">):</span>
+    
+    <span class="n">des_model</span> <span class="o">=</span> <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="n">smoothing_level</span><span class="p">,</span> <span class="n">smoothing_slope</span><span class="o">=</span><span class="n">smoothing_trend</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">des_model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">plot_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">des_base_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">smoothing_level</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">smoothing_trend</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">48</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/634c9008b4e1ba6b8054c5f883fc95ee8d0cbf58a83840f3b710f928c61af3bb.png" src="_images/634c9008b4e1ba6b8054c5f883fc95ee8d0cbf58a83840f3b710f928c61af3bb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">des_optimizer</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span> <span class="n">trend</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
 
-<span class="n">wisc_emp</span><span class="p">[</span><span class="s1">&#39;Employment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Employment&#39;</span><span class="p">)</span>
-<span class="n">wisc_emp</span><span class="p">[</span><span class="s1">&#39;TES&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> 
-                     <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;TES: $L=12,\,\alpha=0.4,\,\beta=0.6,\,\gamma=0.2,\,h=0$&#39;</span><span class="p">)</span>
-<span class="n">leg</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/3897c24da051185b51cf757f32954c889ef5a471182237452b42f8b57bd34fd3.png" src="_images/3897c24da051185b51cf757f32954c889ef5a471182237452b42f8b57bd34fd3.png" />
-</div>
-</div>
-<ul class="simple">
-<li><p>Si comparamos este ajuste con las <code class="docutils literal notranslate"><span class="pre">suavizaciones</span> <span class="pre">de</span> <span class="pre">primer</span> <span class="pre">y</span> <span class="pre">segundo</span> <span class="pre">orden</span> <span class="pre">obtenemos</span></code></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wisc_emp</span><span class="p">[</span><span class="s1">&#39;DES&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">double_exp_smoothing</span><span class="p">(</span><span class="n">wisc_emp</span><span class="p">[</span><span class="s1">&#39;Employment&#39;</span><span class="p">],</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
-<span class="n">wisc_emp</span><span class="p">[</span><span class="s1">&#39;SES&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">single_exp_smoothing</span><span class="p">(</span><span class="n">wisc_emp</span><span class="p">[</span><span class="s1">&#39;Employment&#39;</span><span class="p">],</span> <span class="mf">0.4</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">()</span>
+    <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
 
-<span class="n">wisc_emp</span><span class="p">[</span><span class="s1">&#39;Employment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Employment&#39;</span><span class="p">)</span>
-<span class="n">wisc_emp</span><span class="p">[</span><span class="s1">&#39;TES&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> 
-                     <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;TES: $L=12,\,\alpha=0.4,\,\beta=0.6,\,\gamma=0.2,\,h=0$&#39;</span><span class="p">)</span>
-<span class="n">wisc_emp</span><span class="p">[</span><span class="s1">&#39;DES&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;DES: $\alpha=0.4,\,\beta=0.6$&#39;</span><span class="p">)</span>
-<span class="n">wisc_emp</span><span class="p">[</span><span class="s1">&#39;SES&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">45</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;SES: $\alpha=0.4$&#39;</span><span class="p">)</span>
-<span class="n">leg</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+    <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">beta</span> <span class="ow">in</span> <span class="n">betas</span><span class="p">:</span>
+            <span class="n">des_model</span> <span class="o">=</span> <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">smoothing_slope</span><span class="o">=</span><span class="n">beta</span><span class="p">)</span>
+            <span class="n">y_pred</span> <span class="o">=</span> <span class="n">des_model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+            <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mae</span> <span class="o">&lt;</span> <span class="n">best_mae</span><span class="p">:</span>
+                <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">mae</span>
+
+    <span class="k">return</span> <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_mae</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">des_model_tuning</span><span class="p">(</span><span class="n">train</span> <span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">trend</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Model Tuning - Double Exponential Smoothing&quot;</span><span class="p">):</span>
+    
+    <span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span>
+    <span class="n">betas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span>
+    <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="n">des_optimizer</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">)</span>
+    <span class="n">final_model</span> <span class="o">=</span> <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="n">best_alpha</span><span class="p">,</span> <span class="n">smoothing_slope</span><span class="o">=</span><span class="n">best_beta</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">final_model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">plot_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">des_model_tuning</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/64b802a1ce67a161a6e8762a1810a510957604e50bbf9cf16759d0a1d23f5d57.png" src="_images/64b802a1ce67a161a6e8762a1810a510957604e50bbf9cf16759d0a1d23f5d57.png" />
+<img alt="_images/d661e6f49b1aa5ac042f3a37089e675e40b590ec99888ba202caedcebcc11277.png" src="_images/d661e6f49b1aa5ac042f3a37089e675e40b590ec99888ba202caedcebcc11277.png" />
 </div>
 </div>
-<ul class="simple">
-<li><p>Según los estudios numéricos, el nivel único que utiliza el suavizado o la estacionalidad es capaz de capturar tendencia en los datos; por tanto, todos los modelos funcionaron bien, ya que <code class="docutils literal notranslate"><span class="pre">el</span> <span class="pre">suavizado</span> <span class="pre">exponencial</span> <span class="pre">simple</span> <span class="pre">y</span> <span class="pre">el</span> <span class="pre">doble</span> <span class="pre">fueron</span> <span class="pre">capaces</span> <span class="pre">de</span> <span class="pre">utilizar</span> <span class="pre">el</span> <span class="pre">factor</span> <span class="pre">de</span> <span class="pre">suavización</span> <span class="pre">para</span> <span class="pre">hacer</span> <span class="pre">las</span> <span class="pre">predicciones</span></code> y la <code class="docutils literal notranslate"><span class="pre">suavización</span> <span class="pre">exponencial</span> <span class="pre">triple</span> <span class="pre">es</span> <span class="pre">capaz</span> <span class="pre">de</span> <span class="pre">capturas</span> <span class="pre">las</span> <span class="pre">predicciones</span> <span class="pre">utilizando</span> <span class="pre">los</span> <span class="pre">factores</span> <span class="pre">de</span> <span class="pre">suavización</span> <span class="pre">o</span> <span class="pre">estacionalidad</span></code>.</p></li>
-</ul>
+</section>
+<section id="triple-exponential-smoothing">
+<h3>Triple Exponential Smoothing<a class="headerlink" href="#triple-exponential-smoothing" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tes_optimizer</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">abg</span><span class="p">,</span> <span class="n">trend</span><span class="p">,</span> <span class="n">seasonal</span><span class="p">,</span>  <span class="n">seasonal_periods</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+    <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">comb</span> <span class="ow">in</span> <span class="n">abg</span><span class="p">:</span>
+        <span class="n">tes_model</span> <span class="o">=</span> <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">,</span> <span class="n">seasonal</span><span class="o">=</span><span class="n">seasonal</span><span class="p">,</span> <span class="n">seasonal_periods</span><span class="o">=</span><span class="n">seasonal_periods</span><span class="p">)</span><span class="o">.</span>\
+            <span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="n">comb</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">smoothing_slope</span><span class="o">=</span><span class="n">comb</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">smoothing_seasonal</span><span class="o">=</span><span class="n">comb</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">tes_model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+        <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mae</span> <span class="o">&lt;</span> <span class="n">best_mae</span><span class="p">:</span>
+            <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="n">comb</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">comb</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">comb</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">mae</span>
+
+    <span class="k">return</span> <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">best_mae</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tes_model_tuning</span><span class="p">(</span><span class="n">train</span> <span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">trend</span><span class="p">,</span> <span class="n">seasonal</span><span class="p">,</span> <span class="n">seasonal_periods</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Model Tuning - Triple Exponential Smoothing&quot;</span><span class="p">):</span>
+  <span class="n">alphas</span> <span class="o">=</span> <span class="n">betas</span> <span class="o">=</span> <span class="n">gammas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span>
+  <span class="n">abg</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span> <span class="n">gammas</span><span class="p">))</span>
+  <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="n">tes_optimizer</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">abg</span><span class="o">=</span><span class="n">abg</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">,</span> <span class="n">seasonal</span><span class="o">=</span><span class="n">seasonal</span><span class="p">,</span> <span class="n">seasonal_periods</span><span class="o">=</span><span class="n">seasonal_periods</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">)</span>
+  <span class="n">final_model</span> <span class="o">=</span> <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">,</span> <span class="n">seasonal</span><span class="o">=</span><span class="n">seasonal</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="n">best_alpha</span><span class="p">,</span> <span class="n">smoothing_slope</span><span class="o">=</span><span class="n">best_beta</span><span class="p">,</span> <span class="n">smoothing_seasonal</span><span class="o">=</span><span class="n">best_gamma</span><span class="p">)</span>
+  <span class="n">y_pred</span> <span class="o">=</span> <span class="n">final_model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+  <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+  <span class="n">plot_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">best_mae</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="n">tes_model_tuning</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">seasonal</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">seasonal_periods</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/18687603aebb77c35d067771eef53efbc15e444df9932e4d483dab55e44c42a0.png" src="_images/18687603aebb77c35d067771eef53efbc15e444df9932e4d483dab55e44c42a0.png" />
+</div>
+</div>
+</section>
+<section id="tes-final-model-prediction">
+<h3>TES Final Model(Prediction)<a class="headerlink" href="#tes-final-model-prediction" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tes_final_model</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">seasonal</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">):</span>
+  <span class="n">final_model</span> <span class="o">=</span> <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">,</span> <span class="n">seasonal</span><span class="o">=</span><span class="n">seasonal</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="n">best_alpha</span><span class="p">,</span> <span class="n">smoothing_slope</span><span class="o">=</span><span class="n">best_beta</span><span class="p">,</span> <span class="n">smoothing_seasonal</span><span class="o">=</span><span class="n">best_gamma</span><span class="p">)</span>
+  <span class="n">feature_predict</span> <span class="o">=</span> <span class="n">final_model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">feature_predict</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tes_final_model</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2002-01-01    371.909208
+2002-02-01    372.689151
+2002-03-01    373.597083
+2002-04-01    374.803473
+2002-05-01    375.297729
+2002-06-01    374.706404
+Freq: MS, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
 <div class="tip admonition">
 <p class="admonition-title">Resumen</p>
 <ul class="simple">
@@ -3144,6 +2824,7 @@ T_{0}=\frac{1}{C}\left(\frac{y_{C+1}-y_{1}}{C}+\frac{y_{C+2}-y_{2}}{C}+\frac{y_{
 <li><p>En este capítulo se han tratado todos estos modelos en detalle con su implementación en <code class="docutils literal notranslate"><span class="pre">Python</span></code>. El enfoque de <code class="docutils literal notranslate"><span class="pre">suavizado</span> <span class="pre">exponencial</span> <span class="pre">puede</span> <span class="pre">utilizarse</span> <span class="pre">para</span> <span class="pre">pronosticar</span> <span class="pre">series</span> <span class="pre">temporales</span> <span class="pre">estacionarias</span></code>. Sin embargo, esta suposición puede no ser cierta. <code class="docutils literal notranslate"><span class="pre">Se</span> <span class="pre">recomienda</span> <span class="pre">el</span> <span class="pre">suavizado</span> <span class="pre">exponencial</span> <span class="pre">de</span> <span class="pre">orden</span> <span class="pre">superior</span> <span class="pre">para</span> <span class="pre">estos</span> <span class="pre">casos</span></code>, pero su cálculo es difícil y costoso computacionalmente. Por lo tanto, para hacer frente a este planteamiento, <code class="docutils literal notranslate"><span class="pre">se</span> <span class="pre">utilizan</span> <span class="pre">otras</span> <span class="pre">técnicas</span> <span class="pre">de</span> <span class="pre">previsión</span> <span class="pre">como</span> <span class="pre">el</span> <span class="pre">modelo</span> <span class="pre">ARIMA,</span> <span class="pre">que</span> <span class="pre">se</span> <span class="pre">tratará</span> <span class="pre">en</span> <span class="pre">la</span> <span class="pre">siguiente</span> <span class="pre">sección</span></code>.</p></li>
 </ul>
 </div>
+</section>
 </section>
 </section>
 
@@ -3233,11 +2914,12 @@ T_{0}=\frac{1}{C}\left(\frac{y_{C+1}-y_{1}}{C}+\frac{y_{C+2}-y_{2}}{C}+\frac{y_{
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suavizacion-exponencial-para-datos-estacionales">Suavización exponencial para datos estacionales</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-estacional-aditivo">Modelo estacional aditivo</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-estacional-multiplicativo">Modelo estacional multiplicativo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-exponential-smoothing">Single Exponential Smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#double-exponential-smoothing">Double Exponential Smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#triple-exponential-smoothing">Triple Exponential Smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tes-final-model-prediction">TES Final Model(Prediction)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">Implementación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Suavización exponencial de segundo orden</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suavizacion-exponencial-de-orden-superior">Suavización exponencial de orden superior</a></li>
 </ul>
 </li>
 </ul>
