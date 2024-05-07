@@ -681,7 +681,7 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 \end{align}
 \]</div>
 <ul class="simple">
-<li><p>Nótese que si <span class="math notranslate nohighlight">\(\lambda\rightarrow1\)</span>, <span class="math notranslate nohighlight">\(\text{Var}(\tilde{y}_{T})\rightarrow\text{Var}(y_{T})\)</span>, y si <span class="math notranslate nohighlight">\(\lambda\rightarrow0\)</span>, <span class="math notranslate nohighlight">\(\text{Var}(\tilde{y}_{T}\rightarrow0)\)</span>. La pregunta ahora es, ¿cuánto suavizado se necesita?. En la literatura se recomienda <span class="math notranslate nohighlight">\(\lambda\)</span> entre 0.1 y 0.4 y, de hecho, funcionan bien en la práctica. Un método más riguroso para encontrar el valor <span class="math notranslate nohighlight">\(\lambda\)</span> se discutirá mas adelante en este capítulo.</p></li>
+<li><p>Nótese que si <span class="math notranslate nohighlight">\(\lambda\rightarrow1\)</span>, <span class="math notranslate nohighlight">\(\text{Var}(\tilde{y}_{T})\rightarrow\text{Var}(y_{T})\)</span>, y si <span class="math notranslate nohighlight">\(\lambda\rightarrow0\)</span>, <span class="math notranslate nohighlight">\(\text{Var}(\tilde{y}_{T}\rightarrow0)\)</span>. La pregunta ahora es, <em><strong>¿cuánto suavizado se necesita?. En la literatura se recomienda <span class="math notranslate nohighlight">\(\lambda\)</span> entre 0.1 y 0.4</strong></em> y, de hecho, funcionan bien en la práctica. Un método más riguroso para encontrar el valor <span class="math notranslate nohighlight">\(\lambda\)</span> se discutirá más adelante en este capítulo.</p></li>
 <li><p>Como medidas de precisión usaremos las siguientes métricas que vienen ya implementadas en <code class="docutils literal notranslate"><span class="pre">Python</span></code>; <code class="docutils literal notranslate"><span class="pre">MAPE,</span> <span class="pre">MAD</span></code> y <code class="docutils literal notranslate"><span class="pre">MSD</span></code>.</p></li>
 <li><p>El <em><strong>error porcentual medio absoluto (MAPE)</strong></em> es el cambio porcentual medio absoluto entre el valor predicho, esto es <span class="math notranslate nohighlight">\(\tilde{y}_{t-1}:=\tilde{y}_{t}(t-1)\)</span>, para una predicción <em><strong>one-step-ahead</strong></em> y el valor real dado por</p></li>
 </ul>
@@ -852,7 +852,7 @@ dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">djia_ts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Dow Jones Industrial Average between Jan 2016 - Dec 2016&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
@@ -861,7 +861,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d9672adbac4cc6a394578303be80d97901f3c1f824e54f0f985af4d200f8da39.png" src="_images/d9672adbac4cc6a394578303be80d97901f3c1f824e54f0f985af4d200f8da39.png" />
+<img alt="_images/acaedd185391cf7afeb3bb3001777728a3d642587d9daec870676ddbef9e8613.png" src="_images/acaedd185391cf7afeb3bb3001777728a3d642587d9daec870676ddbef9e8613.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1456,6 +1456,9 @@ SS_{E}(\lambda)=\sum_{t=1}^{T}e_{t}^{2}(1).
 <li><p>Para un conjunto histórico de datos, podemos en general calcular <span class="math notranslate nohighlight">\(SS_{E}(\lambda)\)</span> para varios valores de <span class="math notranslate nohighlight">\(\lambda\)</span> y <em><strong>seleccionar aquel con la menor suma de errores de predicción al cuadrado</strong></em>.</p></li>
 </ul>
 </div>
+<ul class="simple">
+<li><p>Por ejemplo, supongamos que interesados en la <em><strong>velocidad promedio en un tramo específico de una autopista durante las horas no pico</strong></em>. Durante el último año y medio (78 semanas), tenemos disponibles <em><strong>promedios semanales de la velocidad promedio en millas por hora entre las 10 a. m. y las 3 p. m</strong></em>. Los datos se presentan en la siguiente tabla</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -1547,9 +1550,12 @@ dtype: float64
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>La siguiente figura muestra que los <em><strong>datos de la serie temporal siguen un proceso constante</strong></em>. Sin embargo, para <em><strong>suavizar la variación excesiva, podemos usar el suavizado exponencial de primer orden</strong></em>. La “mejor” constante de suavizado se puede determinar encontrando el valor de la constante de suavizado que minimiza la suma de los errores de predicción de un paso adelante al cuadrado.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">speed_ts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;The weekly average speed during nonrush hours.&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Week&#39;</span><span class="p">)</span>
@@ -1558,7 +1564,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1f2a66e89a5ee0b4ab1ff5f061759664d1e0fed1fa4bd0aa735899bb2acafc66.png" src="_images/1f2a66e89a5ee0b4ab1ff5f061759664d1e0fed1fa4bd0aa735899bb2acafc66.png" />
+<img alt="_images/244b22f54ea7efebf82e7cda369c00fb268babf6e37fca257b710221a641aaa8.png" src="_images/244b22f54ea7efebf82e7cda369c00fb268babf6e37fca257b710221a641aaa8.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1656,13 +1662,465 @@ dtype: float64
 \end{align*}
 \end{split}\]</div>
 </div>
-<ul class="simple">
-<li><p>Nótese que las predicciones dependerán ahora del horizonte de predicción <span class="math notranslate nohighlight">\(\tau\)</span>. En este caso el <span class="math notranslate nohighlight">\(100(1-\alpha/2)\)</span> intervalo de predicción para cualquier horizonte de tiempo <span class="math notranslate nohighlight">\(\tau\)</span> está dado por</p></li>
-</ul>
+<ul>
+<li><p>Nótese que <em><strong>las predicciones dependerán ahora del horizonte de predicción</strong></em> <span class="math notranslate nohighlight">\(\tau\)</span>. En este caso, el <span class="math notranslate nohighlight">\(100(1-\alpha/2)\)</span> intervalo de predicción para cualquier horizonte de tiempo <span class="math notranslate nohighlight">\(\tau\)</span> está dado por (<em><strong><code class="docutils literal notranslate"><span class="pre">bonus</span></code></strong></em>)</p>
 <div class="math notranslate nohighlight">
 \[
-\left(2+\frac{\lambda}{1-\lambda}\tau\right)\tilde{y}_{T}^{(1)}-\left(1+\frac{\lambda}{1-\lambda}\tau\right)\tilde{y}_{T}^{(2)}\pm Z_{\alpha/2}\hat{\sigma}_{e}.
-\]</div>
+  \left(2+\frac{\lambda}{1-\lambda}\tau\right)\tilde{y}_{T}^{(1)}-\left(1+\frac{\lambda}{1-\lambda}\tau\right)\tilde{y}_{T}^{(2)}\pm Z_{\alpha/2}\frac{c_{\tau}}{c_{1}}\hat{\sigma}_{e}.
+  \]</div>
+<p>donde</p>
+<div class="math notranslate nohighlight">
+\[
+  c_{i}^{2}=1+\frac{\lambda}{(2-\lambda)^{3}}[(10-14\lambda+5\lambda^{2})+2i\lambda(4-3\lambda)+2i^{2}\lambda^{2}].
+  \]</div>
+</li>
+</ul>
+<ul class="simple">
+<li><p>A manera de ejemplo, consideremos los datos asociados al <em><strong>US Consumer Price Index (CPI)</strong></em>. Como primera opción, realizaremos <em><strong>pronósticos para todo el año 2004</strong></em> (<em>pronósticos de 1 a 12 pasos por delante</em>)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpi_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/lihkir/Data/main/CPI.csv&quot;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">skipfooter</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpi_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Period</th>
+      <th>Consumer Price Index</th>
+      <th>Over-the-Year Percent Change</th>
+      <th>Over-the-Month Percent Change</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2024</td>
+      <td>March</td>
+      <td>312.3</td>
+      <td>3.5%</td>
+      <td>0.6%</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2024</td>
+      <td>February</td>
+      <td>310.3</td>
+      <td>3.2%</td>
+      <td>0.6%</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2024</td>
+      <td>January</td>
+      <td>308.4</td>
+      <td>3.1%</td>
+      <td>0.5%</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2023</td>
+      <td>December</td>
+      <td>306.7</td>
+      <td>3.4%</td>
+      <td>-0.1%</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2023</td>
+      <td>November</td>
+      <td>307.1</td>
+      <td>3.1%</td>
+      <td>-0.2%</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpi_data</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cpi_data</span><span class="p">[</span><span class="s1">&#39;Period&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">cpi_data</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpi_data</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">cpi_data</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span>
+<span class="n">cpi_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">cpi_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Period</th>
+      <th>Consumer Price Index</th>
+      <th>Over-the-Year Percent Change</th>
+      <th>Over-the-Month Percent Change</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>March-2024</th>
+      <td>2024</td>
+      <td>March</td>
+      <td>312.3</td>
+      <td>3.5%</td>
+      <td>0.6%</td>
+    </tr>
+    <tr>
+      <th>February-2024</th>
+      <td>2024</td>
+      <td>February</td>
+      <td>310.3</td>
+      <td>3.2%</td>
+      <td>0.6%</td>
+    </tr>
+    <tr>
+      <th>January-2024</th>
+      <td>2024</td>
+      <td>January</td>
+      <td>308.4</td>
+      <td>3.1%</td>
+      <td>0.5%</td>
+    </tr>
+    <tr>
+      <th>December-2023</th>
+      <td>2023</td>
+      <td>December</td>
+      <td>306.7</td>
+      <td>3.4%</td>
+      <td>-0.1%</td>
+    </tr>
+    <tr>
+      <th>November-2023</th>
+      <td>2023</td>
+      <td>November</td>
+      <td>307.1</td>
+      <td>3.1%</td>
+      <td>-0.2%</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpi_ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">cpi_data</span><span class="p">[</span><span class="s1">&#39;Consumer Price Index&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">cpi_data</span><span class="o">.</span><span class="n">index</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpi_ts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Date
+January-1913       9.8
+February-1913      9.8
+March-1913         9.8
+April-1913         9.8
+May-1913           9.7
+                 ...  
+November-2023    307.1
+December-2023    306.7
+January-2024     308.4
+February-2024    310.3
+March-2024       312.3
+Length: 1335, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Consideremos el <em><strong>US Consumer Price Index (CPI)</strong></em> de Estados Unidos <em><strong>desde enero de 1995 hasta diciembre de 2004</strong></em>. La siguiente figura muestra claramente que los datos exhiben una tendencia lineal.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpi_dates</span> <span class="o">=</span> <span class="n">cpi_ts</span><span class="p">[</span><span class="n">cpi_ts</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="s1">&#39;January-1995&#39;</span><span class="p">):</span><span class="n">cpi_ts</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="s1">&#39;December-2004&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpi_dates</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Date
+January-1995      150.3
+February-1995     150.9
+March-1995        151.4
+April-1995        151.9
+May-1995          152.2
+                  ...  
+August-2004       189.5
+September-2004    189.9
+October-2004      190.9
+November-2004     191.0
+December-2004     190.3
+Length: 120, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">cpi_dates</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;US Consumer Price Index (CPI)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Closing Value&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/89bc2a9613cd5ca8d9b4c8d39cb7fd6cac237fb4c05984cde25dab689add870e.png" src="_images/89bc2a9613cd5ca8d9b4c8d39cb7fd6cac237fb4c05984cde25dab689add870e.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>En <em><strong>diciembre de 2003</strong></em>, realiza las <em><strong>previsiones para todo el año 2004</strong></em> (<em>previsiones de 1 a 12 pasos adelante</em>)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lcpi</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mi">12</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpi_smooth1</span> <span class="o">=</span> <span class="n">firstsmooth</span><span class="p">(</span><span class="n">cpi_dates</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="o">-</span><span class="n">h</span><span class="p">],</span> <span class="n">lcpi</span><span class="p">)</span>
+<span class="n">cpi_smooth2</span> <span class="o">=</span> <span class="n">firstsmooth</span><span class="p">(</span><span class="n">cpi_smooth1</span><span class="p">,</span> <span class="n">lcpi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpi_hat</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cpi_smooth1</span> <span class="o">-</span> <span class="n">cpi_smooth2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">h</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cpi_smooth1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpi_forecast</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="n">tau</span> <span class="o">*</span> <span class="p">(</span><span class="n">lcpi</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">lcpi</span><span class="p">)))</span> <span class="o">*</span> <span class="n">cpi_smooth1</span><span class="p">[</span><span class="n">T</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">tau</span> <span class="o">*</span> <span class="p">(</span><span class="n">lcpi</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">lcpi</span><span class="p">)))</span> <span class="o">*</span> <span class="n">cpi_smooth2</span><span class="p">[</span><span class="n">T</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cpi_forecast</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([184.88217447, 185.02262463, 185.16307479, 185.30352495,
+       185.4439751 , 185.58442526, 185.72487542, 185.86532557,
+       186.00577573, 186.14622589, 186.28667604, 186.4271262 ])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ctau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">lcpi</span> <span class="o">/</span> <span class="p">((</span><span class="mi">2</span> <span class="o">-</span> <span class="n">lcpi</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span> <span class="o">-</span> <span class="mi">14</span> <span class="o">*</span> <span class="n">lcpi</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">lcpi</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">lcpi</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">lcpi</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">tau</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">lcpi</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha_lev</span> <span class="o">=</span> <span class="mf">0.05</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sig_est</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">cpi_dates</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">cpi_hat</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">ctau</span> <span class="o">/</span> <span class="n">ctau</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">sig_est</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">alpha_lev</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cpi_dates</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="o">-</span><span class="n">h</span><span class="p">],</span> <span class="n">cpi_dates</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="o">-</span><span class="n">h</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cpi_dates</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">:],</span> <span class="n">cpi_dates</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">:]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cpi_dates</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">:],</span> <span class="n">cpi_forecast</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Forecast&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cpi_dates</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">:],</span> <span class="n">cpi_forecast</span> <span class="o">+</span> <span class="n">cl</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Upper bound&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cpi_dates</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">:],</span> <span class="n">cpi_forecast</span> <span class="o">-</span> <span class="n">cl</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Lower bound&#39;</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cpi_dates</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="n">n</span><span class="p">),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Closing Value&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4c34f2ef9d734aeeb96423e2651fd29db9220b2b9c815e1747df06a4bcdfa698.png" src="_images/4c34f2ef9d734aeeb96423e2651fd29db9220b2b9c815e1747df06a4bcdfa698.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Como segunda opción. <em><strong>En diciembre de 2003, hacer el pronóstico para enero de 2004</strong></em>. Luego, <em><strong>cuando los datos de enero de 2004 estén disponibles, hacer el pronóstico para febrero de 2004</strong></em> (<em>solo pronósticos de un paso por delante</em>)”</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lcpi</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">108</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">alpha_lev</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">cpi_forecast</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>
+<span class="n">cl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>
+<span class="n">cpi_smooth1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span> <span class="o">+</span> <span class="n">tau</span><span class="p">)</span>
+<span class="n">cpi_smooth2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span> <span class="o">+</span> <span class="n">tau</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">tau</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">cpi_smooth1</span><span class="p">[:</span><span class="n">T</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">firstsmooth</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">cpi_dates</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="n">T</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">lambda_</span><span class="o">=</span><span class="n">lcpi</span><span class="p">)</span>
+    <span class="n">cpi_smooth2</span><span class="p">[:</span><span class="n">T</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">firstsmooth</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">cpi_smooth1</span><span class="p">[:</span><span class="n">T</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">lambda_</span><span class="o">=</span><span class="n">lcpi</span><span class="p">)</span>
+    <span class="n">cpi_forecast</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">lcpi</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">lcpi</span><span class="p">)))</span> <span class="o">*</span> <span class="n">cpi_smooth1</span><span class="p">[</span><span class="n">T</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> \
+                          <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">lcpi</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">lcpi</span><span class="p">)))</span> <span class="o">*</span> <span class="n">cpi_smooth2</span><span class="p">[</span><span class="n">T</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="n">cpi_hat</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cpi_smooth1</span><span class="p">[:</span><span class="n">T</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">cpi_smooth2</span><span class="p">[:</span><span class="n">T</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">sig_est</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">cpi_dates</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">T</span> <span class="o">+</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">cpi_hat</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">cl</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha_lev</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">sig_est</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cpi_dates</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="o">-</span><span class="n">h</span><span class="p">],</span> <span class="n">cpi_dates</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="o">-</span><span class="n">h</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CPI&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cpi_dates</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">:],</span> <span class="n">cpi_dates</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">:]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cpi_dates</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">:],</span> <span class="n">cpi_forecast</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Forecast&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cpi_dates</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">:],</span> <span class="n">cpi_forecast</span> <span class="o">+</span> <span class="n">cl</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Confidence Interval&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cpi_dates</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">:],</span> <span class="n">cpi_forecast</span> <span class="o">-</span> <span class="n">cl</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cpi_dates</span><span class="o">.</span><span class="n">index</span><span class="p">),</span> <span class="n">n</span><span class="p">),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;CPI&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e0949a258f7c548b9c60a5ce1839e00f33c8570a4b53a3e3522d9c1440450c8a.png" src="_images/e0949a258f7c548b9c60a5ce1839e00f33c8570a4b53a3e3522d9c1440450c8a.png" />
+</div>
+</div>
 </section>
 <section id="estimacion-de-sigma-e-2">
 <h2>Estimación de <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span><a class="headerlink" href="#estimacion-de-sigma-e-2" title="Link to this heading">#</a></h2>
