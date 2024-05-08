@@ -64,7 +64,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Deep Learning para la predicción de series temporales" href="deep_learning.html" />
+    <link rel="next" title="Bibliografía" href="biblio.html" />
     <link rel="prev" title="Métodos de Suavización Exponencial" href="exponential_smoothing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -186,7 +186,6 @@
 <li class="toctree-l1"><a class="reference internal" href="exponential_smoothing.html">Métodos de Suavización Exponencial</a></li>
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Modelos autorregresivos integrados de media móvil</a></li>
-<li class="toctree-l1"><a class="reference internal" href="deep_learning.html">Deep Learning para la predicción de series temporales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliografía</a></li>
 </ul>
 
@@ -383,7 +382,6 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis">Análisis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-lineales-para-series-de-tiempo-estacionarias">Modelos lineales para series de tiempo estacionarias</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estacionariedad">Estacionariedad</a></li>
@@ -411,7 +409,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-conjuntos-de-datos-con-arima">Creación de conjuntos de datos con ARIMA</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arima">ARIMA</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalo-de-confianza">Intervalo de confianza</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a></li>
 </ul>
             </nav>
         </div>
@@ -425,12 +422,13 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="modelos-autorregresivos-integrados-de-media-movil">
 <h1>Modelos autorregresivos integrados de media móvil<a class="headerlink" href="#modelos-autorregresivos-integrados-de-media-movil" title="Link to this heading">#</a></h1>
-<section id="introduccion">
-<h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Introducción</p>
 <ul class="simple">
 <li><p>En el capítulo anterior se trataron las técnicas de predicción basadas en el suavizado exponencial, que se basan en el supuesto de que <strong>las series temporales se componen de términos deterministas y estocásticos</strong>. El componente aleatorio se reduce a cero con el número de observaciones consideradas para la predicción. Esto supone que el ruido aleatorio es realmente aleatorio y sigue una distribución idéntica e independiente. Sin embargo, esta suposición tiende a violarse a menudo y <em>el suavizado no es suficiente para modelar el proceso y establecer un modelo de predicción</em>.</p></li>
 <li><p>En estos casos, los <strong>modelos autorregresivos</strong> pueden ser muy útiles, ya que <strong>se ajustan inmediatamente utilizando valores de retardo previos aprovechando la correlación serial inherente entre las observaciones</strong>. En esta sección se presentan los conceptos de predicción mediante <strong>modelos autorregresivos</strong>. El <em>modelo autorregresivo incluye términos autorregresivos o términos de media móvil</em>. En función de los componentes utilizados, existen múltiples enfoques que pueden utilizarse en predicciones con series temporales, como la <strong>media móvil (MA)</strong>, la <strong>media móvil autorregresiva (ARMA)</strong> y <strong>media móvil integrada autorregresiva (ARIMA)</strong>.</p></li>
 </ul>
+</div>
 <ul class="simple">
 <li><p>La presente sección se centra en el <strong>modelo autorregresivo</strong> y cubrirá los siguientes temas:
 <br/></p>
@@ -442,7 +440,6 @@ document.write(`
 </ul>
 </li>
 </ul>
-</section>
 <section id="analisis">
 <h2>Análisis<a class="headerlink" href="#analisis" title="Link to this heading">#</a></h2>
 </section>
@@ -2409,10 +2406,10 @@ y_{t}=\phi y_{t-1}+\varepsilon_{t}=\phi (\phi y_{t-2} + \varepsilon_{t-1})+\vare
   <th>Model:</th>            <td>ARIMA(3, 0, 0)</td>  <th>  Log Likelihood     </th> <td>-847.763</td>
 </tr>
 <tr>
-  <th>Date:</th>            <td>Mon, 06 May 2024</td> <th>  AIC                </th> <td>1705.527</td>
+  <th>Date:</th>            <td>Tue, 07 May 2024</td> <th>  AIC                </th> <td>1705.527</td>
 </tr>
 <tr>
-  <th>Time:</th>                <td>19:10:01</td>     <th>  BIC                </th> <td>1727.512</td>
+  <th>Time:</th>                <td>21:00:03</td>     <th>  BIC                </th> <td>1727.512</td>
 </tr>
 <tr>
   <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>1714.085</td>
@@ -2672,10 +2669,10 @@ y_{t}=0.7\varepsilon_{t-1}+\varepsilon_{t}
   <th>Model:</th>            <td>ARIMA(0, 0, 1)</td>  <th>  Log Likelihood     </th> <td>-842.209</td>
 </tr>
 <tr>
-  <th>Date:</th>            <td>Mon, 06 May 2024</td> <th>  AIC                </th> <td>1690.418</td>
+  <th>Date:</th>            <td>Tue, 07 May 2024</td> <th>  AIC                </th> <td>1690.418</td>
 </tr>
 <tr>
-  <th>Time:</th>                <td>19:10:03</td>     <th>  BIC                </th> <td>1703.609</td>
+  <th>Time:</th>                <td>21:00:05</td>     <th>  BIC                </th> <td>1703.609</td>
 </tr>
 <tr>
   <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>1695.553</td>
@@ -2742,10 +2739,10 @@ y_{t}=0.7\varepsilon_{t-1}+\varepsilon_{t}
   <th>Model:</th>            <td>ARIMA(0, 0, 3)</td>  <th>  Log Likelihood     </th> <td>-852.803</td>
 </tr>
 <tr>
-  <th>Date:</th>            <td>Mon, 06 May 2024</td> <th>  AIC                </th> <td>1715.606</td>
+  <th>Date:</th>            <td>Tue, 07 May 2024</td> <th>  AIC                </th> <td>1715.606</td>
 </tr>
 <tr>
-  <th>Time:</th>                <td>19:10:03</td>     <th>  BIC                </th> <td>1737.591</td>
+  <th>Time:</th>                <td>21:00:05</td>     <th>  BIC                </th> <td>1737.591</td>
 </tr>
 <tr>
   <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>1724.165</td>
@@ -2952,10 +2949,10 @@ MA(q):\quad y_{t}=(1-\theta_{1}L-\theta_{2}L^{2}-\cdots-\theta_{q}L^{q})\varepsi
   <th>Model:</th>            <td>ARIMA(1, 0, 1)</td>  <th>  Log Likelihood     </th> <td>-826.795</td>
 </tr>
 <tr>
-  <th>Date:</th>            <td>Mon, 06 May 2024</td> <th>  AIC                </th> <td>1661.590</td>
+  <th>Date:</th>            <td>Tue, 07 May 2024</td> <th>  AIC                </th> <td>1661.590</td>
 </tr>
 <tr>
-  <th>Time:</th>                <td>19:10:03</td>     <th>  BIC                </th> <td>1679.178</td>
+  <th>Time:</th>                <td>21:00:05</td>     <th>  BIC                </th> <td>1679.178</td>
 </tr>
 <tr>
   <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>1668.436</td>
@@ -3973,10 +3970,10 @@ p-value: 0.000000
   <th>Model:</th>            <td>ARIMA(0, 2, 1)</td>  <th>  Log Likelihood     </th> <td>-1588.730</td>
 </tr>
 <tr>
-  <th>Date:</th>            <td>Mon, 06 May 2024</td> <th>  AIC                </th> <td>3181.460</td> 
+  <th>Date:</th>            <td>Tue, 07 May 2024</td> <th>  AIC                </th> <td>3181.460</td> 
 </tr>
 <tr>
-  <th>Time:</th>                <td>19:10:08</td>     <th>  BIC                </th> <td>3188.503</td> 
+  <th>Time:</th>                <td>21:00:09</td>     <th>  BIC                </th> <td>3188.503</td> 
 </tr>
 <tr>
   <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>3184.295</td> 
@@ -4100,10 +4097,10 @@ p-value: 0.000000
   <th>Model:</th>           <td>SARIMAX(0, 2, 1)x(1, 1, 1, 42)</td> <th>  Log Likelihood     </th> <td>-1366.570</td>
 </tr>
 <tr>
-  <th>Date:</th>                   <td>Mon, 06 May 2024</td>        <th>  AIC                </th> <td>2741.141</td> 
+  <th>Date:</th>                   <td>Tue, 07 May 2024</td>        <th>  AIC                </th> <td>2741.141</td> 
 </tr>
 <tr>
-  <th>Time:</th>                       <td>19:10:11</td>            <th>  BIC                </th> <td>2754.491</td> 
+  <th>Time:</th>                       <td>21:00:12</td>            <th>  BIC                </th> <td>2754.491</td> 
 </tr>
 <tr>
   <th>Sample:</th>                         <td>0</td>               <th>  HQIC               </th> <td>2746.539</td> 
@@ -4185,13 +4182,13 @@ p-value: 0.000000
 <img alt="_images/3e6451f9015b088f5b42c71afd5cbd39dfedab7cacdc22e044c278e2e764833f.png" src="_images/3e6451f9015b088f5b42c71afd5cbd39dfedab7cacdc22e044c278e2e764833f.png" />
 </div>
 </div>
-</section>
-<section id="resumen">
-<h2>Resumen<a class="headerlink" href="#resumen" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Resumen</p>
 <ul class="simple">
 <li><p>En este capítulo, cubrimos los modelos autorregresivos como un modelo <span class="math notranslate nohighlight">\(MA\)</span> para capturar la correlación serial utilizando la relación de error. En líneas similares, se cubrieron los modelos <span class="math notranslate nohighlight">\(AR\)</span>, que establecen la previsión utilizando los rezagos como observaciones dependientes. Los modelos <span class="math notranslate nohighlight">\(AR\)</span> son buenos para captar información sobre tendencias. También se ilustró el enfoque basado en <span class="math notranslate nohighlight">\(ARMA\)</span>, que integra los modelos <span class="math notranslate nohighlight">\(AR\)</span> y <span class="math notranslate nohighlight">\(MA\)</span> para captar las tendencias temporales y los acontecimientos inesperados que provocan muchos errores que tardan en corregirse, como una crisis económica.</p></li>
 <li><p>Todos estos modelos suponen estacionariedad; en los casos en los que no se da estacionariedad, se utiliza un modelo basado en la diferenciación, como el <span class="math notranslate nohighlight">\(ARIMA\)</span>, que diferencia los conjuntos de datos de series temporales para eliminar cualquier tendencia. Los métodos de previsión se ilustraron con ejemplos utilizando el módulo <code class="docutils literal notranslate"><span class="pre">tsa</span></code> de <code class="docutils literal notranslate"><span class="pre">Python</span></code>. El presente capítulo se centra en el uso de <code class="docutils literal notranslate"><span class="pre">métodos</span> <span class="pre">estadísticos</span></code> para la previsión. En el capítulo siguiente se ampliará el enfoque estadístico a los métodos de <code class="docutils literal notranslate"><span class="pre">aprendizaje</span> <span class="pre">automático</span></code> para la previsión, concretamente <code class="docutils literal notranslate"><span class="pre">modelos</span> <span class="pre">de</span> <span class="pre">aprendizaje</span> <span class="pre">profundo</span></code>.</p></li>
 </ul>
+</div>
 </section>
 </section>
 
@@ -4235,11 +4232,11 @@ p-value: 0.000000
       </div>
     </a>
     <a class="right-next"
-       href="deep_learning.html"
+       href="biblio.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Deep Learning para la predicción de series temporales</p>
+        <p class="prev-next-title">Bibliografía</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -4259,7 +4256,6 @@ p-value: 0.000000
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis">Análisis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-lineales-para-series-de-tiempo-estacionarias">Modelos lineales para series de tiempo estacionarias</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estacionariedad">Estacionariedad</a></li>
@@ -4287,7 +4283,6 @@ p-value: 0.000000
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-conjuntos-de-datos-con-arima">Creación de conjuntos de datos con ARIMA</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arima">ARIMA</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalo-de-confianza">Intervalo de confianza</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen">Resumen</a></li>
 </ul>
   </nav></div>
 

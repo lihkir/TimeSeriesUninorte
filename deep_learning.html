@@ -64,8 +64,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Bibliografía" href="biblio.html" />
-    <link rel="prev" title="Modelos autorregresivos integrados de media móvil" href="arima_model.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -127,6 +125,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,13 +180,12 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="statistical_background.html">Introducción a las Series de Tiempo</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="exponential_smoothing.html">Métodos de Suavización Exponencial</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="arima_model.html">Modelos autorregresivos integrados de media móvil</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Deep Learning para la predicción de series temporales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliografía</a></li>
 </ul>
 
@@ -453,23 +452,23 @@ y_{t}=f(y_{t-1}, y_{t-2}, \dots, y_{t-p}).
 </li>
 </ul>
 <ul class="simple">
-<li><p>En el caso de una <code class="docutils literal notranslate"><span class="pre">red</span> <span class="pre">neuronal</span> <span class="pre">de</span> <span class="pre">una</span> <span class="pre">sola</span> <span class="pre">capa</span> <span class="pre">oculta</span></code>, como se muestra en <a class="reference internal" href="#single-hidden-layer"><span class="std std-numref">Fig. 4</span></a>, la salida de cada neurona se pasa a la capa de salida, que aplica una <code class="docutils literal notranslate"><span class="pre">transformación</span> <span class="pre">lineal</span> <span class="pre">y</span> <span class="pre">función</span> <span class="pre">de</span> <span class="pre">activación</span> <span class="pre">para</span> <span class="pre">generar</span> <span class="pre">la</span> <span class="pre">predicción</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">variable</span> <span class="pre">objetivo</span></code>, que, en el caso de la predicción de series temporales, es el valor predicho de la serie en el tiempo <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p>En el caso de una <code class="docutils literal notranslate"><span class="pre">red</span> <span class="pre">neuronal</span> <span class="pre">de</span> <span class="pre">una</span> <span class="pre">sola</span> <span class="pre">capa</span> <span class="pre">oculta</span></code>, como se muestra en <code class="xref std std-numref docutils literal notranslate"><span class="pre">single_hidden_layer</span></code>, la salida de cada neurona se pasa a la capa de salida, que aplica una <code class="docutils literal notranslate"><span class="pre">transformación</span> <span class="pre">lineal</span> <span class="pre">y</span> <span class="pre">función</span> <span class="pre">de</span> <span class="pre">activación</span> <span class="pre">para</span> <span class="pre">generar</span> <span class="pre">la</span> <span class="pre">predicción</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">variable</span> <span class="pre">objetivo</span></code>, que, en el caso de la predicción de series temporales, es el valor predicho de la serie en el tiempo <span class="math notranslate nohighlight">\(t\)</span></p></li>
 </ul>
 <figure class="align-center" id="single-hidden-layer">
 <a class="reference internal image-reference" href="_images/single_hidden_layer.png"><img alt="_images/single_hidden_layer.png" src="_images/single_hidden_layer.png" style="width: 450.0px; height: 400.5px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Red neuronal con una sola capa oculta.</span><a class="headerlink" href="#single-hidden-layer" title="Link to this image">#</a></p>
+<p><span class="caption-text">Red neuronal con una sola capa oculta.</span><a class="headerlink" href="#single-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>En un <code class="docutils literal notranslate"><span class="pre">MLP</span></code> (ver <a class="reference internal" href="#multiple-hidden-layer"><span class="std std-numref">Fig. 5</span></a>), se agrupan varias capas ocultas. <code class="docutils literal notranslate"><span class="pre">La</span> <span class="pre">salida</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">neuronas</span> <span class="pre">de</span> <span class="pre">una</span> <span class="pre">capa</span> <span class="pre">oculta</span> <span class="pre">se</span> <span class="pre">introduce</span> <span class="pre">en</span> <span class="pre">la</span> <span class="pre">siguiente</span> <span class="pre">capa</span> <span class="pre">oculta</span></code>. Las neuronas de esta capa transforman la entrada y la pasan a la siguiente capa oculta. Finalmente, <code class="docutils literal notranslate"><span class="pre">la</span> <span class="pre">última</span> <span class="pre">capa</span> <span class="pre">oculta</span> <span class="pre">alimenta</span> <span class="pre">la</span> <span class="pre">capa</span> <span class="pre">de</span> <span class="pre">salida</span></code></p></li>
+<li><p>En un <code class="docutils literal notranslate"><span class="pre">MLP</span></code> (ver <code class="xref std std-numref docutils literal notranslate"><span class="pre">multiple_hidden_layer</span></code>), se agrupan varias capas ocultas. <code class="docutils literal notranslate"><span class="pre">La</span> <span class="pre">salida</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">neuronas</span> <span class="pre">de</span> <span class="pre">una</span> <span class="pre">capa</span> <span class="pre">oculta</span> <span class="pre">se</span> <span class="pre">introduce</span> <span class="pre">en</span> <span class="pre">la</span> <span class="pre">siguiente</span> <span class="pre">capa</span> <span class="pre">oculta</span></code>. Las neuronas de esta capa transforman la entrada y la pasan a la siguiente capa oculta. Finalmente, <code class="docutils literal notranslate"><span class="pre">la</span> <span class="pre">última</span> <span class="pre">capa</span> <span class="pre">oculta</span> <span class="pre">alimenta</span> <span class="pre">la</span> <span class="pre">capa</span> <span class="pre">de</span> <span class="pre">salida</span></code></p></li>
 </ul>
 <figure class="align-center" id="multiple-hidden-layer">
 <a class="reference internal image-reference" href="_images/multiple_hidden_layer.png"><img alt="_images/multiple_hidden_layer.png" src="_images/multiple_hidden_layer.png" style="width: 690.0px; height: 405.72px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Red neuronal con múltiples capas ocultas.</span><a class="headerlink" href="#multiple-hidden-layer" title="Link to this image">#</a></p>
+<p><span class="caption-text">Red neuronal con múltiples capas ocultas.</span><a class="headerlink" href="#multiple-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -503,26 +502,26 @@ p\times n_{1}+n_{1}\times n_{2}+n_{2}\times n_{3}+n_{3}.
 <a class="reference internal image-reference" href="_images/twoinput_single_hidden_layer.png"><img alt="_images/twoinput_single_hidden_layer.png" src="_images/twoinput_single_hidden_layer.png" style="width: 390.0px; height: 269.88px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Red neuronal con una sola capa oculta y dos entradas.</span><a class="headerlink" href="#twoinput-single-hidden-layer" title="Link to this image">#</a></p>
+<p><span class="caption-text">Red neuronal con una sola capa oculta y dos entradas.</span><a class="headerlink" href="#twoinput-single-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>La red realiza una serie de <code class="docutils literal notranslate"><span class="pre">sumas,</span> <span class="pre">multiplicaciones</span> <span class="pre">y</span> <span class="pre">un</span> <span class="pre">par</span> <span class="pre">evaluaciones</span> <span class="pre">de</span> <span class="pre">funciones</span> <span class="pre">sigmoidales</span> <span class="pre">para</span> <span class="pre">transformar</span> <span class="pre">la</span> <span class="pre">entrada</span> <span class="pre">en</span> <span class="pre">una</span> <span class="pre">predicción</span></code>. La transformación de la entrada en una predicción se denomina paso hacia delante de la red neuronal. La <a class="reference internal" href="#forwardprop-single-hidden-layer"><span class="std std-numref">Fig. 7</span></a> muestra cómo se consigue un pase hacia adelante mediante un grafo computacional para un par de entrada <span class="math notranslate nohighlight">\([-1, 2]\)</span>. Cada cálculo da como resultado una salida intermedia <span class="math notranslate nohighlight">\(p_{i}\)</span>. <code class="docutils literal notranslate"><span class="pre">Los</span> <span class="pre">resultados</span> <span class="pre">intermedios</span></code> <span class="math notranslate nohighlight">\(p_{7}\)</span> <code class="docutils literal notranslate"><span class="pre">y</span></code> <span class="math notranslate nohighlight">\(p_{8}\)</span> <code class="docutils literal notranslate"><span class="pre">son</span> <span class="pre">la</span> <span class="pre">salida</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">neuronas</span> <span class="pre">ocultas</span></code> <span class="math notranslate nohighlight">\(g_{1}\)</span> y <span class="math notranslate nohighlight">\(g_{2}\)</span>. Durante el entrenamiento, la función de pérdida <span class="math notranslate nohighlight">\(L\)</span> también se calcula en el paso hacia delante</p></li>
+<li><p>La red realiza una serie de <code class="docutils literal notranslate"><span class="pre">sumas,</span> <span class="pre">multiplicaciones</span> <span class="pre">y</span> <span class="pre">un</span> <span class="pre">par</span> <span class="pre">evaluaciones</span> <span class="pre">de</span> <span class="pre">funciones</span> <span class="pre">sigmoidales</span> <span class="pre">para</span> <span class="pre">transformar</span> <span class="pre">la</span> <span class="pre">entrada</span> <span class="pre">en</span> <span class="pre">una</span> <span class="pre">predicción</span></code>. La transformación de la entrada en una predicción se denomina paso hacia delante de la red neuronal. La <code class="xref std std-numref docutils literal notranslate"><span class="pre">forwardprop_single_hidden_layer</span></code> muestra cómo se consigue un pase hacia adelante mediante un grafo computacional para un par de entrada <span class="math notranslate nohighlight">\([-1, 2]\)</span>. Cada cálculo da como resultado una salida intermedia <span class="math notranslate nohighlight">\(p_{i}\)</span>. <code class="docutils literal notranslate"><span class="pre">Los</span> <span class="pre">resultados</span> <span class="pre">intermedios</span></code> <span class="math notranslate nohighlight">\(p_{7}\)</span> <code class="docutils literal notranslate"><span class="pre">y</span></code> <span class="math notranslate nohighlight">\(p_{8}\)</span> <code class="docutils literal notranslate"><span class="pre">son</span> <span class="pre">la</span> <span class="pre">salida</span> <span class="pre">de</span> <span class="pre">las</span> <span class="pre">neuronas</span> <span class="pre">ocultas</span></code> <span class="math notranslate nohighlight">\(g_{1}\)</span> y <span class="math notranslate nohighlight">\(g_{2}\)</span>. Durante el entrenamiento, la función de pérdida <span class="math notranslate nohighlight">\(L\)</span> también se calcula en el paso hacia delante</p></li>
 </ul>
 <figure class="align-center" id="forwardprop-single-hidden-layer">
 <img alt="_images/forwardprop_single_hidden_layer.png" src="_images/forwardprop_single_hidden_layer.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Gráfico computacional de un perceptrón con una capa y dos neuronas ocultas.</span><a class="headerlink" href="#forwardprop-single-hidden-layer" title="Link to this image">#</a></p>
+<p><span class="caption-text">Gráfico computacional de un perceptrón con una capa y dos neuronas ocultas.</span><a class="headerlink" href="#forwardprop-single-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
 <li><p>En este punto, <code class="docutils literal notranslate"><span class="pre">se</span> <span class="pre">aplica</span> <span class="pre">el</span> <span class="pre">algoritmo</span> <span class="pre">de</span> <span class="pre">backpropagation</span> <span class="pre">para</span> <span class="pre">calcular</span> <span class="pre">las</span> <span class="pre">derivadas</span> <span class="pre">parciales</span> <span class="pre">entre</span> <span class="pre">dos</span> <span class="pre">nodos</span> <span class="pre">conectados</span> <span class="pre">por</span> <span class="pre">una</span> <span class="pre">arista</span></code>. El recorrido hacia atrás en el grafo para calcular la derivada parcial también se conoce como paso hacia atrás (<code class="docutils literal notranslate"><span class="pre">backward</span> <span class="pre">pass</span></code>). <code class="docutils literal notranslate"><span class="pre">El</span> <span class="pre">operador</span> <span class="pre">de</span> <span class="pre">diferenciación</span> <span class="pre">parcial</span> <span class="pre">se</span> <span class="pre">aplica</span> <span class="pre">en</span> <span class="pre">cada</span> <span class="pre">nodo</span> <span class="pre">y</span> <span class="pre">las</span> <span class="pre">derivadas</span> <span class="pre">parciales</span> <span class="pre">se</span> <span class="pre">asignan</span> <span class="pre">a</span> <span class="pre">las</span> <span class="pre">respectivas</span> <span class="pre">aristas</span> <span class="pre">que</span> <span class="pre">conectan</span> <span class="pre">el</span> <span class="pre">nodo</span> <span class="pre">descendente</span> <span class="pre">a</span> <span class="pre">lo</span> <span class="pre">largo</span> <span class="pre">del</span> <span class="pre">grafo</span> <span class="pre">computacional</span></code>.</p></li>
-<li><p>Siguiendo la regla de la cadena la derivada parcial <span class="math notranslate nohighlight">\(\partial_{\omega} L\)</span> se calcula <code class="docutils literal notranslate"><span class="pre">multiplicando</span> <span class="pre">las</span> <span class="pre">derivadas</span> <span class="pre">parciales</span> <span class="pre">en</span> <span class="pre">todas</span> <span class="pre">las</span> <span class="pre">aristas</span> <span class="pre">que</span> <span class="pre">conectan</span> <span class="pre">el</span> <span class="pre">nodo</span> <span class="pre">de</span> <span class="pre">peso</span> <span class="pre">y</span> <span class="pre">el</span> <span class="pre">nodo</span> <span class="pre">de</span> <span class="pre">pérdida</span></code>. Si existen varios caminos entre un nodo de peso y el nodo de pérdida, las derivadas parciales a lo largo de cada camino se suman para obtener la <code class="docutils literal notranslate"><span class="pre">derivada</span> <span class="pre">parcial</span> <span class="pre">total</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">pérdida</span> <span class="pre">con</span> <span class="pre">respecto</span> <span class="pre">al</span> <span class="pre">peso</span></code>. Esta técnica gráfica de implementar los pasos hacia delante y hacia atrás es la técnica computacional subyacente utilizada en potentes bibliotecas de aprendizaje profundo. El paso hacia atrás se ilustra en <a class="reference internal" href="#partialderivates-single-hidden-layer"><span class="std std-numref">Fig. 8</span></a></p></li>
+<li><p>Siguiendo la regla de la cadena la derivada parcial <span class="math notranslate nohighlight">\(\partial_{\omega} L\)</span> se calcula <code class="docutils literal notranslate"><span class="pre">multiplicando</span> <span class="pre">las</span> <span class="pre">derivadas</span> <span class="pre">parciales</span> <span class="pre">en</span> <span class="pre">todas</span> <span class="pre">las</span> <span class="pre">aristas</span> <span class="pre">que</span> <span class="pre">conectan</span> <span class="pre">el</span> <span class="pre">nodo</span> <span class="pre">de</span> <span class="pre">peso</span> <span class="pre">y</span> <span class="pre">el</span> <span class="pre">nodo</span> <span class="pre">de</span> <span class="pre">pérdida</span></code>. Si existen varios caminos entre un nodo de peso y el nodo de pérdida, las derivadas parciales a lo largo de cada camino se suman para obtener la <code class="docutils literal notranslate"><span class="pre">derivada</span> <span class="pre">parcial</span> <span class="pre">total</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">pérdida</span> <span class="pre">con</span> <span class="pre">respecto</span> <span class="pre">al</span> <span class="pre">peso</span></code>. Esta técnica gráfica de implementar los pasos hacia delante y hacia atrás es la técnica computacional subyacente utilizada en potentes bibliotecas de aprendizaje profundo. El paso hacia atrás se ilustra en <code class="xref std std-numref docutils literal notranslate"><span class="pre">partialderivates_single_hidden_layer</span></code></p></li>
 </ul>
 <figure class="align-center" id="partialderivates-single-hidden-layer">
 <img alt="_images/partialderivates_single_hidden_layer.png" src="_images/partialderivates_single_hidden_layer.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Cálculo de derivadas parciales en un grafo computacional.</span><a class="headerlink" href="#partialderivates-single-hidden-layer" title="Link to this image">#</a></p>
+<p><span class="caption-text">Cálculo de derivadas parciales en un grafo computacional.</span><a class="headerlink" href="#partialderivates-single-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -546,7 +545,7 @@ p\times n_{1}+n_{1}\times n_{2}+n_{2}\times n_{3}+n_{3}.
 <figure class="align-center" id="forward-backward-single-hidden-layer">
 <img alt="_images/forward_backward_single_hidden_layer.png" src="_images/forward_backward_single_hidden_layer.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Pasos hacia delante (en azul) y hacia atrás (en rojo) sobre un grafo computacional.</span><a class="headerlink" href="#forward-backward-single-hidden-layer" title="Link to this image">#</a></p>
+<p><span class="caption-text">Pasos hacia delante (en azul) y hacia atrás (en rojo) sobre un grafo computacional.</span><a class="headerlink" href="#forward-backward-single-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -2428,24 +2427,6 @@ ts_model.fit<span class="o">(</span><span class="nv">x</span><span class="o">=</
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="arima_model.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Modelos autorregresivos integrados de media móvil</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="biblio.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Bibliografía</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               

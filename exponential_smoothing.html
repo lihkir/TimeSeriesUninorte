@@ -64,7 +64,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Bibliografía" href="biblio.html" />
+    <link rel="next" title="Modelos autorregresivos integrados de media móvil" href="arima_model.html" />
     <link rel="prev" title="Introducción a las Series de Tiempo" href="statistical_background.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -185,6 +185,7 @@
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Métodos de Suavización Exponencial</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="arima_model.html">Modelos autorregresivos integrados de media móvil</a></li>
 <li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliografía</a></li>
 </ul>
 
@@ -403,10 +404,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suavizacion-exponencial-para-datos-estacionales">Suavización exponencial para datos estacionales</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-estacional-aditivo">Modelo estacional aditivo</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-estacional-multiplicativo">Modelo estacional multiplicativo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libreria-statsmodels-tsa-holtwinters">Librería <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa.holtwinters</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-exponential-smoothing">Single Exponential Smoothing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#double-exponential-smoothing">Double Exponential Smoothing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#triple-exponential-smoothing">Triple Exponential Smoothing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tes-final-model-prediction">TES Final Model(Prediction)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion">Predicción</a></li>
 </ul>
 </li>
 </ul>
@@ -444,7 +448,7 @@ document.write(`
 <section id="introduccion-al-suavizado-de-series-temporales">
 <h2>Introducción al suavizado de series temporales<a class="headerlink" href="#introduccion-al-suavizado-de-series-temporales" title="Link to this heading">#</a></h2>
 <ul>
-<li><p>Los datos de las series temporales se componen de <em><strong>señal y ruido</strong></em>, donde la <em><strong>señal captura la dinámica intrínseca del proceso</strong></em>; sin embargo, el <em><strong>ruido representa el componente no modelado de la señal o error aleatorio no correlacionado, el cual en diferentes tiempos es estadísticamente independiente</strong></em>.</p></li>
+<li><p>Los datos de las series temporales se componen de <em><strong>señal y ruido</strong></em>, donde la <em><strong>señal captura la dinámica intrínseca del proceso</strong></em>; sin embargo, el <em><strong>ruido representa el componente no modelado de la señal o error aleatorio no correlacionado</strong></em>, el cual en diferentes tiempos es <em><strong>estadísticamente independiente</strong></em>.</p></li>
 <li><p>La dinámica intrínseca de una señal de serie temporal puede ser tan simple como <em><strong>la media del proceso</strong></em> o puede ser una <em><strong>forma funcional compleja</strong></em> dentro de las observaciones, como se representa aquí:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -2465,6 +2469,10 @@ $<span class="math notranslate nohighlight">\(
 <p>Para más detalles ver <span id="id6">[<a class="reference internal" href="biblio.html#id5" title="D.C. Montgomery, L.A. Johnson, and J.S. Gardiner. Forecasting and Time Series Analysis. Industrial engineering series. McGraw-Hill, 1990. ISBN 9780070428584. URL: https://books.google.com.co/books?id=t9HuAAAAMAAJ.">Montgomery <em>et al.</em>, 1990</a>]</span> y <span id="id7">[<a class="reference internal" href="biblio.html#id9" title="B. Abraham and J. Ledolter. Statistical Methods for Forecasting. Wiley Series in Probability and Statistics. Wiley, 2009. ISBN 9780470317297. URL: https://books.google.com.co/books?id=WIPxdb2P8sAC.">Abraham and Ledolter, 2009</a>]</span>.</p>
 </li>
 </ul>
+</section>
+</section>
+<section id="libreria-statsmodels-tsa-holtwinters">
+<h2>Librería <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa.holtwinters</span></code><a class="headerlink" href="#libreria-statsmodels-tsa-holtwinters" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -2625,7 +2633,6 @@ Freq: MS, Name: co2, dtype: float64
 </div>
 </div>
 </div>
-</section>
 <section id="single-exponential-smoothing">
 <h3>Single Exponential Smoothing<a class="headerlink" href="#single-exponential-smoothing" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
@@ -2663,7 +2670,7 @@ Freq: MS, Name: co2, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ses_model_tuning</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">48</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ses_model_tuning</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">h_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2688,7 +2695,7 @@ Freq: MS, Name: co2, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">des_base_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">smoothing_level</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">smoothing_trend</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">48</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">des_base_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">smoothing_level</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">smoothing_trend</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">h_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2732,7 +2739,7 @@ Freq: MS, Name: co2, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">des_model_tuning</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">des_model_tuning</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">h_test</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2777,7 +2784,7 @@ Freq: MS, Name: co2, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="n">tes_model_tuning</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">seasonal</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">seasonal_periods</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="n">tes_model_tuning</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">h_test</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">seasonal</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">seasonal_periods</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2786,8 +2793,8 @@ Freq: MS, Name: co2, dtype: float64
 </div>
 </div>
 </section>
-<section id="tes-final-model-prediction">
-<h3>TES Final Model(Prediction)<a class="headerlink" href="#tes-final-model-prediction" title="Link to this heading">#</a></h3>
+<section id="prediccion">
+<h3>Predicción<a class="headerlink" href="#prediccion" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tes_final_model</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">seasonal</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">):</span>
@@ -2868,11 +2875,11 @@ Freq: MS, dtype: float64
       </div>
     </a>
     <a class="right-next"
-       href="biblio.html"
+       href="arima_model.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Bibliografía</p>
+        <p class="prev-next-title">Modelos autorregresivos integrados de media móvil</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2914,10 +2921,13 @@ Freq: MS, dtype: float64
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suavizacion-exponencial-para-datos-estacionales">Suavización exponencial para datos estacionales</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-estacional-aditivo">Modelo estacional aditivo</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-estacional-multiplicativo">Modelo estacional multiplicativo</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libreria-statsmodels-tsa-holtwinters">Librería <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa.holtwinters</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-exponential-smoothing">Single Exponential Smoothing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#double-exponential-smoothing">Double Exponential Smoothing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#triple-exponential-smoothing">Triple Exponential Smoothing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tes-final-model-prediction">TES Final Model(Prediction)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion">Predicción</a></li>
 </ul>
 </li>
 </ul>
