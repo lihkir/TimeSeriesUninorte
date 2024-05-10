@@ -407,10 +407,9 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libreria-statsmodels-tsa-holtwinters">Librería <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa.holtwinters</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-exponential-smoothing">Single Exponential Smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-exponential-smoothing">Simple Exponential Smoothing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#double-exponential-smoothing">Double Exponential Smoothing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#triple-exponential-smoothing">Triple Exponential Smoothing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion">Predicción</a></li>
 </ul>
 </li>
 </ul>
@@ -487,19 +486,19 @@ document.write(`
 SS_{E}=\sum_{t=1}^{T}(y_{t}-\mu)^{2}.
 \]</div>
 <ul>
-<li><p>La estimación por mínimos cuadrados de <span class="math notranslate nohighlight">\(\mu\)</span> puede ser calculada derivando <span class="math notranslate nohighlight">\(SS_{E}\)</span> con respecto a <span class="math notranslate nohighlight">\(\mu\)</span> el igualar a cero (<em><strong>verifíquelo</strong></em>). Esto entrega</p>
+<li><p>La estimación por mínimos cuadrados de <span class="math notranslate nohighlight">\(\mu\)</span> puede ser calculada <em><strong>derivando</strong></em> <span class="math notranslate nohighlight">\(SS_{E}\)</span> <em><strong>con respecto a</strong></em> <span class="math notranslate nohighlight">\(\mu\)</span> el igualar a cero (<em><strong>verifíquelo</strong></em>). Esto entrega</p>
 <div class="math notranslate nohighlight" id="equation-constant-process-ols">
 <span class="eqno">(7)<a class="headerlink" href="#equation-constant-process-ols" title="Link to this equation">#</a></span>\[
   \hat{\mu}=\frac{1}{T}\sum_{t=1}^{T}y_{t},
   \]</div>
 <p>donde <span class="math notranslate nohighlight">\(\hat{\mu}\)</span> <em><strong>es la estimación por mínimos cuadrados</strong></em> de <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
 </li>
-<li><p>La Ecuación <a class="reference internal" href="#equation-constant-process-ols">(7)</a> muestra que la estimación por mínimos cuadrados de <span class="math notranslate nohighlight">\(\mu\)</span>, es, en efecto, el promedio de las observaciones hasta el tiempo <span class="math notranslate nohighlight">\(T\)</span>.</p></li>
+<li><p>La Ecuación <a class="reference internal" href="#equation-constant-process-ols">(7)</a> muestra que la <em><strong>estimación por mínimos cuadrados de</strong></em> <span class="math notranslate nohighlight">\(\mu\)</span>, es, en efecto, el promedio de las observaciones hasta el tiempo <span class="math notranslate nohighlight">\(T\)</span>.</p></li>
 </ul>
-<div class="admonition-observacion admonition">
+<div class="tip admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p>El principal problema con el suavizador de la Ecuación <a class="reference internal" href="#equation-constant-process-ols">(7)</a> es que <em><strong>reacciona lentamente a procesos de cambios</strong></em>, debido a que <em><strong>acumula mas y mas puntos de datos ganando algún tipo de inercia</strong></em>. La solución mas obvia es de alguna forma descontar datos mas antiguos.</p></li>
+<li><p>El principal problema con el suavizador de la Ecuación <a class="reference internal" href="#equation-constant-process-ols">(7)</a> es que <em><strong>reacciona lentamente a procesos de cambios</strong></em>, debido a que <em><strong>acumula más y más puntos de datos ganando algún tipo de inercia</strong></em>. La solución más obvia es de alguna forma descontar datos más antiguos.</p></li>
 <li><p>Una solución común es usar la <em><strong>media móvil simple</strong></em> definida por</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-simple-moving-avg">
@@ -507,14 +506,14 @@ SS_{E}=\sum_{t=1}^{T}(y_{t}-\mu)^{2}.
 M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{t}.
 \]</div>
 <ul>
-<li><p>Una media reaccionará mas rápido a cambios si <span class="math notranslate nohighlight">\(N\)</span> es pequeño. Dado que para observaciones no correlacionadas con varianza constante <span class="math notranslate nohighlight">\(\sigma^{2}\)</span> se tiene que (<em><strong>verifíquelo</strong></em>)</p>
+<li><p>Una media <em><strong>reaccionará más rápido a cambios si</strong></em> <span class="math notranslate nohighlight">\(N\)</span> <em><strong>es pequeño</strong></em>. Dado que para observaciones no correlacionadas con varianza constante <span class="math notranslate nohighlight">\(\sigma^{2}\)</span> se tiene que</p>
 <div class="math notranslate nohighlight" id="equation-variance-sma">
 <span class="eqno">(9)<a class="headerlink" href="#equation-variance-sma" title="Link to this equation">#</a></span>\[
     \text{Var}(M_{T})=\frac{\sigma^{2}}{N}.
     \]</div>
 </li>
-<li><p>Dada la Ecuación <a class="reference internal" href="#equation-variance-sma">(9)</a>. Si se espera que el proceso es constante, un valor grande de <span class="math notranslate nohighlight">\(N\)</span> puede ser usado, mientras que, un valor pequeño de <span class="math notranslate nohighlight">\(N\)</span> es preferido si el proceso es cambiante.</p></li>
-<li><p>Queda como ejercicio para el lector verificar que la <em><strong>función de autocorrelación (ACF)</strong></em> de la media móvil con <span class="math notranslate nohighlight">\(k\)</span>-lags está dada por</p></li>
+<li><p>Dada la Ecuación <a class="reference internal" href="#equation-variance-sma">(9)</a>. Si se espera que el <em><strong>proceso es constante</strong></em>, un <em><strong>valor grande de</strong></em> <span class="math notranslate nohighlight">\(N\)</span> puede ser usado, mientras que, un <em><strong>valor pequeño de</strong></em> <span class="math notranslate nohighlight">\(N\)</span> <em><strong>es preferido si el proceso es cambiante</strong></em>.</p></li>
+<li><p>Queda como ejercicio para el lector verificar que la <em><strong>función de autocorrelación (ACF)</strong></em> de la media móvil con <span class="math notranslate nohighlight">\(k\)</span>-lags está dada por (<em><strong><code class="docutils literal notranslate"><span class="pre">verifíquelo</span></code></strong></em>)</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-acf-moving-average">
 <span class="eqno">(10)<a class="headerlink" href="#equation-acf-moving-average" title="Link to this equation">#</a></span>\[\begin{split}
@@ -531,28 +530,33 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 <div class="proof theorem admonition" id="th-simple_exp_smoothing">
 <p class="admonition-title"><span class="caption-number">Theorem 2 </span> (Suavización exponencial simple)</p>
 <section class="theorem-content" id="proof-content">
-<p>Dada una serie de tiempo <span class="math notranslate nohighlight">\((y_{t})_{t=1}^{T}\)</span>. Una <em><strong>suavización exponencial ponderada</strong></em> está definida por:</p>
+<ul>
+<li><p>Dada una serie de tiempo <span class="math notranslate nohighlight">\((y_{t})_{t=1}^{T}\)</span>. Una <em><strong>suavización exponencial ponderada</strong></em> está definida por:</p>
 <div class="math notranslate nohighlight" id="equation-eq-simple-exp-smoothing">
 <span class="eqno">(11)<a class="headerlink" href="#equation-eq-simple-exp-smoothing" title="Link to this equation">#</a></span>\[
-\sum_{t=1}^{T-1}\theta^{t}y_{T-t}=y_{T}+\theta y_{T-1}+\theta^{2}y_{t-2}+\cdots+\theta^{T-1}y_{1}
-\]</div>
-<p>donde <span class="math notranslate nohighlight">\(\theta\)</span> satisface <span class="math notranslate nohighlight">\(|\theta|&lt;1\)</span>. Esto es, observaciones pasadas son descontadas de manera geométricamente descendiente. Entonces, la <em><strong>suavización exponencial simple</strong></em> está representada por:</p>
+    \sum_{t=0}^{T-1}\theta^{t}y_{T-t}=y_{T}+\theta y_{T-1}+\theta^{2}y_{t-2}+\cdots+\theta^{T-1}y_{1}
+    \]</div>
+<p>donde <span class="math notranslate nohighlight">\(\theta\)</span> satisface <span class="math notranslate nohighlight">\(|\theta|&lt;1\)</span>. Esto es, <em><strong>observaciones pasadas son descontadas de manera geométricamente descendiente</strong></em>.</p>
+</li>
+<li><p>Entonces, la <em><strong>suavización exponencial simple</strong></em> está representada por:</p>
 <div class="math notranslate nohighlight">
 \[
-\tilde{y}_{T}=\lambda y_{T}+(1-\lambda)\tilde{y}_{T-1},\quad\text{donde}\quad\lambda=1-\theta.
-\]</div>
+    \tilde{y}_{T}=\lambda y_{T}+(1-\lambda)\tilde{y}_{T-1},\quad\text{donde}\quad\lambda=1-\theta.
+    \]</div>
 <p><span class="math notranslate nohighlight">\(\lambda\)</span> es conocido como el <em><strong>factor de descuento</strong></em>. Nótese que el factor de descuento <span class="math notranslate nohighlight">\(\lambda\)</span>, representa el peso colocado sobre la última observación <span class="math notranslate nohighlight">\(y_{T}\)</span> y <span class="math notranslate nohighlight">\(1-\lambda\)</span> el peso asignado al valor suavizado de la previa observación <span class="math notranslate nohighlight">\(\tilde{y}_{T-1}\)</span>.</p>
+</li>
+</ul>
 </section>
-</div><p><strong><code class="docutils literal notranslate"><span class="pre">Demostración</span></code></strong></p>
+</div><p><em><strong><code class="docutils literal notranslate"><span class="pre">Demostración</span></code></strong></em></p>
 <ul class="simple">
-<li><p>Por hipótesis, pasadas observaciones son descontadas en forma geométricamente descendente, con <span class="math notranslate nohighlight">\(|\theta|&lt;1\)</span>. Nótese que el suavizador <a class="reference internal" href="#equation-eq-simple-exp-smoothing">(11)</a> no es una media movil simple. En efecto:</p></li>
+<li><p>Por hipótesis, <em><strong>pasadas observaciones son descontadas en forma geométricamente descendente</strong></em>, con <span class="math notranslate nohighlight">\(|\theta|&lt;1\)</span>. Nótese que el suavizador de la Ecuación <a class="reference internal" href="#equation-eq-simple-exp-smoothing">(11)</a> no es una media movil simple. En efecto:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
 \sum_{t=0}^{T-1}\theta^{t}&amp;=1+\theta+\theta^2+\cdots+\theta^{T-1},\quad\text{multiplicando por}~(1-\theta)\\
 (1-\theta)\sum_{t=0}^{T-1}\theta^{t}&amp;=(1-\theta)(1+\theta+\theta^2+\cdots+\theta^{T-1})\\
-&amp;=(1+\theta+\theta^2+\cdots+\theta^{T-1})-(\theta+\theta^2+\theta^{3}+\cdots+\theta^{T-1}+\theta^{T})\\
+&amp;=(1+\theta+\theta^2+\cdots+\theta^{T-1})-(\theta+\theta^2+\theta^{3}+\cdots+\theta^{T-1}+\theta^{T})\\[3mm]
 &amp;=1-\theta^{T}\Longrightarrow\\
 \sum_{t=0}^{T-1}\theta^{t}&amp;=\frac{1-\theta^{T}}{1-\theta}.
 \end{align*}
@@ -563,16 +567,17 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 \[
     \sum_{t=0}^{T-1}\theta^{t}=\frac{1-\theta^{T}}{1-\theta},
     \]</div>
-<p>no necesariamente es igual a 1. Esto puede ser ajustado multiplicando por <span class="math notranslate nohighlight">\((1-\theta)/(1-\theta^{T})\)</span> la ecuación <a class="reference internal" href="#equation-eq-simple-exp-smoothing">(11)</a>.</p>
+<p>no necesariamente es igual a 1. Esto puede ser ajustado multiplicando la Ecuación <a class="reference internal" href="#equation-eq-simple-exp-smoothing">(11)</a> por <span class="math notranslate nohighlight">\((1-\theta)/(1-\theta^{T})\)</span>.</p>
 </li>
 </ul>
 <ul class="simple">
-<li><p>Además, dado que <span class="math notranslate nohighlight">\((1-\theta)/(1-\theta^{T})\rightarrow 1-\theta\)</span> cuando <span class="math notranslate nohighlight">\(T\rightarrow\infty,~ |\theta|&lt;1\)</span>. Entonces <a class="reference internal" href="#equation-eq-simple-exp-smoothing">(11)</a> puede reescribirse como:</p></li>
+<li><p>Además, dado que <span class="math notranslate nohighlight">\((1-\theta)/(1-\theta^{T})\rightarrow 1-\theta\)</span> cuando <span class="math notranslate nohighlight">\(T\rightarrow\infty,~ |\theta|&lt;1\)</span>. Entonces, la Ecuación <a class="reference internal" href="#equation-eq-simple-exp-smoothing">(11)</a> puede reescribirse como:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
-\tilde{y}_{T}&amp;=\frac{1-\theta}{1-\theta^{T}}\sum_{t=0}^{T-1}\theta^{t}y_{T-t}\overset{T\rightarrow\infty}{=}(1-\theta)\sum_{t=0}^{T-1}\theta^{t}y_{T-t}\\
+\tilde{y}_{T}&amp;=\frac{1-\theta}{1-\theta^{T}}\sum_{t=0}^{T-1}\theta^{t}y_{T-t}\\
+&amp;\hspace{-2mm}\overset{T\rightarrow\infty}{=}(1-\theta)\sum_{t=0}^{T-1}\theta^{t}y_{T-t}\\
 &amp;=(1-\theta)(y_{T}+\theta y_{T-1}+\theta^{2}y_{T-2}+\cdots+\theta^{T-1}y_{1})
 \end{align*}
 \end{split}\]</div>
@@ -584,7 +589,7 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 \tilde{y}_{T}=(1-\theta)(y_{T}+\theta y_{T-1}+\theta^{2}y_{T-2}+\cdots+\theta^{T-1}y_{1})
 \]</div>
 <ul class="simple">
-<li><p>Una expresión alternativa para la suavización exponencial simple es:</p></li>
+<li><p>Una <em><strong>expresión alternativa</strong></em> para la suavización exponencial simple es:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -596,7 +601,7 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 \end{align*}
 \end{split}\]</div>
 <ul class="simple">
-<li><p>Esto es, la suavización exponencial de primer orden, puede verse como combianción lineal de la observación actual y la observación suavizada en un tiempo previo. Definiendo <span class="math notranslate nohighlight">\(\lambda=1-\theta\)</span>, (<em><strong>factor de corrección</strong></em>) se tiene que:</p></li>
+<li><p>Esto es, la suavización exponencial de primer orden, puede verse como <em><strong>combinación lineal de la observación actual y la observación suavizada en un tiempo previo</strong></em>. Definiendo <span class="math notranslate nohighlight">\(\lambda=1-\theta\)</span>, (<em><strong>factor de corrección</strong></em>) se tiene que:</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-eq-simple-exp-smoothing3">
 <span class="eqno">(13)<a class="headerlink" href="#equation-eq-simple-exp-smoothing3" title="Link to this equation">#</a></span>\[
@@ -604,7 +609,7 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 \]</div>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
-<p>Análogamente a la longitud del periodo en la media movil, <em><strong>un asunto importante para la suavización exponencial es la selección del factor de descuento</strong></em> <span class="math notranslate nohighlight">\(\lambda\)</span>. Además, a partir de la ecuación <a class="reference internal" href="#equation-eq-simple-exp-smoothing3">(13)</a> podemos observa que el cálculo de <span class="math notranslate nohighlight">\(\tilde{y}_{1}\)</span> va a requerir conocer <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span>.</p>
+<p>Análogamente a la longitud del periodo en la media movil, <em><strong>un asunto importante para la suavización exponencial es la selección del factor de descuento</strong></em> <span class="math notranslate nohighlight">\(\lambda\)</span>. Además, a partir de la Ecuación <a class="reference internal" href="#equation-eq-simple-exp-smoothing3">(13)</a> podemos observa que el cálculo de <span class="math notranslate nohighlight">\(\tilde{y}_{1}\)</span> va a requerir conocer <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span>.</p>
 </div>
 <div class="proof theorem admonition" id="th-initial-value-simple-exp-smoothing">
 <p class="admonition-title"><span class="caption-number">Theorem 3 </span> (Selección de <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span>)</p>
@@ -631,7 +636,7 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 \end{align*}
 \end{split}\]</div>
 <ul class="simple">
-<li><p>Por lo tanto, cuando <span class="math notranslate nohighlight">\(T\rightarrow\infty,~ (1-\lambda)^{T}\rightarrow 0\)</span>, esto es, la contribución de <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span> a <span class="math notranslate nohighlight">\(\tilde{y}_{T}\)</span> es mínima. Esto es, la estimación de <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span> no es relevante para un conjunto grande de datos.</p></li>
+<li><p>Por lo tanto, cuando <span class="math notranslate nohighlight">\(T\rightarrow\infty,~ (1-\lambda)^{T}\rightarrow 0\)</span>, esto es, la contribución de <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span> a <span class="math notranslate nohighlight">\(\tilde{y}_{T}\)</span> es mínima. Esto es, la estimación de <span class="math notranslate nohighlight">\(\tilde{y}_{0}\)</span> <em><strong>no es relevante para un conjunto grande de datos</strong></em>.</p></li>
 </ul>
 </section>
 <section id="el-valor-de-lambda">
@@ -671,7 +676,7 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 \[\begin{split}
 \begin{align*}
 (1-(1-\lambda)^{2})\sum_{t=0}^{T-1}(1-\lambda)^{2t} &amp;= 1+(1-\lambda)^{2}+(1-\lambda)^{4}+\cdots+(1-\lambda)^{2(T-1)}\\
-&amp;- ((1-\lambda)^{2}+(1-\lambda)^{4}+\cdots+(1-\lambda)^{2T}\\[3mm]
+&amp;- ((1-\lambda)^{2}+(1-\lambda)^{4}+\cdots+(1-\lambda)^{2T})\\[3mm]
 &amp;= 1-(1-\lambda)^{2T}\xrightarrow[T\rightarrow\infty]{}1,\quad |1-\lambda|&lt;1\Rightarrow\\
 \sum_{t=0}^{T-1}(1-\lambda)^{2t} &amp;= \frac{1}{\lambda(2-\lambda)}
 \end{align*}
@@ -686,8 +691,8 @@ M_{T}= \frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{N}y_{
 \end{align}
 \]</div>
 <ul class="simple">
-<li><p>Nótese que si <span class="math notranslate nohighlight">\(\lambda\rightarrow1\)</span>, <span class="math notranslate nohighlight">\(\text{Var}(\tilde{y}_{T})\rightarrow\text{Var}(y_{T})\)</span>, y si <span class="math notranslate nohighlight">\(\lambda\rightarrow0\)</span>, <span class="math notranslate nohighlight">\(\text{Var}(\tilde{y}_{T}\rightarrow0)\)</span>. La pregunta ahora es, <em><strong>¿cuánto suavizado se necesita?. En la literatura se recomienda <span class="math notranslate nohighlight">\(\lambda\)</span> entre 0.1 y 0.4</strong></em> y, de hecho, funcionan bien en la práctica. Un método más riguroso para encontrar el valor <span class="math notranslate nohighlight">\(\lambda\)</span> se discutirá más adelante en este capítulo.</p></li>
-<li><p>Como medidas de precisión usaremos las siguientes métricas que vienen ya implementadas en <code class="docutils literal notranslate"><span class="pre">Python</span></code>; <code class="docutils literal notranslate"><span class="pre">MAPE,</span> <span class="pre">MAD</span></code> y <code class="docutils literal notranslate"><span class="pre">MSD</span></code>.</p></li>
+<li><p>Nótese que si <span class="math notranslate nohighlight">\(\lambda\rightarrow1\)</span>, <span class="math notranslate nohighlight">\(\text{Var}(\tilde{y}_{T})\rightarrow\text{Var}(y_{T})\)</span>, y si <span class="math notranslate nohighlight">\(\lambda\rightarrow0\)</span>, <span class="math notranslate nohighlight">\(\text{Var}(\tilde{y}_{T})\rightarrow0\)</span>. La pregunta ahora es, <em><strong>¿cuánto suavizado se necesita?. En la literatura se recomienda <span class="math notranslate nohighlight">\(\lambda\)</span> entre 0.1 y 0.4</strong></em> y, de hecho, funcionan bien en la práctica. Un método más riguroso para encontrar el valor <span class="math notranslate nohighlight">\(\lambda\)</span> se discutirá más adelante en este capítulo.</p></li>
+<li><p>Como <em><strong>medidas de precisión</strong></em> usaremos las siguientes métricas las cuales vienen ya implementadas en <code class="docutils literal notranslate"><span class="pre">Python</span></code>; <code class="docutils literal notranslate"><span class="pre">MAPE,</span> <span class="pre">MAD</span></code> y <code class="docutils literal notranslate"><span class="pre">MSD</span></code>.</p></li>
 <li><p>El <em><strong>error porcentual medio absoluto (MAPE)</strong></em> es el cambio porcentual medio absoluto entre el valor predicho, esto es <span class="math notranslate nohighlight">\(\tilde{y}_{t-1}:=\tilde{y}_{t}(t-1)\)</span>, para una predicción <em><strong>one-step-ahead</strong></em> y el valor real dado por</p></li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -1050,6 +1055,9 @@ dtype: float64
 </table>
 </div></div></div>
 </div>
+<ul class="simple">
+<li><p>En este caso, se obtuvo un MAPE del 0.87% lo cual significa que, <em><strong>en promedio, las predicciones tienen un error del 0.87% en relación con los valores reales</strong></em>, el cual es más alto que el implementado en la función <code class="docutils literal notranslate"><span class="pre">firstsmooth</span></code>.</p></li>
+</ul>
 </section>
 <section id="modelado-de-datos-de-series-temporales">
 <h2>Modelado de datos de series temporales<a class="headerlink" href="#modelado-de-datos-de-series-temporales" title="Link to this heading">#</a></h2>
@@ -1095,12 +1103,12 @@ SS_{E}=\sum_{t=1}^{T}(y_{t}-\mu)^{2}
 SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|\theta|&lt;1.
 \]</div>
 <ul class="simple">
-<li><p>Derivando <a class="reference internal" href="#equation-error-sq-sum1">(14)</a> con respecto a <span class="math notranslate nohighlight">\(\beta_{0}\)</span> e igualando a cero obtenemos el estimador por mínimos cuadrado para <span class="math notranslate nohighlight">\(\beta_{0}\)</span></p></li>
+<li><p>Derivando la Ecuación <a class="reference internal" href="#equation-error-sq-sum1">(14)</a> con respecto a <span class="math notranslate nohighlight">\(\beta_{0}\)</span> e igualando a cero obtenemos el <em><strong>estimador por mínimos cuadrados</strong></em> para <span class="math notranslate nohighlight">\(\beta_{0}\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 \begin{align*}
-\frac{\partial SS_{E}^{\star}}{\partial\beta_{0}} &amp;= \frac{\partial}{\partial\beta_{0}}\left(\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\hat{\beta}_{0})\right)=-2\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\hat{\beta}_{0})=0
+\frac{\partial SS_{E}^{\star}}{\partial\beta_{0}} &amp;= \frac{\partial}{\partial\beta_{0}}\left(\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\hat{\beta}_{0})^{2}\right)=-2\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\hat{\beta}_{0})=0
 \end{align*}
 \]</div>
 <ul class="simple">
@@ -1164,13 +1172,13 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 \text{E}(\tilde{y}_{T})=\text{E}\left(\lambda\sum_{t=0}^{T-1}(1-\lambda)^{t}y_{T-t}\right)=\lambda\sum_{t=0}^{T-1}(1-\lambda)^{t}\text{E}(y_{T-t}).
 \]</div>
 <ul class="simple">
-<li><p>Dado que para la tendencia lineal: <span class="math notranslate nohighlight">\(\text{E}(y_{t})=E(\beta_{0})+\beta_{1}t+\varepsilon_{t})=\beta_{0}+\beta_{1}t\)</span>, entonces</p></li>
+<li><p>Dado que para la tendencia lineal: <span class="math notranslate nohighlight">\(\text{E}(y_{t})=\text{E}(\beta_{0}+\beta_{1}t+\varepsilon_{t})=\beta_{0}+\beta_{1}t\)</span>, entonces</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
 \text{E}(\tilde{y}_{T}) &amp;= \lambda\sum_{t=0}^{T-1}(1-\lambda)^{t}(\beta_{0}+\beta_{1}(T-t))\\
-&amp;= \lambda\sum_{t=0}^{T-1}(1-\lambda)^{t}(\beta_{0}+\beta_{1}t)-\lambda\sum_{t=0}^{T-1}(1-\lambda)^{t}(\beta_{1}t)\\
+&amp;= \lambda\sum_{t=0}^{T-1}(1-\lambda)^{t}(\beta_{0}+\beta_{1}T)-\lambda\sum_{t=0}^{T-1}(1-\lambda)^{t}(\beta_{1}t)\\
 &amp;= (\beta_{0}+\beta_{1}T)\lambda\sum_{t=0}^{T-1}(1-\lambda)^{t}-\lambda\beta_{1}\sum_{t=0}^{T-1}(1-\lambda)^{t}t.
 \end{align*}
 \end{split}\]</div>
@@ -1195,8 +1203,8 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 \text{E}(\tilde{y}_{T})=(\beta_{0}+\beta_{1}T)\lambda\left(\frac{1}{\lambda}\right)-\lambda\beta_{1}\left(\frac{1-\lambda}{\lambda^{2}}\right)=(\beta_{0}+\beta_{1}T)-\frac{1-\lambda}{\lambda}\beta_{1}=\text{E}(y_{T})-\frac{1-\lambda}{\lambda}\beta_{1}.
 \]</div>
 <ul class="simple">
-<li><p>Esto es, la suavización exponencial simple es <em><strong>sesgada como estimador</strong></em> y la cantidad de sesgo está dada por <span class="math notranslate nohighlight">\(-(1-\lambda)\beta_{1}/\lambda\)</span>, la cual puede generar errores de subestimación.</p></li>
-<li><p>Una solución puede ser usar <span class="math notranslate nohighlight">\(\lambda\)</span> grande ya que <span class="math notranslate nohighlight">\((1-\lambda)/\lambda\rightarrow0\)</span> cuando <span class="math notranslate nohighlight">\(\lambda\rightarrow1\)</span>. Técnicas autoadaptativas para <span class="math notranslate nohighlight">\(\lambda\)</span> pueden ser estudiadas, las cuales sigan los cambios en el proceso.</p></li>
+<li><p>Esto es, la suavización exponencial simple es <em><strong>sesgada como estimador</strong></em> y la cantidad de sesgo está dada por <span class="math notranslate nohighlight">\(-(1-\lambda)\beta_{1}/\lambda\)</span>, la cual puede generar <em><strong>errores de subestimación</strong></em>.</p></li>
+<li><p>Una solución puede ser usar <span class="math notranslate nohighlight">\(\lambda\)</span> grande, ya que <span class="math notranslate nohighlight">\((1-\lambda)/\lambda\rightarrow0\)</span> cuando <span class="math notranslate nohighlight">\(\lambda\rightarrow1\)</span>. Técnicas autoadaptativas para <span class="math notranslate nohighlight">\(\lambda\)</span> pueden ser estudiadas, las cuales sigan los cambios en el proceso.</p></li>
 </ul>
 <ul>
 <li><p>Dado que la suavización de segundo orden está dada por</p>
@@ -1208,7 +1216,7 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 </li>
 </ul>
 <ul class="simple">
-<li><p>Por motivos de derivación de la expresión, consideramos el mismo <span class="math notranslate nohighlight">\(\lambda\)</span> para <span class="math notranslate nohighlight">\(\tilde{y}_{T}^{(1)}\)</span> y <span class="math notranslate nohighlight">\(\tilde{y}_{t}^{(2)}\)</span>. Dado que la suavización exponencial de primer orden es sesgada, su suavización (<em><strong>suavización de segundo orden</strong></em>) también es sesgada. Entonces</p></li>
+<li><p>Por <em><strong>motivos de derivación de la expresión, consideramos el mismo</strong></em> <span class="math notranslate nohighlight">\(\lambda\)</span> para <span class="math notranslate nohighlight">\(\tilde{y}_{T}^{(1)}\)</span> y <span class="math notranslate nohighlight">\(\tilde{y}_{t}^{(2)}\)</span>. Dado que la suavización exponencial de primer orden es sesgada, su suavización (<em><strong>suavización de segundo orden</strong></em>) también es sesgada. Entonces</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -1251,7 +1259,7 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 \textcolor{red}{\hat{\beta}_{0, T} = \left(2-T\frac{\lambda}{1-\lambda}\right)\tilde{y}_{T}^{(1)}-\left(1-T\frac{\lambda}{1-\lambda}\right)y_{T}^{(2)}},
 \]</div>
 <ul class="simple">
-<li><p>Combinando las Ecuaciones <a class="reference internal" href="#equation-beta1-estimation-eq">(15)</a>, <a class="reference internal" href="#equation-beta0-estimation-eq-yhat">(17)</a> tenemos que</p></li>
+<li><p>Combinando las Ecuaciones <a class="reference internal" href="#equation-beta1-estimation-eq">(15)</a>-<a class="reference internal" href="#equation-beta0-estimation-eq-yhat">(17)</a> tenemos que</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1382,7 +1390,7 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p>Incluso para el modelo cuadrático, los cálculos se vuelven bastante complicados. Consulte <span id="id1">[<a class="reference internal" href="biblio.html#id5" title="D.C. Montgomery, L.A. Johnson, and J.S. Gardiner. Forecasting and Time Series Analysis. Industrial engineering series. McGraw-Hill, 1990. ISBN 9780070428584. URL: https://books.google.com.co/books?id=t9HuAAAAMAAJ.">Montgomery <em>et al.</em>, 1990</a>]</span>, <span id="id2">[<a class="reference internal" href="biblio.html#id6" title="Robert Goodell Brown. Smoothing, forecasting and prediction of discrete time series. Courier Corporation, 2004.">Brown, 2004</a>]</span> y <span id="id3">[<a class="reference internal" href="biblio.html#id9" title="B. Abraham and J. Ledolter. Statistical Methods for Forecasting. Wiley Series in Probability and Statistics. Wiley, 2009. ISBN 9780470317297. URL: https://books.google.com.co/books?id=WIPxdb2P8sAC.">Abraham and Ledolter, 2009</a>]</span> para las <em><strong>soluciones a problemas de suavizamiento exponencial de orden superior</strong></em>.</p></li>
+<li><p>Incluso para el modelo cuadrático, los cálculos se vuelven bastante complicados. Consulte <span id="id1">[<a class="reference internal" href="biblio.html#id5" title="D.C. Montgomery, L.A. Johnson, and J.S. Gardiner. Forecasting and Time Series Analysis. Industrial engineering series. McGraw-Hill, 1990. ISBN 9780070428584. URL: https://books.google.com.co/books?id=t9HuAAAAMAAJ.">Montgomery <em>et al.</em>, 1990</a>]</span>, <span id="id2">[<a class="reference internal" href="biblio.html#id6" title="Robert Goodell Brown. Smoothing, forecasting and prediction of discrete time series. Courier Corporation, 2004.">Brown, 2004</a>]</span> y <span id="id3">[<a class="reference internal" href="biblio.html#id9" title="B. Abraham and J. Ledolter. Statistical Methods for Forecasting. Wiley Series in Probability and Statistics. Wiley, 2009. ISBN 9780470317297. URL: https://books.google.com.co/books?id=WIPxdb2P8sAC.">Abraham and Ledolter, 2009</a>]</span> para las <em><strong>soluciones a problemas de suavizamiento exponencial de orden superior</strong></em> (<em><strong><code class="docutils literal notranslate"><span class="pre">bonus</span></code></strong></em>).</p></li>
 <li><p>Si un polinomio de alto orden parece ser necesario para la serie de tiempo, los <em><strong>modelos autorregresivos de media móvil integrada (ARIMA) pueden considerarse en cambio</strong></em>.</p></li>
 </ul>
 </div>
@@ -1392,28 +1400,28 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 <div class="admonition-forecasting admonition">
 <p class="admonition-title">Forecasting</p>
 <ul class="simple">
-<li><p>En el tiempo <span class="math notranslate nohighlight">\(T\)</span>, deseamos predecir la observación en la unidad de tiempo siguiente, <span class="math notranslate nohighlight">\(T+1\)</span>, u otro valor en el futuro. Denotaremos el pronóstico <span class="math notranslate nohighlight">\(\tau\)</span> pasos hacia adelante (<em>horizonte</em> <span class="math notranslate nohighlight">\(\tau\)</span>) realizado en el tiempo <span class="math notranslate nohighlight">\(T\)</span> como <span class="math notranslate nohighlight">\(\hat{y}_{T+\tau}(T)\)</span>.</p></li>
+<li><p>En el tiempo <span class="math notranslate nohighlight">\(T\)</span>, deseamos <em><strong>predecir la observación en la unidad de tiempo siguiente</strong></em>, <span class="math notranslate nohighlight">\(T+1\)</span>, u otro valor en el futuro. Denotaremos el pronóstico <span class="math notranslate nohighlight">\(\tau\)</span> pasos hacia adelante (<em>horizonte</em> <span class="math notranslate nohighlight">\(\tau\)</span>) realizado en el tiempo <span class="math notranslate nohighlight">\(T\)</span> como <span class="math notranslate nohighlight">\(\hat{y}_{T+\tau}(T)\)</span>.</p></li>
 </ul>
 </div>
 <section id="proceso-constante">
 <h3>Proceso constante<a class="headerlink" href="#proceso-constante" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>La suavización exponencial de primer orden para el proceso constante está dada por</p></li>
+<li><p>La <em><strong>suavización exponencial de primer orden</strong></em> para el proceso constante está dada por</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 \tilde{y}_{T}=\lambda y_{T}+(1-\lambda)\tilde{y}_{T-1}
 \]</div>
 <ul class="simple">
-<li><p>Se demostró también que <span class="math notranslate nohighlight">\(f(t, \boldsymbol{\beta})=\beta_{0}\)</span> puede ser estimado con <span class="math notranslate nohighlight">\(\tilde{y}_{T}\)</span>. Dado que hasta el momento, el error aleatorio no puede ser predicho</p></li>
+<li><p>Se demostró también que <span class="math notranslate nohighlight">\(f(t, \boldsymbol{\beta})=\beta_{0}\)</span> puede ser estimado con <span class="math notranslate nohighlight">\(\tilde{y}_{T}\)</span>. Dado que <em><strong>hasta el momento, el error aleatorio no puede ser predicho</strong></em></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 \hat{y}_{T+\tau}(T)=\tilde{y}_{T}=\hat{\beta}_{0}.
 \]</div>
 <ul class="simple">
-<li><p>Dado que pronósticos constantes pueden no ser correctos a medida que vamos acumulando observaciones, actualizamos nuestra predicción por medio de técnicas como el <em><strong>rolling</strong></em>.</p></li>
-<li><p>Por ejemplo, si la observación en el tiempo <span class="math notranslate nohighlight">\(T+1\)</span> está disponible, nuestro pronostico para futuras observaciones sería</p></li>
+<li><p>Dado que <em><strong>pronósticos constantes pueden no ser correctos</strong></em> a medida que vamos acumulando observaciones, <em><strong>actualizamos nuestra predicción por medio de técnicas como <code class="docutils literal notranslate"><span class="pre">rolling</span></code></strong></em>.</p></li>
+<li><p>Por ejemplo, si la observación en el tiempo <span class="math notranslate nohighlight">\(T+1\)</span> está disponible, nuestro pronóstico para futuras observaciones sería</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-fc-in-tplustau-eq">
 <span class="eqno">(20)<a class="headerlink" href="#equation-fc-in-tplustau-eq" title="Link to this equation">#</a></span>\[\begin{split}
@@ -1475,7 +1483,7 @@ SS_{E}(\lambda)=\sum_{t=1}^{T}e_{t}^{2}(1).
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">speed_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;weekly_average_speed.csv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">speed_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/lihkir/Data/main/weekly_average_speed.csv&quot;</span><span class="p">)</span>
 <span class="n">speed_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1637,19 +1645,19 @@ dtype: float64
 <div class="admonition-proceso-contante admonition">
 <p class="admonition-title">Proceso contante</p>
 <ul>
-<li><p>Para un proceso constante, el intervalo de predicción <span class="math notranslate nohighlight">\(100(1-\alpha/2)\)</span> para cualquier horizonte <span class="math notranslate nohighlight">\(\tau\)</span> está dado por</p>
+<li><p>Para un <em><strong>proceso constante, el intervalo de predicción</strong></em> <span class="math notranslate nohighlight">\(100(1-\alpha/2)\)</span> para cualquier horizonte <span class="math notranslate nohighlight">\(\tau\)</span> está dado por</p>
 <div class="math notranslate nohighlight">
 \[
     \tilde{y}\pm Z_{\alpha/2}\hat{\sigma}_{e},
     \]</div>
-<p>donde <span class="math notranslate nohighlight">\(\tilde{y}_{T}\)</span> es la suavización exponencial de primer orden, <span class="math notranslate nohighlight">\(Z_{\alpha/2}\)</span> es el <span class="math notranslate nohighlight">\(100(1-\alpha/2)\)</span> percentíl de la distribución normal estándar, y <span class="math notranslate nohighlight">\(\hat{\sigma}_{e}\)</span> es la estimación de la desviación estándar de los errores predichos.</p>
+<p>donde <span class="math notranslate nohighlight">\(\tilde{y}_{T}\)</span> es la <em><strong>suavización exponencial de primer orden</strong></em>, <span class="math notranslate nohighlight">\(Z_{\alpha/2}\)</span> es el <span class="math notranslate nohighlight">\(100(1-\alpha/2)\)</span> percentíl de la distribución normal estándar, y <span class="math notranslate nohighlight">\(\hat{\sigma}_{e}\)</span> es la estimación de la desviación estándar de los errores predichos.</p>
 </li>
 </ul>
 </div>
 <ul class="simple">
 <li><p>Encontraremos solución a problemas de intervalo constante para todos los horizontes de predicción.</p></li>
 </ul>
-<div class="admonition-proceso-de-tendencia-lineal admonition">
+<div class="tip admonition">
 <p class="admonition-title">Proceso de tendencia lineal</p>
 <ul class="simple">
 <li><p>El pronóstico de horizonte <span class="math notranslate nohighlight">\(\tau\)</span> para el <em><strong>modelo de tendencia lineal</strong></em> está dado por</p></li>
@@ -2118,23 +2126,23 @@ Length: 120, dtype: float64
 <section id="estimacion-de-sigma-e-2">
 <h2>Estimación de <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span><a class="headerlink" href="#estimacion-de-sigma-e-2" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>En el proceso de estimar la varianza de los errores de pronóstico, representada como <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span>, frecuentemente se postula que el modelo subyacente (por ejemplo, constante, tendencia lineal) es <em><strong>correcto e invariante en el tiempo</strong></em>. Bajo estas condiciones, dos metodologías distintas están disponibles para estimar <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span></p></li>
+<li><p>En el proceso de <em><strong>estimar la varianza de los errores de pronóstico</strong></em>, representada como <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span>, frecuentemente se postula que <em><strong>el modelo subyacente</strong></em> (por ejemplo, <em>constante, tendencia lineal</em>) es <em><strong>correcto e invariante en el tiempo</strong></em> (<em>predicciones precisas y estables a medida que se avanza en el tiempo</em>). Bajo estas condiciones, dos metodologías distintas están disponibles para estimar <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span></p></li>
 </ul>
 <div class="tip admonition">
-<p class="admonition-title">Assignment</p>
+<p class="admonition-title">Bonus</p>
 <ul class="simple">
-<li><p>Encuentre la estimación de la varianza de los errores de pronóstico <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span> para el modelo de suavización exponencial. Utilice <code class="docutils literal notranslate"><span class="pre">Látex</span></code> para redactar la solución y además, utilice los siguientes documentos como guía: <a class="reference external" href="https://www.pomsmeetings.org/confproceedings/015/fullpapers/015-0271.pdf">Peter Wanke et. al</a> y <a class="reference external" href="http://adjifern.lecture.ub.ac.id/files/2016/03/bahan-ADE-minggu-11b.pdf">Kuliah Genap</a>.</p></li>
+<li><p>Encuentre la <em><strong>estimación de la varianza de los errores de pronóstico</strong></em> <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span> para el modelo de suavización exponencial. Utilice los siguientes documentos como guía <a class="reference external" href="https://www.pomsmeetings.org/confproceedings/015/fullpapers/015-0271.pdf">Peter Wanke et. al</a> y <a class="reference external" href="http://adjifern.lecture.ub.ac.id/files/2016/03/bahan-ADE-minggu-11b.pdf">Kuliah Genap</a>, así como aquellos que encuentre en su revisión.</p></li>
 </ul>
 </div>
 <ol class="arabic simple">
-<li><p>Dado el pronostico <code class="docutils literal notranslate"><span class="pre">one-step-ahead</span></code> definido como <span class="math notranslate nohighlight">\(e_{T}(1)=y_{T}-\hat{y}_{T}(T-1)\)</span>. El objetivo es aplicar el modelo a los datos históricos y obtener el error de pronostico a calcular</p></li>
+<li><p>Dado el pronóstico <code class="docutils literal notranslate"><span class="pre">one-step-ahead</span></code> definido como <span class="math notranslate nohighlight">\(e_{T}(1)=y_{T}-\hat{y}_{T}(T-1)\)</span>. El objetivo es aplicar el modelo a los datos históricos y obtener la <em><strong>varianza del error de pronóstico</strong></em> a calcular</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[
 \sigma_{e}^{2}=\frac{1}{T}\sum_{t=1}^{T}e_{t}^{2}(1)=\frac{1}{T}\sum_{t=1}^{T}(y_{t}-\hat{y}_{t}(t-1))^{2}.
 \]</div>
 <ul class="simple">
-<li><p>Nótese que en el calculo de la varianza, la media del ajuste no fue necesaria, ya que para el modelo correcto los pronósticos son insesgados; esto es, el valor esperado de los errores de pronóstico es 0.</p></li>
+<li><p>Nótese que en el cálculo de la varianza, la media del ajuste no fue necesaria, ya que para el modelo correcto los pronósticos son insesgados; esto es, <em><strong>el valor esperado de los errores de pronóstico es 0</strong></em>.</p></li>
 <li><p>A medida que se recopilan más datos, la varianza de los errores de pronóstico puede ser actualizada</p></li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -2142,17 +2150,17 @@ Length: 120, dtype: float64
 \hat{\sigma}_{eT+1}=\frac{1}{T+1}\left(T\hat{\sigma}_{e, T}^{2}+e_{T+1}^{2}(1)\right).
 \]</div>
 <ul class="simple">
-<li><p>Puede resultar contraintuitivo tener una varianza constante de errores de pronóstico para todos los horizontes de predicción. En su lugar, podemos definir <span class="math notranslate nohighlight">\(\sigma_{e}^{2}(\tau)\)</span> como la <code class="docutils literal notranslate"><span class="pre">varianza</span> <span class="pre">del</span> <span class="pre">error</span> <span class="pre">de</span> <span class="pre">pronóstico</span> <span class="pre">a</span></code> <span class="math notranslate nohighlight">\(\tau\)</span> <code class="docutils literal notranslate"><span class="pre">pasos</span> <span class="pre">hacia</span> <span class="pre">adelante</span></code> y estimarla mediante</p></li>
+<li><p>Puede resultar contraintuitivo tener una varianza constante de errores de pronóstico para todos los horizontes de predicción. En su lugar, podemos definir <span class="math notranslate nohighlight">\(\sigma_{e}^{2}(\tau)\)</span> como la <em><strong>varianza del error de pronóstico a</strong></em> <span class="math notranslate nohighlight">\(\tau\)</span> <em><strong>pasos hacia adelante</strong></em> y estimarla mediante</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-error-variance-estimation-tau">
 <span class="eqno">(21)<a class="headerlink" href="#equation-error-variance-estimation-tau" title="Link to this equation">#</a></span>\[
 \hat{\sigma}_{e}^{2}(\tau)=\frac{1}{T-\tau+1}\sum_{t=\tau}^{T}e_{1}^{2}(\tau).
 \]</div>
 <ul class="simple">
-<li><p>Por lo tanto, la estimación en la Ecuación <code class="docutils literal notranslate"><span class="pre">eq</span></code>{error_variance_estimation_tau} puede ser utilizada en los cálculos del <code class="docutils literal notranslate"><span class="pre">intervalo</span> <span class="pre">de</span> <span class="pre">predicción</span> <span class="pre">para</span> <span class="pre">el</span> <span class="pre">pronóstico</span> <span class="pre">a</span></code> <span class="math notranslate nohighlight">\(\tau\)</span> <code class="docutils literal notranslate"><span class="pre">pasos</span> <span class="pre">hacia</span> <span class="pre">adelante</span></code>.</p></li>
+<li><p>Por lo tanto, la estimación en la Ecuación <a class="reference internal" href="#equation-error-variance-estimation-tau">(21)</a> puede ser utilizada en los cálculos del <em><strong>intervalo de predicción para el pronóstico a</strong></em> <span class="math notranslate nohighlight">\(\tau\)</span> <em><strong>pasos hacia adelante</strong></em>.</p></li>
 </ul>
 <ol class="arabic" start="2">
-<li><p>Para el segundo método de estimación de <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span>, primero definiremos la <code class="docutils literal notranslate"><span class="pre">desviación</span> <span class="pre">media</span> <span class="pre">absoluta</span></code> <span class="math notranslate nohighlight">\(\Delta\)</span> como</p>
+<li><p>Para el segundo método de estimación de <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span>, primero definiremos la <em><strong>desviación media absoluta</strong></em> <span class="math notranslate nohighlight">\(\Delta\)</span> como</p>
 <div class="math notranslate nohighlight">
 \[
     \Delta = E(|e-E(e)|)
@@ -2162,7 +2170,7 @@ Length: 120, dtype: float64
 <span class="eqno">(22)<a class="headerlink" href="#equation-mean-absolute-deviationt" title="Link to this equation">#</a></span>\[
     \hat{\Delta}_{T}=\delta|e_{T}(1)|+(1-\delta)\hat{\Delta}_{T-1}.
     \]</div>
-<p>Entonces, el estimador de <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span> está dado por</p>
+<p>Entonces, el estimador de <span class="math notranslate nohighlight">\(\sigma_{e}^{2}\)</span> está dado por <span id="id4">[<a class="reference internal" href="biblio.html#id5" title="D.C. Montgomery, L.A. Johnson, and J.S. Gardiner. Forecasting and Time Series Analysis. Industrial engineering series. McGraw-Hill, 1990. ISBN 9780070428584. URL: https://books.google.com.co/books?id=t9HuAAAAMAAJ.">Montgomery <em>et al.</em>, 1990</a>]</span> (<em><strong><code class="docutils literal notranslate"><span class="pre">bonus</span></code></strong></em>)</p>
 <div class="math notranslate nohighlight">
 \[
     \hat{\sigma}_{e, T}=1.25\hat{\Delta}_{T}.
@@ -2173,16 +2181,16 @@ Length: 120, dtype: float64
 <section id="adaptacion-actualizada-del-factor-de-descuento">
 <h2>Adaptación actualizada del factor de descuento<a class="headerlink" href="#adaptacion-actualizada-del-factor-de-descuento" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Cambios en el modelo subyacente de series temporales dificultarán que el suavizador exponencial con factor de descuento fijo siga estos cambios. Por lo tanto, surge la necesidad de <code class="docutils literal notranslate"><span class="pre">monitorear</span> <span class="pre">y,</span> <span class="pre">si</span> <span class="pre">es</span> <span class="pre">necesario,</span> <span class="pre">modificar</span> <span class="pre">el</span> <span class="pre">factor</span> <span class="pre">de</span> <span class="pre">descuento</span></code>. Al hacerlo, el factor de descuento se adaptará a los cambios en el modelo de series temporales.</p></li>
-<li><p>Para ello, emplearemos el procedimiento descrito originalmente por <span id="id4">[<a class="reference internal" href="biblio.html#id4" title="DW Trigg and A Gi Leach. Exponential smoothing with an adaptive response rate. Journal of the Operational Research Society, 18:53–59, 1967.">Trigg and Leach, 1967</a>]</span> para un único factor de descuento. Como ejemplo, consideraremos el <code class="docutils literal notranslate"><span class="pre">suavizador</span> <span class="pre">exponencial</span> <span class="pre">de</span> <span class="pre">primer</span> <span class="pre">orden</span></code> y lo modificaremos de la siguiente manera:</p></li>
+<li><p>Cambios en el modelo subyacente de series temporales dificultarán que el suavizador exponencial con factor de descuento fijo siga estos cambios. Por lo tanto, surge la necesidad de <em><strong>monitorear y, si es necesario, modificar el factor de descuento</strong></em>. Al hacerlo, el factor de descuento se adaptará a los cambios en el modelo de series temporales.</p></li>
+<li><p>Para ello, emplearemos el procedimiento descrito originalmente por <span id="id5">[<a class="reference internal" href="biblio.html#id4" title="DW Trigg and A Gi Leach. Exponential smoothing with an adaptive response rate. Journal of the Operational Research Society, 18:53–59, 1967.">Trigg and Leach, 1967</a>]</span> para un único factor de descuento. Como ejemplo, consideraremos el <em><strong>suavizador exponencial de primer orden</strong></em> y lo modificaremos de la siguiente manera:</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-adaptive-discount-factor">
 <span class="eqno">(23)<a class="headerlink" href="#equation-adaptive-discount-factor" title="Link to this equation">#</a></span>\[
 \hat{y}_{T}=\lambda_{T}y_{T}+(1-\lambda_{T})\hat{y}_{T-1}.
 \]</div>
 <ul>
-<li><p>Nótese que en la Ecuación <a class="reference internal" href="#equation-adaptive-discount-factor">(23)</a>, el factor de descuento <span class="math notranslate nohighlight">\(\lambda_{T}\)</span> se introduce como una función del tiempo y, por lo tanto, <code class="docutils literal notranslate"><span class="pre">se</span> <span class="pre">le</span> <span class="pre">permite</span> <span class="pre">adaptarse</span> <span class="pre">a</span> <span class="pre">los</span> <span class="pre">cambios</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">modelo</span> <span class="pre">de</span> <span class="pre">series</span> <span class="pre">temporales</span></code>.</p></li>
-<li><p>También definimos el <code class="docutils literal notranslate"><span class="pre">error</span> <span class="pre">de</span> <span class="pre">suavizado</span></code> como</p>
+<li><p>Nótese que en la Ecuación <a class="reference internal" href="#equation-adaptive-discount-factor">(23)</a>, el factor de descuento <span class="math notranslate nohighlight">\(\lambda_{T}\)</span> se introduce como una función del tiempo y, por lo tanto, <em><strong>se le permite adaptarse a los cambios en el modelo de series temporales</strong></em>.</p></li>
+<li><p>También definimos el <em><strong>error de suavizado</strong></em> como</p>
 <div class="math notranslate nohighlight">
 \[
     Q_{T}=\delta e_{T}(1)+(1-\delta)Q_{T-1},
@@ -2200,12 +2208,12 @@ Length: 120, dtype: float64
 </li>
 </ul>
 <ul>
-<li><p>Se espera que este cociente sea cercano a 0 cuando el sistema de predicción funciona bien, y que se acerque a <span class="math notranslate nohighlight">\(\pm1\)</span> cuando empiece a fallar. De hecho, <span id="id5">[<a class="reference internal" href="biblio.html#id4" title="DW Trigg and A Gi Leach. Exponential smoothing with an adaptive response rate. Journal of the Operational Research Society, 18:53–59, 1967.">Trigg and Leach, 1967</a>]</span> sugieren fijar el factor de descuento en</p>
+<li><p><em><strong>Se espera que este cociente sea cercano a 0 cuando el sistema de predicción funciona bien, y que se acerque a</strong></em> <span class="math notranslate nohighlight">\(\pm1\)</span> <em><strong>cuando empiece a fallar</strong></em>. De hecho, <span id="id6">[<a class="reference internal" href="biblio.html#id4" title="DW Trigg and A Gi Leach. Exponential smoothing with an adaptive response rate. Journal of the Operational Research Society, 18:53–59, 1967.">Trigg and Leach, 1967</a>]</span> sugieren fijar el factor de descuento en</p>
 <div class="math notranslate nohighlight" id="equation-adaptive-discount-factor-abs">
 <span class="eqno">(24)<a class="headerlink" href="#equation-adaptive-discount-factor-abs" title="Link to this equation">#</a></span>\[
     \lambda_{T}=\left|\frac{Q_{T}}{\hat{\Delta}_{T}}\right|,
     \]</div>
-<p>Donde <span class="math notranslate nohighlight">\(\hat{\Delta}_{T}\)</span> está dado por la Ecuación <a class="reference internal" href="#equation-mean-absolute-deviationt">(22)</a>. La Ecuación <a class="reference internal" href="#equation-adaptive-discount-factor-abs">(24)</a> <code class="docutils literal notranslate"><span class="pre">permitirá</span> <span class="pre">actualizar</span> <span class="pre">automáticamente</span> <span class="pre">el</span> <span class="pre">factor</span> <span class="pre">de</span> <span class="pre">descuento</span></code>.</p>
+<p>Donde <span class="math notranslate nohighlight">\(\hat{\Delta}_{T}\)</span> está dado por la Ecuación <a class="reference internal" href="#equation-mean-absolute-deviationt">(22)</a>. La Ecuación <a class="reference internal" href="#equation-adaptive-discount-factor-abs">(24)</a> <em><strong>permitirá actualizar automáticamente el factor de descuento</strong></em>.</p>
 </li>
 </ul>
 <ul class="simple">
@@ -2274,7 +2282,7 @@ Length: 120, dtype: float64
 <section id="evaluacion-del-modelo">
 <h2>Evaluación del modelo<a class="headerlink" href="#evaluacion-del-modelo" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Si el modelo de pronóstico funciona como se esperaba, <code class="docutils literal notranslate"><span class="pre">los</span> <span class="pre">errores</span> <span class="pre">de</span> <span class="pre">pronóstico</span> <span class="pre">deberían</span> <span class="pre">no</span> <span class="pre">exhibir</span> <span class="pre">ningún</span> <span class="pre">patrón</span> <span class="pre">o</span> <span class="pre">estructura</span></code>; es decir, no deberían estar correlacionados. Por lo tanto, siempre es una buena idea verificar esto. Puede hacerlo calculando el <code class="docutils literal notranslate"><span class="pre">ACF</span> <span class="pre">muestral</span> <span class="pre">de</span> <span class="pre">los</span> <span class="pre">errores</span> <span class="pre">de</span> <span class="pre">pronóstico</span></code> de</p></li>
+<li><p>Si el modelo de pronóstico funciona como se esperaba, <em><strong>los errores de pronóstico deberían no exhibir ningún patrón o estructura</strong></em>; es decir, no deberían estar correlacionados. Por lo tanto, siempre es una buena idea verificar esto. Puede hacerlo calculando el <em><strong>ACF muestral de los errores de pronóstico</strong></em> de</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -2283,37 +2291,38 @@ r_{k}=\frac{\displaystyle{\sum_{t=k}^{T-1}[e_{t}(1)-\overline{e}][e_{t-k}(1)-\ov
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p>Si los <code class="docutils literal notranslate"><span class="pre">errores</span> <span class="pre">de</span> <span class="pre">pronóstico</span></code> de un paso adelante en realidad <code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">están</span> <span class="pre">correlacionados</span></code>, las <code class="docutils literal notranslate"><span class="pre">autocorrelaciones</span> <span class="pre">muestrales</span> <span class="pre">para</span> <span class="pre">cualquier</span> <span class="pre">rezago</span></code> <span class="math notranslate nohighlight">\(k\)</span> <code class="docutils literal notranslate"><span class="pre">deben</span> <span class="pre">estar</span> <span class="pre">alrededor</span> <span class="pre">de</span> <span class="pre">0</span></code> con un error estándar <span class="math notranslate nohighlight">\(1/\sqrt{T}\)</span>.</p></li>
-<li><p>De ahí una autocorrelación muestral para cualquier rezago <span class="math notranslate nohighlight">\(k\)</span> que se encuentre fuera de los límites <span class="math notranslate nohighlight">\(\pm2/\sqrt{T}\)</span> requerirán una mayor investigación del modelo.</p></li>
+<li><p>Si los <em><strong>errores de pronóstico</strong></em> de un paso adelante en realidad <em><strong>no están correlacionados</strong></em>, las <em><strong>autocorrelaciones muestrales para cualquier rezago</strong></em> <span class="math notranslate nohighlight">\(k\)</span> <em><strong>deben estar alrededor de 0</strong></em> con un error estándar <span class="math notranslate nohighlight">\(1/\sqrt{T}\)</span>.</p></li>
+<li><p>De ahí una <em><strong>autocorrelación muestral</strong></em> para cualquier rezago <span class="math notranslate nohighlight">\(k\)</span> que se encuentre <em><strong>fuera de los límites</strong></em> <span class="math notranslate nohighlight">\(\pm2/\sqrt{T}\)</span> <em><strong>requerirán una mayor investigación del modelo</strong></em>.</p></li>
 </ul>
 </div>
 </section>
 <section id="suavizacion-exponencial-para-datos-estacionales">
 <h2>Suavización exponencial para datos estacionales<a class="headerlink" href="#suavizacion-exponencial-para-datos-estacionales" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Algunos datos de series de tiempo exhiben <code class="docutils literal notranslate"><span class="pre">patrones</span> <span class="pre">cíclicos</span> <span class="pre">o</span> <span class="pre">estacionales</span></code> que no se pueden modelar efectivamente utilizando el modelo polinómico de la Ecuación <a class="reference internal" href="#equation-highorder-exponential-smoothing">(19)</a>. Hay varios enfoques disponibles para el análisis de dichos datos.</p></li>
-<li><p>La metodología en la que nos centraremos fue introducida originalmente por <code class="docutils literal notranslate"><span class="pre">Holt</span> <span class="pre">(1957)</span> <span class="pre">and</span> <span class="pre">Winters</span> <span class="pre">(1960)</span></code> y generalmente se conoce como <code class="docutils literal notranslate"><span class="pre">método</span> <span class="pre">de</span> <span class="pre">Winters</span></code>, donde se realiza un ajuste estacional al modelo de tendencia lineal.</p></li>
+<li><p>Algunos datos de series de tiempo exhiben <em><strong>patrones cíclicos o estacionales</strong></em> que no se pueden modelar efectivamente utilizando el modelo polinómico de la Ecuación <a class="reference internal" href="#equation-highorder-exponential-smoothing">(19)</a>. Hay varios enfoques disponibles para el análisis de dichos datos.</p></li>
+<li><p>La metodología en la que nos centraremos fue introducida originalmente por <span id="id7">[<a class="reference internal" href="biblio.html#id7" title="Charles C Holt. Forecasting seasonals and trends by exponentially weighted moving averages. International journal of forecasting, 20(1):5–10, 2004.">Holt, 2004</a>]</span> y <span id="id8">[<a class="reference internal" href="biblio.html#id8" title="Peter R Winters. Forecasting sales by exponentially weighted moving averages. Management science, 6(3):324–342, 1960.">Winters, 1960</a>]</span> y generalmente se conoce como <em><strong>método de Winters</strong></em>, donde se realiza un ajuste estacional al modelo de tendencia lineal.</p></li>
 </ul>
 <section id="modelo-estacional-aditivo">
 <h3>Modelo estacional aditivo<a class="headerlink" href="#modelo-estacional-aditivo" title="Link to this heading">#</a></h3>
 <ul>
-<li><p>Para el caso del <code class="docutils literal notranslate"><span class="pre">modelo</span> <span class="pre">estacional</span> <span class="pre">aditivo</span></code>, asumiremos que la serie temporal estacional se puede representar mediante el siguiente modelo:</p>
+<li><p>Para el caso del <em><strong>modelo estacional aditivo</strong></em>, asumiremos que la serie temporal estacional se puede representar mediante el siguiente modelo:</p>
 <div class="math notranslate nohighlight" id="equation-additive-stational-model">
 <span class="eqno">(25)<a class="headerlink" href="#equation-additive-stational-model" title="Link to this equation">#</a></span>\[
     y_{t}=L_{t}+S_{t}+\varepsilon_{t},
     \]</div>
-<p>donde <span class="math notranslate nohighlight">\(L_{t}\)</span> representa el nivel o <code class="docutils literal notranslate"><span class="pre">componente</span> <span class="pre">de</span> <span class="pre">tendencia</span> <span class="pre">lineal</span></code> y puede a su vez ser representado por <span class="math notranslate nohighlight">\(\beta_{0}+\beta_{1}t\)</span>; <span class="math notranslate nohighlight">\(S_{t}\)</span> representa el <code class="docutils literal notranslate"><span class="pre">ajuste</span> <span class="pre">estacional</span></code> con <span class="math notranslate nohighlight">\(S_{t}=S_{t+s}=S_{t+2s}=\cdots\)</span> para <span class="math notranslate nohighlight">\(t=1, 2,\cdots, s-1\)</span> donde <span class="math notranslate nohighlight">\(s\)</span> es la longitud de período (estación) de los ciclos; y suponemos que <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span> es <code class="docutils literal notranslate"><span class="pre">no</span> <span class="pre">correlacionado</span> <span class="pre">con</span> <span class="pre">media</span> <span class="pre">o</span> <span class="pre">y</span> <span class="pre">varianza</span> <span class="pre">constante</span></code> <span class="math notranslate nohighlight">\(\sigma_{\varepsilon}^{2}\)</span>.</p>
+<p>donde <span class="math notranslate nohighlight">\(L_{t}\)</span> representa el nivel o <em><strong>componente de tendencia lineal</strong></em> y puede a su vez ser representado por <span class="math notranslate nohighlight">\(\beta_{0}+\beta_{1}t\)</span>; <span class="math notranslate nohighlight">\(S_{t}\)</span> representa el <em><strong>ajuste estacional</strong></em> con <span class="math notranslate nohighlight">\(S_{t}=S_{t+s}=S_{t+2s}=\cdots\)</span> para <span class="math notranslate nohighlight">\(t=1, 2,\cdots, s-1\)</span> donde <span class="math notranslate nohighlight">\(s\)</span> <em><strong>es la longitud de período (estación) de los ciclos</strong></em>; y suponemos que <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span> es <em><strong>no correlacionado con media o y varianza constante</strong></em> <span class="math notranslate nohighlight">\(\sigma_{\varepsilon}^{2}\)</span>.</p>
 </li>
 </ul>
 <ul class="simple">
-<li><p>Una <code class="docutils literal notranslate"><span class="pre">restricción</span> <span class="pre">habitual</span></code> de este modelo es que los ajustes estacionales suman cero durante un periodo,</p></li>
+<li><p>Una <em>restricción habitual</em> de este modelo es que los <em><strong>ajustes estacionales suman cero durante un periodo</strong></em> (<em>evitar tendencia acumulativa en los ajustes estacionales</em>),</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 \sum_{t=1}^{s}S_{t}=0.
 \]</div>
 <ul class="simple">
-<li><p>En el modelo dado en la Ecuación <a class="reference internal" href="#equation-additive-stational-model">(25)</a>, para pronosticar las observaciones futuras, emplearemos <code class="docutils literal notranslate"><span class="pre">suavizadores</span> <span class="pre">exponenciales</span> <span class="pre">de</span> <span class="pre">primer</span> <span class="pre">orden</span> <span class="pre">con</span> <span class="pre">diferentes</span> <span class="pre">factores</span> <span class="pre">de</span> <span class="pre">descuento</span></code>. El procedimiento para actualizar las estimaciones de los parámetros una vez que se obtiene la observación actual <span class="math notranslate nohighlight">\(y_{T}\)</span> es el siguiente.</p></li>
+<li><p>En el modelo dado en la Ecuación <a class="reference internal" href="#equation-additive-stational-model">(25)</a>, para pronosticar las observaciones futuras, emplearemos <em><strong>suavizadores exponenciales de primer orden con diferentes factores de descuento</strong></em>.</p></li>
+<li><p>El procedimiento para actualizar las estimaciones de los parámetros una vez que se obtiene la observación actual <span class="math notranslate nohighlight">\(y_{T}\)</span> es el siguiente.</p></li>
 </ul>
 <ol class="arabic">
 <li><p>Actualizar la estimación de <span class="math notranslate nohighlight">\(L_{t}\)</span> usando</p>
@@ -2351,7 +2360,7 @@ r_{k}=\frac{\displaystyle{\sum_{t=k}^{T-1}[e_{t}(1)-\overline{e}][e_{t-k}(1)-\ov
 </li>
 </ol>
 <ul>
-<li><p>Estimar los valores iniciales de una suavización exponencial es crucial. Para un conjunto dado de datos históricos con <span class="math notranslate nohighlight">\(n\)</span> estaciones (<span class="math notranslate nohighlight">\(ns\)</span> observaciones), podemos usar las estimaciones de mínimos cuadrados del siguiente modelo:</p>
+<li><p><em><strong>Estimar los valores iniciales de una suavización exponencial es crucial</strong></em>. Para un conjunto dado de datos históricos con <span class="math notranslate nohighlight">\(n\)</span> estaciones (<span class="math notranslate nohighlight">\(ns\)</span> observaciones), podemos usar las <em><strong>estimaciones de mínimos cuadrados</strong></em> del siguiente modelo:</p>
 <div class="math notranslate nohighlight" id="equation-ols-estimation-additive-model">
 <span class="eqno">(29)<a class="headerlink" href="#equation-ols-estimation-additive-model" title="Link to this equation">#</a></span>\[
   y_{t}=\beta_{0}+\beta_{1}t+\sum_{i=1}^{s-1}\gamma_{i}(I_{t, i}-I_{t, s})+\varepsilon_{t},
@@ -2368,7 +2377,7 @@ r_{k}=\frac{\displaystyle{\sum_{t=k}^{T-1}[e_{t}(1)-\overline{e}][e_{t-k}(1)-\ov
 </li>
 </ul>
 <ul class="simple">
-<li><p>Las estimaciones de mínimos cuadrados de los parámetros de la Ecuación <a class="reference internal" href="#equation-ols-estimation-additive-model">(29)</a> se utilizan para obtener los valores iniciales como</p></li>
+<li><p>Las <em><strong>estimaciones de mínimos cuadrados de los parámetros</strong></em> de la Ecuación <a class="reference internal" href="#equation-ols-estimation-additive-model">(29)</a> se utilizan para obtener los valores iniciales como</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -2380,19 +2389,19 @@ r_{k}=\frac{\displaystyle{\sum_{t=k}^{T-1}[e_{t}(1)-\overline{e}][e_{t-k}(1)-\ov
 \end{align*}
 \end{split}\]</div>
 <ul class="simple">
-<li><p>Estos son valores iniciales de los parámetros del modelo en el origen original de tiempo, <span class="math notranslate nohighlight">\(t = 0\)</span>. Para realizar pronósticos desde el origen correcto de tiempo, la componente permanente debe trasladarse al tiempo <span class="math notranslate nohighlight">\(T\)</span> calculando <span class="math notranslate nohighlight">\(\hat{L}_{T}=\hat{L}_{0}+ns\hat{\beta}_{1}\)</span>. Alternativamente, se podrían suavizar los parámetros usando las Ecuaciones <a class="reference internal" href="#equation-lt-estimation">(26)</a>-<a class="reference internal" href="#equation-seasonal-forecast-additive-model">(28)</a> para periodos de tiempo <span class="math notranslate nohighlight">\(t = 1, 2,\dots, T\)</span>.</p></li>
+<li><p>Estos son valores iniciales de los parámetros del modelo en el origen original de tiempo, <span class="math notranslate nohighlight">\(t = 0\)</span>. Para realizar pronósticos desde el origen correcto de tiempo, la componente permanente debe trasladarse al tiempo <span class="math notranslate nohighlight">\(T\)</span> calculando <span class="math notranslate nohighlight">\(\hat{L}_{T}=\hat{L}_{0}+ns\hat{\beta}_{1}\)</span>. Alternativamente, se podrían suavizar los parámetros usando las Ecuaciones <a class="reference internal" href="#equation-lt-estimation">(26)</a>-<a class="reference internal" href="#equation-seasonal-forecast-additive-model">(28)</a> para periodos de tiempo <span class="math notranslate nohighlight">\(t = 1, 2,\dots, T\)</span> <span id="id9">[<a class="reference internal" href="biblio.html#id29" title="R. Hyndman, A.B. Koehler, J.K. Ord, and R.D. Snyder. Forecasting with Exponential Smoothing: The State Space Approach. Springer Series in Statistics. Springer Berlin Heidelberg, 2008. ISBN 9783540719182. URL: https://books.google.com.co/books?id=GSyzox8Lu9YC.">Hyndman <em>et al.</em>, 2008</a>]</span>.</p></li>
 </ul>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p>Intervalos de predicción como en el caso del suavizado no estacional, requerirían <code class="docutils literal notranslate"><span class="pre">estimación</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">varianza</span> <span class="pre">del</span> <span class="pre">error</span> <span class="pre">de</span> <span class="pre">predicción</span></code>. El enfoque más común es utilizar la <code class="docutils literal notranslate"><span class="pre">relación</span> <span class="pre">entre</span> <span class="pre">las</span> <span class="pre">técnicas</span> <span class="pre">de</span> <span class="pre">suavizado</span> <span class="pre">exponencial</span> <span class="pre">y</span> <span class="pre">modelos</span> <span class="pre">ARIMA</span></code> que abordaremos en el siguiente capítulo, y estimar la variación del error de predicción acordemente.</p></li>
+<li><p>Intervalos de predicción como en el caso del suavizado no estacional, requerirían <em><strong>estimación de la varianza del error de predicción</strong></em>. El enfoque más común es utilizar la <em><strong>relación entre las técnicas de suavizado exponencial y modelos ARIMA</strong></em> que abordaremos en el siguiente capítulo, y estimar la variación del error de predicción acordemente.</p></li>
 </ul>
 </div>
 </section>
 <section id="modelo-estacional-multiplicativo">
 <h3>Modelo estacional multiplicativo<a class="headerlink" href="#modelo-estacional-multiplicativo" title="Link to this heading">#</a></h3>
 <ul>
-<li><p>Si la amplitud del patrón estacional es proporcional al nivel medio de la serie temporal estacional, el siguiente modelo estacional multiplicativo será el más adecuado</p>
+<li><p>Si la <em><strong>amplitud del patrón estacional es proporcional al nivel medio de la serie temporal estacional</strong></em>, el siguiente modelo estacional multiplicativo será el más adecuado</p>
 <div class="math notranslate nohighlight" id="equation-multiplicative-stational-model">
 <span class="eqno">(30)<a class="headerlink" href="#equation-multiplicative-stational-model" title="Link to this equation">#</a></span>\[
   y_{t}=L_{t}S_{t}+\varepsilon_{t},
@@ -2436,11 +2445,13 @@ r_{k}=\frac{\displaystyle{\sum_{t=k}^{T-1}[e_{t}(1)-\overline{e}][e_{t-k}(1)-\ov
 <p>donde <span class="math notranslate nohighlight">\(0&lt;\lambda_{3}&lt;1\)</span>.</p>
 </li>
 </ol>
-<ol class="arabic simple" start="4">
-<li><p>El pronóstico <span class="math notranslate nohighlight">\(\tau\)</span> pasos hacia adelante, <span class="math notranslate nohighlight">\(\hat{y}_{T+\tau}(T)\)</span>, es
-$<span class="math notranslate nohighlight">\(
-\hat{y}_{T+\tau}(T)=(\hat{L}_{T}+\hat{\beta}_{1, T}\tau)\hat{S}_{T}(\tau-s).
-\)</span>$</p></li>
+<ol class="arabic" start="4">
+<li><p>El pronóstico <span class="math notranslate nohighlight">\(\tau\)</span> pasos hacia adelante, <span class="math notranslate nohighlight">\(\hat{y}_{T+\tau}(T)\)</span>, es</p>
+<div class="math notranslate nohighlight">
+\[
+   \hat{y}_{T+\tau}(T)=(\hat{L}_{T}+\hat{\beta}_{1, T}\tau)\hat{S}_{T}(\tau-s).
+   \]</div>
+</li>
 </ol>
 <ul>
 <li><p>Supongamos que un registro que consta de <span class="math notranslate nohighlight">\(n\)</span> estaciones de datos es disponible. De este conjunto de datos históricos, los valores iniciales, <span class="math notranslate nohighlight">\(\hat{\beta}_{0, 0}, \hat{\beta}_{1, 0}\)</span> y <span class="math notranslate nohighlight">\(\hat{S}_{0}\)</span>, se puede calcular como</p>
@@ -2466,7 +2477,7 @@ $<span class="math notranslate nohighlight">\(
 \[
   \hat{S}_{j}^{\star}=\frac{1}{n}\sum_{t=1}^{n}\frac{y_{(t-1)s+j}}{\overline{y}_{t}-((s+1)/2-j)\hat{\beta}_{0}}.
   \]</div>
-<p>Para más detalles ver <span id="id6">[<a class="reference internal" href="biblio.html#id5" title="D.C. Montgomery, L.A. Johnson, and J.S. Gardiner. Forecasting and Time Series Analysis. Industrial engineering series. McGraw-Hill, 1990. ISBN 9780070428584. URL: https://books.google.com.co/books?id=t9HuAAAAMAAJ.">Montgomery <em>et al.</em>, 1990</a>]</span> y <span id="id7">[<a class="reference internal" href="biblio.html#id9" title="B. Abraham and J. Ledolter. Statistical Methods for Forecasting. Wiley Series in Probability and Statistics. Wiley, 2009. ISBN 9780470317297. URL: https://books.google.com.co/books?id=WIPxdb2P8sAC.">Abraham and Ledolter, 2009</a>]</span>.</p>
+<p>Para más detalles ver <span id="id10">[<a class="reference internal" href="biblio.html#id5" title="D.C. Montgomery, L.A. Johnson, and J.S. Gardiner. Forecasting and Time Series Analysis. Industrial engineering series. McGraw-Hill, 1990. ISBN 9780070428584. URL: https://books.google.com.co/books?id=t9HuAAAAMAAJ.">Montgomery <em>et al.</em>, 1990</a>]</span> y <span id="id11">[<a class="reference internal" href="biblio.html#id9" title="B. Abraham and J. Ledolter. Statistical Methods for Forecasting. Wiley Series in Probability and Statistics. Wiley, 2009. ISBN 9780470317297. URL: https://books.google.com.co/books?id=WIPxdb2P8sAC.">Abraham and Ledolter, 2009</a>]</span>.</p>
 </li>
 </ul>
 </section>
@@ -2493,6 +2504,9 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Consideremos, nuevamente, el objetivo de estimar la cantidad de *<strong>contaminación atmosférica</strong> por dióxido de carbono a partir de muestras continuas de aire en el <em><strong>Observatorio Mauna Loa, Hawai, EE. UU.</strong></em> Período de registro: <em><strong>marzo de 1958 - diciembre de 2001</strong></em>.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">co2</span><span class="o">.</span><span class="n">load_pandas</span><span class="p">()</span>
@@ -2605,10 +2619,12 @@ Freq: MS, Name: co2, dtype: float64
 <img alt="_images/8517a0b08a4e6bb14d1f05e807defd45be3ceb8fd8d81c8627e7d12b35e7a269.png" src="_images/8517a0b08a4e6bb14d1f05e807defd45be3ceb8fd8d81c8627e7d12b35e7a269.png" />
 </div>
 </div>
+<ul class="simple">
+<li><p>Dividimos en esta ocasión nuestro dataset en conjunto de <em><strong>entrenamiento</strong></em> y de <em><strong>prueba</strong></em>. En este caso <em><strong>el conjunto de prueba corresponde a los últimos 48 meses</strong></em></p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train: 478 Months and Test: 48 Months</span>
-<span class="n">h_test</span> <span class="o">=</span> <span class="mi">48</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h_test</span> <span class="o">=</span> <span class="mi">48</span>
 <span class="n">train</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="o">-</span><span class="n">h_test</span><span class="p">]</span>
 <span class="n">test</span>  <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="n">h_test</span><span class="p">:]</span>
 <span class="nb">print</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)))</span>
@@ -2621,20 +2637,27 @@ Freq: MS, Name: co2, dtype: float64
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>La siguiente función nos permitirá <em><strong>graficar los conjuntos de entrenamiento, prueba y las respectivas predicciones</strong></em> del conjunto de prueba. Además, mostraremos en el título de estas figuras la métrica <code class="docutils literal notranslate"><span class="pre">MAE</span></code></p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
-  <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-  <span class="n">train</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Train&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">, MAE: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">mae</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-  <span class="n">test</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">)</span>
-  <span class="n">y_pred</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Prediction&quot;</span><span class="p">)</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">train</span><span class="p">[</span><span class="o">-</span><span class="mi">112</span><span class="p">:]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Train&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">, MAE: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">mae</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">test</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">)</span>
+    <span class="n">y_pred</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Prediction&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="single-exponential-smoothing">
-<h3>Single Exponential Smoothing<a class="headerlink" href="#single-exponential-smoothing" title="Link to this heading">#</a></h3>
+<section id="simple-exponential-smoothing">
+<h3>Simple Exponential Smoothing<a class="headerlink" href="#simple-exponential-smoothing" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Cada una de las <em><strong>funciones optimizadoras permitirán encontrar el mejor parámetro</strong></em> <span class="math notranslate nohighlight">\(\alpha\)</span> para obtener aquel modelo que minimiza en este caso la métrica <code class="docutils literal notranslate"><span class="pre">MAE</span></code></p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ses_optimizer</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
@@ -2658,16 +2681,20 @@ Freq: MS, Name: co2, dtype: float64
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ses_model_tuning</span><span class="p">(</span><span class="n">train</span> <span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Model Tuning - Single Exponential Smoothing&quot;</span><span class="p">):</span>
     
-  <span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
-  <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="n">ses_optimizer</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">)</span>
-  <span class="n">final_model</span> <span class="o">=</span> <span class="n">SimpleExpSmoothing</span><span class="p">(</span><span class="n">train</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="n">best_alpha</span><span class="p">,</span> <span class="n">optimized</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-  <span class="n">y_pred</span> <span class="o">=</span> <span class="n">final_model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
-  <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-  <span class="n">plot_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
+    <span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+    <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="n">ses_optimizer</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">)</span>
+    <span class="n">final_model</span> <span class="o">=</span> <span class="n">SimpleExpSmoothing</span><span class="p">(</span><span class="n">train</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="n">best_alpha</span><span class="p">,</span> <span class="n">optimized</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">final_model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    
+    <span class="n">plot_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Observemos las <em><strong>predicciones</strong></em> obtenidas por medio del <em><strong>modelo de suavización exponencial simple</strong></em></p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ses_model_tuning</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">h_test</span><span class="p">)</span>
@@ -2675,34 +2702,16 @@ Freq: MS, Name: co2, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2304cd1e30eed29a7b3918d8cfe840f040b648d939f28a7a08ca5bfaa77ec3a6.png" src="_images/2304cd1e30eed29a7b3918d8cfe840f040b648d939f28a7a08ca5bfaa77ec3a6.png" />
+<img alt="_images/2b9db8dd6fc426ae2d2360902ab74c3915ab836f3f651e494d07f16879310f33.png" src="_images/2b9db8dd6fc426ae2d2360902ab74c3915ab836f3f651e494d07f16879310f33.png" />
 </div>
 </div>
 </section>
 <section id="double-exponential-smoothing">
 <h3>Double Exponential Smoothing<a class="headerlink" href="#double-exponential-smoothing" title="Link to this heading">#</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">des_base_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">trend</span><span class="p">,</span> <span class="n">smoothing_level</span><span class="p">,</span> <span class="n">smoothing_trend</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Double Exponential Smoothing&quot;</span><span class="p">):</span>
-    
-    <span class="n">des_model</span> <span class="o">=</span> <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="n">smoothing_level</span><span class="p">,</span> <span class="n">smoothing_slope</span><span class="o">=</span><span class="n">smoothing_trend</span><span class="p">)</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">des_model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
-    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-    <span class="n">plot_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">des_base_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">smoothing_level</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">smoothing_trend</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">h_test</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/634c9008b4e1ba6b8054c5f883fc95ee8d0cbf58a83840f3b710f928c61af3bb.png" src="_images/634c9008b4e1ba6b8054c5f883fc95ee8d0cbf58a83840f3b710f928c61af3bb.png" />
-</div>
-</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothing(train,</span> <span class="pre">trend=trend)</span></code>: Crea una instancia de un modelo de suavización exponencial. Toma como argumento la serie temporal de entrenamiento <code class="docutils literal notranslate"><span class="pre">train</span></code> y especifica el <em><strong>tipo de tendencia (lineal o exponencial)</strong></em> mediante el parámetro <code class="docutils literal notranslate"><span class="pre">trend</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.fit(smoothing_level=alpha,</span> <span class="pre">smoothing_slope=beta)</span></code>: Ajusta el modelo a los datos de entrenamiento. Los parámetros <code class="docutils literal notranslate"><span class="pre">smoothing_level</span></code> y <code class="docutils literal notranslate"><span class="pre">smoothing_slope</span></code> <em><strong>controlan el nivel de suavizado de la serie temporal y de la tendencia</strong></em>, respectivamente. Estos parámetros se establecen en los valores dados por <code class="docutils literal notranslate"><span class="pre">alpha</span></code> y <code class="docutils literal notranslate"><span class="pre">beta</span></code>.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">des_optimizer</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span> <span class="n">trend</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
@@ -2732,6 +2741,7 @@ Freq: MS, Name: co2, dtype: float64
     <span class="n">final_model</span> <span class="o">=</span> <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="n">best_alpha</span><span class="p">,</span> <span class="n">smoothing_slope</span><span class="o">=</span><span class="n">best_beta</span><span class="p">)</span>
     <span class="n">y_pred</span> <span class="o">=</span> <span class="n">final_model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
     <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    
     <span class="n">plot_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2744,15 +2754,20 @@ Freq: MS, Name: co2, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d661e6f49b1aa5ac042f3a37089e675e40b590ec99888ba202caedcebcc11277.png" src="_images/d661e6f49b1aa5ac042f3a37089e675e40b590ec99888ba202caedcebcc11277.png" />
+<img alt="_images/1474c71f8996bd7079b97dcd6aedf30a5292bcf9b62f2c1d2a929b9ffbb52564.png" src="_images/1474c71f8996bd7079b97dcd6aedf30a5292bcf9b62f2c1d2a929b9ffbb52564.png" />
 </div>
 </div>
 </section>
 <section id="triple-exponential-smoothing">
 <h3>Triple Exponential Smoothing<a class="headerlink" href="#triple-exponential-smoothing" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>En <code class="docutils literal notranslate"><span class="pre">ExponentialSmoothing</span></code> de la biblioteca <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> se especifican los <em><strong>componentes del modelo, como la tendencia y la estacionalidad</strong></em>, utilizando los argumentos <code class="docutils literal notranslate"><span class="pre">trend</span></code> y <code class="docutils literal notranslate"><span class="pre">seasonal</span></code>.</p></li>
+<li><p>Se especifica el <em><strong>número de periodos estacionales</strong></em> utilizando el argumento <code class="docutils literal notranslate"><span class="pre">seasonal_periods</span></code>. Los parámetros de suavizado (<code class="docutils literal notranslate"><span class="pre">smoothing_level,</span> <span class="pre">smoothing_slope</span></code> y <code class="docutils literal notranslate"><span class="pre">smoothing_seasonal</span></code>) se establecen en los valores proporcionados en la lista <code class="docutils literal notranslate"><span class="pre">comb</span></code>.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tes_optimizer</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">abg</span><span class="p">,</span> <span class="n">trend</span><span class="p">,</span> <span class="n">seasonal</span><span class="p">,</span>  <span class="n">seasonal_periods</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+    
     <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">comb</span> <span class="ow">in</span> <span class="n">abg</span><span class="p">:</span>
         <span class="n">tes_model</span> <span class="o">=</span> <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">,</span> <span class="n">seasonal</span><span class="o">=</span><span class="n">seasonal</span><span class="p">,</span> <span class="n">seasonal_periods</span><span class="o">=</span><span class="n">seasonal_periods</span><span class="p">)</span><span class="o">.</span>\
@@ -2770,14 +2785,16 @@ Freq: MS, Name: co2, dtype: float64
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tes_model_tuning</span><span class="p">(</span><span class="n">train</span> <span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">trend</span><span class="p">,</span> <span class="n">seasonal</span><span class="p">,</span> <span class="n">seasonal_periods</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Model Tuning - Triple Exponential Smoothing&quot;</span><span class="p">):</span>
-  <span class="n">alphas</span> <span class="o">=</span> <span class="n">betas</span> <span class="o">=</span> <span class="n">gammas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span>
-  <span class="n">abg</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span> <span class="n">gammas</span><span class="p">))</span>
-  <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="n">tes_optimizer</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">abg</span><span class="o">=</span><span class="n">abg</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">,</span> <span class="n">seasonal</span><span class="o">=</span><span class="n">seasonal</span><span class="p">,</span> <span class="n">seasonal_periods</span><span class="o">=</span><span class="n">seasonal_periods</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">)</span>
-  <span class="n">final_model</span> <span class="o">=</span> <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">,</span> <span class="n">seasonal</span><span class="o">=</span><span class="n">seasonal</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="n">best_alpha</span><span class="p">,</span> <span class="n">smoothing_slope</span><span class="o">=</span><span class="n">best_beta</span><span class="p">,</span> <span class="n">smoothing_seasonal</span><span class="o">=</span><span class="n">best_gamma</span><span class="p">)</span>
-  <span class="n">y_pred</span> <span class="o">=</span> <span class="n">final_model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
-  <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-  <span class="n">plot_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
-  <span class="k">return</span> <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">best_mae</span>
+    
+    <span class="n">alphas</span> <span class="o">=</span> <span class="n">betas</span> <span class="o">=</span> <span class="n">gammas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">)</span>
+    <span class="n">abg</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">betas</span><span class="p">,</span> <span class="n">gammas</span><span class="p">))</span>
+    <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">best_mae</span> <span class="o">=</span> <span class="n">tes_optimizer</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">abg</span><span class="o">=</span><span class="n">abg</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">,</span> <span class="n">seasonal</span><span class="o">=</span><span class="n">seasonal</span><span class="p">,</span> <span class="n">seasonal_periods</span><span class="o">=</span><span class="n">seasonal_periods</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">)</span>
+    <span class="n">final_model</span> <span class="o">=</span> <span class="n">ExponentialSmoothing</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">,</span> <span class="n">seasonal</span><span class="o">=</span><span class="n">seasonal</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">smoothing_level</span><span class="o">=</span><span class="n">best_alpha</span><span class="p">,</span> <span class="n">smoothing_slope</span><span class="o">=</span><span class="n">best_beta</span><span class="p">,</span> <span class="n">smoothing_seasonal</span><span class="o">=</span><span class="n">best_gamma</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">final_model</span><span class="o">.</span><span class="n">forecast</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">plot_model</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">best_mae</span>
 </pre></div>
 </div>
 </div>
@@ -2789,12 +2806,12 @@ Freq: MS, Name: co2, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/18687603aebb77c35d067771eef53efbc15e444df9932e4d483dab55e44c42a0.png" src="_images/18687603aebb77c35d067771eef53efbc15e444df9932e4d483dab55e44c42a0.png" />
+<img alt="_images/c6656e1dfb4f27c565e6b12bec98b8108a1394462508d740ad0d1d794bdf121e.png" src="_images/c6656e1dfb4f27c565e6b12bec98b8108a1394462508d740ad0d1d794bdf121e.png" />
 </div>
 </div>
-</section>
-<section id="prediccion">
-<h3>Predicción<a class="headerlink" href="#prediccion" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Realizamos ahora <em><strong>predicciones para datos fuera de la muestra</strong></em>, en este caso pronosticamos un <em><strong>horizonte de 12 meses</strong></em> de <code class="docutils literal notranslate"><span class="pre">CO2</span></code></p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tes_final_model</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">trend</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="n">seasonal</span><span class="o">=</span><span class="s1">&#39;add&#39;</span><span class="p">):</span>
@@ -2807,28 +2824,32 @@ Freq: MS, Name: co2, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tes_final_model</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">tes_final_model</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">best_alpha</span><span class="p">,</span> <span class="n">best_beta</span><span class="p">,</span> <span class="n">best_gamma</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">:]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Train&#39;</span><span class="p">);</span>
+<span class="n">test</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Test&#39;</span><span class="p">);</span>
+<span class="n">y_pred</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Forecast&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;CO2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2002-01-01    371.909208
-2002-02-01    372.689151
-2002-03-01    373.597083
-2002-04-01    374.803473
-2002-05-01    375.297729
-2002-06-01    374.706404
-Freq: MS, dtype: float64
-</pre></div>
-</div>
+<img alt="_images/6b457d91e5b83a2f4858b43245d7ac313d5dc3a5b55f2ee6f9016e7753d558fe.png" src="_images/6b457d91e5b83a2f4858b43245d7ac313d5dc3a5b55f2ee6f9016e7753d558fe.png" />
 </div>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Resumen</p>
 <ul class="simple">
-<li><p>Este capítulo trata de los enfoques de suavización exponencial para datos de series temporales. Los enfoques pueden ampliarse fácilmente para la predicción mediante la inclusión de términos como el <code class="docutils literal notranslate"><span class="pre">factor</span> <span class="pre">de</span> <span class="pre">suavización,</span> <span class="pre">factor</span> <span class="pre">de</span> <span class="pre">tendencia</span> <span class="pre">y</span> <span class="pre">factor</span> <span class="pre">de</span> <span class="pre">estacionalidad</span></code>.</p></li>
-<li><p>El suavizado exponencial de orden único realiza la suavización utilizando solo el factor <span class="math notranslate nohighlight">\(\lambda\)</span>, que se amplía con los factores <span class="math notranslate nohighlight">\(\alpha,\,\beta\)</span> de segundo orden al incluir tendencia. <code class="docutils literal notranslate"><span class="pre">La</span> <span class="pre">suavización</span> <span class="pre">de</span> <span class="pre">tercer</span> <span class="pre">orden</span> <span class="pre">incorpora</span> <span class="pre">todos</span> <span class="pre">los</span> <span class="pre">factores,</span> <span class="pre">tendencia</span> <span class="pre">y</span> <span class="pre">estacionalidad</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">modelo</span></code>.</p></li>
-<li><p>En este capítulo se han tratado todos estos modelos en detalle con su implementación en <code class="docutils literal notranslate"><span class="pre">Python</span></code>. El enfoque de <code class="docutils literal notranslate"><span class="pre">suavizado</span> <span class="pre">exponencial</span> <span class="pre">puede</span> <span class="pre">utilizarse</span> <span class="pre">para</span> <span class="pre">pronosticar</span> <span class="pre">series</span> <span class="pre">temporales</span> <span class="pre">estacionarias</span></code>. Sin embargo, esta suposición puede no ser cierta. <code class="docutils literal notranslate"><span class="pre">Se</span> <span class="pre">recomienda</span> <span class="pre">el</span> <span class="pre">suavizado</span> <span class="pre">exponencial</span> <span class="pre">de</span> <span class="pre">orden</span> <span class="pre">superior</span> <span class="pre">para</span> <span class="pre">estos</span> <span class="pre">casos</span></code>, pero su cálculo es difícil y costoso computacionalmente. Por lo tanto, para hacer frente a este planteamiento, <code class="docutils literal notranslate"><span class="pre">se</span> <span class="pre">utilizan</span> <span class="pre">otras</span> <span class="pre">técnicas</span> <span class="pre">de</span> <span class="pre">previsión</span> <span class="pre">como</span> <span class="pre">el</span> <span class="pre">modelo</span> <span class="pre">ARIMA,</span> <span class="pre">que</span> <span class="pre">se</span> <span class="pre">tratará</span> <span class="pre">en</span> <span class="pre">la</span> <span class="pre">siguiente</span> <span class="pre">sección</span></code>.</p></li>
+<li><p>Este capítulo trata de los enfoques de suavización exponencial para datos de series temporales. Los enfoques pueden ampliarse fácilmente para la predicción mediante la inclusión de términos como el <em><strong>factor de suavización, factor de tendencia y factor de estacionalidad</strong></em>.</p></li>
+<li><p>El suavizado exponencial de orden único realiza la suavización utilizando solo el factor <span class="math notranslate nohighlight">\(\lambda\)</span>, que se amplía con los factores <span class="math notranslate nohighlight">\(\alpha,\,\beta\)</span> de segundo orden al incluir tendencia. <em><strong>La suavización de tercer orden incorpora todos los factores, tendencia y estacionalidad en el modelo</strong></em>.</p></li>
+<li><p>En este capítulo se han tratado todos estos modelos en detalle con su implementación en <em><strong>Python</strong></em>. El enfoque de <em><strong>suavizado exponencial puede utilizarse para pronosticar series temporales estacionarias</strong></em>. Sin embargo, esta suposición puede no ser cierta. <em><strong>Se recomienda el suavizado exponencial de orden superior para estos casos</strong></em>, pero su cálculo es difícil y costoso computacionalmente. Por lo tanto, para hacer frente a este planteamiento, <em><strong>se utilizan otras técnicas de previsión como el modelo ARIMA, que se tratará en la siguiente sección</strong></em>.</p></li>
 </ul>
 </div>
 </section>
@@ -2924,10 +2945,9 @@ Freq: MS, dtype: float64
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#libreria-statsmodels-tsa-holtwinters">Librería <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa.holtwinters</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-exponential-smoothing">Single Exponential Smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-exponential-smoothing">Simple Exponential Smoothing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#double-exponential-smoothing">Double Exponential Smoothing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#triple-exponential-smoothing">Triple Exponential Smoothing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion">Predicción</a></li>
 </ul>
 </li>
 </ul>

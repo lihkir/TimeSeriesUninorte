@@ -425,8 +425,8 @@ document.write(`
 <div class="tip admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
-<li><p>En el capítulo anterior se trataron las técnicas de predicción basadas en el suavizado exponencial, que se basan en el supuesto de que <strong>las series temporales se componen de términos deterministas y estocásticos</strong>. El componente aleatorio se reduce a cero con el número de observaciones consideradas para la predicción. Esto supone que el ruido aleatorio es realmente aleatorio y sigue una distribución idéntica e independiente. Sin embargo, esta suposición tiende a violarse a menudo y <em>el suavizado no es suficiente para modelar el proceso y establecer un modelo de predicción</em>.</p></li>
-<li><p>En estos casos, los <strong>modelos autorregresivos</strong> pueden ser muy útiles, ya que <strong>se ajustan inmediatamente utilizando valores de retardo previos aprovechando la correlación serial inherente entre las observaciones</strong>. En esta sección se presentan los conceptos de predicción mediante <strong>modelos autorregresivos</strong>. El <em>modelo autorregresivo incluye términos autorregresivos o términos de media móvil</em>. En función de los componentes utilizados, existen múltiples enfoques que pueden utilizarse en predicciones con series temporales, como la <strong>media móvil (MA)</strong>, la <strong>media móvil autorregresiva (ARMA)</strong> y <strong>media móvil integrada autorregresiva (ARIMA)</strong>.</p></li>
+<li><p>El capítulo anterior cubrió técnicas de <em><strong>predicción basadas en suavizado exponencial</strong></em>, suponiendo que las series temporales tienen <em><strong>componentes deterministas y estocásticos</strong></em>. Sin embargo, estas técnicas <em><strong>pueden ser insuficientes cuando la suposición de ruido aleatorio completamente aleatorio no se cumple</strong></em>.</p></li>
+<li><p>En tales casos, los <em><strong>modelos autorregresivos</strong></em> pueden ser útiles, ya que <em><strong>aprovechan la correlación entre observaciones pasadas para ajustarse inmediatamente</strong></em>. Estos modelos incluyen términos <em><strong>autorregresivos</strong></em> y de <em><strong>media móvil</strong></em>, y pueden ser utilizados en diferentes enfoques de predicción, como <em><strong>ARMA</strong></em> y <em><strong>ARIMA</strong></em>.</p></li>
 </ul>
 </div>
 <ul class="simple">
@@ -478,23 +478,22 @@ document.write(`
 <h2>Estacionariedad<a class="headerlink" href="#estacionariedad" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>La <strong>estacionariedad</strong> de una serie temporal está relacionada con sus <em>propiedades estadísticas en el tiempo</em>. Es decir, en un sentido más estricto, <em><strong>una serie temporal estacionaria exhibe un comportamiento estadístico similar en el tiempo</strong></em>, lo que a menudo se caracteriza como una distribución de probabilidad constante en el tiempo.</p></li>
-<li><p>Sin embargo, por lo general, es satisfactorio considerar los dos primeros momentos de la serie temporal y definir la <strong>estacionariedad</strong> (o <em>estacionariedad débil</em>) de la siguiente manera:</p>
-<ol class="arabic simple">
-<li><p>El valor esperado de la serie temporal no depende del tiempo</p></li>
-<li><p>La función de autocovarianza definida como <span class="math notranslate nohighlight">\(\text{Cov}(y_{t} , y_{t+k})\)</span> para cualquier rezago, <span class="math notranslate nohighlight">\(k\)</span> es solo una función de <span class="math notranslate nohighlight">\(k\)</span> y no del tiempo; es decir, <span class="math notranslate nohighlight">\(\gamma_{y}(k) = \text{Cov}(y_{t}, y_{t+k})\)</span>.</p></li>
+<li><p>Sin embargo, por lo general, es satisfactorio considerar los dos primeros momentos de la serie temporal y definir la <strong>estacionariedad</strong> (o <em>estacionariedad débil</em>) de la siguiente manera:</p></li>
+<li><ol class="arabic simple">
+<li><p>El <em>valor esperado de la serie temporal no depende del tiempo</em></p></li>
+<li><p><em>La función de autocovarianza</em> definida como <span class="math notranslate nohighlight">\(\text{Cov}(y_{t} , y_{t+k})\)</span> para cualquier rezago, <span class="math notranslate nohighlight">\(k\)</span> <em><strong>es solo una función de</strong></em> <span class="math notranslate nohighlight">\(k\)</span> <em>y no del tiempo</em>; es decir, <span class="math notranslate nohighlight">\(\gamma_{y}(k) = \text{Cov}(y_{t}, y_{t+k})\)</span>.</p></li>
 </ol>
 </li>
 </ul>
-<div class="admonition-observacion admonition">
+<div class="tip admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
 <li><p>La <strong>estacionariedad</strong> de una serie temporal se puede evaluar aproximadamente mediante la observación de su comportamiento en diferentes momentos. Si muestra un <em><strong>comportamiento similar en distintos instantes, se puede asumir estacionariedad y continuar con el modelado</strong></em>.</p></li>
-<li><p>Además, pruebas preliminares, como el análisis de la función de <strong>autocorrelación</strong>, pueden proporcionar indicios sobre la estacionariedad. Un <em>decaimiento lento en la autocorrelación sugiere desviaciones de la estacionariedad</em>. También existen pruebas metodológicas más rigurosas para evaluar la estacionariedad, que se discutirán posteriormente en este capítulo.</p></li>
+<li><p>Además, pruebas preliminares, como el análisis de la <em><strong>función de autocorrelación</strong></em>, pueden <em><strong>proporcionar indicios sobre la estacionariedad</strong></em>. Un <em>decaimiento lento en la autocorrelación sugiere desviaciones de la estacionariedad</em>. También existen pruebas metodológicas más rigurosas para evaluar la estacionariedad, que se discutirán posteriormente en este capítulo.</p></li>
 </ul>
 </div>
-<div class="proof theorem admonition" id="theorem-0">
-<p class="admonition-title"><span class="caption-number">Theorem 6 </span></p>
-<section class="theorem-content" id="proof-content">
+<div class="admonition-teorema admonition">
+<p class="admonition-title">Teorema</p>
 <ul>
 <li><p>Dado un <em><strong>filtro lineal invariante en el tiempo y estable</strong></em> y una serie de tiempo con <em><strong>input</strong></em> <span class="math notranslate nohighlight">\(x_{t}\)</span> <em><strong>estacionario</strong></em>, con <span class="math notranslate nohighlight">\(\mu_{x}=\text{E}(x_{t})\)</span> y <span class="math notranslate nohighlight">\(\gamma_{x}(k)=\text{Cov}(x_{t}, x_{t+k})\)</span>, la serie de tiempo</p>
 <div class="math notranslate nohighlight" id="equation-linear-invariant-process">
@@ -506,35 +505,35 @@ document.write(`
 <li><p>El siguiente proceso lineal estable con <em><strong>ruido blanco</strong></em> <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span> <em><strong>es también estacionario</strong></em></p>
 <div class="math notranslate nohighlight" id="equation-linear-filter-white-noise">
 <span class="eqno">(33)<a class="headerlink" href="#equation-linear-filter-white-noise" title="Link to this equation">#</a></span>\[
-    y_{t}=\mu+\sum_{i=-\infty}^{\infty}\Psi_{i}\varepsilon_{t-i},
+    y_{t}=\mu+\sum_{i=-\infty}^{\infty}\psi_{i}\varepsilon_{t-i},
     \]</div>
 <p>y además puede reescribirse como sigue, en términos del <em><strong>operado backshift</strong></em> <span class="math notranslate nohighlight">\(B\)</span> como</p>
 <div class="math notranslate nohighlight" id="equation-moving-average-backshift">
 <span class="eqno">(34)<a class="headerlink" href="#equation-moving-average-backshift" title="Link to this equation">#</a></span>\[
-    y_{t}=\mu+\left(\sum_{i=0}^{\infty}\Psi_{i}B^{i}\right)\varepsilon_{t}=\mu+\Psi(B)\varepsilon_{t}.
+    y_{t}=\mu+\left(\sum_{i=0}^{\infty}\psi_{i}B^{i}\right)\varepsilon_{t}=\mu+\Psi(B)\varepsilon_{t}.
     \]</div>
 </li>
 </ul>
-</section>
-</div><p><strong><code class="docutils literal notranslate"><span class="pre">Demostración</span></code></strong></p>
+</div>
+<p><em><strong><code class="docutils literal notranslate"><span class="pre">Demostración</span></code></strong></em></p>
 <ul class="simple">
 <li><p>Calculemos <em><strong>valor esperado</strong></em> para la serie <span class="math notranslate nohighlight">\(y_{t}\)</span> dada en la Ecuación <a class="reference internal" href="#equation-linear-invariant-process">(32)</a>. Nótese que es constante respecto a <span class="math notranslate nohighlight">\(t\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 \begin{align*}
-\text{E}(y_{t})=\text{E}\left(\sum_{i=-\infty}^{\infty}\Psi_{i}\text{E}(x_{t-i})\right)=\sum_{i=-\infty}^{\infty}\Psi_{i}\text{E}(x_{t-i})=\sum_{i=-\infty}^{\infty}\Psi_{i}\mu_{x}
+\text{E}(y_{t})=\text{E}\left(\sum_{i=-\infty}^{\infty}\psi_{i}\text{E}(x_{t-i})\right)=\sum_{i=-\infty}^{\infty}\psi_{i}\text{E}(x_{t-i})=\sum_{i=-\infty}^{\infty}\psi_{i}\mu_{x}
 \end{align*}
 \]</div>
 <ul class="simple">
-<li><p>Evaluemos ahora la <em><strong>autocovarianza</strong></em>. Nótese que esta es función de <span class="math notranslate nohighlight">\(k\)</span></p></li>
+<li><p>Evaluemos ahora la <a class="reference external" href="https://en.wikipedia.org/wiki/Covariance">autocovarianza</a>. Nótese que esta es función de <span class="math notranslate nohighlight">\(k\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
-\text{Cov}(y_{t}, y_{t+k})&amp;=\text{Cov}\left(\sum_{i=-\infty}^{\infty}\Psi_{i}x_{t-i}, \sum_{j=-\infty}^{\infty}\Psi_{j}x_{t+k-j}\right)\\
-&amp;=\sum_{i=-\infty}^{\infty}\sum_{j=-\infty}^{\infty}\Psi_{i}\Psi_{j}\text{Cov}(x_{t-i}, x_{t+k-j})\\
-&amp;=\sum_{i=-\infty}^{\infty}\sum_{j=-\infty}^{\infty}\Psi_{i}\Psi_{j}\gamma_{x}(k+i-j).
+\text{Cov}(y_{t}, y_{t+k})&amp;=\text{Cov}\left(\sum_{i=-\infty}^{\infty}\psi_{i}x_{t-i}, \sum_{j=-\infty}^{\infty}\psi_{j}x_{t+k-j}\right)\\
+&amp;=\sum_{i=-\infty}^{\infty}\sum_{j=-\infty}^{\infty}\psi_{i}\psi_{j}\text{Cov}(x_{t-i}, x_{t+k-j})\\
+&amp;=\sum_{i=-\infty}^{\infty}\sum_{j=-\infty}^{\infty}\psi_{i}\psi_{j}\gamma_{x}(k+i-j).
 \end{align*}
 \end{split}\]</div>
 <ul class="simple">
@@ -542,46 +541,48 @@ document.write(`
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\text{E}(y_{t})=\text{E}\left(\mu+\sum_{i=0}^{\infty}\Psi_{i}\varepsilon_{t-i}\right)=\mu+\sum_{i=0}^{\infty}\Psi_{i}\cancelto{0}{\text{E}(\varepsilon_{t-i})}=\mu.
+\text{E}(y_{t})=\text{E}\left(\mu+\sum_{i=0}^{\infty}\psi_{i}\varepsilon_{t-i}\right)=\mu+\sum_{i=0}^{\infty}\psi_{i}\cancelto{0}{\text{E}(\varepsilon_{t-i})}=\mu.
 \]</div>
 <ul class="simple">
-<li><p>Dado que <span class="math notranslate nohighlight">\(\gamma(k)=\text{Cov}(c,c)=\text{Var}(c)=0,~\forall c\in\mathbb{R}\)</span>, la autocovarianza de la Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(33)</a> está dada por</p></li>
+<li><p>Dado que <span class="math notranslate nohighlight">\(\gamma_{c}(k)=\text{Cov}(c,c)=\text{Var}(c)=0,~\forall c\in\mathbb{R}\)</span>, la autocovarianza de la Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(33)</a> está dada por</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
-\text{Cov}(y_{t}, y_{t+k})&amp;=\text{Cov}\left(\mu+\sum_{i=0}^{\infty}\Psi_{i}\varepsilon_{t-i}, \mu+\sum_{j=0}^{\infty}\Psi_{j}\varepsilon_{t+k-j}\right)\\
-&amp;=\text{Cov}\left(\sum_{i=0}^{\infty}\Psi_{i}\varepsilon_{t-i}, \sum_{j=0}^{\infty}\Psi_{j}\varepsilon_{t+k-j}\right)\\
-&amp;=\sum_{i=0}^{\infty}\sum_{j=0}^{\infty}\Psi_{i}\Psi_{j}\text{Cov}(\varepsilon_{t-i}, \varepsilon_{t+k-j})\\
-&amp;=\sum_{i=0}^{\infty}\sum_{j=0}^{\infty}\Psi_{i}\Psi_{j}\gamma_{\varepsilon}(k+i-j),~\text{donde}~\gamma_{\varepsilon}(h)=\begin{cases}\sigma^{2}, &amp; h=0\\0, &amp; h\neq0\end{cases}\\
-&amp;=\sigma^{2}\sum_{i=0}^{\infty}\Psi_{i}\Psi_{i+k}.
+\text{Cov}(y_{t}, y_{t+k})&amp;=\text{Cov}\left(\mu+\sum_{i=0}^{\infty}\psi_{i}\varepsilon_{t-i}, \mu+\sum_{j=0}^{\infty}\psi_{j}\varepsilon_{t+k-j}\right)\\
+&amp;=\text{Cov}\left(\sum_{i=0}^{\infty}\psi_{i}\varepsilon_{t-i}, \sum_{j=0}^{\infty}\psi_{j}\varepsilon_{t+k-j}\right)\\
+&amp;=\sum_{i=0}^{\infty}\sum_{j=0}^{\infty}\psi_{i}\psi_{j}\text{Cov}(\varepsilon_{t-i}, \varepsilon_{t+k-j})\\
+&amp;=\sum_{i=0}^{\infty}\sum_{j=0}^{\infty}\psi_{i}\psi_{j}\gamma_{\varepsilon}(k+i-j),~\text{donde}~\gamma_{\varepsilon}(h)=\begin{cases}\sigma^{2}, &amp; h=0\\0, &amp; h\neq0\end{cases}\\
+&amp;=\sigma^{2}\sum_{i=0}^{\infty}\psi_{i}\psi_{i+k}.
 \end{align*}
 \end{split}\]</div>
 <ul class="simple">
-<li><p>Nótese que la última igualdad es independiente de <span class="math notranslate nohighlight">\(t\)</span>. Nótese que se usó el hecho de que: <span class="math notranslate nohighlight">\(h=0\Leftrightarrow k+i-j=0\Leftrightarrow j=i+k\)</span> y además <span class="math notranslate nohighlight">\(\gamma_{\varepsilon}(h)=\sigma^{2}\)</span></p></li>
-<li><p>Además, la Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(33)</a> puede reescribirse como</p></li>
+<li><p>Nótese que la última igualdad es independiente de <span class="math notranslate nohighlight">\(t\)</span>. Además, se usó el hecho de que: <span class="math notranslate nohighlight">\(h=k+i-j=0\)</span> entonces <span class="math notranslate nohighlight">\(\gamma_{\varepsilon}(h)=\sigma^{2}\)</span>.</p></li>
+<li><p>La Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(33)</a> puede reescribirse como</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
-y_{t}=\mu+\sum_{i=0}^{\infty}\Psi_{i}\varepsilon_{t-i}&amp;=\mu+\Psi_{0}\varepsilon_{t}+\Psi_{1}\varepsilon_{t-1}+\Psi_{2}\varepsilon_{t-2}+\cdots\\
-&amp;=\mu+\Psi_{0}B^{0}\varepsilon_{t}+\Psi_{1}B^{1}\varepsilon_{t}+\Psi_{2}B^{2}\varepsilon_{t}+\cdots\\
-&amp;=\mu+\sum_{i=0}^{\infty}\Psi_{i}B^{i}\varepsilon_{t}\\
-&amp;=\mu+\left(\sum_{i=0}^{\infty}\Psi_{i}B^{i}\right)\varepsilon_{t}=\mu+\Psi(B)\varepsilon_{t}.
+y_{t}=\mu+\sum_{i=0}^{\infty}\psi_{i}\varepsilon_{t-i}&amp;=\mu+\psi_{0}\varepsilon_{t}+\psi_{1}\varepsilon_{t-1}+\psi_{2}\varepsilon_{t-2}+\cdots\\
+&amp;=\mu+\psi_{0}B^{0}\varepsilon_{t}+\psi_{1}B^{1}\varepsilon_{t}+\psi_{2}B^{2}\varepsilon_{t}+\cdots\\
+&amp;=\mu+\sum_{i=0}^{\infty}\psi_{i}B^{i}\varepsilon_{t}\\
+&amp;=\mu+\left(\sum_{i=0}^{\infty}\psi_{i}B^{i}\right)\varepsilon_{t}=\mu+\Psi(B)\varepsilon_{t}.
 \end{align*}
 \end{split}\]</div>
 <div class="admonition-observacion admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
 <li><p>La Ecuación <a class="reference internal" href="#equation-moving-average-backshift">(34)</a> se le conoce como el <em><strong>promedio móvil infinito</strong></em> y sirve como una clase general de <em><strong>modelos para cualquier serie temporal estacionaria</strong></em> <span id="id1">[<a class="reference internal" href="biblio.html#id10" title="Herman Wold. A study in the analysis of stationary time series. PhD thesis, Almqvist &amp; Wiksell, 1938.">Wold, 1938</a>]</span>.</p></li>
-<li><p>Básicamente, establece que cualquier serie temporal <span class="math notranslate nohighlight">\(y_{t}\)</span> no determinística y estacionaria débil puede ser representada como en la Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(33)</a>, donde <span class="math notranslate nohighlight">\(\{\Psi_{i}\}\)</span> satisfacen <span class="math notranslate nohighlight">\(\sum_{i=0}^{\infty}\Psi_{i}^{2}&lt;\infty\)</span>.</p></li>
+<li><p>Básicamente, establece que <em><strong>cualquier serie temporal</strong></em> <span class="math notranslate nohighlight">\(y_{t}\)</span> <em><strong>no determinística y estacionaria débil puede ser representada como en la Ecuación</strong></em> <a class="reference internal" href="#equation-linear-filter-white-noise">(33)</a>, donde <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span> satisfacen <span class="math notranslate nohighlight">\(\sum_{i=0}^{\infty}\psi_{i}^{2}&lt;\infty\)</span>.</p></li>
 <li><p>Una interpretación más intuitiva de este teorema es que <em><strong>una serie temporal estacionaria puede ser vista como la suma ponderada de las “perturbaciones” aleatorias presentes y pasadas</strong></em> <span id="id2">[<a class="reference internal" href="biblio.html#id11" title="George Udny Yule. On a method of investigating periodicities in disturbed series with special reference to wolfer’s sunspot numbers. Statistical Papers of George Udny Yule, pages 389–420, 1971.">Yule, 1971</a>, <a class="reference internal" href="biblio.html#id12" title="Søren Bisgaard and Murat Kulahci. Time series analysis and forecasting by example. John Wiley &amp; Sons, 2011.">Bisgaard and Kulahci, 2011</a>]</span>.</p></li>
 </ul>
 </div>
+<ul class="simple">
+<li><p>El <em><strong>Teorema de Wold</strong></em> requiere que los choques aleatorios en una <em><strong>media móvil infinita</strong></em> sean ruido blanco, que definimos como <em><strong>choques aleatorios no correlacionados con varianza constante</strong></em>. Es importante tener en cuenta que hay una diferencia entre correlación e independencia.</p></li>
+</ul>
 <div class="tip admonition">
 <p class="admonition-title">Indpendencia vs No Correlación</p>
 <ul class="simple">
-<li><p>El <em><strong>teorema de Wold</strong></em> requiere que los choques aleatorios en una <em><strong>media móvil infinita</strong></em> sean ruido blanco, que definimos como <em><strong>choques aleatorios no correlacionados con varianza constante</strong></em>. Es importante tener en cuenta que hay una diferencia entre correlación e independencia.</p></li>
 <li><p>Las <em><strong>variables aleatorias independientes también son no correlacionadas, pero lo contrario no siempre es cierto</strong></em>. La <em><strong>independencia</strong></em> entre dos variables aleatorias se refiere a que su <em><strong>función de distribución de probabilidad conjunta es igual al producto de las distribuciones marginales</strong></em>. Es decir, dos variables aleatorias <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> se dicen independientes si</p></li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -604,7 +605,7 @@ f(X, Y)=f_{X}(X)f_{Y}(Y).
 \begin{align*}
 \text{E}[XY]&amp;=\int\int xyf(x, y)dxdy\\
 &amp;=\int\int xyf(x)f(y)dxdy\\
-&amp;=\left\{\int xf(x)dx\right\}\left\{\int yf(y)dy\right\}\\
+&amp;=\left\{\int xf(x)dx\right\}\left\{\int yf(y)dy\right\}\\[2mm]
 &amp;=\text{E}[X]\text{E}[Y].
 \end{align*}
 \end{split}\]</div>
@@ -623,18 +624,23 @@ f(X, Y)=f_{X}(X)f_{Y}(Y).
 </section>
 <section id="proceso-de-media-movil-finito-ma-q">
 <h2>Proceso de media movil finito <span class="math notranslate nohighlight">\(MA(q)\)</span><a class="headerlink" href="#proceso-de-media-movil-finito-ma-q" title="Link to this heading">#</a></h2>
-<div class="admonition-proceso-de-media-movil-de-orden-q-ma-q admonition">
+<div class="tip admonition">
 <p class="admonition-title">Proceso de media móvil de orden <span class="math notranslate nohighlight">\(q\)</span> (<span class="math notranslate nohighlight">\(MA(q)\)</span>)</p>
-<p>En los <em><strong>modelos de media móvil de orden finito</strong></em> o <span class="math notranslate nohighlight">\(MA\)</span>, convencionalmente <span class="math notranslate nohighlight">\(\Psi_{0}\)</span> se establece en 1 y los pesos que no se establecen en 0 se representan con la letra griega <span class="math notranslate nohighlight">\(\theta\)</span> con un signo menos delante. Por lo tanto, un <em><strong>proceso de media móvil de orden</strong></em> <span class="math notranslate nohighlight">\(q\)</span> (<span class="math notranslate nohighlight">\(MA(q)\)</span>) se expresa como</p>
+<ul>
+<li><p>En los <em><strong>modelos de media móvil de orden finito</strong></em> o <span class="math notranslate nohighlight">\(MA\)</span>, convencionalmente <span class="math notranslate nohighlight">\(\psi_{0}\)</span> se establece en 1 y los pesos que no se establecen en 0 se representan con la letra griega <span class="math notranslate nohighlight">\(\theta\)</span> con signo negativo delante. Por lo tanto, un <em><strong>proceso de media móvil de orden</strong></em> <span class="math notranslate nohighlight">\(q\)</span> (<span class="math notranslate nohighlight">\(MA(q)\)</span>) se expresa como</p>
 <div class="math notranslate nohighlight" id="equation-finite-moving-average-orderq">
 <span class="eqno">(35)<a class="headerlink" href="#equation-finite-moving-average-orderq" title="Link to this equation">#</a></span>\[
-y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\cdots-\theta_{q}\varepsilon_{q}
-\]</div>
+    y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\cdots-\theta_{q}\varepsilon_{q}
+    \]</div>
 <p>donde <span class="math notranslate nohighlight">\(\{\varepsilon_{t}\}\)</span> es <em><strong>ruido blanco</strong></em>.</p>
+</li>
+</ul>
 </div>
-<div class="proof theorem admonition" id="theorem-1">
-<p class="admonition-title"><span class="caption-number">Theorem 7 </span></p>
-<section class="theorem-content" id="proof-content">
+<ul class="simple">
+<li><p>Suponga que está modelando el <em><strong>número de ventas diarias en una tienda</strong></em>. En un modelo de <em>media móvil</em>, podría tener en cuenta el <em><strong>efecto de los errores pasados en las ventas actuales</strong></em>. Supongamos que <em><strong>ayer hubo un error positivo en las ventas</strong></em>, es decir, se <em>vendió más de lo esperado</em>. En ese caso, se esperaría que las <em><strong>ventas de hoy sean menores para compensar ese exceso de ventas de ayer</strong></em>. Por lo tanto, el <em><strong>coeficiente asociado con el error de ayer sería negativo</strong></em> en el modelo de promedio móvil.</p></li>
+</ul>
+<div class="admonition-teorema admonition">
+<p class="admonition-title">Teorema</p>
 <ul>
 <li><p>Dado que la Ecuación <a class="reference internal" href="#equation-finite-moving-average-orderq">(35)</a> es un caso especial de la Ecuación <a class="reference internal" href="#equation-moving-average-backshift">(34)</a> con solo pesos finitos, <em><strong>un proceso</strong></em> <span class="math notranslate nohighlight">\(MA(q)\)</span> <em><strong>siempre es estacionario independientemente de los valores de los pesos</strong></em>. En términos del operador backshift, el proceso <span class="math notranslate nohighlight">\(MA(q)\)</span> está dado por</p>
 <div class="math notranslate nohighlight">
@@ -669,13 +675,13 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\cdots-\theta_{q}\varepsil
 0, &amp; k&gt;q.
 \end{cases}
 \end{split}\]</div>
-</section>
-</div><p><strong><code class="docutils literal notranslate"><span class="pre">Demostración</span></code></strong></p>
+</div>
+<p><em><strong><code class="docutils literal notranslate"><span class="pre">Demostración</span></code></strong></em></p>
 <ul>
 <li><p>Nótese que utilizando el operador backshift el proceso <span class="math notranslate nohighlight">\(MA(q)\)</span> se escribe como</p>
 <div class="math notranslate nohighlight">
 \[
-  y_{t}=\mu+(B^{0}-\theta_{1}B^{1}-\theta_{2}B^{2}-\cdots-\theta_{q}B^{q})\varepsilon_{t}=\mu+\left(1-\sum_{i=1}^{q}\theta_{i}B^{i}\right)\varepsilon_{t}=\mu+\Phi(B)\varepsilon_{t}.
+  y_{t}=\mu+(B^{0}-\theta_{1}B^{1}-\theta_{2}B^{2}-\cdots-\theta_{q}B^{q})\varepsilon_{t}=\mu+\left(1-\sum_{i=1}^{q}\theta_{i}B^{i}\right)\varepsilon_{t}=\mu+\Phi(B)\varepsilon_{t}
   \]</div>
 </li>
 </ul>
@@ -696,7 +702,7 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\cdots-\theta_{q}\varepsil
 \[\begin{split}
 \begin{align*}
 \text{Var}(y_{t})&amp;=\text{Var}(\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\cdots-\theta_{q}\varepsilon_{t-q})\\
-&amp;=\text{Var}(\mu)+\text{Var}(\varepsilon_{t})-\theta_{1}^{2}\text{Var}(\varepsilon_{t-1})-\cdots-\theta_{q}^{2}\text{Var}(\varepsilon_{t-q})\\
+&amp;=\text{Var}(\mu)+\text{Var}(\varepsilon_{t})+\theta_{1}^{2}\text{Var}(\varepsilon_{t-1})+\cdots+\theta_{q}^{2}\text{Var}(\varepsilon_{t-q})\\
 &amp;=\sigma^{2}+\theta_{1}^{2}\sigma^{2}+\theta_{2}^{2}\sigma^{2}+\cdots+\theta_{q}^{2}\sigma^{2}\\
 &amp;=\sigma^{2}(1+\theta_{1}^{2}+\theta_{2}^{2}+\cdots+\theta_{q}^{2})=\gamma_{y}(0).
 \end{align*}
@@ -714,7 +720,7 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\cdots-\theta_{q}\varepsil
 </li>
 </ul>
 <ul class="simple">
-<li><p>Recuerde que: <span class="math notranslate nohighlight">\(\text{E}_{t}=0,~\text{Var}(\varepsilon_{t})=\text{E}(\varepsilon_{t}^{2})=\sigma^{2}\)</span> y <span class="math notranslate nohighlight">\(\text{Cov}(\varepsilon_{t}, \varepsilon_{t-k})=\text{E}(\varepsilon_{t}\varepsilon_{t-k})=0,~k\neq0\)</span>. Nótese además que para <span class="math notranslate nohighlight">\(k=1\)</span></p></li>
+<li><p>Recuerde que: <span class="math notranslate nohighlight">\(\text{E}(\varepsilon_{t})=0,~\text{Var}(\varepsilon_{t})=\text{E}(\varepsilon_{t}^{2})=\sigma^{2}\)</span> y <span class="math notranslate nohighlight">\(\text{Cov}(\varepsilon_{t}, \varepsilon_{t-k})=\text{E}(\varepsilon_{t}\varepsilon_{t-k})=0,~k\neq0\)</span>. Nótese además que para <span class="math notranslate nohighlight">\(k=1\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -755,7 +761,7 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\cdots-\theta_{q}\varepsil
 <ul>
 <li><p>Esta característica de la <code class="docutils literal notranslate"><span class="pre">ACF</span></code> es muy <em><strong>útil para identificar el modelo <code class="docutils literal notranslate"><span class="pre">MA</span></code> y su orden adecuado, ya que <em>“se corta”</em> después del rezago</strong></em> <span class="math notranslate nohighlight">\(q\)</span>. Sin embargo, en aplicaciones de la vida real, la <code class="docutils literal notranslate"><span class="pre">ACF</span></code> muestral, <span class="math notranslate nohighlight">\(r(k)\)</span>, no necesariamente será igual a cero después del rezago <span class="math notranslate nohighlight">\(q\)</span>. <em><strong>Se espera que se vuelva muy pequeña en valor absoluto después del rezago</strong></em> <span class="math notranslate nohighlight">\(q\)</span>.</p></li>
 <li><p>Para un conjunto de datos de <span class="math notranslate nohighlight">\(N\)</span> observaciones, esto a menudo se prueba contra límites de <span class="math notranslate nohighlight">\(\pm 2/\sqrt{N}\)</span>, donde <span class="math notranslate nohighlight">\(1/\sqrt{N}\)</span> es el <em><strong>valor aproximado para la desviación estándar de la</strong></em> <code class="docutils literal notranslate"><span class="pre">ACF</span></code> <em><strong>para cualquier rezago</strong></em> bajo la suposición de que <span class="math notranslate nohighlight">\(\rho(k)=0\)</span> para todos los <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
-<li><p>Tenga en cuenta que una fórmula más precisa para el <em><strong>error estándar del coeficiente de autocorrelación muestral <span class="math notranslate nohighlight">\(k\)</span></strong></em> es proporcionada por</p>
+<li><p><span id="id3">[<a class="reference internal" href="biblio.html#id3" title="Maurice S Bartlett. On the theoretical specification and sampling properties of autocorrelated time-series. Supplement to the Journal of the Royal Statistical Society, 8(1):27–41, 1946.">Bartlett, 1946</a>]</span> <span id="id4">[<a class="reference internal" href="biblio.html#id30" title="P.J. Brockwell and R.A. Davis. Time Series: Theory and Methods: Theory and Methods. Springer Series in Statistics. Springer New York, 1991. ISBN 9780387974293. URL: https://books.google.com.co/books?id=ZW_ThhYQiXIC.">Brockwell and Davis, 1991</a>]</span> Tenga en cuenta que una fórmula más precisa para el <em><strong>error estándar del coeficiente de autocorrelación muestral <span class="math notranslate nohighlight">\(k\)</span></strong></em> es proporcionada por (<em><strong><code class="docutils literal notranslate"><span class="pre">bonus</span></code></strong></em>)</p>
 <div class="math notranslate nohighlight">
 \[
     \text{s.e.}~(r(k))=N^{-1/2}\left(1+2\sum_{j=1}^{k-1}r(j)^{\star 2}\right)^{1/2}
@@ -774,9 +780,8 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\cdots-\theta_{q}\varepsil
 </section>
 <section id="el-proceso-de-media-movil-de-primer-orden-ma-1">
 <h2>El Proceso de Media Móvil de Primer Orden, <span class="math notranslate nohighlight">\(MA(1)\)</span><a class="headerlink" href="#el-proceso-de-media-movil-de-primer-orden-ma-1" title="Link to this heading">#</a></h2>
-<div class="proof corollary admonition" id="corollary-2">
-<p class="admonition-title"><span class="caption-number">Corollary 1 </span> (Media Móvil de Primer Orden <span class="math notranslate nohighlight">\(MA(1)\)</span>)</p>
-<section class="corollary-content" id="proof-content">
+<div class="tip admonition">
+<p class="admonition-title">Media Móvil de Primer Orden <span class="math notranslate nohighlight">\(MA(1)\)</span></p>
 <ul class="simple">
 <li><p>El modelo <span class="math notranslate nohighlight">\(MA\)</span> de orden finito más simple se obtiene cuando <span class="math notranslate nohighlight">\(q = 1\)</span> en la Ecuación <a class="reference internal" href="#equation-finite-moving-average-orderq">(35)</a></p></li>
 </ul>
@@ -814,8 +819,8 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}.
 <p>y la función de <em><strong>autocorrelación se reduce a cero después del primer rezago</strong></em>.</p>
 </li>
 </ul>
-</section>
-</div><div class="cell tag_hide-input docutils container">
+</div>
+<div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
 <span class="collapsed">Show code cell source</span>
@@ -915,9 +920,8 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}.
 </section>
 <section id="el-proceso-de-media-movil-de-segundo-orden-ma-2">
 <h2>El Proceso de Media Móvil de Segundo Orden, <span class="math notranslate nohighlight">\(MA(2)\)</span><a class="headerlink" href="#el-proceso-de-media-movil-de-segundo-orden-ma-2" title="Link to this heading">#</a></h2>
-<div class="proof corollary admonition" id="corollary-3">
-<p class="admonition-title"><span class="caption-number">Corollary 2 </span> (Media Móvil de Segundo Orden <span class="math notranslate nohighlight">\(MA(2)\)</span>)</p>
-<section class="corollary-content" id="proof-content">
+<div class="tip admonition">
+<p class="admonition-title">Media Móvil de Segundo Orden <span class="math notranslate nohighlight">\(MA(2)\)</span></p>
 <ul class="simple">
 <li><p>Otro <em><strong>proceso de media móvil de orden finito</strong></em> útil es <span class="math notranslate nohighlight">\(MA(2)\)</span>, dado como</p></li>
 </ul>
@@ -951,8 +955,8 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\theta_{2}\varepsilon_{t-2
 \rho_{y}(k) &amp;= 0,~k&gt;2.
 \end{align*}
 \end{split}\]</div>
-</section>
-</div><ul class="simple">
+</div>
+<ul class="simple">
 <li><p>El siguiente gráfico muestra la serie temporal y la <em><strong>función de autocorrelación</strong></em> para la realización del modelo <span class="math notranslate nohighlight">\(MA(2)\)</span>: <span class="math notranslate nohighlight">\(y_{t}=40+\varepsilon_{t}+0.7\varepsilon_{t-1}-0.28\varepsilon_{t-2}\)</span></p></li>
 </ul>
 <div class="cell tag_hide-input docutils container">
@@ -1000,9 +1004,8 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\theta_{2}\varepsilon_{t-2
 </section>
 <section id="proceso-autorregresivo-de-primer-orden-ar-1">
 <h2>Proceso autorregresivo de primer orden, <span class="math notranslate nohighlight">\(AR(1)\)</span><a class="headerlink" href="#proceso-autorregresivo-de-primer-orden-ar-1" title="Link to this heading">#</a></h2>
-<div class="proof theorem admonition" id="theorem-4">
-<p class="admonition-title"><span class="caption-number">Theorem 8 </span> (Autorregresivo de primer orden <span class="math notranslate nohighlight">\(AR(1)\)</span>)</p>
-<section class="theorem-content" id="proof-content">
+<div class="tip admonition">
+<p class="admonition-title">Teorema</p>
 <ul>
 <li><p>Considere el <em><strong>siguiente proceso lineal estable</strong></em>, con serie de tiempo <span class="math notranslate nohighlight">\({\varepsilon}_{t}\)</span>, ruido blanco,</p>
 <div class="math notranslate nohighlight">
@@ -1029,20 +1032,20 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\theta_{2}\varepsilon_{t-2
     \end{split}\]</div>
 </li>
 </ul>
-</section>
-</div><p><em><strong><code class="docutils literal notranslate"><span class="pre">Demostración</span></code></strong></em></p>
+</div>
+<p><em><strong><code class="docutils literal notranslate"><span class="pre">Demostración</span></code></strong></em></p>
 <ul>
 <li><p>Primero, volvamos a considerar la serie temporal dada en la Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(33)</a> asociada con el proceso lineal estable</p>
 <div class="math notranslate nohighlight">
 \[
-  y_{t}=\mu+\sum_{i=0}^{\infty}\Psi_{i}\varepsilon_{t-i}=\mu+\sum_{i=0}^{\infty}\Psi_{i}B^{i}\varepsilon_{t}=\mu+\Psi(B)\varepsilon_{t},
+  y_{t}=\mu+\sum_{i=0}^{\infty}\psi_{i}\varepsilon_{t-i}=\mu+\sum_{i=0}^{\infty}\psi_{i}B^{i}\varepsilon_{t}=\mu+\Psi(B)\varepsilon_{t},
   \]</div>
 <p>donde <span class="math notranslate nohighlight">\(\Psi(B)=\sum_{i=0}^{\infty}\Psi_{i}B^{i}\)</span>.</p>
 </li>
 </ul>
 <ul class="simple">
 <li><p>Una manera de modelar esta serie temporal es <em><strong>asumir que las contribuciones de las perturbaciones que ocurrieron hace mucho tiempo deberían ser pequeñas en comparación con las perturbaciones más recientes experimentadas por el proceso</strong></em>. Dado que las perturbaciones son variables aleatorias independientes e idénticamente distribuidas, podemos simplemente <em><strong>asumir un conjunto de infinitas ponderaciones en magnitudes descendentes que reflejen la disminución en las contribuciones de las perturbaciones pasadas</strong></em>.</p></li>
-<li><p>Un conjunto simple e intuitivo de <em><strong>estas ponderaciones pueden seguir un patrón de decaimiento exponencial</strong></em>. Para ello, estableceremos <span class="math notranslate nohighlight">\(\Psi_{i}=\phi^{i}\)</span>, donde <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span> para <em><strong>garantizar el “decaimiento” exponencial</strong></em>. Con esta notación, las ponderaciones en las perturbaciones, comenzando desde la perturbación actual y retrocediendo en el tiempo, serán <span class="math notranslate nohighlight">\(1, \phi, \phi^{2}, \phi^{3},\dots\)</span>.</p></li>
+<li><p>Un conjunto simple e intuitivo de <em><strong>estas ponderaciones pueden seguir un patrón de decaimiento exponencial</strong></em>. Para ello, estableceremos <span class="math notranslate nohighlight">\(\psi_{i}=\phi^{i}\)</span>, donde <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span> para <em><strong>garantizar el “decaimiento” exponencial</strong></em>. Con esta notación, las ponderaciones en las perturbaciones, comenzando desde la perturbación actual y retrocediendo en el tiempo, serán <span class="math notranslate nohighlight">\(1, \phi, \phi^{2}, \phi^{3},\dots\)</span>.</p></li>
 </ul>
 <ul class="simple">
 <li><p>Por lo tanto, la Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(33)</a> puede escribirse como:</p></li>
@@ -1080,7 +1083,7 @@ y_{t}=\mu+\varepsilon_{t}+\phi\varepsilon_{t-1}+\phi^{2}\varepsilon_{t-2}+\cdots
 <div class="admonition-observacion admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p>El supuesto de <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span> <em><strong>conduce a ponderaciones que decaen exponencialmente en el tiempo y también garantiza que</strong></em> <span class="math notranslate nohighlight">\(\sum_{i=0}^{\infty}|\Psi|&lt;\infty\)</span>. Esto significa que un proceso <span class="math notranslate nohighlight">\(AR(1)\)</span> <em><strong>es estacionario si</strong></em> <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span>. Para <span class="math notranslate nohighlight">\(|\phi|&gt;1\)</span>, las perturbaciones pasadas obtendrán <em><strong>ponderaciones exponencialmente crecientes</strong></em> a medida que pasa el tiempo y la <em><strong>serie temporal resultante será explosiva</strong></em>. Este tipo de procesos son de <em><strong>poco interés práctico y, por lo tanto, solo consideran casos donde</strong></em> <span class="math notranslate nohighlight">\(|\phi|=1\)</span> y <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span>.</p></li>
+<li><p>El supuesto de <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span> <em><strong>conduce a ponderaciones que decaen exponencialmente en el tiempo y también garantiza que</strong></em> <span class="math notranslate nohighlight">\(\sum_{i=0}^{\infty}|\psi_{i}|&lt;\infty\)</span>. Esto significa que un proceso <span class="math notranslate nohighlight">\(AR(1)\)</span> <em><strong>es estacionario si</strong></em> <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span>. Para <span class="math notranslate nohighlight">\(|\phi|&gt;1\)</span>, las perturbaciones pasadas obtendrán <em><strong>ponderaciones exponencialmente crecientes</strong></em> a medida que pasa el tiempo y la <em><strong>serie temporal resultante será explosiva</strong></em>. Este tipo de procesos son de <em><strong>poco interés práctico y, por lo tanto, solo consideran casos donde</strong></em> <span class="math notranslate nohighlight">\(|\phi|=1\)</span> y <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span>.</p></li>
 </ul>
 </div>
 <ul>
@@ -1224,9 +1227,8 @@ y_{t}=\mu+\varepsilon_{t}+\phi\varepsilon_{t-1}+\phi^{2}\varepsilon_{t-2}+\cdots
 </section>
 <section id="proceso-autorregresivo-de-segundo-orden-ar-2">
 <h2>Proceso autorregresivo de segundo orden, <span class="math notranslate nohighlight">\(AR(2)\)</span><a class="headerlink" href="#proceso-autorregresivo-de-segundo-orden-ar-2" title="Link to this heading">#</a></h2>
-<div class="proof theorem admonition" id="theorem-5">
-<p class="admonition-title"><span class="caption-number">Theorem 9 </span> (Proceso autorregresivo de segundo orden, <span class="math notranslate nohighlight">\(AR(2)\)</span>)</p>
-<section class="theorem-content" id="proof-content">
+<div class="admonition-teorema admonition">
+<p class="admonition-title">Teorema</p>
 <ul class="simple">
 <li><p>La clara extensión de la Ecuación <a class="reference internal" href="#equation-ar1-process-formula">(39)</a> incluye la observación <span class="math notranslate nohighlight">\(y_{t-2}\)</span> y define el <em><strong>proceso autorregresivo de segundo orden</strong></em> <span class="math notranslate nohighlight">\(AR(2)\)</span> como</p></li>
 </ul>
@@ -1255,8 +1257,8 @@ y_{t}=\delta+\phi y_{t-1}+\phi_{2}y_{t-2}+\varepsilon_{t}.
 <ul class="simple">
 <li><p>Más aún, las raíces de las <em><strong>ecuaciones de Yule-Walker muestran combinación de dos términos: decaimiento exponencial y forma sinusoidal amortiguada</strong></em>.</p></li>
 </ul>
-</section>
-</div><p><em><strong><code class="docutils literal notranslate"><span class="pre">Demostración</span></code></strong></em></p>
+</div>
+<p><em><strong><code class="docutils literal notranslate"><span class="pre">Demostración</span></code></strong></em></p>
 <ul>
 <li><p>Nótese que la Ecuación <a class="reference internal" href="#equation-ar2-process-formula">(46)</a> puede reescribirse como</p>
 <div class="math notranslate nohighlight">
@@ -1292,9 +1294,8 @@ y_{t}=\textcolor{red}{\Phi(B)^{-1}\delta}+\textcolor{red}{\Phi(B)^{-1}}\varepsil
 \psi_{j}-\phi_{1}\psi_{j-1}-\phi_{2}\psi_{j-2} &amp;= 0,~j=2,3,\dots,
 \end{align*}
 \end{split}\]</div>
-<div class="proof theorem dropdown admonition" id="theorem-6">
-<p class="admonition-title"><span class="caption-number">Theorem 10 </span> (Ecuación en diferencias lineal homogénea de orden <span class="math notranslate nohighlight">\(n\)</span>)</p>
-<section class="theorem-content" id="proof-content">
+<div class="dropdown admonition">
+<p class="admonition-title">Ecuación en diferencias lineal homogénea de orden <span class="math notranslate nohighlight">\(n\)</span></p>
 <ul>
 <li><p>Una <em><strong>ecuación en diferencias lineal homogénea de orden</strong></em> <span class="math notranslate nohighlight">\(n\)</span> está dada por</p>
 <div class="math notranslate nohighlight" id="equation-homogeneous-difference-equation">
@@ -1311,8 +1312,8 @@ y_{t}=\textcolor{red}{\Phi(B)^{-1}\delta}+\textcolor{red}{\Phi(B)^{-1}}\varepsil
 <p>la llamamos <em><strong>ecuación característica asociada a la ecuación en diferencias lineal homogénea de orden</strong></em> <span class="math notranslate nohighlight">\(n\)</span> <a class="reference internal" href="#equation-homogeneous-difference-equation">(50)</a>.</p>
 </li>
 </ul>
-</section>
-</div><ul>
+</div>
+<ul>
 <li><p>Para encontrar <em><strong>soluciones homogéneas no triviales</strong></em>, asumimos soluciones de la forma <span class="math notranslate nohighlight">\(\psi_{j}=Am^{j},~A,r\in\mathbb{R}\setminus\{0\}\)</span>. Entonces la <em><strong>ecuación característica</strong></em> asociada a la Ecuación <a class="reference internal" href="#equation-diff-eq-second-order">(49)</a> tomaría la forma</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1394,7 +1395,7 @@ m_{1,2}=\frac{\phi_{1}\pm\sqrt{\phi_{1}^{2}+4\phi_{2}}}{2}
 <figure class="align-center" id="complex-roots-ar2-model-fig">
 <img alt="_images/complex_roots_ar2_model.png" src="_images/complex_roots_ar2_model.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Funciones típicas de <em><strong>autocorrelación y autocorrelación parcial</strong></em> <span class="math notranslate nohighlight">\(\rho_{k}\)</span> y <span class="math notranslate nohighlight">\(\phi_{kk}\)</span> para varios modelos <span class="math notranslate nohighlight">\(AR(2)\)</span> estacionarios. (Fuente: <span id="id3">[<a class="reference internal" href="biblio.html#id13" title="Casimir Michael Stralkowski. Lower order autoregressive-moving average stochastic models and their use for the characterization of abrasive cutting tools. PhD thesis, University of Wisconsin, 1968.">Stralkowski, 1968</a>]</span>).</span><a class="headerlink" href="#complex-roots-ar2-model-fig" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Funciones típicas de <em><strong>autocorrelación y autocorrelación parcial</strong></em> <span class="math notranslate nohighlight">\(\rho_{k}\)</span> y <span class="math notranslate nohighlight">\(\phi_{kk}\)</span> para varios modelos <span class="math notranslate nohighlight">\(AR(2)\)</span> estacionarios. (Fuente: <span id="id5">[<a class="reference internal" href="biblio.html#id13" title="Casimir Michael Stralkowski. Lower order autoregressive-moving average stochastic models and their use for the characterization of abrasive cutting tools. PhD thesis, University of Wisconsin, 1968.">Stralkowski, 1968</a>]</span>).</span><a class="headerlink" href="#complex-roots-ar2-model-fig" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -1463,9 +1464,8 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
   \]</div>
 </li>
 </ul>
-<div class="proof theorem dropdown admonition" id="theorem-7">
-<p class="admonition-title"><span class="caption-number">Theorem 11 </span></p>
-<section class="theorem-content" id="proof-content">
+<div class="dropdown admonition">
+<p class="admonition-title">Ecuación característica</p>
 <ul>
 <li><p>Si <span class="math notranslate nohighlight">\(m_{0}\)</span> es solución de la ecuación característica <a class="reference internal" href="#equation-characteristic-equation-ngrade">(51)</a>, entonces <span class="math notranslate nohighlight">\(y_{t}=Am_{0}^{t}\)</span> es solución de <a class="reference internal" href="#equation-homogeneous-difference-equation">(50)</a></p></li>
 <li><p>Al resolver la <em><strong>ecuación característica</strong></em> pueden ocurrir los siguientes casos:</p>
@@ -1492,8 +1492,8 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
     \]</div>
 </li>
 </ul>
-</section>
-</div><ol class="arabic">
+</div>
+<ol class="arabic">
 <li><p>Si <span class="math notranslate nohighlight">\(m_{1}, m_{2}\)</span> son <em><strong>raíces reales distintas</strong></em>, tenemos que</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1790,7 +1790,7 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 \text{E}(\hat{\phi}_{kk})\approx 0~\text{y}~\text{Var}(\hat{\phi}_{kk})\approx\frac{1}{N}
 \]</div>
 <ul class="simple">
-<li><p>Por lo tanto, los <em><strong>límites del 95% para juzgar si algún</strong></em> <span class="math notranslate nohighlight">\(\hat{\phi}_{kk}\)</span> es estadísticamente <em><strong>significativamente diferente de cero se dan por</strong></em> <span class="math notranslate nohighlight">\(\pm 2/\sqrt{N}\)</span> <span id="id4">[<a class="reference internal" href="biblio.html#id14" title="Maurice H Quenouille. Approximate tests of correlation in time-series 3. In Mathematical Proceedings of the Cambridge Philosophical Society, volume 45, 483–484. Cambridge University Press, 1949.">Quenouille, 1949</a>, <a class="reference internal" href="biblio.html#id15" title="GM Jenkins and others. Tests of hypotheses in the linear autoregressive model. 1956.">Jenkins and others, 1956</a>, <a class="reference internal" href="biblio.html#id16" title="HE Daniels. The approximate distribution of serial correlation coefficients. Biometrika, 43(1/2):169–185, 1956.">Daniels, 1956</a>]</span>.</p></li>
+<li><p>Por lo tanto, los <em><strong>límites del 95% para juzgar si algún</strong></em> <span class="math notranslate nohighlight">\(\hat{\phi}_{kk}\)</span> es estadísticamente <em><strong>significativamente diferente de cero se dan por</strong></em> <span class="math notranslate nohighlight">\(\pm 2/\sqrt{N}\)</span> <span id="id6">[<a class="reference internal" href="biblio.html#id14" title="Maurice H Quenouille. Approximate tests of correlation in time-series 3. In Mathematical Proceedings of the Cambridge Philosophical Society, volume 45, 483–484. Cambridge University Press, 1949.">Quenouille, 1949</a>, <a class="reference internal" href="biblio.html#id15" title="GM Jenkins and others. Tests of hypotheses in the linear autoregressive model. 1956.">Jenkins and others, 1956</a>, <a class="reference internal" href="biblio.html#id16" title="HE Daniels. The approximate distribution of serial correlation coefficients. Biometrika, 43(1/2):169–185, 1956.">Daniels, 1956</a>]</span>.</p></li>
 </ul>
 </div>
 <ul>
@@ -1838,9 +1838,8 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 <li><p>Los modelos <span class="math notranslate nohighlight">\(ARMA\)</span> son ampliamente utilizados en la modelización y <em><strong>predicción de datos temporales</strong></em> en una variedad de campos, incluyendo <em><strong>la economía, las finanzas, la meteorología y la ingeniería</strong></em>, debido a su <em><strong>capacidad para capturar tanto la dependencia temporal como la variabilidad aleatoria</strong></em>.</p></li>
 </ul>
 </div>
-<div class="proof definition admonition" id="definition-8">
-<p class="admonition-title"><span class="caption-number">Definition 5 </span> (Proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span>)</p>
-<section class="definition-content" id="proof-content">
+<div class="tip admonition">
+<p class="admonition-title">Proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span></p>
 <ul>
 <li><p>En general, un <em><strong>modelo</strong></em> <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span> se define como:</p>
 <div class="math notranslate nohighlight" id="equation-arma-process-orderpq">
@@ -1858,8 +1857,8 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 <p>donde <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span> es un <em><strong>proceso ruido blanco</strong></em>.</p>
 </li>
 </ul>
+</div>
 </section>
-</div></section>
 <section id="estacionariedad-del-proceso-arma-p-q">
 <h2>Estacionariedad del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span><a class="headerlink" href="#estacionariedad-del-proceso-arma-p-q" title="Link to this heading">#</a></h2>
 <ul>
@@ -1989,7 +1988,7 @@ y_{t}=16-0.7y_{t-1}+\varepsilon_{t}-0.6\varepsilon_{t-1}
 <h2>Funciones de autocorrelación (<span class="math notranslate nohighlight">\(ACF\)</span>) y autocorrelación parcial (<span class="math notranslate nohighlight">\(PACF\)</span>) del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span><a class="headerlink" href="#funciones-de-autocorrelacion-acf-y-autocorrelacion-parcial-pacf-del-proceso-arma-p-q" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Las <em><strong>funciones de autocorrelación (ACF) y autocorrelación parcial (PACF) de un proceso ARMA son determinadas por las componentes AR y MA</strong></em>, respectivamente. Por lo tanto, tanto la ACF como la PACF de un <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span> <em><strong>exhiben patrones de decaimiento exponencial y/o sinusoidales amortiguados</strong></em>, lo que <em>dificulta relativamente la identificación del orden del modelo</em> <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span>.</p></li>
-<li><p>Para ello, se pueden utilizar funciones de muestra adicionales como la <em><strong>ACF de muestra extendida (ESACF), la PACF de muestra generalizada (GPACF), la ACF inversa (IACF) y correlaciones canónicas</strong></em> <span id="id5">[<a class="reference internal" href="biblio.html#id17" title="George EP Box, Gwilym M Jenkins, Gregory C Reinsel, and Greta M Ljung. Time series analysis: forecasting and control. John Wiley &amp; Sons, 2015.">Box <em>et al.</em>, 2015</a>, <a class="reference internal" href="biblio.html#id18" title="Wei William and S Wei. Time series analysis: univariate and multivariate methods. USA, Pearson Addison Wesley, Segunda edicion. Cap, 10:212–235, 2006.">William and Wei, 2006</a>, <a class="reference internal" href="biblio.html#id19" title="George C Tiao and George EP Box. Modeling multiple time series with applications. journal of the American Statistical Association, 76(376):802–816, 1981.">Tiao and Box, 1981</a>, <a class="reference internal" href="biblio.html#id20" title="Ruey S Tsay and George C Tiao. Consistent estimates of autoregressive parameters and extended sample autocorrelation function for stationary and nonstationary arma models. Journal of the American Statistical Association, 79(385):84–96, 1984.">Tsay and Tiao, 1984</a>, <a class="reference internal" href="biblio.html#id21" title="Johannes Ledolter and Bovas Abraham. Some comments on the initialization of exponential smoothing. Journal of Forecasting, 3(1):79–84, 1984.">Ledolter and Abraham, 1984</a>]</span>.</p></li>
+<li><p>Para ello, se pueden utilizar funciones de muestra adicionales como la <em><strong>ACF de muestra extendida (ESACF), la PACF de muestra generalizada (GPACF), la ACF inversa (IACF) y correlaciones canónicas</strong></em> <span id="id7">[<a class="reference internal" href="biblio.html#id17" title="George EP Box, Gwilym M Jenkins, Gregory C Reinsel, and Greta M Ljung. Time series analysis: forecasting and control. John Wiley &amp; Sons, 2015.">Box <em>et al.</em>, 2015</a>, <a class="reference internal" href="biblio.html#id18" title="Wei William and S Wei. Time series analysis: univariate and multivariate methods. USA, Pearson Addison Wesley, Segunda edicion. Cap, 10:212–235, 2006.">William and Wei, 2006</a>, <a class="reference internal" href="biblio.html#id19" title="George C Tiao and George EP Box. Modeling multiple time series with applications. journal of the American Statistical Association, 76(376):802–816, 1981.">Tiao and Box, 1981</a>, <a class="reference internal" href="biblio.html#id20" title="Ruey S Tsay and George C Tiao. Consistent estimates of autoregressive parameters and extended sample autocorrelation function for stationary and nonstationary arma models. Journal of the American Statistical Association, 79(385):84–96, 1984.">Tsay and Tiao, 1984</a>, <a class="reference internal" href="biblio.html#id21" title="Johannes Ledolter and Bovas Abraham. Some comments on the initialization of exponential smoothing. Journal of Forecasting, 3(1):79–84, 1984.">Ledolter and Abraham, 1984</a>]</span>.</p></li>
 <li><p>Sin embargo, la <em><strong>disponibilidad de librerías en Python</strong></em> permite al profesional considerar varios modelos con diferentes órdenes y compararlos según los <em><strong>criterios de selección de modelos como AIC, AICC y BIC</strong></em>. Los valores teóricos de la <em><strong>ACF y la PACF para series de tiempo estacionarias se resumen en la siguiente tabla</strong></em>.</p></li>
 </ul>
 <table class="table" id="table-acf-pacf-arima-process">
@@ -2064,7 +2063,7 @@ y_{t} &amp;= w_{t}+y_{t-1}\\
 <h2>Identificación de modelos<a class="headerlink" href="#identificacion-de-modelos" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><em><strong>Antes de comenzar con esfuerzos rigurosos de construcción de modelos estadísticos</strong></em>, se recomienda el uso de <em><strong>gráficos descriptivos, como los gráficos de series temporales simples y los gráficos de dispersión de los datos de series temporales</strong></em> <span class="math notranslate nohighlight">\(y_{t}\)</span> vs <span class="math notranslate nohighlight">\(y_{t−1}, y_{t−2},\dots,\)</span>.</p></li>
-<li><p>Si se <em><strong>sospecha de no estacionariedad</strong></em>, también se debe considerar el <em><strong>gráfico de la primera (o <em><strong><span class="math notranslate nohighlight">\(d\)</span></strong></em>-ésima) diferencia</strong></em>. La prueba de <em><strong>raíz unitaria</strong></em> <span id="id6">[<a class="reference internal" href="biblio.html#id22" title="David A Dickey and Wayne A Fuller. Distribution of the estimators for autoregressive time series with a unit root. Journal of the American statistical association, 74(366a):427–431, 1979.">Dickey and Fuller, 1979</a>]</span> también se puede realizar para asegurarse de que se necesite realmente la diferenciación.</p></li>
+<li><p>Si se <em><strong>sospecha de no estacionariedad</strong></em>, también se debe considerar el <em><strong>gráfico de la primera (o <em><strong><span class="math notranslate nohighlight">\(d\)</span></strong></em>-ésima) diferencia</strong></em>. La prueba de <em><strong>raíz unitaria</strong></em> <span id="id8">[<a class="reference internal" href="biblio.html#id22" title="David A Dickey and Wayne A Fuller. Distribution of the estimators for autoregressive time series with a unit root. Journal of the American statistical association, 74(366a):427–431, 1979.">Dickey and Fuller, 1979</a>]</span> también se puede realizar para asegurarse de que se necesite realmente la diferenciación.</p></li>
 <li><p><em><strong>Una vez que se puede asumir la estacionariedad</strong></em> de la serie temporal, se deben <em><strong>obtener la ACF y PACF muestral de la serie temporal original</strong></em> (o su <span class="math notranslate nohighlight">\(d\)</span>-ésima diferencia si es necesario). Dependiendo de la naturaleza de la autocorrelación, <em><strong>las primeras 20–25 autocorrelaciones y autocorrelaciones parciales muestrales deberían ser suficientes</strong></em>.</p></li>
 <li><p>La Tabla <a class="reference internal" href="#table-acf-pacf-arima-process"><span class="std std-ref">Comportamiento de las ACF, PACF teóricas para procesos estacionarios</span></a> junto con <em><strong>los límtes</strong></em> <span class="math notranslate nohighlight">\(\pm2/\sqrt{N}\)</span> pueden ser usados como una guía para <em><strong>identificar modelos</strong></em> <span class="math notranslate nohighlight">\(AR\)</span> y <span class="math notranslate nohighlight">\(MA\)</span>. La identificación va a requerir mayor cuidado dado que, <span class="math notranslate nohighlight">\(ACF\)</span> y <span class="math notranslate nohighlight">\(PACF\)</span> van a presentar <em><strong>decaimiento exponencial y comportamiento sinusoidal amortiguado</strong></em>.</p></li>
 </ul>
@@ -2406,10 +2405,10 @@ y_{t}=\phi y_{t-1}+\varepsilon_{t}=\phi (\phi y_{t-2} + \varepsilon_{t-1})+\vare
   <th>Model:</th>            <td>ARIMA(3, 0, 0)</td>  <th>  Log Likelihood     </th> <td>-847.763</td>
 </tr>
 <tr>
-  <th>Date:</th>            <td>Tue, 07 May 2024</td> <th>  AIC                </th> <td>1705.527</td>
+  <th>Date:</th>            <td>Fri, 10 May 2024</td> <th>  AIC                </th> <td>1705.527</td>
 </tr>
 <tr>
-  <th>Time:</th>                <td>21:00:03</td>     <th>  BIC                </th> <td>1727.512</td>
+  <th>Time:</th>                <td>06:57:11</td>     <th>  BIC                </th> <td>1727.512</td>
 </tr>
 <tr>
   <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>1714.085</td>
@@ -2669,10 +2668,10 @@ y_{t}=0.7\varepsilon_{t-1}+\varepsilon_{t}
   <th>Model:</th>            <td>ARIMA(0, 0, 1)</td>  <th>  Log Likelihood     </th> <td>-842.209</td>
 </tr>
 <tr>
-  <th>Date:</th>            <td>Tue, 07 May 2024</td> <th>  AIC                </th> <td>1690.418</td>
+  <th>Date:</th>            <td>Fri, 10 May 2024</td> <th>  AIC                </th> <td>1690.418</td>
 </tr>
 <tr>
-  <th>Time:</th>                <td>21:00:05</td>     <th>  BIC                </th> <td>1703.609</td>
+  <th>Time:</th>                <td>06:57:12</td>     <th>  BIC                </th> <td>1703.609</td>
 </tr>
 <tr>
   <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>1695.553</td>
@@ -2739,10 +2738,10 @@ y_{t}=0.7\varepsilon_{t-1}+\varepsilon_{t}
   <th>Model:</th>            <td>ARIMA(0, 0, 3)</td>  <th>  Log Likelihood     </th> <td>-852.803</td>
 </tr>
 <tr>
-  <th>Date:</th>            <td>Tue, 07 May 2024</td> <th>  AIC                </th> <td>1715.606</td>
+  <th>Date:</th>            <td>Fri, 10 May 2024</td> <th>  AIC                </th> <td>1715.606</td>
 </tr>
 <tr>
-  <th>Time:</th>                <td>21:00:05</td>     <th>  BIC                </th> <td>1737.591</td>
+  <th>Time:</th>                <td>06:57:13</td>     <th>  BIC                </th> <td>1737.591</td>
 </tr>
 <tr>
   <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>1724.165</td>
@@ -2949,10 +2948,10 @@ MA(q):\quad y_{t}=(1-\theta_{1}L-\theta_{2}L^{2}-\cdots-\theta_{q}L^{q})\varepsi
   <th>Model:</th>            <td>ARIMA(1, 0, 1)</td>  <th>  Log Likelihood     </th> <td>-826.795</td>
 </tr>
 <tr>
-  <th>Date:</th>            <td>Tue, 07 May 2024</td> <th>  AIC                </th> <td>1661.590</td>
+  <th>Date:</th>            <td>Fri, 10 May 2024</td> <th>  AIC                </th> <td>1661.590</td>
 </tr>
 <tr>
-  <th>Time:</th>                <td>21:00:05</td>     <th>  BIC                </th> <td>1679.178</td>
+  <th>Time:</th>                <td>06:57:13</td>     <th>  BIC                </th> <td>1679.178</td>
 </tr>
 <tr>
   <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>1668.436</td>
@@ -3970,10 +3969,10 @@ p-value: 0.000000
   <th>Model:</th>            <td>ARIMA(0, 2, 1)</td>  <th>  Log Likelihood     </th> <td>-1588.730</td>
 </tr>
 <tr>
-  <th>Date:</th>            <td>Tue, 07 May 2024</td> <th>  AIC                </th> <td>3181.460</td> 
+  <th>Date:</th>            <td>Fri, 10 May 2024</td> <th>  AIC                </th> <td>3181.460</td> 
 </tr>
 <tr>
-  <th>Time:</th>                <td>21:00:09</td>     <th>  BIC                </th> <td>3188.503</td> 
+  <th>Time:</th>                <td>06:57:17</td>     <th>  BIC                </th> <td>3188.503</td> 
 </tr>
 <tr>
   <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>3184.295</td> 
@@ -4097,10 +4096,10 @@ p-value: 0.000000
   <th>Model:</th>           <td>SARIMAX(0, 2, 1)x(1, 1, 1, 42)</td> <th>  Log Likelihood     </th> <td>-1366.570</td>
 </tr>
 <tr>
-  <th>Date:</th>                   <td>Tue, 07 May 2024</td>        <th>  AIC                </th> <td>2741.141</td> 
+  <th>Date:</th>                   <td>Fri, 10 May 2024</td>        <th>  AIC                </th> <td>2741.141</td> 
 </tr>
 <tr>
-  <th>Time:</th>                       <td>21:00:12</td>            <th>  BIC                </th> <td>2754.491</td> 
+  <th>Time:</th>                       <td>06:57:20</td>            <th>  BIC                </th> <td>2754.491</td> 
 </tr>
 <tr>
   <th>Sample:</th>                         <td>0</td>               <th>  HQIC               </th> <td>2746.539</td> 
