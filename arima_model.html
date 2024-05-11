@@ -1008,7 +1008,7 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\theta_{2}\varepsilon_{t-2
 <li><p>Considere el <em><strong>siguiente proceso lineal estable</strong></em>, con serie de tiempo <span class="math notranslate nohighlight">\({\varepsilon}_{t}\)</span>, ruido blanco,</p>
 <div class="math notranslate nohighlight">
 \[
-    y_{t}=\mu+\sum_{i=0}^{\infty}\Psi_{i}\varepsilon_{t-i}.
+    y_{t}=\mu+\sum_{i=0}^{\infty}\psi_{i}\varepsilon_{t-i}.
     \]</div>
 </li>
 <li><p>Además, para <em><strong>garantizar decrecimiento exponencial</strong></em>, fije <span class="math notranslate nohighlight">\(\psi_{i}=\phi^{i}\)</span>, donde <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span>.</p></li>
@@ -1038,7 +1038,7 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\theta_{2}\varepsilon_{t-2
 \[
   y_{t}=\mu+\sum_{i=0}^{\infty}\psi_{i}\varepsilon_{t-i}=\mu+\sum_{i=0}^{\infty}\psi_{i}B^{i}\varepsilon_{t}=\mu+\Psi(B)\varepsilon_{t},
   \]</div>
-<p>donde <span class="math notranslate nohighlight">\(\Psi(B)=\sum_{i=0}^{\infty}\Psi_{i}B^{i}\)</span>.</p>
+<p>donde <span class="math notranslate nohighlight">\(\Psi(B)=\sum_{i=0}^{\infty}\psi_{i}B^{i}\)</span>.</p>
 </li>
 </ul>
 <ul class="simple">
@@ -1081,7 +1081,8 @@ y_{t}=\mu+\varepsilon_{t}+\phi\varepsilon_{t-1}+\phi^{2}\varepsilon_{t-2}+\cdots
 <div class="admonition-observacion admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p>El supuesto de <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span> <em><strong>conduce a ponderaciones que decaen exponencialmente en el tiempo y también garantiza que</strong></em> <span class="math notranslate nohighlight">\(\sum_{i=0}^{\infty}|\psi_{i}|&lt;\infty\)</span>. Esto significa que un proceso <span class="math notranslate nohighlight">\(AR(1)\)</span> <em><strong>es estacionario si</strong></em> <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span>. Para <span class="math notranslate nohighlight">\(|\phi|&gt;1\)</span>, las perturbaciones pasadas obtendrán <em><strong>ponderaciones exponencialmente crecientes</strong></em> a medida que pasa el tiempo y la <em><strong>serie temporal resultante será explosiva</strong></em>. Este tipo de procesos son de <em><strong>poco interés práctico y, por lo tanto, solo consideran casos donde</strong></em> <span class="math notranslate nohighlight">\(|\phi|=1\)</span> y <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span>.</p></li>
+<li><p>El supuesto de <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span> <em><strong>conduce a ponderaciones que decaen exponencialmente en el tiempo y también garantiza que</strong></em> <span class="math notranslate nohighlight">\(\sum_{i=0}^{\infty}|\psi_{i}|&lt;\infty\)</span>. Esto significa que un proceso <span class="math notranslate nohighlight">\(AR(1)\)</span> <em><strong>es estacionario si</strong></em> <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span>.</p></li>
+<li><p>Para <span class="math notranslate nohighlight">\(|\phi|&gt;1\)</span>, las perturbaciones pasadas obtendrán <em><strong>ponderaciones exponencialmente crecientes</strong></em> a medida que pasa el tiempo y la <em><strong>serie temporal resultante será explosiva</strong></em>. Este tipo de procesos son de <em><strong>poco interés práctico y, por lo tanto, solo consideran casos donde</strong></em> <span class="math notranslate nohighlight">\(|\phi|=1\)</span> y <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span>.</p></li>
 </ul>
 </div>
 <ul>
@@ -1266,7 +1267,7 @@ y_{t}=\delta+\phi y_{t-1}+\phi_{2}y_{t-2}+\varepsilon_{t}.
 </li>
 </ul>
 <ul class="simple">
-<li><p>Aplicando el operador inverso <span class="math notranslate nohighlight">\(\Phi(B)^{-1}\)</span> en ambos mienbros de la igualdad se tiene</p></li>
+<li><p>Aplicando el operador inverso <span class="math notranslate nohighlight">\(\Phi(B)^{-1}\)</span> en ambos miembros de la igualdad se tiene</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -1327,7 +1328,7 @@ y_{t}=\textcolor{red}{\Phi(B)^{-1}\delta}+\textcolor{red}{\Phi(B)^{-1}}\varepsil
 m_{1,2}=\frac{\phi_{1}\pm\sqrt{\phi_{1}^{2}+4\phi_{2}}}{2}
 \]</div>
 <ul>
-<li><p>Nótese que si <span class="math notranslate nohighlight">\(|m_{i}|&lt;1,~i=1,2\)</span> entonces <span class="math notranslate nohighlight">\(\sum_{i=0}^{\infty}|\Psi_{i}|&lt;\infty\)</span>. Por lo tanto, el modelo sería <em><strong>causal estacionario</strong></em>. Además, si las <em><strong>raices de la Ecuación</strong></em> <a class="reference internal" href="#equation-roots-diff-equations-ar2">(52)</a> <em><strong>son complejas</strong></em>, esto es, de la forma <span class="math notranslate nohighlight">\(a+bi,~i=\sqrt{-1}\)</span>, la <em><strong>estacionariedad se tendría si</strong></em></p>
+<li><p>Nótese que si <span class="math notranslate nohighlight">\(|m_{i}|&lt;1,~i=1,2\)</span> entonces <span class="math notranslate nohighlight">\(\sum_{i=0}^{\infty}|\psi_{i}|&lt;\infty\)</span> (<em><strong><code class="docutils literal notranslate"><span class="pre">verifíquelo</span></code></strong></em>). Por lo tanto, el modelo sería <em><strong>causal estacionario</strong></em>. Además, si las <em><strong>raices de la Ecuación</strong></em> <a class="reference internal" href="#equation-roots-diff-equations-ar2">(52)</a> <em><strong>son complejas</strong></em>, esto es, de la forma <span class="math notranslate nohighlight">\(a+bi,~i=\sqrt{-1}\)</span>, la <em><strong>estacionariedad se tendría si</strong></em></p>
 <div class="math notranslate nohighlight">
 \[
   |a+bi|=\sqrt{a^{2}+b^{2}}&lt;1
@@ -2321,10 +2322,10 @@ y_{t}=\phi y_{t-1}+\varepsilon_{t}=\phi (\phi y_{t-2} + \varepsilon_{t-1})+\vare
   <th>Model:</th>            <td>ARIMA(3, 0, 0)</td>  <th>  Log Likelihood     </th> <td>-847.763</td>
 </tr>
 <tr>
-  <th>Date:</th>            <td>Fri, 10 May 2024</td> <th>  AIC                </th> <td>1705.527</td>
+  <th>Date:</th>            <td>Sat, 11 May 2024</td> <th>  AIC                </th> <td>1705.527</td>
 </tr>
 <tr>
-  <th>Time:</th>                <td>21:18:32</td>     <th>  BIC                </th> <td>1727.512</td>
+  <th>Time:</th>                <td>08:10:07</td>     <th>  BIC                </th> <td>1727.512</td>
 </tr>
 <tr>
   <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>1714.085</td>
@@ -2527,10 +2528,10 @@ y_{t}=0.7\varepsilon_{t-1}+\varepsilon_{t}
   <th>Model:</th>            <td>ARIMA(0, 0, 1)</td>  <th>  Log Likelihood     </th> <td>-842.209</td>
 </tr>
 <tr>
-  <th>Date:</th>            <td>Fri, 10 May 2024</td> <th>  AIC                </th> <td>1690.418</td>
+  <th>Date:</th>            <td>Sat, 11 May 2024</td> <th>  AIC                </th> <td>1690.418</td>
 </tr>
 <tr>
-  <th>Time:</th>                <td>21:18:34</td>     <th>  BIC                </th> <td>1703.609</td>
+  <th>Time:</th>                <td>08:10:08</td>     <th>  BIC                </th> <td>1703.609</td>
 </tr>
 <tr>
   <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>1695.553</td>
@@ -2597,10 +2598,10 @@ y_{t}=0.7\varepsilon_{t-1}+\varepsilon_{t}
   <th>Model:</th>            <td>ARIMA(0, 0, 3)</td>  <th>  Log Likelihood     </th> <td>-852.803</td>
 </tr>
 <tr>
-  <th>Date:</th>            <td>Fri, 10 May 2024</td> <th>  AIC                </th> <td>1715.606</td>
+  <th>Date:</th>            <td>Sat, 11 May 2024</td> <th>  AIC                </th> <td>1715.606</td>
 </tr>
 <tr>
-  <th>Time:</th>                <td>21:18:34</td>     <th>  BIC                </th> <td>1737.591</td>
+  <th>Time:</th>                <td>08:10:08</td>     <th>  BIC                </th> <td>1737.591</td>
 </tr>
 <tr>
   <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>1724.165</td>
@@ -2746,10 +2747,10 @@ y_{t}=0.7\varepsilon_{t-1}+\varepsilon_{t}
   <th>Model:</th>            <td>ARIMA(1, 0, 1)</td>  <th>  Log Likelihood     </th> <td>-826.795</td>
 </tr>
 <tr>
-  <th>Date:</th>            <td>Fri, 10 May 2024</td> <th>  AIC                </th> <td>1661.590</td>
+  <th>Date:</th>            <td>Sat, 11 May 2024</td> <th>  AIC                </th> <td>1661.590</td>
 </tr>
 <tr>
-  <th>Time:</th>                <td>21:18:34</td>     <th>  BIC                </th> <td>1679.178</td>
+  <th>Time:</th>                <td>08:10:09</td>     <th>  BIC                </th> <td>1679.178</td>
 </tr>
 <tr>
   <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>1668.436</td>
@@ -3731,10 +3732,10 @@ p-value: 0.000000
   <th>Model:</th>            <td>ARIMA(0, 2, 1)</td>  <th>  Log Likelihood     </th> <td>-1588.730</td>
 </tr>
 <tr>
-  <th>Date:</th>            <td>Fri, 10 May 2024</td> <th>  AIC                </th> <td>3181.460</td> 
+  <th>Date:</th>            <td>Sat, 11 May 2024</td> <th>  AIC                </th> <td>3181.460</td> 
 </tr>
 <tr>
-  <th>Time:</th>                <td>21:18:39</td>     <th>  BIC                </th> <td>3188.503</td> 
+  <th>Time:</th>                <td>08:10:13</td>     <th>  BIC                </th> <td>3188.503</td> 
 </tr>
 <tr>
   <th>Sample:</th>                  <td>0</td>        <th>  HQIC               </th> <td>3184.295</td> 
@@ -3858,10 +3859,10 @@ p-value: 0.000000
   <th>Model:</th>           <td>SARIMAX(0, 2, 1)x(1, 1, 1, 42)</td> <th>  Log Likelihood     </th> <td>-1366.570</td>
 </tr>
 <tr>
-  <th>Date:</th>                   <td>Fri, 10 May 2024</td>        <th>  AIC                </th> <td>2741.141</td> 
+  <th>Date:</th>                   <td>Sat, 11 May 2024</td>        <th>  AIC                </th> <td>2741.141</td> 
 </tr>
 <tr>
-  <th>Time:</th>                       <td>21:18:42</td>            <th>  BIC                </th> <td>2754.491</td> 
+  <th>Time:</th>                       <td>08:10:16</td>            <th>  BIC                </th> <td>2754.491</td> 
 </tr>
 <tr>
   <th>Sample:</th>                         <td>0</td>               <th>  HQIC               </th> <td>2746.539</td> 
