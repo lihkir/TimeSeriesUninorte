@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -186,6 +186,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Métodos de Suavización Exponencial</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="arima_model.html">Modelos autorregresivos integrados de media móvil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deep_learning.html">Deep Learning para la predicción de series temporales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliografía</a></li>
 </ul>
 
@@ -458,8 +459,7 @@ document.write(`
 </li>
 </ul>
 <figure class="align-center" id="signal-noise-fig">
-<a class="reference internal image-reference" href="_images/signal_noise.png"><img alt="_images/signal_noise.png" src="_images/signal_noise.png" style="width: 589.6px; height: 489.6px;" />
-</a>
+<a class="reference internal image-reference" href="_images/signal_noise.png"><img alt="_images/signal_noise.png" src="_images/signal_noise.png" style="width: 589.6px; height: 489.6px;" /></a>
 </figure>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(f(t, \boldsymbol{\beta})\)</span> <em><strong>denota la forma funcional de la señal</strong></em>. Un ejemplo puede ser una constante (<em><strong>media</strong></em>) como forma funcional:</p></li>
@@ -873,7 +873,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/acaedd185391cf7afeb3bb3001777728a3d642587d9daec870676ddbef9e8613.png" src="_images/acaedd185391cf7afeb3bb3001777728a3d642587d9daec870676ddbef9e8613.png" />
+<img alt="_images/44b9cbca2a44d5d7e123b09f85f2c3abb014050a492046a1898cfbac645a2130.png" src="_images/44b9cbca2a44d5d7e123b09f85f2c3abb014050a492046a1898cfbac645a2130.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -909,7 +909,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e72bb8afc3b2c5313196591ebe8a6a8fc4f50fbb0b6c33af67dff2990157f385.png" src="_images/e72bb8afc3b2c5313196591ebe8a6a8fc4f50fbb0b6c33af67dff2990157f385.png" />
+<img alt="_images/77e9ccf818345ddc95760d71bf9ddd5f69953358730d76914e3d19a0d52a5834.png" src="_images/77e9ccf818345ddc95760d71bf9ddd5f69953358730d76914e3d19a0d52a5834.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1046,10 +1046,10 @@ dtype: float64
   <tbody>
     <tr>
       <th>0</th>
-      <td>1.084430e+07</td>
+      <td>1.084431e+07</td>
       <td>0.876061</td>
-      <td>154.763858</td>
-      <td>43032.945974</td>
+      <td>154.763888</td>
+      <td>43032.984921</td>
     </tr>
   </tbody>
 </table>
@@ -1362,7 +1362,7 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e270f307f866c68a9322a37264415b9e0b6e38d45cf68e4d68d47753bcc30819.png" src="_images/e270f307f866c68a9322a37264415b9e0b6e38d45cf68e4d68d47753bcc30819.png" />
+<img alt="_images/46fca9bf16d567ba3d97e18d585a943cb633cb3f3a04a86b37ced354db67c56a.png" src="_images/46fca9bf16d567ba3d97e18d585a943cb633cb3f3a04a86b37ced354db67c56a.png" />
 </div>
 </div>
 </section>
@@ -1431,8 +1431,7 @@ SS_{E}^{\star}=\sum_{t=0}^{T-1}\theta^{t}(y_{T-t}-\beta_{0})^{2},~\text{donde}~|
 \end{align*}
 \end{split}\]</div>
 <figure class="align-center" id="forecasttau-timeseries-fig">
-<a class="reference internal image-reference" href="_images/forecasttau_timeseries.png"><img alt="_images/forecasttau_timeseries.png" src="_images/forecasttau_timeseries.png" style="width: 540.0px; height: 105.66px;" />
-</a>
+<a class="reference internal image-reference" href="_images/forecasttau_timeseries.png"><img alt="_images/forecasttau_timeseries.png" src="_images/forecasttau_timeseries.png" style="width: 540.0px; height: 105.66px;" /></a>
 </figure>
 <ul>
 <li><p>Para <span class="math notranslate nohighlight">\(\tau=1\)</span> la Ecuación <a class="reference internal" href="#equation-fc-in-tplustau-eq">(20)</a> puede reescribirse como</p>
@@ -1579,7 +1578,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/244b22f54ea7efebf82e7cda369c00fb268babf6e37fca257b710221a641aaa8.png" src="_images/244b22f54ea7efebf82e7cda369c00fb268babf6e37fca257b710221a641aaa8.png" />
+<img alt="_images/533ffd32674083858fe5fab9503b51de4c0a57e19bf9f24e9d588e26eddff965.png" src="_images/533ffd32674083858fe5fab9503b51de4c0a57e19bf9f24e9d588e26eddff965.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1633,7 +1632,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b9de3be68312681fc922f73d455a732826512f9a8071cadbe151f9efc2f57279.png" src="_images/b9de3be68312681fc922f73d455a732826512f9a8071cadbe151f9efc2f57279.png" />
+<img alt="_images/ae650abb5162bcd5f47eacc7225dd409eb1ad8d9109da4c38563afbebba49ef1.png" src="_images/ae650abb5162bcd5f47eacc7225dd409eb1ad8d9109da4c38563afbebba49ef1.png" />
 </div>
 </div>
 </section>
@@ -1961,7 +1960,7 @@ Length: 120, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/89bc2a9613cd5ca8d9b4c8d39cb7fd6cac237fb4c05984cde25dab689add870e.png" src="_images/89bc2a9613cd5ca8d9b4c8d39cb7fd6cac237fb4c05984cde25dab689add870e.png" />
+<img alt="_images/ac4b1148cc79f1a1354b7f4ea74763e9a557eed1e1b6c099362ef98eeb0a56dc.png" src="_images/ac4b1148cc79f1a1354b7f4ea74763e9a557eed1e1b6c099362ef98eeb0a56dc.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2059,7 +2058,7 @@ Length: 120, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4c34f2ef9d734aeeb96423e2651fd29db9220b2b9c815e1747df06a4bcdfa698.png" src="_images/4c34f2ef9d734aeeb96423e2651fd29db9220b2b9c815e1747df06a4bcdfa698.png" />
+<img alt="_images/cd918878d4533c2e4819753d9a8a1cd327cf5b97a09c5dbc3e8c60b7978a2021.png" src="_images/cd918878d4533c2e4819753d9a8a1cd327cf5b97a09c5dbc3e8c60b7978a2021.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2119,7 +2118,7 @@ Length: 120, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e0949a258f7c548b9c60a5ce1839e00f33c8570a4b53a3e3522d9c1440450c8a.png" src="_images/e0949a258f7c548b9c60a5ce1839e00f33c8570a4b53a3e3522d9c1440450c8a.png" />
+<img alt="_images/eb481271e261ac3762e30886f13a038c79a4ed32240421d4213ca1065bcb1966.png" src="_images/eb481271e261ac3762e30886f13a038c79a4ed32240421d4213ca1065bcb1966.png" />
 </div>
 </div>
 </section>
@@ -2275,7 +2274,7 @@ Length: 120, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1e11033861219061c701819702068a90e5d9b57c69364a29934ff2a0eb3a1d55.png" src="_images/1e11033861219061c701819702068a90e5d9b57c69364a29934ff2a0eb3a1d55.png" />
+<img alt="_images/797fe533d4bdbc6255169f726df217fe8b634c83154042d1ac1a6c073df8548c.png" src="_images/797fe533d4bdbc6255169f726df217fe8b634c83154042d1ac1a6c073df8548c.png" />
 </div>
 </div>
 </section>
@@ -2616,7 +2615,7 @@ Freq: MS, Name: co2, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8517a0b08a4e6bb14d1f05e807defd45be3ceb8fd8d81c8627e7d12b35e7a269.png" src="_images/8517a0b08a4e6bb14d1f05e807defd45be3ceb8fd8d81c8627e7d12b35e7a269.png" />
+<img alt="_images/2c4e9acd5b26d2219810e9ed33cb9bf95a71fba431f7c7b603d8008255b31239.png" src="_images/2c4e9acd5b26d2219810e9ed33cb9bf95a71fba431f7c7b603d8008255b31239.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2702,7 +2701,7 @@ Freq: MS, Name: co2, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2b9db8dd6fc426ae2d2360902ab74c3915ab836f3f651e494d07f16879310f33.png" src="_images/2b9db8dd6fc426ae2d2360902ab74c3915ab836f3f651e494d07f16879310f33.png" />
+<img alt="_images/03393f7a3263295e3aba87b5b96e166a43fc4986ff476dcd9977358c69b68ed2.png" src="_images/03393f7a3263295e3aba87b5b96e166a43fc4986ff476dcd9977358c69b68ed2.png" />
 </div>
 </div>
 </section>
@@ -2754,7 +2753,7 @@ Freq: MS, Name: co2, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1474c71f8996bd7079b97dcd6aedf30a5292bcf9b62f2c1d2a929b9ffbb52564.png" src="_images/1474c71f8996bd7079b97dcd6aedf30a5292bcf9b62f2c1d2a929b9ffbb52564.png" />
+<img alt="_images/f1f1051663486d3f958c049d44f9bc37ad4055ea40d78af142338230af24b646.png" src="_images/f1f1051663486d3f958c049d44f9bc37ad4055ea40d78af142338230af24b646.png" />
 </div>
 </div>
 </section>
@@ -2806,7 +2805,7 @@ Freq: MS, Name: co2, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c6656e1dfb4f27c565e6b12bec98b8108a1394462508d740ad0d1d794bdf121e.png" src="_images/c6656e1dfb4f27c565e6b12bec98b8108a1394462508d740ad0d1d794bdf121e.png" />
+<img alt="_images/bcfaff7a3c605bb82db1b4dd73bda9000a3facb136ff7d656e7c417befd41947.png" src="_images/bcfaff7a3c605bb82db1b4dd73bda9000a3facb136ff7d656e7c417befd41947.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2841,7 +2840,7 @@ Freq: MS, Name: co2, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6b457d91e5b83a2f4858b43245d7ac313d5dc3a5b55f2ee6f9016e7753d558fe.png" src="_images/6b457d91e5b83a2f4858b43245d7ac313d5dc3a5b55f2ee6f9016e7753d558fe.png" />
+<img alt="_images/f174e04338b04ff7a366161600f233229e59bf397d3614555af1d29d28147939.png" src="_images/f174e04338b04ff7a366161600f233229e59bf397d3614555af1d29d28147939.png" />
 </div>
 </div>
 <div class="tip admonition">
@@ -2865,16 +2864,16 @@ Freq: MS, Name: co2, dtype: float64
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "ml_tf"
+            mode: "tensorflow"
         },
         kernelOptions: {
-            name: "ml_tf",
+            name: "tensorflow",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'ml_tf'</script>
+    <script>kernelName = 'tensorflow'</script>
 
                 </article>
               
