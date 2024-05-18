@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -439,8 +439,7 @@ document.write(`
 <li><p>En el método de gradiente descendiente, <em><strong>la selección de</strong></em> <span class="math notranslate nohighlight">\(\Delta\boldsymbol{\theta}^{(i)}\)</span> <em><strong>es realizada para garantizar que</strong></em> <span class="math notranslate nohighlight">\(J(\boldsymbol{\theta}^{(i)})&lt;J(\boldsymbol{\theta}^{(i-1)})\)</span>, excepto en el minimizador <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{\star}\)</span>.</p></li>
 </ul>
 <figure class="align-center" id="curva-nivel">
-<a class="reference internal image-reference" href="_images/curva_nivel.png"><img alt="_images/curva_nivel.png" src="_images/curva_nivel.png" style="width: 504.8px; height: 386.40000000000003px;" />
-</a>
+<a class="reference internal image-reference" href="_images/curva_nivel.png"><img alt="_images/curva_nivel.png" src="_images/curva_nivel.png" style="width: 504.8px; height: 386.40000000000003px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4 </span><span class="caption-text">Función de coste en el espacio de parámetros bidimensional.</span><a class="headerlink" href="#curva-nivel" title="Link to this image">#</a></p>
 </figcaption>
@@ -466,8 +465,7 @@ J(\boldsymbol{\theta}^{(i)})=J(\boldsymbol{\theta}^{(i-1)}+\mu_{i}\Delta\boldsym
 </li>
 </ul>
 <figure class="align-center" id="maximun-dec-cost-function">
-<a class="reference internal image-reference" href="_images/maximun_dec_cost_function.png"><img alt="_images/maximun_dec_cost_function.png" src="_images/maximun_dec_cost_function.png" style="width: 495.20000000000005px; height: 365.6px;" />
-</a>
+<a class="reference internal image-reference" href="_images/maximun_dec_cost_function.png"><img alt="_images/maximun_dec_cost_function.png" src="_images/maximun_dec_cost_function.png" style="width: 495.20000000000005px; height: 365.6px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5 </span><span class="caption-text">El vector gradiente en un punto <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> es perpendicular al plano tangente (línea punteada) en la curva de nivel que cruza <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>. La dirección de descenso forma un ángulo obtuso, <span class="math notranslate nohighlight">\(\phi\)</span>, con el vector gradiente.</span><a class="headerlink" href="#maximun-dec-cost-function" title="Link to this image">#</a></p>
 </figcaption>
@@ -476,8 +474,7 @@ J(\boldsymbol{\theta}^{(i)})=J(\boldsymbol{\theta}^{(i-1)}+\mu_{i}\Delta\boldsym
 <li><p>Nótese que <em><strong>si</strong></em> <span class="math notranslate nohighlight">\(\mu_{i}\|\Delta\boldsymbol{\theta}^{(i)}\|\)</span> <em><strong>es demasiado grande, entonces el nuevo punto puede ser colocado en un contorno correspondiente a un valor mayor al del actual</strong></em> contorno.</p></li>
 </ul>
 <figure class="align-center" id="curva-nivel-cost-function">
-<a class="reference internal image-reference" href="_images/curva_nivel_cost_function.png"><img alt="_images/curva_nivel_cost_function.png" src="_images/curva_nivel_cost_function.png" style="width: 484.2px; height: 359.1px;" />
-</a>
+<a class="reference internal image-reference" href="_images/curva_nivel_cost_function.png"><img alt="_images/curva_nivel_cost_function.png" src="_images/curva_nivel_cost_function.png" style="width: 484.2px; height: 359.1px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 6 </span><span class="caption-text">Las correspondientes curvas de nivel para la función de coste, en el plano bidimensional. Nótese que a medida que nos alejamos del valor óptimo, <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{\star}\)</span>, los valores de <span class="math notranslate nohighlight">\(c\)</span> aumentan.</span><a class="headerlink" href="#curva-nivel-cost-function" title="Link to this image">#</a></p>
 </figcaption>
@@ -497,8 +494,7 @@ z=-\frac{\nabla J(\boldsymbol{\theta}^{(i-1)})}{\|\nabla J(\boldsymbol{\theta}^{
 \boldsymbol{\theta}^{(i)}=\boldsymbol{\theta}^{(i-1)}-\mu_{i}\nabla J(\boldsymbol{\theta}^{(i-1)}),\quad\text{Gradiente descendiente}.
 \]</div>
 <figure class="align-center" id="fig-desc-gradient">
-<a class="reference internal image-reference" href="_images/desc_gradient.png"><img alt="_images/desc_gradient.png" src="_images/desc_gradient.png" style="width: 480.6px; height: 352.8px;" />
-</a>
+<a class="reference internal image-reference" href="_images/desc_gradient.png"><img alt="_images/desc_gradient.png" src="_images/desc_gradient.png" style="width: 480.6px; height: 352.8px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7 </span><span class="caption-text">Representación del gradiente negativo, el cual conduce a la máxima disminución de la función de coste.</span><a class="headerlink" href="#fig-desc-gradient" title="Link to this image">#</a></p>
 </figcaption>
@@ -524,11 +520,12 @@ z=-\frac{\nabla J(\boldsymbol{\theta}^{(i-1)})}{\|\nabla J(\boldsymbol{\theta}^{
     \boldsymbol{\theta}_{\star}^{T}\boldsymbol{x}&amp;&lt;0,\quad\text{si}\quad\boldsymbol{x}\in\omega_{2}
     \end{cases}
     \end{split}\]</div>
-<p>En otras palabras, <em><strong>dicho hiperplano clasifica correctamente todos los puntos del conjunto de entrenamiento</strong></em>. Para simplificar, el <em><strong>término de sesgo del hiperplano ha sido absorbido en</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{\star}\)</span> después de extender la dimensionalidad del espacio de entrada en uno. El objetivo ahora es <em><strong>desarrollar un algoritmo que calcule iterativamente un hiperplano que clasifique correctamente todos los patrones de ambas clases</strong></em>. Para ello, se adopta una función de costo.</p>
+<p>en otras palabras, <em><strong>dicho hiperplano clasifica correctamente todos los puntos del conjunto de entrenamiento</strong></em>.</p>
 </li>
+<li><p>Para simplificar, el <em><strong>término de sesgo del hiperplano ha sido absorbido en</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{\star}\)</span> después de extender la dimensionalidad del espacio de entrada en uno. El objetivo ahora es <em><strong>desarrollar un algoritmo que calcule iterativamente un hiperplano que clasifique correctamente todos los patrones de ambas clases</strong></em>. Para ello, se adopta una función de costo.</p></li>
 </ul>
 <ul class="simple">
-<li><p>Sea <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> la <em><strong>estimación del vector de parámetros desconocidos, disponible en la actual iteración</strong></em>. Entonces hay dos posibilidades. La primera es que <em><strong>todos los puntos estén clasificados correctamente</strong></em>; esto significa que se ha obtenido una solución. La otra alternativa es que <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> <em><strong>clasifique correctamente algunos de los puntos</strong></em> y el resto estén mal clasificados.</p></li>
+<li><p>Sea <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> la <em><strong>estimación del vector de parámetros desconocidos, disponible en la actual iteración</strong></em>. Entonces hay dos posibilidades. La primera es que <em><strong>todos los puntos estén clasificados correctamente</strong></em>; esto significa que se ha obtenido una solución. La otra alternativa es que <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> <em><strong>clasifique correctamente algunos de los puntos</strong></em> y <em><strong>el resto estén mal clasificados</strong></em>.</p></li>
 </ul>
 <div class="tip admonition">
 <p class="admonition-title">Costo perceptrón</p>
@@ -548,7 +545,7 @@ y_{n}=
 \end{split}\]</div>
 </div>
 <ul class="simple">
-<li><p>Nótese que la función <em><strong>la función de costo es no negativa</strong></em>. En efecto, dado que la suma es sobre los puntos mal clasificados, si <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n}\in\omega_{1}~(\omega_{2}),~\)</span> entonces <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{T}\boldsymbol{x}_{n}\leq (\geq)~0\)</span>, entregando así un producto <span class="math notranslate nohighlight">\(-y_{n}\boldsymbol{\theta}^{T}\boldsymbol{x}_{n}\geq0\)</span>.</p></li>
+<li><p>Nótese que <em><strong>la función de costo es no negativa</strong></em>. Dado que la suma es sobre los puntos mal clasificados, si <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n}\in\omega_{1}~(\omega_{2}),~\)</span> entonces <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{T}\boldsymbol{x}_{n}\leq (\geq)~0\)</span>, entregando así un producto <span class="math notranslate nohighlight">\(-y_{n}\boldsymbol{\theta}^{T}\boldsymbol{x}_{n}\geq0\)</span>.</p></li>
 <li><p><em><strong>La función de costo es cero, si no existen puntos mal clasificados</strong></em>, esto es, <span class="math notranslate nohighlight">\(\mathcal{Y}=\emptyset\)</span>. La función de costo perceptrón <em><strong>no es diferenciable en todos los puntos, es lineal por tramos</strong></em>. Si reescribimos <span class="math notranslate nohighlight">\(J(\boldsymbol{\theta})\)</span> en una forma ligeramente diferente:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -556,19 +553,20 @@ y_{n}=
 J(\boldsymbol{\theta})=\left(-\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\boldsymbol{x}_{n}^{T}\right)\boldsymbol{\theta}.
 \]</div>
 <ul class="simple">
-<li><p><em><strong>Nótese que esta es una función lineal con respeto a</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>, siempre que el conjunto de puntos mal clasificados permanezca igual. Además, <em><strong>nótese que ligeros cambios del valor</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> <em><strong>corresponden a cambios de posición del respectivo hiperplano</strong></em>. Como consecuencia, existirá un punto donde el número de muestras mal clasificadas en <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span>, repentinamente cambia; este es el tiempo donde <em><strong>una muestra en el conjunto de entrenamiento cambia su posición relativa con respecto a el hiperplano en movimiento</strong></em>, y en consecuencia, el conjunto <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span> es modificado. Después de este cambio, el conjunto, <span class="math notranslate nohighlight">\(J(\boldsymbol{\theta})\)</span>, corresponderá a una nueva  función lineal.</p></li>
+<li><p><em><strong>Nótese que esta es una función lineal con respeto a</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>, siempre que el conjunto de puntos mal clasificados permanezca igual. Además, <em><strong>nótese que ligeros cambios del valor</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> <em><strong>corresponden a cambios de posición del respectivo hiperplano</strong></em>.</p></li>
+<li><p>Como consecuencia, existirá un punto donde el número de muestras mal clasificadas en <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span>, repentinamente cambia; este es el tiempo donde <em><strong>una muestra en el conjunto de entrenamiento cambia su posición relativa con respecto al hiperplano en movimiento</strong></em>, y en consecuencia, el conjunto <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span> es modificado. Después de este cambio, el conjunto, <span class="math notranslate nohighlight">\(J(\boldsymbol{\theta})\)</span>, corresponderá a una nueva  función lineal.</p></li>
 </ul>
 <div class="tip admonition">
 <p class="admonition-title">El algoritmo perceptrón</p>
 <p>A partir del <em><strong>método de subgradientes</strong></em> se puede verificar fácilmente que, iniciando desde un punto arbitrario, <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(0)}\)</span>, el siguiente método iterativo,</p>
 <div class="math notranslate nohighlight">
 \[
-\boldsymbol{\theta}^{(i)}=\boldsymbol{\theta}^{(i-1)}+\mu_{i}\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\boldsymbol{x}_{n}:\quad\text{Regla perceptrón}, 
+\boldsymbol{\theta}^{(i)}=\boldsymbol{\theta}^{(i-1)}+\mu_{i}\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\boldsymbol{x}_{n}:\quad\textsf{Regla perceptrón}, 
 \]</div>
 <p>converge después de un <em>número finito de pasos</em>. La sucesión de parámetros <span class="math notranslate nohighlight">\(\mu_{i}\)</span> es seleccionada adecuadamente para garantizar convergencia.</p>
 </div>
 <ul class="simple">
-<li><p>Nótese que usando el <em><strong>método de subgradiente (ver apéndice)</strong></em> se tiene que</p></li>
+<li><p>Nótese que usando el <a class="reference external" href="https://en.wikipedia.org/wiki/Subgradient_method">método de subgradiente</a> se tiene que</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -590,19 +588,25 @@ J(\boldsymbol{\theta})=\left(-\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\bol
 \end{cases}
 \end{split}\]</div>
 <ul class="simple">
-<li><p>Esto es, partiendo de una estimación inicial de forma random, <em><strong>inicializando</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(0)}\)</span> <em><strong>con algunos valores pequeños, testeamos cada una de las muestras</strong></em>, <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n},~n=1,2,\dots,N\)</span>. <em><strong>Cada vez que una muestra es mal clasificada, se toma acción por medio de la regla perceptrón para una corrección</strong></em>. <em><strong>En otro caso, ninguna acción es requerida</strong></em>. Una vez que todas las muestras han sido consideradas, decimos que una <strong><code class="docutils literal notranslate"><span class="pre">época</span> <span class="pre">(epoch)</span></code></strong> ha sido completada.</p></li>
-<li><p>Si no se obtiene convergencia, todas las muestras son reconsideradas en una segunda época, y así sucesivamente. La versión de este algoritmo es conocida como esquema <strong><code class="docutils literal notranslate"><span class="pre">pattern-by-pattern</span></code></strong>. Algunas veces también es referido como el <em><strong>algoritmo online</strong></em>. Nótese que el número total de datos muestrales es fijo, y que el algoritmo las considera en forma cíclica, época por época (<em><strong>epoch-by-epoch</strong></em>).</p></li>
-<li><p>Después de un número finito de épocas, se garantiza que el algoritmo es convergente. <em><strong>Nótese que para obtener dicha convergencia, la sucesión</strong></em> <span class="math notranslate nohighlight">\(\mu_{i}\)</span> <em><strong>debe ser seleccionada apropiadamente</strong></em>. Sin embargo, para el caso del <em><strong>algoritmo perceptrón, la convergencia es garantizada</strong></em> (<span class="math notranslate nohighlight">\(J\)</span> convexa), aún cuando <span class="math notranslate nohighlight">\(\mu_{i}\)</span> es una constante positiva, <span class="math notranslate nohighlight">\(\mu_{i}=\mu&gt;0\)</span>, <em><strong>usualmente tomado igual a uno</strong></em>. La formulación en <a class="reference internal" href="#equation-eq-perceptron-algo2">(72)</a> es conocida también como la filosofía de aprendizaje <strong><code class="docutils literal notranslate"><span class="pre">reward-punishment</span></code></strong>. Si la actual estimación es exitosa en la predicción de la clase del respectivo patron, ninguna acción es tomada (<code class="docutils literal notranslate"><span class="pre">reward</span></code>), en otro caso, el algoritmo es obligado a realizar una actualización (<code class="docutils literal notranslate"><span class="pre">punishment</span></code>).</p></li>
+<li><p>Esto es, partiendo de una estimación inicial de forma random, <em><strong>inicializando</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(0)}\)</span> <em><strong>con algunos valores pequeños, testeamos cada una de las muestras</strong></em>, <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n},~n=1,2,\dots,N\)</span>. Cada vez que una <em><strong>muestra es mal clasificada, se toma acción por medio de la regla perceptrón para una corrección</strong></em>. En otro caso, ninguna acción es requerida. Una vez que todas las muestras han sido consideradas, decimos que una <strong><code class="docutils literal notranslate"><span class="pre">época</span> <span class="pre">(epoch)</span></code></strong> ha sido completada.</p></li>
 </ul>
+<div class="tip admonition">
+<p class="admonition-title">Observación</p>
+<ul class="simple">
+<li><p>Si <em><strong>no se obtiene convergencia, todas las muestras son reconsideradas en una segunda época</strong></em>, y así sucesivamente. La versión de este algoritmo es conocida como esquema <strong>pattern-by-pattern</strong>. Algunas veces también es referido como el <em><strong>algoritmo online</strong></em>. Nótese que el número total de datos muestrales es fijo, y que el algoritmo las considera en forma cíclica, época por época (<em><strong>epoch-by-epoch</strong></em>).</p></li>
+<li><p>Después de un número finito de épocas, se garantiza que el algoritmo es convergente. <em><strong>Nótese que para obtener dicha convergencia, la sucesión</strong></em> <span class="math notranslate nohighlight">\(\mu_{i}\)</span> <em><strong>debe ser seleccionada apropiadamente</strong></em>. Sin embargo, para el caso del <em><strong>algoritmo perceptrón, la convergencia es garantizada</strong></em> (<span class="math notranslate nohighlight">\(J\)</span> convexa), aun cuando <span class="math notranslate nohighlight">\(\mu_{i}\)</span> es una constante positiva, <span class="math notranslate nohighlight">\(\mu_{i}=\mu&gt;0\)</span>, <em><strong>usualmente tomado igual a uno</strong></em>.</p></li>
+<li><p>La formulación en <a class="reference internal" href="#equation-eq-perceptron-algo2">(72)</a> es conocida también como la filosofía de aprendizaje <strong><code class="docutils literal notranslate"><span class="pre">reward-punishment</span></code></strong>. Si la actual estimación es exitosa en la predicción de la clase del respectivo patrón, ninguna acción es tomada (<code class="docutils literal notranslate"><span class="pre">reward</span></code>), en otro caso, el algoritmo es obligado a realizar una actualización (<code class="docutils literal notranslate"><span class="pre">punishment</span></code>).</p></li>
+</ul>
+</div>
 <figure class="align-center" id="perceptron-rule">
-<a class="reference internal image-reference" href="_images/perceptron_rule.png"><img alt="_images/perceptron_rule.png" src="_images/perceptron_rule.png" style="width: 332.8px; height: 346.40000000000003px;" />
-</a>
+<a class="reference internal image-reference" href="_images/perceptron_rule.png"><img alt="_images/perceptron_rule.png" src="_images/perceptron_rule.png" style="width: 332.8px; height: 346.40000000000003px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8 </span><span class="caption-text">El punto <span class="math notranslate nohighlight">\(x\)</span> está mal clasificado por la línea roja. La regla perceptrón gira el hiperplano hacia el punto <span class="math notranslate nohighlight">\(x\)</span>, para intentar incluirlo en el lado correcto del nuevo hiperplano y clasificarlo correctamente. El nuevo hiperplano está definido por <span class="math notranslate nohighlight">\(θ^{(i)}\)</span> y se muestra con la línea negra.</span><a class="headerlink" href="#perceptron-rule" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul>
-<li><p>La <a class="reference internal" href="#perceptron-rule"><span class="std std-numref">Fig. 8</span></a> ofrece una interpretación geométrica de la <em><strong>regla del perceptrón</strong></em>. Supongamos que la muestra <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> está mal clasificada por el hiperplano, <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(i-1)}\)</span>. Como sabemos, por geometría analítica, <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(i-1)}\)</span> <em><strong>corresponde a un vector que es perpendicular al hiperplano que está definido por este vector</strong></em>. Como <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> se encuentra en el lado <span class="math notranslate nohighlight">\((-)\)</span> del hiperplano y está mal clasificado, pertenece a la clase <span class="math notranslate nohighlight">\(\omega_{1}\)</span>; asumiendo <span class="math notranslate nohighlight">\(\mu = 1\)</span>, la corrección aplicada por el algoritmo es</p>
+<li><p>La <a class="reference internal" href="#perceptron-rule"><span class="std std-numref">Fig. 8</span></a> ofrece una interpretación geométrica de la <em><strong>regla del perceptrón</strong></em>. Supongamos que la muestra <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> está mal clasificada por el hiperplano, <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(i-1)}\)</span>. Como sabemos, por geometría analítica, <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(i-1)}\)</span> <em><strong>corresponde a un vector que es perpendicular al hiperplano que está definido por este vector</strong></em>.</p></li>
+<li><p>Como <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> se encuentra en el lado <span class="math notranslate nohighlight">\((-)\)</span> del hiperplano y está mal clasificado, pertenece a la clase <span class="math notranslate nohighlight">\(\omega_{1}\)</span>; asumiendo <span class="math notranslate nohighlight">\(\mu = 1\)</span>, la corrección aplicada por el algoritmo es</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
     \\[1mm]
@@ -616,14 +620,14 @@ J(\boldsymbol{\theta})=\left(-\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\bol
 <section class="algorithm-content" id="proof-content">
 <p><strong>Inicialización</strong></p>
 <ol class="arabic simple">
-<li><p>Inicializar <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(0)}\)</span>; usualmente, de forma <code class="docutils literal notranslate"><span class="pre">random,</span> <span class="pre">un</span> <span class="pre">número</span> <span class="pre">pequeño</span></code></p></li>
-<li><p>Seleccionar <span class="math notranslate nohighlight">\(\mu\)</span>; usualmente <code class="docutils literal notranslate"><span class="pre">establecido</span> <span class="pre">como</span> <span class="pre">uno</span></code></p></li>
+<li><p>Inicializar <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(0)}\)</span>; usualmente, de forma <code class="docutils literal notranslate"><span class="pre">random,</span> <span class="pre">pequeño</span></code></p></li>
+<li><p>Seleccionar <span class="math notranslate nohighlight">\(\mu\)</span>; usualmente <code class="docutils literal notranslate"><span class="pre">establecido</span> <span class="pre">como</span> <span class="pre">1</span></code></p></li>
 <li><p><span class="math notranslate nohighlight">\(i=1\)</span></p></li>
 </ol>
 <p><strong>Repeat</strong> Cada iteración corresponde a un <code class="docutils literal notranslate"><span class="pre">epoch</span></code></p>
 <ol class="arabic">
 <li><p><code class="docutils literal notranslate"><span class="pre">counter</span> <span class="pre">=</span> <span class="pre">0</span></code>; Contador del número de actualizaciones por <code class="docutils literal notranslate"><span class="pre">epoch</span></code></p></li>
-<li><p><strong>For</strong> <span class="math notranslate nohighlight">\(n=1,2,\dots,N\)</span> <strong>Do</strong> Para cada <code class="docutils literal notranslate"><span class="pre">epoch</span></code>, todas las muestras son presentadas una vez</p>
+<li><p><strong>For</strong> <span class="math notranslate nohighlight">\(n=1,2,\dots,N\)</span> <strong>Do</strong> Para cada <code class="docutils literal notranslate"><span class="pre">epoch</span></code>, <em>todas las muestras son presentadas una vez</em></p>
 <p><strong>If</strong>(<span class="math notranslate nohighlight">\(y_{n}\boldsymbol{x}_{n}^{T}\leq0\)</span>) <strong>Then</strong></p>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(i)}=\boldsymbol{\theta}^{(i-1)}+\mu y_{n}\boldsymbol{x}_{n}\)</span></p></li>
@@ -648,8 +652,7 @@ f(z)=
 \end{cases}
 \end{split}\]</div>
 <figure class="align-center" id="mcculloch-pitts">
-<a class="reference internal image-reference" href="_images/mcculloch_pitts.png"><img alt="_images/mcculloch_pitts.png" src="_images/mcculloch_pitts.png" style="width: 532.0px; height: 167.20000000000002px;" />
-</a>
+<a class="reference internal image-reference" href="_images/mcculloch_pitts.png"><img alt="_images/mcculloch_pitts.png" src="_images/mcculloch_pitts.png" style="width: 532.0px; height: 167.20000000000002px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 9 </span><span class="caption-text">Arquitectura básica de neuronas/perceptrones.</span><a class="headerlink" href="#mcculloch-pitts" title="Link to this image">#</a></p>
 </figcaption>
@@ -658,8 +661,7 @@ f(z)=
 <li><p>En la arquitectura básica de neuronas/perceptrones, las <em><strong>características de entrada se aplican a los nodos de entrada y se ponderan por los respectivos pesos que definen las sinapsis</strong></em>. A continuación <em><strong>se añade el término de sesgo en su combinación lineal y el resultado es empujado a través de la no linealidad</strong></em>. En la neurona <em><strong>McCulloch-Pitts</strong></em>, la salida es 1 para los patrones de la clase <span class="math notranslate nohighlight">\(\omega_{1}\)</span> o 0 para la clase <span class="math notranslate nohighlight">\(\omega_{2}\)</span>. La suma y la operación no lineal se unen para simplificar el gráfico.</p></li>
 </ul>
 <figure class="align-center" id="hidden-layer-activationf-function-fig">
-<a class="reference internal image-reference" href="_images/hidden_layer_activationf_function.png"><img alt="_images/hidden_layer_activationf_function.png" src="_images/hidden_layer_activationf_function.png" style="width: 508.9px; height: 256.2px;" />
-</a>
+<a class="reference internal image-reference" href="_images/hidden_layer_activationf_function.png"><img alt="_images/hidden_layer_activationf_function.png" src="_images/hidden_layer_activationf_function.png" style="width: 508.9px; height: 256.2px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 10 </span><span class="caption-text">Selección de función de activación para <code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">layers</span></code>. (Fuente <span id="id2">[<a class="reference internal" href="biblio.html#id32" title="J. Brownlee and Machine Learning Mastery. Deep Learning with Python: Develop Deep Learning Models on Theano and TensorFlow Using Keras. Machine Learning Mastery, 2017. URL: https://books.google.com.co/books?id=eJw2nQAACAAJ.">Brownlee and Mastery, 2017</a>]</span>).</span><a class="headerlink" href="#hidden-layer-activationf-function-fig" title="Link to this image">#</a></p>
 </figcaption>
@@ -669,8 +671,7 @@ f(z)=
 <li><p>Las <em><strong>redes recurrentes recurrentes</strong></em> suelen utilizar funciones de activación <em><strong>tanh</strong></em> o <em><strong>sigmoid</strong></em>, o incluso ambas. Por ejemplo, la <em><strong>LSTM suele utilizar la activación sigmoid para las conexiones recurrentes y la activación tanh para la salida</strong></em>.</p></li>
 </ul>
 <figure class="align-center" id="output-layer-activation-function">
-<a class="reference internal image-reference" href="_images/output_layer_activation_function.png"><img alt="_images/output_layer_activation_function.png" src="_images/output_layer_activation_function.png" style="width: 485.79999999999995px; height: 301.7px;" />
-</a>
+<a class="reference internal image-reference" href="_images/output_layer_activation_function.png"><img alt="_images/output_layer_activation_function.png" src="_images/output_layer_activation_function.png" style="width: 485.79999999999995px; height: 301.7px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 11 </span><span class="caption-text">Selección de función de activación para <em><strong>hidden layers</strong></em>. (Fuente <span id="id3">[<a class="reference internal" href="biblio.html#id32" title="J. Brownlee and Machine Learning Mastery. Deep Learning with Python: Develop Deep Learning Models on Theano and TensorFlow Using Keras. Machine Learning Mastery, 2017. URL: https://books.google.com.co/books?id=eJw2nQAACAAJ.">Brownlee and Mastery, 2017</a>]</span>).</span><a class="headerlink" href="#output-layer-activation-function" title="Link to this image">#</a></p>
 </figcaption>
@@ -735,8 +736,7 @@ f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
 <li><p>Nótese que <em><strong>cuanto mayor sea el valor del parámetro</strong></em> <span class="math notranslate nohighlight">\(a\)</span>, <em><strong>la gráfica correspondiente se acerca más a la de la función de Heaviside</strong></em> (ver <a class="reference internal" href="#sigmoid-act-function"><span class="std std-numref">Fig. 12</span></a>).</p></li>
 </ul>
 <figure class="align-center" id="sigmoid-act-function">
-<a class="reference internal image-reference" href="_images/sigmoid_act_function.png"><img alt="_images/sigmoid_act_function.png" src="_images/sigmoid_act_function.png" style="width: 507.20000000000005px; height: 471.20000000000005px;" />
-</a>
+<a class="reference internal image-reference" href="_images/sigmoid_act_function.png"><img alt="_images/sigmoid_act_function.png" src="_images/sigmoid_act_function.png" style="width: 507.20000000000005px; height: 471.20000000000005px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 12 </span><span class="caption-text">La función sigmoidea logística para diferentes valores del parámetro <span class="math notranslate nohighlight">\(a\)</span>.</span><a class="headerlink" href="#sigmoid-act-function" title="Link to this image">#</a></p>
 </figcaption>
@@ -751,8 +751,7 @@ f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
 </li>
 </ul>
 <figure class="align-center" id="tanh-act-function">
-<a class="reference internal image-reference" href="_images/tanh_act_function.png"><img alt="_images/tanh_act_function.png" src="_images/tanh_act_function.png" style="width: 693.6px; height: 435.20000000000005px;" />
-</a>
+<a class="reference internal image-reference" href="_images/tanh_act_function.png"><img alt="_images/tanh_act_function.png" src="_images/tanh_act_function.png" style="width: 693.6px; height: 435.20000000000005px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 13 </span><span class="caption-text">Función de reducción de la tangente hiperbólica para <span class="math notranslate nohighlight">\(a = 1.7\)</span> y <span class="math notranslate nohighlight">\(c = 4/3\)</span>.</span><a class="headerlink" href="#tanh-act-function" title="Link to this image">#</a></p>
 </figcaption>
@@ -768,8 +767,7 @@ f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
 </li>
 </ul>
 <figure class="align-center" id="convex-function-saddle-point">
-<a class="reference internal image-reference" href="_images/convex_function_saddle_point.png"><img alt="_images/convex_function_saddle_point.png" src="_images/convex_function_saddle_point.png" style="width: 635.2px; height: 354.40000000000003px;" />
-</a>
+<a class="reference internal image-reference" href="_images/convex_function_saddle_point.png"><img alt="_images/convex_function_saddle_point.png" src="_images/convex_function_saddle_point.png" style="width: 635.2px; height: 354.40000000000003px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 14 </span><span class="caption-text">Función no convexa global, con mínimos locales y puntos de silla.</span><a class="headerlink" href="#convex-function-saddle-point" title="Link to this image">#</a></p>
 </figcaption>
@@ -810,8 +808,7 @@ f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
 <li><p>El parámetro <span class="math notranslate nohighlight">\(\mu\)</span> es el tamaño de paso definido por el usuario (también puede depender de la iteración) y <span class="math notranslate nohighlight">\(J\)</span> denota la función de coste.</p></li>
 </ul>
 <figure class="align-center" id="synaptic-weights-link">
-<a class="reference internal image-reference" href="_images/synaptic_weights_link.png"><img alt="_images/synaptic_weights_link.png" src="_images/synaptic_weights_link.png" style="width: 529.6px; height: 355.20000000000005px;" />
-</a>
+<a class="reference internal image-reference" href="_images/synaptic_weights_link.png"><img alt="_images/synaptic_weights_link.png" src="_images/synaptic_weights_link.png" style="width: 529.6px; height: 355.20000000000005px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 15 </span><span class="caption-text">Enlaces y las variables asociadas de la <span class="math notranslate nohighlight">\(j\)</span> th neurona en la <span class="math notranslate nohighlight">\(r\)</span> th capa. <span class="math notranslate nohighlight">\(y_{k}^{r-1}\)</span> es la salida de la <span class="math notranslate nohighlight">\(k\)</span> th neurona de la <span class="math notranslate nohighlight">\((r - 1)\)</span> th capa y <span class="math notranslate nohighlight">\(\theta_{jk}^{r}\)</span> es el peso respectivo que conecta estas dos neuronas.</span><a class="headerlink" href="#synaptic-weights-link" title="Link to this image">#</a></p>
 </figcaption>
@@ -1093,8 +1090,7 @@ Calcule <span class="math notranslate nohighlight">\(y_{nj}^{r}=f(z_{nj}^{r})\)<
 </ul>
 </div>
 <figure class="align-center" id="recurrent-neural-network-arch-numref">
-<a class="reference internal image-reference" href="_images/recurrent_neural_network_arch.png"><img alt="_images/recurrent_neural_network_arch.png" src="_images/recurrent_neural_network_arch.png" style="width: 552.0px; height: 304.8px;" />
-</a>
+<a class="reference internal image-reference" href="_images/recurrent_neural_network_arch.png"><img alt="_images/recurrent_neural_network_arch.png" src="_images/recurrent_neural_network_arch.png" style="width: 552.0px; height: 304.8px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 16 </span><span class="caption-text">Arquitectura de una <em><strong>Red Neuronal Recurrente</strong></em>. Fuente <span id="id8">[<a class="reference internal" href="biblio.html#id31" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#recurrent-neural-network-arch-numref" title="Link to this image">#</a></p>
 </figcaption>
@@ -1248,8 +1244,7 @@ J(U, W, V, \boldsymbol{b}, \boldsymbol{c})=\sum_{n=1}^{N}J_{n}(U, W, V, \boldsym
 </ul>
 </section>
 </div><figure class="align-center" id="lstm-arch-rnn-numref">
-<a class="reference internal image-reference" href="_images/lstm_arch_rnn.png"><img alt="_images/lstm_arch_rnn.png" src="_images/lstm_arch_rnn.png" style="width: 664.8000000000001px; height: 332.0px;" />
-</a>
+<a class="reference internal image-reference" href="_images/lstm_arch_rnn.png"><img alt="_images/lstm_arch_rnn.png" src="_images/lstm_arch_rnn.png" style="width: 664.8000000000001px; height: 332.0px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 17 </span><span class="caption-text">Arquitectura de unidad LSTM. Fuente <span id="id12">[<a class="reference internal" href="biblio.html#id31" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#lstm-arch-rnn-numref" title="Link to this image">#</a></p>
 </figcaption>
@@ -1349,8 +1344,7 @@ y_{t}=f(y_{t-1}, y_{t-2}, \dots, y_{t-p}).
 <li><p>En el caso de una <em><strong>red neuronal de una sola capa oculta</strong></em>, como se muestra en <a class="reference internal" href="#single-hidden-layer"><span class="std std-numref">Fig. 18</span></a>, la salida de cada neurona se pasa a la capa de salida, que aplica una <em><strong>transformación lineal y función de activación para generar la predicción de la variable objetivo</strong></em>, que, en el caso de la predicción de series temporales, es el valor predicho de la serie en el tiempo <span class="math notranslate nohighlight">\(t\)</span></p></li>
 </ul>
 <figure class="align-center" id="single-hidden-layer">
-<a class="reference internal image-reference" href="_images/single_hidden_layer.png"><img alt="_images/single_hidden_layer.png" src="_images/single_hidden_layer.png" style="width: 360.0px; height: 320.4px;" />
-</a>
+<a class="reference internal image-reference" href="_images/single_hidden_layer.png"><img alt="_images/single_hidden_layer.png" src="_images/single_hidden_layer.png" style="width: 360.0px; height: 320.4px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 18 </span><span class="caption-text">Red neuronal con una sola capa oculta.</span><a class="headerlink" href="#single-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
@@ -1359,8 +1353,7 @@ y_{t}=f(y_{t-1}, y_{t-2}, \dots, y_{t-p}).
 <li><p>En un <code class="docutils literal notranslate"><span class="pre">MLP</span></code> (ver <a class="reference internal" href="#multiple-hidden-layer"><span class="std std-numref">Fig. 19</span></a>), se agrupan varias capas ocultas. <em><strong>La salida de las neuronas de una capa oculta se introduce en la siguiente capa oculta</strong></em>. Las neuronas de esta capa transforman la entrada y la pasan a la siguiente capa oculta. Finalmente, <em><strong>la última capa oculta alimenta la capa de salida</strong></em></p></li>
 </ul>
 <figure class="align-center" id="multiple-hidden-layer">
-<a class="reference internal image-reference" href="_images/multiple_hidden_layer.png"><img alt="_images/multiple_hidden_layer.png" src="_images/multiple_hidden_layer.png" style="width: 570.0px; height: 335.16px;" />
-</a>
+<a class="reference internal image-reference" href="_images/multiple_hidden_layer.png"><img alt="_images/multiple_hidden_layer.png" src="_images/multiple_hidden_layer.png" style="width: 570.0px; height: 335.16px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 19 </span><span class="caption-text">Red neuronal con múltiples capas ocultas.</span><a class="headerlink" href="#multiple-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
@@ -1394,8 +1387,7 @@ p\times n_{1}+n_{1}\times n_{2}+n_{2}\times n_{3}+n_{3}.
 <li><p>Para entender el algoritmo backpropagation, primero hay que conocer los <em><strong>grafos computacionales y cómo se utilizan para realizar cálculos en una red neuronal</strong></em>. Consideremos una <em><strong>red neuronal simple de una sola capa oculta, que tiene dos unidades ocultas, cada una con una activación sigmoidea</strong></em>. La unidad de salida es una transformación lineal de sus entradas. La red se alimenta con dos variables de entrada, <span class="math notranslate nohighlight">\([y_{1},y_{2}]\)</span>. Los pesos se muestran a lo largo de los bordes de la red</p></li>
 </ul>
 <figure class="align-center" id="twoinput-single-hidden-layer">
-<a class="reference internal image-reference" href="_images/twoinput_single_hidden_layer.png"><img alt="_images/twoinput_single_hidden_layer.png" src="_images/twoinput_single_hidden_layer.png" style="width: 300.0px; height: 207.60000000000002px;" />
-</a>
+<a class="reference internal image-reference" href="_images/twoinput_single_hidden_layer.png"><img alt="_images/twoinput_single_hidden_layer.png" src="_images/twoinput_single_hidden_layer.png" style="width: 300.0px; height: 207.60000000000002px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 20 </span><span class="caption-text">Red neuronal con una sola capa oculta y dos entradas.</span><a class="headerlink" href="#twoinput-single-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
@@ -2288,7 +2280,7 @@ Shape of test: (8760, 9)
 </ul>
 </div>
 <ul class="simple">
-<li><p>En este ejemplo, se añade una capa <code class="docutils literal notranslate"><span class="pre">Dropout</span></code> antes de la capa de salida. <em><strong>Dropout aleatoriamente establece</strong></em> <span class="math notranslate nohighlight">\(p\)</span> <em><strong>fracción de neuronas de entrada a cero antes de pasar a la siguiente capa</strong></em>. La eliminación aleatoria de entradas actúa esencialmente como un tipo de ensamblaje de modelos de agregación <code class="docutils literal notranslate"><span class="pre">bootstrap</span></code>.</p></li>
+<li><p>En este ejemplo, se añade una capa <code class="docutils literal notranslate"><span class="pre">Dropout</span></code> antes de la capa de salida. <em><strong>Dropout aleatoriamente establece</strong></em> <span class="math notranslate nohighlight">\(p\)</span> <em><strong>fracción de neuronas de entrada a cero antes de pasar a la siguiente capa</strong></em>. La eliminación aleatoria de entradas actúa esencialmente como un tipo de ensamblaje de modelos de agregación <code class="docutils literal notranslate"><span class="pre">bootstrap</span></code>. Al <em><strong>apagar neuronas aleatoriamente</strong></em>, <code class="docutils literal notranslate"><span class="pre">Dropout</span></code> está <em><strong>forzando a la red a no depender excesivamente de ninguna unidad específica, mejorando la generalización</strong></em>.</p></li>
 <li><p>Por ejemplo, <em><strong>el bosque aleatorio utiliza el ensamblaje mediante la construcción de árboles en subconjuntos aleatorios de características de entrada</strong></em>. Utilizamos <span class="math notranslate nohighlight">\(p=0.2\)</span> para <em>descartar el 20% de las características de entrada seleccionadas aleatoriamente</em>.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -2375,8 +2367,7 @@ Shape of test: (8760, 9)
 </pre></div>
 </div>
 <figure class="align-default">
-<a class="reference internal image-reference" href="_images/airpresure_mlp_epochs.png"><img alt="_images/airpresure_mlp_epochs.png" src="_images/airpresure_mlp_epochs.png" style="width: 484.0px; height: 753.0px;" />
-</a>
+<a class="reference internal image-reference" href="_images/airpresure_mlp_epochs.png"><img alt="_images/airpresure_mlp_epochs.png" src="_images/airpresure_mlp_epochs.png" style="width: 484.0px; height: 753.0px;" /></a>
 </figure>
 <ul class="simple">
 <li><p>En este caso, el modo <code class="docutils literal notranslate"><span class="pre">verbose=2</span></code> muestra una <em><strong>barra de progreso por cada época</strong></em>. Los modos posibles son: <code class="docutils literal notranslate"><span class="pre">0</span></code> para no mostrar nada, <code class="docutils literal notranslate"><span class="pre">1</span></code> para mostrar la barra de progreso, <code class="docutils literal notranslate"><span class="pre">2</span></code> para mostrar una línea por época. Las <em><strong>muestras se mezclan aleatoriamente antes de cada época</strong></em> (<code class="docutils literal notranslate"><span class="pre">shuffle=True</span></code>).</p></li>
@@ -2394,15 +2385,15 @@ Shape of test: (8760, 9)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">  1/274</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">11s</span> 43ms/step
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">  1/274</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">12s</span> 47ms/step
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">162/274</span> <span class=" -Color -Color-Green">━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 311us/step
+<span class=" -Color -Color-Bold">175/274</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 361us/step
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">274/274</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 354us/step
+<span class=" -Color -Color-Bold">274/274</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 345us/step
 </pre></div>
 </div>
 </div>
@@ -3011,8 +3002,7 @@ Shape of test: (8661, 9)
 </pre></div>
 </div>
 <figure class="align-default">
-<a class="reference internal image-reference" href="_images/mlp_pm25_epochs.png"><img alt="_images/mlp_pm25_epochs.png" src="_images/mlp_pm25_epochs.png" style="width: 561.0px; height: 688.0px;" />
-</a>
+<a class="reference internal image-reference" href="_images/mlp_pm25_epochs.png"><img alt="_images/mlp_pm25_epochs.png" src="_images/mlp_pm25_epochs.png" style="width: 561.0px; height: 688.0px;" /></a>
 </figure>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3024,19 +3014,19 @@ Shape of test: (8661, 9)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">  1/271</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">33s</span> 123ms/step
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">  1/271</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">33s</span> 125ms/step
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold"> 70/271</span> <span class=" -Color -Color-Green">━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 732us/step 
+<span class=" -Color -Color-Bold"> 88/271</span> <span class=" -Color -Color-Green">━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 723us/step 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">145/271</span> <span class=" -Color -Color-Green">━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 700us/step
+<span class=" -Color -Color-Bold">180/271</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 700us/step
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">223/271</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━</span> <span class=" -Color -Color-Bold">0s</span> 683us/step
+<span class=" -Color -Color-Bold">270/271</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━</span> <span class=" -Color -Color-Bold">0s</span> 700us/step
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
@@ -3206,8 +3196,7 @@ características:</p></li>
 </pre></div>
 </div>
 <figure class="align-default">
-<a class="reference internal image-reference" href="_images/lstm_epochs.png"><img alt="_images/lstm_epochs.png" src="_images/lstm_epochs.png" style="width: 563.0px; height: 713.0px;" />
-</a>
+<a class="reference internal image-reference" href="_images/lstm_epochs.png"><img alt="_images/lstm_epochs.png" src="_images/lstm_epochs.png" style="width: 563.0px; height: 713.0px;" /></a>
 </figure>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3225,19 +3214,19 @@ características:</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">  1/271</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">31s</span> 116ms/step
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">  1/271</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">29s</span> 110ms/step
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold"> 72/271</span> <span class=" -Color -Color-Green">━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 715us/step 
+<span class=" -Color -Color-Bold"> 74/271</span> <span class=" -Color -Color-Green">━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 855us/step 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">147/271</span> <span class=" -Color -Color-Green">━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 693us/step
+<span class=" -Color -Color-Bold">168/271</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 748us/step
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">222/271</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━</span> <span class=" -Color -Color-Bold">0s</span> 688us/step
+<span class=" -Color -Color-Bold">266/271</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━</span> <span class=" -Color -Color-Bold">0s</span> 710us/step
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
