@@ -1,24 +1,21 @@
 Traceback (most recent call last):
-  File "C:\Users\USER\miniconda3\envs\tensorflow\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+  File "C:\Users\lihkir\Anaconda3\envs\ml_tf\lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
     executenb(
-  File "C:\Users\USER\miniconda3\envs\tensorflow\Lib\site-packages\nbclient\client.py", line 1305, in execute
+  File "C:\Users\lihkir\Anaconda3\envs\ml_tf\lib\site-packages\nbclient\client.py", line 1305, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\USER\miniconda3\envs\tensorflow\Lib\site-packages\jupyter_core\utils\__init__.py", line 173, in wrapped
+  File "C:\Users\lihkir\Anaconda3\envs\ml_tf\lib\site-packages\jupyter_core\utils\__init__.py", line 98, in wrapped
     return loop.run_until_complete(inner)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\USER\miniconda3\envs\tensorflow\Lib\asyncio\base_events.py", line 653, in run_until_complete
+  File "C:\Users\lihkir\Anaconda3\envs\ml_tf\lib\asyncio\base_events.py", line 647, in run_until_complete
     return future.result()
-           ^^^^^^^^^^^^^^^
-  File "C:\Users\USER\miniconda3\envs\tensorflow\Lib\site-packages\nbclient\client.py", line 705, in async_execute
+  File "C:\Users\lihkir\Anaconda3\envs\ml_tf\lib\site-packages\nbclient\client.py", line 705, in async_execute
     await self.async_execute_cell(
-  File "C:\Users\USER\miniconda3\envs\tensorflow\Lib\site-packages\nbclient\client.py", line 1058, in async_execute_cell
+  File "C:\Users\lihkir\Anaconda3\envs\ml_tf\lib\site-packages\nbclient\client.py", line 1058, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "C:\Users\USER\miniconda3\envs\tensorflow\Lib\site-packages\nbclient\client.py", line 914, in _check_raise_for_error
+  File "C:\Users\lihkir\Anaconda3\envs\ml_tf\lib\site-packages\nbclient\client.py", line 914, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-best_model = load_model(os.path.join('keras_models', 'PRSA_data_Air_Pressure_MLP_weights.12-0.0001.hdf5'), compile=False)
+best_model = load_model(os.path.join('keras_models', 'PRSA_data_Air_Pressure_MLP_weights.05-0.0001.keras'), compile=False)
 preds = best_model.predict(X_val)
 pred_PRES = scaler.inverse_transform(preds)
 pred_PRES = np.squeeze(pred_PRES)
@@ -26,63 +23,46 @@ pred_PRES = np.squeeze(pred_PRES)
 
 
 [1;31m---------------------------------------------------------------------------[0m
-[1;31mFileNotFoundError[0m                         Traceback (most recent call last)
-Cell [1;32mIn[28], line 1[0m
-[1;32m----> 1[0m best_model [38;5;241m=[39m load_model(os[38;5;241m.[39mpath[38;5;241m.[39mjoin([38;5;124m'[39m[38;5;124mkeras_models[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mPRSA_data_Air_Pressure_MLP_weights.12-0.0001.hdf5[39m[38;5;124m'[39m), [38;5;28mcompile[39m[38;5;241m=[39m[38;5;28;01mFalse[39;00m)
+[1;31mOSError[0m                                   Traceback (most recent call last)
+Cell [1;32mIn[29], line 1[0m
+[1;32m----> 1[0m best_model [38;5;241m=[39m [43mload_model[49m[43m([49m[43mos[49m[38;5;241;43m.[39;49m[43mpath[49m[38;5;241;43m.[39;49m[43mjoin[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mkeras_models[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mPRSA_data_Air_Pressure_MLP_weights.05-0.0001.keras[39;49m[38;5;124;43m'[39;49m[43m)[49m[43m,[49m[43m [49m[38;5;28;43mcompile[39;49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m)[49m
 [0;32m      2[0m preds [38;5;241m=[39m best_model[38;5;241m.[39mpredict(X_val)
 [0;32m      3[0m pred_PRES [38;5;241m=[39m scaler[38;5;241m.[39minverse_transform(preds)
 
-File [1;32m~\AppData\Roaming\Python\Python311\site-packages\keras\src\saving\saving_api.py:183[0m, in [0;36mload_model[1;34m(filepath, custom_objects, compile, safe_mode)[0m
-[0;32m    176[0m     [38;5;28;01mreturn[39;00m saving_lib[38;5;241m.[39mload_model(
-[0;32m    177[0m         filepath,
-[0;32m    178[0m         custom_objects[38;5;241m=[39mcustom_objects,
-[0;32m    179[0m         [38;5;28mcompile[39m[38;5;241m=[39m[38;5;28mcompile[39m,
-[0;32m    180[0m         safe_mode[38;5;241m=[39msafe_mode,
-[0;32m    181[0m     )
-[0;32m    182[0m [38;5;28;01mif[39;00m [38;5;28mstr[39m(filepath)[38;5;241m.[39mendswith(([38;5;124m"[39m[38;5;124m.h5[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124m.hdf5[39m[38;5;124m"[39m)):
-[1;32m--> 183[0m     [38;5;28;01mreturn[39;00m legacy_h5_format[38;5;241m.[39mload_model_from_hdf5(
-[0;32m    184[0m         filepath, custom_objects[38;5;241m=[39mcustom_objects, [38;5;28mcompile[39m[38;5;241m=[39m[38;5;28mcompile[39m
-[0;32m    185[0m     )
-[0;32m    186[0m [38;5;28;01melif[39;00m [38;5;28mstr[39m(filepath)[38;5;241m.[39mendswith([38;5;124m"[39m[38;5;124m.keras[39m[38;5;124m"[39m):
-[0;32m    187[0m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
-[0;32m    188[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;124mFile not found: filepath=[39m[38;5;132;01m{[39;00mfilepath[38;5;132;01m}[39;00m[38;5;124m. [39m[38;5;124m"[39m
-[0;32m    189[0m         [38;5;124m"[39m[38;5;124mPlease ensure the file is an accessible `.keras` [39m[38;5;124m"[39m
-[0;32m    190[0m         [38;5;124m"[39m[38;5;124mzip file.[39m[38;5;124m"[39m
-[0;32m    191[0m     )
+File [1;32m~\Anaconda3\envs\ml_tf\lib\site-packages\keras\utils\traceback_utils.py:70[0m, in [0;36mfilter_traceback.<locals>.error_handler[1;34m(*args, **kwargs)[0m
+[0;32m     67[0m     filtered_tb [38;5;241m=[39m _process_traceback_frames(e[38;5;241m.[39m__traceback__)
+[0;32m     68[0m     [38;5;66;03m# To get the full stack trace, call:[39;00m
+[0;32m     69[0m     [38;5;66;03m# `tf.debugging.disable_traceback_filtering()`[39;00m
+[1;32m---> 70[0m     [38;5;28;01mraise[39;00m e[38;5;241m.[39mwith_traceback(filtered_tb) [38;5;28;01mfrom[39;00m [38;5;28;01mNone[39;00m
+[0;32m     71[0m [38;5;28;01mfinally[39;00m:
+[0;32m     72[0m     [38;5;28;01mdel[39;00m filtered_tb
 
-File [1;32m~\AppData\Roaming\Python\Python311\site-packages\keras\src\legacy\saving\legacy_h5_format.py:116[0m, in [0;36mload_model_from_hdf5[1;34m(filepath, custom_objects, compile)[0m
-[0;32m    114[0m opened_new_file [38;5;241m=[39m [38;5;129;01mnot[39;00m [38;5;28misinstance[39m(filepath, h5py[38;5;241m.[39mFile)
-[0;32m    115[0m [38;5;28;01mif[39;00m opened_new_file:
-[1;32m--> 116[0m     f [38;5;241m=[39m h5py[38;5;241m.[39mFile(filepath, mode[38;5;241m=[39m[38;5;124m"[39m[38;5;124mr[39m[38;5;124m"[39m)
-[0;32m    117[0m [38;5;28;01melse[39;00m:
-[0;32m    118[0m     f [38;5;241m=[39m filepath
+File [1;32m~\Anaconda3\envs\ml_tf\lib\site-packages\h5py\_hl\files.py:567[0m, in [0;36mFile.__init__[1;34m(self, name, mode, driver, libver, userblock_size, swmr, rdcc_nslots, rdcc_nbytes, rdcc_w0, track_order, fs_strategy, fs_persist, fs_threshold, fs_page_size, page_buf_size, min_meta_keep, min_raw_keep, locking, alignment_threshold, alignment_interval, meta_block_size, **kwds)[0m
+[0;32m    558[0m     fapl [38;5;241m=[39m make_fapl(driver, libver, rdcc_nslots, rdcc_nbytes, rdcc_w0,
+[0;32m    559[0m                      locking, page_buf_size, min_meta_keep, min_raw_keep,
+[0;32m    560[0m                      alignment_threshold[38;5;241m=[39malignment_threshold,
+[0;32m    561[0m                      alignment_interval[38;5;241m=[39malignment_interval,
+[0;32m    562[0m                      meta_block_size[38;5;241m=[39mmeta_block_size,
+[0;32m    563[0m                      [38;5;241m*[39m[38;5;241m*[39mkwds)
+[0;32m    564[0m     fcpl [38;5;241m=[39m make_fcpl(track_order[38;5;241m=[39mtrack_order, fs_strategy[38;5;241m=[39mfs_strategy,
+[0;32m    565[0m                      fs_persist[38;5;241m=[39mfs_persist, fs_threshold[38;5;241m=[39mfs_threshold,
+[0;32m    566[0m                      fs_page_size[38;5;241m=[39mfs_page_size)
+[1;32m--> 567[0m     fid [38;5;241m=[39m make_fid(name, mode, userblock_size, fapl, fcpl, swmr[38;5;241m=[39mswmr)
+[0;32m    569[0m [38;5;28;01mif[39;00m [38;5;28misinstance[39m(libver, [38;5;28mtuple[39m):
+[0;32m    570[0m     [38;5;28mself[39m[38;5;241m.[39m_libver [38;5;241m=[39m libver
 
-File [1;32m~\AppData\Roaming\Python\Python311\site-packages\h5py\_hl\files.py:562[0m, in [0;36mFile.__init__[1;34m(self, name, mode, driver, libver, userblock_size, swmr, rdcc_nslots, rdcc_nbytes, rdcc_w0, track_order, fs_strategy, fs_persist, fs_threshold, fs_page_size, page_buf_size, min_meta_keep, min_raw_keep, locking, alignment_threshold, alignment_interval, meta_block_size, **kwds)[0m
-[0;32m    553[0m     fapl [38;5;241m=[39m make_fapl(driver, libver, rdcc_nslots, rdcc_nbytes, rdcc_w0,
-[0;32m    554[0m                      locking, page_buf_size, min_meta_keep, min_raw_keep,
-[0;32m    555[0m                      alignment_threshold[38;5;241m=[39malignment_threshold,
-[0;32m    556[0m                      alignment_interval[38;5;241m=[39malignment_interval,
-[0;32m    557[0m                      meta_block_size[38;5;241m=[39mmeta_block_size,
-[0;32m    558[0m                      [38;5;241m*[39m[38;5;241m*[39mkwds)
-[0;32m    559[0m     fcpl [38;5;241m=[39m make_fcpl(track_order[38;5;241m=[39mtrack_order, fs_strategy[38;5;241m=[39mfs_strategy,
-[0;32m    560[0m                      fs_persist[38;5;241m=[39mfs_persist, fs_threshold[38;5;241m=[39mfs_threshold,
-[0;32m    561[0m                      fs_page_size[38;5;241m=[39mfs_page_size)
-[1;32m--> 562[0m     fid [38;5;241m=[39m make_fid(name, mode, userblock_size, fapl, fcpl, swmr[38;5;241m=[39mswmr)
-[0;32m    564[0m [38;5;28;01mif[39;00m [38;5;28misinstance[39m(libver, [38;5;28mtuple[39m):
-[0;32m    565[0m     [38;5;28mself[39m[38;5;241m.[39m_libver [38;5;241m=[39m libver
+File [1;32m~\Anaconda3\envs\ml_tf\lib\site-packages\h5py\_hl\files.py:231[0m, in [0;36mmake_fid[1;34m(name, mode, userblock_size, fapl, fcpl, swmr)[0m
+[0;32m    229[0m     [38;5;28;01mif[39;00m swmr [38;5;129;01mand[39;00m swmr_support:
+[0;32m    230[0m         flags [38;5;241m|[39m[38;5;241m=[39m h5f[38;5;241m.[39mACC_SWMR_READ
+[1;32m--> 231[0m     fid [38;5;241m=[39m [43mh5f[49m[38;5;241;43m.[39;49m[43mopen[49m[43m([49m[43mname[49m[43m,[49m[43m [49m[43mflags[49m[43m,[49m[43m [49m[43mfapl[49m[38;5;241;43m=[39;49m[43mfapl[49m[43m)[49m
+[0;32m    232[0m [38;5;28;01melif[39;00m mode [38;5;241m==[39m [38;5;124m'[39m[38;5;124mr+[39m[38;5;124m'[39m:
+[0;32m    233[0m     fid [38;5;241m=[39m h5f[38;5;241m.[39mopen(name, h5f[38;5;241m.[39mACC_RDWR, fapl[38;5;241m=[39mfapl)
 
-File [1;32m~\AppData\Roaming\Python\Python311\site-packages\h5py\_hl\files.py:235[0m, in [0;36mmake_fid[1;34m(name, mode, userblock_size, fapl, fcpl, swmr)[0m
-[0;32m    233[0m     [38;5;28;01mif[39;00m swmr [38;5;129;01mand[39;00m swmr_support:
-[0;32m    234[0m         flags [38;5;241m|[39m[38;5;241m=[39m h5f[38;5;241m.[39mACC_SWMR_READ
-[1;32m--> 235[0m     fid [38;5;241m=[39m h5f[38;5;241m.[39mopen(name, flags, fapl[38;5;241m=[39mfapl)
-[0;32m    236[0m [38;5;28;01melif[39;00m mode [38;5;241m==[39m [38;5;124m'[39m[38;5;124mr+[39m[38;5;124m'[39m:
-[0;32m    237[0m     fid [38;5;241m=[39m h5f[38;5;241m.[39mopen(name, h5f[38;5;241m.[39mACC_RDWR, fapl[38;5;241m=[39mfapl)
+File [1;32mh5py\_objects.pyx:54[0m, in [0;36mh5py._objects.with_phil.wrapper[1;34m()[0m
 
-File [1;32mh5py\\_objects.pyx:54[0m, in [0;36mh5py._objects.with_phil.wrapper[1;34m()[0m
+File [1;32mh5py\_objects.pyx:55[0m, in [0;36mh5py._objects.with_phil.wrapper[1;34m()[0m
 
-File [1;32mh5py\\_objects.pyx:55[0m, in [0;36mh5py._objects.with_phil.wrapper[1;34m()[0m
+File [1;32mh5py\h5f.pyx:106[0m, in [0;36mh5py.h5f.open[1;34m()[0m
 
-File [1;32mh5py\\h5f.pyx:102[0m, in [0;36mh5py.h5f.open[1;34m()[0m
-
-[1;31mFileNotFoundError[0m: [Errno 2] Unable to synchronously open file (unable to open file: name = 'keras_models\PRSA_data_Air_Pressure_MLP_weights.12-0.0001.hdf5', errno = 2, error message = 'No such file or directory', flags = 0, o_flags = 0)
+[1;31mOSError[0m: Unable to open file (file signature not found)
 

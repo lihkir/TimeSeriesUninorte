@@ -6,7 +6,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Deep Learning para la predicción de series temporales &#8212; Análisis y Predicción de Series de Tiempo</title>
   
@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -532,7 +532,7 @@ z=-\frac{\nabla J(\boldsymbol{\theta}^{(i-1)})}{\|\nabla J(\boldsymbol{\theta}^{
 <p>Sea <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span> el conjunto de todas las muestras mal clasificadas. La <strong><code class="docutils literal notranslate"><span class="pre">función</span> <span class="pre">de</span> <span class="pre">costo,</span> <span class="pre">perceptrón</span></code></strong> se define como</p>
 <div class="math notranslate nohighlight">
 \[
-J(\boldsymbol{\theta})=-\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\boldsymbol{\theta}^{T}\boldsymbol{x}_{n}:\quad\textit{Costo perceptrón},
+J(\boldsymbol{\theta})=-\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\boldsymbol{\theta}^{T}\boldsymbol{x}_{n}:\quad\textsf{Costo perceptrón},
 \]</div>
 <p>donde</p>
 <div class="math notranslate nohighlight">
@@ -554,7 +554,7 @@ J(\boldsymbol{\theta})=\left(-\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\bol
 \]</div>
 <ul class="simple">
 <li><p><em><strong>Nótese que esta es una función lineal con respeto a</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>, siempre que el conjunto de puntos mal clasificados permanezca igual. Además, <em><strong>nótese que ligeros cambios del valor</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> <em><strong>corresponden a cambios de posición del respectivo hiperplano</strong></em>.</p></li>
-<li><p>Como consecuencia, existirá un punto donde el número de muestras mal clasificadas en <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span>, repentinamente cambia; este es el tiempo donde <em><strong>una muestra en el conjunto de entrenamiento cambia su posición relativa con respecto al hiperplano en movimiento</strong></em>, y en consecuencia, el conjunto <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span> es modificado. Después de este cambio, el conjunto, <span class="math notranslate nohighlight">\(J(\boldsymbol{\theta})\)</span>, corresponderá a una nueva  función lineal.</p></li>
+<li><p>Como consecuencia, <em><strong>existirá un punto donde el número de muestras mal clasificadas en</strong></em> <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span>, <em><strong>repentinamente cambia</strong></em>; este es el tiempo donde <em><strong>una muestra en el conjunto de entrenamiento cambia su posición relativa con respecto al hiperplano en movimiento</strong></em>, y en consecuencia, el conjunto <span class="math notranslate nohighlight">\(\mathcal{Y}\)</span> es modificado. Después de este cambio, el conjunto, <span class="math notranslate nohighlight">\(J(\boldsymbol{\theta})\)</span>, corresponderá a una nueva  función lineal.</p></li>
 </ul>
 <div class="tip admonition">
 <p class="admonition-title">El algoritmo perceptrón</p>
@@ -563,7 +563,7 @@ J(\boldsymbol{\theta})=\left(-\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\bol
 \[
 \boldsymbol{\theta}^{(i)}=\boldsymbol{\theta}^{(i-1)}+\mu_{i}\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\boldsymbol{x}_{n}:\quad\textsf{Regla perceptrón}, 
 \]</div>
-<p>converge después de un <em>número finito de pasos</em>. La sucesión de parámetros <span class="math notranslate nohighlight">\(\mu_{i}\)</span> es seleccionada adecuadamente para garantizar convergencia.</p>
+<p><em><strong>converge después de un número finito de pasos</strong></em>. La sucesión de parámetros <span class="math notranslate nohighlight">\(\mu_{i}\)</span> es seleccionada adecuadamente para garantizar convergencia.</p>
 </div>
 <ul class="simple">
 <li><p>Nótese que usando el <a class="reference external" href="https://en.wikipedia.org/wiki/Subgradient_method">método de subgradiente</a> se tiene que</p></li>
@@ -571,13 +571,13 @@ J(\boldsymbol{\theta})=\left(-\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\bol
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align*}
-\boldsymbol{\theta}^{(i)}&amp;=\boldsymbol{\theta}^{(i-1)}-\mu_{i}J'(\boldsymbol{\theta}^{(i-1)})\\
+\boldsymbol{\theta}^{(i)}&amp;=\boldsymbol{\theta}^{(i-1)}-\mu_{i}\nabla_{\boldsymbol{\theta}} J(\boldsymbol{\theta}^{(i-1)})\\
 &amp;=\boldsymbol{\theta}^{(i-1)}-\mu_{i}\left(-\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\boldsymbol{x}_{n}^{T}\right)\\
 &amp;=\boldsymbol{\theta}^{(i-1)}+\mu_{i}\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\boldsymbol{x}_{n}.
 \end{align*}
 \end{split}\]</div>
 <ul class="simple">
-<li><p>Otra versión del algoritmo considera una <em><strong>muestra por iteración en un esquema cíclico, hasta que el algoritmo converge</strong></em>. Denotemos por <span class="math notranslate nohighlight">\(y_{(i)}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{x}_{i},~i\in\{1,2,\dots,N\}\)</span> los <em><strong>pares de entrenamiento presentados al algoritmo en la iteración</strong></em> <span class="math notranslate nohighlight">\(i\)</span><em><strong>-ésima</strong></em>. Entonces, la iteración de actualización se convierte en:</p></li>
+<li><p>Otra versión del algoritmo considera <em><strong>una muestra por iteración en un esquema cíclico, hasta que el algoritmo converge</strong></em>. Denotemos por <span class="math notranslate nohighlight">\(y_{(i)}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{x}_{i},~i\in\{1,2,\dots,N\}\)</span> los <em><strong>pares de entrenamiento presentados al algoritmo en la iteración</strong></em> <span class="math notranslate nohighlight">\(i\)</span><em><strong>-ésima</strong></em>. Entonces, la iteración de actualización se convierte en:</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-eq-perceptron-algo2">
 <span class="eqno">(72)<a class="headerlink" href="#equation-eq-perceptron-algo2" title="Link to this equation">#</a></span>\[\begin{split}
@@ -588,14 +588,14 @@ J(\boldsymbol{\theta})=\left(-\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\bol
 \end{cases}
 \end{split}\]</div>
 <ul class="simple">
-<li><p>Esto es, partiendo de una estimación inicial de forma random, <em><strong>inicializando</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(0)}\)</span> <em><strong>con algunos valores pequeños, testeamos cada una de las muestras</strong></em>, <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n},~n=1,2,\dots,N\)</span>. Cada vez que una <em><strong>muestra es mal clasificada, se toma acción por medio de la regla perceptrón para una corrección</strong></em>. En otro caso, ninguna acción es requerida. Una vez que todas las muestras han sido consideradas, decimos que una <strong><code class="docutils literal notranslate"><span class="pre">época</span> <span class="pre">(epoch)</span></code></strong> ha sido completada.</p></li>
+<li><p>Esto es, partiendo de una estimación inicial de forma random, <em><strong>inicializando</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(0)}\)</span> <em><strong>con algunos valores pequeños, testeamos cada una de las muestras</strong></em>, <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n},~n=1,2,\dots,N\)</span>. Cada vez que una <em><strong>muestra es mal clasificada, se toma acción por medio de la regla perceptrón para una corrección</strong></em>. En otro caso, ninguna acción es requerida. <em><strong>Una vez que todas las muestras han sido consideradas, decimos que una <code class="docutils literal notranslate"><span class="pre">época</span> <span class="pre">(epoch)</span></code> ha sido completada</strong></em>.</p></li>
 </ul>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p>Si <em><strong>no se obtiene convergencia, todas las muestras son reconsideradas en una segunda época</strong></em>, y así sucesivamente. La versión de este algoritmo es conocida como esquema <strong>pattern-by-pattern</strong>. Algunas veces también es referido como el <em><strong>algoritmo online</strong></em>. Nótese que el número total de datos muestrales es fijo, y que el algoritmo las considera en forma cíclica, época por época (<em><strong>epoch-by-epoch</strong></em>).</p></li>
+<li><p>Si <em><strong>no se obtiene convergencia, todas las muestras son reconsideradas en una segunda época</strong></em>, y así sucesivamente. La versión de este algoritmo es conocida como esquema <strong><code class="docutils literal notranslate"><span class="pre">pattern-by-pattern</span></code></strong>. Algunas veces también es referido como el <em><strong>algoritmo online</strong></em>. Nótese que el número total de datos muestrales es fijo, y que el algoritmo los considera en forma cíclica, época por época (<em><strong>epoch-by-epoch</strong></em>).</p></li>
 <li><p>Después de un número finito de épocas, se garantiza que el algoritmo es convergente. <em><strong>Nótese que para obtener dicha convergencia, la sucesión</strong></em> <span class="math notranslate nohighlight">\(\mu_{i}\)</span> <em><strong>debe ser seleccionada apropiadamente</strong></em>. Sin embargo, para el caso del <em><strong>algoritmo perceptrón, la convergencia es garantizada</strong></em> (<span class="math notranslate nohighlight">\(J\)</span> convexa), aun cuando <span class="math notranslate nohighlight">\(\mu_{i}\)</span> es una constante positiva, <span class="math notranslate nohighlight">\(\mu_{i}=\mu&gt;0\)</span>, <em><strong>usualmente tomado igual a uno</strong></em>.</p></li>
-<li><p>La formulación en <a class="reference internal" href="#equation-eq-perceptron-algo2">(72)</a> es conocida también como la filosofía de aprendizaje <strong><code class="docutils literal notranslate"><span class="pre">reward-punishment</span></code></strong>. Si la actual estimación es exitosa en la predicción de la clase del respectivo patrón, ninguna acción es tomada (<code class="docutils literal notranslate"><span class="pre">reward</span></code>), en otro caso, el algoritmo es obligado a realizar una actualización (<code class="docutils literal notranslate"><span class="pre">punishment</span></code>).</p></li>
+<li><p>La formulación en <a class="reference internal" href="#equation-eq-perceptron-algo2">(72)</a> es conocida también como la <em><strong>filosofía de aprendizaje <code class="docutils literal notranslate"><span class="pre">reward-punishment</span></code></strong></em>. Si la actual estimación es exitosa en la predicción de la clase del respectivo patrón, ninguna acción es tomada (<code class="docutils literal notranslate"><span class="pre">reward</span></code>), en otro caso, el algoritmo es obligado a realizar una actualización (<code class="docutils literal notranslate"><span class="pre">punishment</span></code>).</p></li>
 </ul>
 </div>
 <figure class="align-center" id="perceptron-rule">
@@ -606,7 +606,7 @@ J(\boldsymbol{\theta})=\left(-\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\bol
 </figure>
 <ul>
 <li><p>La <a class="reference internal" href="#perceptron-rule"><span class="std std-numref">Fig. 8</span></a> ofrece una interpretación geométrica de la <em><strong>regla del perceptrón</strong></em>. Supongamos que la muestra <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> está mal clasificada por el hiperplano, <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(i-1)}\)</span>. Como sabemos, por geometría analítica, <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(i-1)}\)</span> <em><strong>corresponde a un vector que es perpendicular al hiperplano que está definido por este vector</strong></em>.</p></li>
-<li><p>Como <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> se encuentra en el lado <span class="math notranslate nohighlight">\((-)\)</span> del hiperplano y está mal clasificado, pertenece a la clase <span class="math notranslate nohighlight">\(\omega_{1}\)</span>; asumiendo <span class="math notranslate nohighlight">\(\mu = 1\)</span>, la corrección aplicada por el algoritmo es</p>
+<li><p>Como <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> se encuentra en el lado <span class="math notranslate nohighlight">\((-)\)</span> del hiperplano y está <em>mal clasificado, pertenece a la clase</em> <span class="math notranslate nohighlight">\(\omega_{1}\)</span>; asumiendo <span class="math notranslate nohighlight">\(\mu = 1\)</span>, la corrección aplicada por el algoritmo es</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
     \\[1mm]
@@ -641,7 +641,7 @@ J(\boldsymbol{\theta})=\left(-\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\bol
 </section>
 </div><ul class="simple">
 <li><p>Una vez que el <em><strong>algoritmo perceptrón se ha ejecutado y converge</strong></em>, tenemos los <em><strong>pesos</strong></em>, <span class="math notranslate nohighlight">\(\theta_{i},~i = 1,2,\dots,l\)</span>, <em><strong>de las sinapsis de la neurona/perceptrón</strong></em> asociada, así como el término de sesgo <span class="math notranslate nohighlight">\(\theta_{0}\)</span>. Ahora se pueden <em><strong>utilizar para clasificar patrones desconocidos</strong></em>. Las características <span class="math notranslate nohighlight">\(x_{i}, i = 1, 2,\dots,l\)</span>, se aplican a los nodos de entrada.</p></li>
-<li><p>A su vez, <em><strong>cada característica se multiplica por la sinapsis respectiva (peso), y luego se añade el término de sesgo en su combinación lineal</strong></em>. El resultado de esta operación <em><strong>pasa por una función no lineal</strong></em>, <span class="math notranslate nohighlight">\(f\)</span>, conocida como <em><strong>función de activación</strong></em> (ver <a class="reference external" href="https://en.wikipedia.org/wiki/Activation_function">Activation function</a>). Dependiendo de la forma de la no linealidad, se producen diferentes tipos de neuronas. La más clásica conocida como <em><strong>neurona McCulloch-Pitts</strong></em>, la función de <em><strong>activación es la de Heaviside</strong></em>, es decir,</p></li>
+<li><p>A su vez, <em><strong>cada característica se multiplica por la sinapsis respectiva (peso), y luego se añade el término de sesgo en su combinación lineal</strong></em>. El resultado de esta operación <em><strong>pasa por una función no lineal</strong></em>, <span class="math notranslate nohighlight">\(f\)</span>, conocida como <em><strong><a class="reference external" href="https://en.wikipedia.org/wiki/Activation_function">función de activación</a></strong></em>. Dependiendo de la forma de la no linealidad, se producen diferentes tipos de neuronas. La más clásica conocida como <em><strong>neurona McCulloch-Pitts</strong></em>, la función de <em><strong>activación es la de Heaviside</strong></em>, es decir,</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -658,27 +658,43 @@ f(z)=
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>En la arquitectura básica de neuronas/perceptrones, las <em><strong>características de entrada se aplican a los nodos de entrada y se ponderan por los respectivos pesos que definen las sinapsis</strong></em>. A continuación <em><strong>se añade el término de sesgo en su combinación lineal y el resultado es empujado a través de la no linealidad</strong></em>. En la neurona <em><strong>McCulloch-Pitts</strong></em>, la salida es 1 para los patrones de la clase <span class="math notranslate nohighlight">\(\omega_{1}\)</span> o 0 para la clase <span class="math notranslate nohighlight">\(\omega_{2}\)</span>. La suma y la operación no lineal se unen para simplificar el gráfico.</p></li>
+<li><p>En la arquitectura básica de neuronas/perceptrones, las <em><strong>características de entrada se aplican a los nodos de entrada y se ponderan por los respectivos pesos que definen las sinapsis</strong></em>. A continuación <em><strong>se añade el término de sesgo en su combinación lineal y el resultado es empujado a través de la no linealidad</strong></em>.</p></li>
+<li><p>En la neurona <em><strong>McCulloch-Pitts</strong></em>, la salida es 1 para los patrones de la clase <span class="math notranslate nohighlight">\(\omega_{1}\)</span> o 0 para la clase <span class="math notranslate nohighlight">\(\omega_{2}\)</span>. La suma y la operación no lineal se unen para simplificar el gráfico.</p></li>
 </ul>
 <figure class="align-center" id="hidden-layer-activationf-function-fig">
 <a class="reference internal image-reference" href="_images/hidden_layer_activationf_function.png"><img alt="_images/hidden_layer_activationf_function.png" src="_images/hidden_layer_activationf_function.png" style="width: 508.9px; height: 256.2px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Selección de función de activación para <code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">layers</span></code>. (Fuente <span id="id2">[<a class="reference internal" href="biblio.html#id32" title="J. Brownlee and Machine Learning Mastery. Deep Learning with Python: Develop Deep Learning Models on Theano and TensorFlow Using Keras. Machine Learning Mastery, 2017. URL: https://books.google.com.co/books?id=eJw2nQAACAAJ.">Brownlee and Mastery, 2017</a>]</span>).</span><a class="headerlink" href="#hidden-layer-activationf-function-fig" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Selección de función de activación para <em><strong><code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">layers</span></code></strong></em>. (Fuente <span id="id2">[<a class="reference internal" href="biblio.html#id32" title="J. Brownlee and Machine Learning Mastery. Deep Learning with Python: Develop Deep Learning Models on Theano and TensorFlow Using Keras. Machine Learning Mastery, 2017. URL: https://books.google.com.co/books?id=eJw2nQAACAAJ.">Brownlee and Mastery, 2017</a>]</span>).</span><a class="headerlink" href="#hidden-layer-activationf-function-fig" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>Para las capas ocultas, la función de <em><strong>activación tangente hiperbólica suele funcionar mejor que la sigmoidea logística</strong></em>. Tanto la función <em><strong>sigmoid</strong></em> como <em><strong>tanh</strong></em> pueden hacer que el modelo sea más <em><strong>susceptible a los problemas durante el entrenamiento, a través del llamado problema de los gradientes desvanecientes</strong></em>. Los modelos modernos de redes neuronales con arquitecturas comunes, como <em><strong>MLP y CNN, harán uso de la función de activación ReLU</strong></em>, o extensiones.</p></li>
-<li><p>Las <em><strong>redes recurrentes recurrentes</strong></em> suelen utilizar funciones de activación <em><strong>tanh</strong></em> o <em><strong>sigmoid</strong></em>, o incluso ambas. Por ejemplo, la <em><strong>LSTM suele utilizar la activación sigmoid para las conexiones recurrentes y la activación tanh para la salida</strong></em>.</p></li>
+<li><p>Para las capas ocultas, la función de <em><strong>activación <a class="reference external" href="https://es.wikipedia.org/wiki/Tangente_hiperb%C3%B3lica">tangente hiperbólica</a> suele funcionar mejor que la <a class="reference external" href="https://en.wikipedia.org/wiki/Sigmoid_function">sigmoidea logística</a></strong></em>. Tanto la función <em><strong>sigmoid</strong></em> como <em><strong>tanh</strong></em> pueden hacer que el modelo sea más <em><strong>susceptible a los problemas durante el entrenamiento, a través del llamado problema de los <code class="docutils literal notranslate"><span class="pre">gradientes</span> <span class="pre">desvanecientes</span></code></strong></em>. Los modelos modernos de redes neuronales con arquitecturas comunes, como <em><strong>MLP y CNN, harán uso de la función de activación <a class="reference external" href="https://es.wikipedia.org/wiki/Rectificador_(redes_neuronales)">ReLU</a></strong></em>, o extensiones.</p></li>
+<li><p>Las <em><strong>redes recurrentes</strong></em> suelen utilizar funciones de activación <em><strong>tanh</strong></em> o <em><strong>sigmoid</strong></em>, o incluso ambas. Por ejemplo, la <em><strong>LSTM suele utilizar la activación sigmoid para las conexiones recurrentes y la activación tanh para la salida</strong></em>.</p></li>
 </ul>
 <figure class="align-center" id="output-layer-activation-function">
 <a class="reference internal image-reference" href="_images/output_layer_activation_function.png"><img alt="_images/output_layer_activation_function.png" src="_images/output_layer_activation_function.png" style="width: 485.79999999999995px; height: 301.7px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Selección de función de activación para <em><strong>hidden layers</strong></em>. (Fuente <span id="id3">[<a class="reference internal" href="biblio.html#id32" title="J. Brownlee and Machine Learning Mastery. Deep Learning with Python: Develop Deep Learning Models on Theano and TensorFlow Using Keras. Machine Learning Mastery, 2017. URL: https://books.google.com.co/books?id=eJw2nQAACAAJ.">Brownlee and Mastery, 2017</a>]</span>).</span><a class="headerlink" href="#output-layer-activation-function" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Selección de función de activación para <em><strong><code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">layers</span></code></strong></em>. (Fuente <span id="id3">[<a class="reference internal" href="biblio.html#id32" title="J. Brownlee and Machine Learning Mastery. Deep Learning with Python: Develop Deep Learning Models on Theano and TensorFlow Using Keras. Machine Learning Mastery, 2017. URL: https://books.google.com.co/books?id=eJw2nQAACAAJ.">Brownlee and Mastery, 2017</a>]</span>).</span><a class="headerlink" href="#output-layer-activation-function" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>Si su problema es de <em><strong>regresión, debe utilizar una función de activación lineal</strong></em>. Si su problema es de <em><strong>clasificación</strong></em>, el modelo predice la probabilidad de pertenencia a una clase, que se puede convertir en una <em><strong>etiqueta de clase mediante redondeo (para sigmoid)</strong></em> o <em><strong>argmax (para softmax)</strong></em>.</p></li>
+<li><p>Si su problema es de <em><strong>regresión, debe utilizar una función de <a class="reference external" href="https://en.wikipedia.org/wiki/Linearity">activación lineal</a></strong></em>. Si su problema es de <em><strong>clasificación</strong></em>, el modelo predice la <em><strong>probabilidad de pertenencia a una clase</strong></em>, que se puede convertir en una <em><strong>etiqueta de clase mediante redondeo (para sigmoid)</strong></em> o <em><strong>argmax (para <a class="reference external" href="https://en.wikipedia.org/wiki/Softmax_function">softmax</a>)</strong></em>.</p></li>
 </ul>
+<div class="admonition-activacion-lineal-y-problemas-de-regresion admonition">
+<p class="admonition-title">Activación Lineal y Problemas de Regresión</p>
+<p>En las <em><strong>Redes Neuronales Artificiales (ANNs)</strong></em>, la función de <em><strong>activación lineal</strong></em> se utiliza comúnmente en la capa de salida para <em><strong>problemas de regresión y series de tiempo</strong></em> debido a las siguientes razones:</p>
+<ul>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Producción</span> <span class="pre">de</span> <span class="pre">Salidas</span> <span class="pre">Continuas</span></code></strong></em></p>
+<p>La regresión y las predicciones de <em><strong>series de tiempo</strong></em> generalmente requieren que el modelo produzca <em><strong>salidas continuas, no discretas</strong></em>. Una función de <em><strong>activación lineal permite que la salida de la red neuronal sea cualquier valor real, lo que es adecuado para este tipo de problemas</strong></em>. <em>Por ejemplo, si estamos prediciendo precios de viviendas o temperaturas futuras, necesitamos que las salidas sean valores continuos, no limitados a un rango específico</em>.</p>
+</li>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Evitar</span> <span class="pre">Saturación</span></code></strong></em></p>
+<p>Funciones de activación no lineales como la <em><strong>sigmoid o tanh tienen salidas acotadas</strong></em> (<em>entre 0 y 1 para sigmoide, y entre -1 y 1 para tanh</em>). Estas funciones pueden saturarse, es decir, <em><strong>para valores grandes de entrada, los gradientes pueden volverse muy pequeños, lo que dificulta el entrenamiento del modelo debido al problema del gradiente desvaneciente</strong></em>. <em>Una función de activación lineal no tiene este problema, ya que la salida es directamente proporcional a la entrada</em>.</p>
+</li>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Preservación</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">Escala</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">Salida</span></code></strong></em></p>
+<p>En <em><strong>tareas de regresión y predicción de series de tiempo</strong></em>, a menudo <em><strong>es importante que la escala de las salidas se mantenga consistente con la escala de los valores objetivo</strong></em>. La función de activación lineal, definida como, <span class="math notranslate nohighlight">\(\boldsymbol{f(x)=x}\)</span> <em><strong>no cambia la escala de los valores</strong></em>, permitiendo que la red neuronal <em>modele relaciones directamente proporcionales entre las entradas y las salidas</em>.</p>
+</li>
+</ul>
+</div>
 </section>
 <section id="redes-totalmente-conectadas">
 <h2>Redes Totalmente Conectadas<a class="headerlink" href="#redes-totalmente-conectadas" title="Link to this heading">#</a></h2>
@@ -709,14 +725,30 @@ f(\boldsymbol{z}^{r})
 \end{bmatrix}
 \end{split}\]</div>
 <ul class="simple">
-<li><p>La notación anterior significa que <span class="math notranslate nohighlight">\(f\)</span> <em><strong>actúa sobre cada uno de los respectivos componentes del vector</strong></em>, individualmente, y la <em><strong>extensión del vector en uno es para dar cuenta de los términos de sesgo</strong></em> en la práctica estándar. Para redes grandes, con muchas capas y muchos nodos por capa, este tipo de conectividad resulta ser muy costoso en términos del número de parámetros (pesos), que es del orden de <span class="math notranslate nohighlight">\(k_{r}k_{r-1}\)</span>. Por ejemplo, si <span class="math notranslate nohighlight">\(k_{r-1} = 1000\)</span> y <span class="math notranslate nohighlight">\(k_{r} = 1000\)</span>, <em><strong>esto equivale a un orden de 1 millón de parámetros</strong></em>. Tenga en cuenta que este número es la contribución de los parámetros de una sola de las capas. Sin embargo, <em><strong>un gran número de parámetros hace que una red sea vulnerable al sobreajuste</strong></em>, cuando se trata de entrenamiento</p></li>
-<li><p>Se pueden emplear las llamadas <em><strong>técnicas de reparto de pesos</strong></em>, en las que un conjunto de parámetros es compartido entre un número de conexiones, a través de restricciones adecuadamente incorporadas. Las <em><strong>redes neuronales recurrentes y convolucionales</strong></em> que se discutirán en en el curso <strong><code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">series</span> <span class="pre">forecasting</span></code></strong>, pertenecen a esta familia de redes de peso compartido. Como veremos, en una red convolucional, las <em><strong>convoluciones sustituyen a las operaciones de producto interno</strong></em>, lo que permite un reparto de pesos importante que conduce a una reducción sustancial del número de parámetros.</p></li>
+<li><p>La siguiente figura describe como es creada la <span class="math notranslate nohighlight">\(j\)</span>-ésima columna de la red neuronal full conectada</p></li>
+</ul>
+<figure class="align-center" id="id20">
+<a class="reference internal image-reference" href="_images/fully_connected_net.png"><img alt="_images/fully_connected_net.png" src="_images/fully_connected_net.png" style="width: 600.0px; height: 317.20000000000005px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text"><span class="math notranslate nohighlight">\(j\)</span>-ésimo elemento de la capa <span class="math notranslate nohighlight">\(r\)</span> de la red totalmente conectada.</span><a class="headerlink" href="#id20" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="tip admonition">
+<p class="admonition-title">Observación</p>
+<ul class="simple">
+<li><p>La notación anterior significa que <span class="math notranslate nohighlight">\(f\)</span> <em><strong>actúa sobre cada uno de los respectivos componentes del vector</strong></em>, individualmente, y la <em><strong>extensión del vector en uno es para dar cuenta de los términos de sesgo</strong></em> en la práctica estándar. Para redes grandes, con muchas capas y muchos nodos por capa, este tipo de conectividad resulta ser muy costoso en términos del número de parámetros (pesos), que es del orden de <span class="math notranslate nohighlight">\(k_{r}k_{r-1}\)</span>.</p></li>
+<li><p>Por ejemplo, si <span class="math notranslate nohighlight">\(k_{r-1} = 1000\)</span> y <span class="math notranslate nohighlight">\(k_{r} = 1000\)</span>, <em><strong>esto equivale a un orden de 1 millón de parámetros</strong></em>. Tenga en cuenta que este número es la contribución de los parámetros de una sola de las capas. Sin embargo, <em><strong>un gran número de parámetros hace que una red sea vulnerable al sobreajuste</strong></em>, cuando se trata de entrenamiento</p></li>
+</ul>
+</div>
+<ul class="simple">
+<li><p>Se pueden emplear las llamadas <em><strong>técnicas de reparto de pesos</strong></em>, en las que un conjunto de parámetros es compartido entre un número de conexiones, a través de restricciones adecuadamente incorporadas. Las <em><strong>redes neuronales recurrentes y convolucionales</strong></em> pertenecen a esta familia de redes de peso compartido. En una red convolucional, las <em><strong>convoluciones sustituyen a las operaciones de producto interno</strong></em>, lo que permite un reparto de pesos importante que conduce a una reducción sustancial del número de parámetros.</p></li>
 </ul>
 </section>
 <section id="el-algoritmo-de-backpropagation">
 <h2>El Algoritmo De Backpropagation<a class="headerlink" href="#el-algoritmo-de-backpropagation" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Una red neuronal considera una <em><strong>función paramétrica no lineal</strong></em>, <span class="math notranslate nohighlight">\(\hat{y} = f_{\boldsymbol{\theta}}(\boldsymbol{x})\)</span>, donde <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> representa todos los pesos/sesgo presentes en la red. Por lo tanto, el entrenamiento de una red neuronal no parece ser diferente del entrenamiento de cualquier otro modelo de predicción paramétrica. Todo lo que se necesita es <em><strong>(a)</strong></em> un <em><strong>conjunto de muestras de entrenamiento</strong></em>, <em><strong>(b)</strong></em> una <em><strong>función de pérdida</strong></em> <span class="math notranslate nohighlight">\(\mathcal{L}(y, \hat{y})\)</span>, y <em><strong>(c)</strong></em> un <em><strong>esquema iterativo</strong></em>, por ejemplo, el <em><strong>gradiente descendiente</strong></em>, para realizar la optimización de la función de coste asociada (<em><strong>pérdida empírica</strong></em>).</p></li>
+<li><p>Una red neuronal considera una <em><strong>función paramétrica no lineal</strong></em>, <span class="math notranslate nohighlight">\(\hat{y} = f_{\boldsymbol{\theta}}(\boldsymbol{x})\)</span>, donde <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> representa todos los pesos/sesgo presentes en la red. Por lo tanto, el entrenamiento de una red neuronal no parece ser diferente del entrenamiento de cualquier otro modelo de predicción paramétrico.</p></li>
+<li><p>Todo lo que se necesita es <em><strong>(a)</strong></em> un <em><strong>conjunto de muestras de entrenamiento</strong></em>, <em><strong>(b)</strong></em> una <em><strong>función de pérdida</strong></em> <span class="math notranslate nohighlight">\(\mathcal{L}(y, \hat{y})\)</span>, y <em><strong>(c)</strong></em> un <em><strong>esquema iterativo</strong></em>, por ejemplo, el <em><strong>gradiente descendiente</strong></em>, para realizar la optimización de la función de coste asociada (<em><strong>pérdida empírica</strong></em>).</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -726,19 +758,19 @@ J(\boldsymbol{\theta})=\sum_{n=1}^{N}\mathcal{L}(y_{n}, f_{\boldsymbol{\theta}}(
 <li><p>La dificultad del entrenamiento de las redes neuronales radica en su <em><strong>estructura multicapa que complica el cálculo de los gradientes, que intervienen en la optimización</strong></em>. Además, la neurona <em><strong>McCulloch-Pitts</strong></em> se basa en la función de activación discontinua de <em><strong>Heaviside, que no es diferenciable</strong></em>.</p></li>
 </ul>
 <ul class="simple">
-<li><p>La <em><strong>neurona sigmoidea logística</strong></em>: Una posibilidad es adoptar la función <em><strong>sigmoidea logística</strong></em>, es decir,</p></li>
+<li><p>La <em><strong><code class="docutils literal notranslate"><span class="pre">neurona</span> <span class="pre">sigmoidea</span> <span class="pre">logística</span></code></strong></em>: Una posibilidad es adoptar la función <em><strong>sigmoidea logística</strong></em>, es decir,</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
 \]</div>
 <ul class="simple">
-<li><p>Nótese que <em><strong>cuanto mayor sea el valor del parámetro</strong></em> <span class="math notranslate nohighlight">\(a\)</span>, <em><strong>la gráfica correspondiente se acerca más a la de la función de Heaviside</strong></em> (ver <a class="reference internal" href="#sigmoid-act-function"><span class="std std-numref">Fig. 12</span></a>).</p></li>
+<li><p>Nótese que <em><strong>cuanto mayor sea el valor del parámetro</strong></em> <span class="math notranslate nohighlight">\(a\)</span>, <em><strong>la gráfica correspondiente se acerca más a la de la función de Heaviside</strong></em> (ver <a class="reference internal" href="#sigmoid-act-function"><span class="std std-numref">Fig. 13</span></a>).</p></li>
 </ul>
 <figure class="align-center" id="sigmoid-act-function">
 <a class="reference internal image-reference" href="_images/sigmoid_act_function.png"><img alt="_images/sigmoid_act_function.png" src="_images/sigmoid_act_function.png" style="width: 507.20000000000005px; height: 471.20000000000005px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 12 </span><span class="caption-text">La función sigmoidea logística para diferentes valores del parámetro <span class="math notranslate nohighlight">\(a\)</span>.</span><a class="headerlink" href="#sigmoid-act-function" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">La función sigmoidea logística para diferentes valores del parámetro <span class="math notranslate nohighlight">\(a\)</span>.</span><a class="headerlink" href="#sigmoid-act-function" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul>
@@ -747,13 +779,13 @@ f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
 \[
     f(z)=a\tanh\left(\frac{cz}{2}\right),
     \]</div>
-<p>donde <span class="math notranslate nohighlight">\(c\)</span> y <span class="math notranslate nohighlight">\(a\)</span> son parámetros de control. El gráfico de esta función se muestra en la {numref}<em><strong>tanh_act_function</strong></em>. Nótese que a diferencia de la sigmoidea logística, ésta es una <em><strong>función es no simétrica</strong></em>, es decir, <span class="math notranslate nohighlight">\(f(-z)=-f(z)\)</span>. Ambas son también conocidas como <em><strong>funciones de reducción, porque limitan la salida a un rango finito de valores</strong></em>.</p>
+<p>donde <span class="math notranslate nohighlight">\(c\)</span> y <span class="math notranslate nohighlight">\(a\)</span> son parámetros de control. El gráfico de esta función se muestra en la <a class="reference internal" href="#tanh-act-function"><span class="std std-numref">Fig. 14</span></a>. Nótese que a diferencia de la sigmoidea logística, ésta es una <em><strong>función no simétrica</strong></em>, es decir, <span class="math notranslate nohighlight">\(f(-z)=-f(z)\)</span>. Ambas son también conocidas como <em><strong>funciones de reducción, porque limitan la salida a un rango finito de valores</strong></em>.</p>
 </li>
 </ul>
 <figure class="align-center" id="tanh-act-function">
 <a class="reference internal image-reference" href="_images/tanh_act_function.png"><img alt="_images/tanh_act_function.png" src="_images/tanh_act_function.png" style="width: 693.6px; height: 435.20000000000005px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Función de reducción de la tangente hiperbólica para <span class="math notranslate nohighlight">\(a = 1.7\)</span> y <span class="math notranslate nohighlight">\(c = 4/3\)</span>.</span><a class="headerlink" href="#tanh-act-function" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">Función de reducción de la tangente hiperbólica para <span class="math notranslate nohighlight">\(a = 1.7\)</span> y <span class="math notranslate nohighlight">\(c = 4/3\)</span>.</span><a class="headerlink" href="#tanh-act-function" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul>
@@ -763,39 +795,42 @@ f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
     \\[1mm]
     \theta(new)=\theta(old)-\mu\left.\frac{d J}{d\theta}\right|_{\theta(old)},
     \end{split}\]</div>
-<p>y las iteraciones parten de un punto inicial arbitrario, <span class="math notranslate nohighlight">\(\theta^{(0)}\)</span>. Si en la iteración actual el algoritmo está digamos, en el punto <span class="math notranslate nohighlight">\(\theta(old) = \theta_{1}\)</span>, entonces se moverá hacia el mínimo local, <span class="math notranslate nohighlight">\(\theta_{l}\)</span>. Esto se debe a que la derivada del coste en <span class="math notranslate nohighlight">\(\theta_{1}\)</span> es igual a la tangente de <span class="math notranslate nohighlight">\(\phi_{1}\)</span>, que es negativa (el ángulo es obtuso) y la actualización, <span class="math notranslate nohighlight">\(\theta(new)\)</span>, se moverá a la derecha, hacia el mínimo local, <span class="math notranslate nohighlight">\(\theta_{l}\)</span>.</p>
+<p>y las iteraciones parten de un punto inicial arbitrario, <span class="math notranslate nohighlight">\(\theta^{(0)}\)</span>. Si en la iteración actual el algoritmo está digamos, en el punto <span class="math notranslate nohighlight">\(\theta(old) = \theta_{1}\)</span>, entonces se moverá hacia el mínimo local, <span class="math notranslate nohighlight">\(\theta_{l}\)</span>. <em><strong>Esto se debe a que la derivada del coste en</strong></em> <span class="math notranslate nohighlight">\(\theta_{1}\)</span> <em><strong>es igual a la tangente de</strong></em> <span class="math notranslate nohighlight">\(\phi_{1}\)</span>, <em><strong>que es negativa</strong></em> (<em>el ángulo es obtuso</em>) y la actualización, <span class="math notranslate nohighlight">\(\theta(new)\)</span>, se moverá a la derecha, hacia el mínimo local, <span class="math notranslate nohighlight">\(\theta_{l}\)</span>.</p>
 </li>
 </ul>
 <figure class="align-center" id="convex-function-saddle-point">
 <a class="reference internal image-reference" href="_images/convex_function_saddle_point.png"><img alt="_images/convex_function_saddle_point.png" src="_images/convex_function_saddle_point.png" style="width: 635.2px; height: 354.40000000000003px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 14 </span><span class="caption-text">Función no convexa global, con mínimos locales y puntos de silla.</span><a class="headerlink" href="#convex-function-saddle-point" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">Función no convexa global, con mínimos locales y puntos de silla.</span><a class="headerlink" href="#convex-function-saddle-point" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>La <em><strong>elección del tamaño del paso</strong></em>, <span class="math notranslate nohighlight">\(\mu\)</span>, <em><strong>es crítica para la convergencia del algoritmo</strong></em>. En problemas reales en espacios multidimensionales, el número de mínimos locales puede ser grande, por lo que el algoritmo puede converger a uno local. Sin embargo, esto no es necesariamente una mala noticia. Si este <em><strong>mínimo local es lo suficientemente profundo</strong></em>, es decir, si el valor de la función de coste en este punto, por ejemplo, <span class="math notranslate nohighlight">\(J(\theta_{l})\)</span>, <em><strong>no es mucho mayor que el alcanzado en el mínimo global</strong></em>, es decir, <span class="math notranslate nohighlight">\(J(\theta_{g})\)</span>, la <em><strong>convergencia a dicho mínimo local puede corresponder a una buena solución</strong></em>.</p></li>
+<li><p>La <em><strong>elección del tamaño del paso</strong></em>, <span class="math notranslate nohighlight">\(\mu\)</span>, <em><strong>es crítica para la convergencia del algoritmo</strong></em>. En problemas reales en espacios multidimensionales, el número de mínimos locales puede ser grande, por lo que <em><strong>el algoritmo puede converger a uno local</strong></em>. Sin embargo, esto no es necesariamente una mala noticia.</p></li>
+<li><p>Si este <em><strong>mínimo local es lo suficientemente profundo</strong></em>, es decir, si el valor de la función de coste en este punto, por ejemplo, <span class="math notranslate nohighlight">\(J(\theta_{l})\)</span>, <em><strong>no es mucho mayor que el alcanzado en el mínimo global</strong></em>, es decir, <span class="math notranslate nohighlight">\(J(\theta_{g})\)</span>, la <em><strong>convergencia a dicho mínimo local puede corresponder a una buena solución</strong></em>.</p></li>
 </ul>
 </section>
 <section id="el-esquema-de-backpropagation-para-gradiente-descendiente">
 <h2>El Esquema De Backpropagation Para Gradiente Descendiente<a class="headerlink" href="#el-esquema-de-backpropagation-para-gradiente-descendiente" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Habiendo adoptado una función de activación diferenciable, estamos listos para proceder a desarrollar el <em><strong>esquema iterativo de gradiente descendiente para la minimización de la función de coste</strong></em>. Formularemos la tarea en un marco general.</p></li>
-<li><p>Sea <span class="math notranslate nohighlight">\((\boldsymbol{y}_{n}, \boldsymbol{x}_{n}), n = 1, 2,\dots, N\)</span>, es el conjunto de muestras de entrenamiento. <em><strong>Nótese que hemos asumido múltiples variables output</strong></em>, como vectores. Suponemos que la red consta de <span class="math notranslate nohighlight">\(L\)</span> capas, <span class="math notranslate nohighlight">\(L-1\)</span> capas ocultas y una capa de salida. Cada capa consta de <span class="math notranslate nohighlight">\(k_{r}, r = 1, 2,\dots, L\)</span>, neuronas. Así, los vectores de salida (objetivo/deseado) son</p></li>
+</ul>
+<ul class="simple">
+<li><p>Sea <span class="math notranslate nohighlight">\((\boldsymbol{y}_{n}, \boldsymbol{x}_{n}), n = 1, 2,\dots, N\)</span>, el conjunto de muestras de entrenamiento. <em><strong>Nótese que hemos asumido output multivariado</strong></em>. Suponemos que la red consta de <span class="math notranslate nohighlight">\(L\)</span> capas, <span class="math notranslate nohighlight">\(L-1\)</span> capas ocultas y una capa de salida. Cada capa consta de <span class="math notranslate nohighlight">\(k_{r}, r = 1, 2,\dots, L\)</span>, neuronas. Así, los vectores de salida (objetivo/deseado) son</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\boldsymbol{y}_{n}=[y_{n1}, y_{n2},\dots, y_{nk_{L}}]^{T}\in\mathbb{R}^{K_{L}},\quad n=1,2,\dots,N.
+\boldsymbol{y}_{n}=[y_{n1}, y_{n2},\dots, y_{nk_{L}}]^{T}\in\mathbb{R}^{k_{L}},\quad n=1,2,\dots,N.
 \]</div>
 <ul class="simple">
 <li><p>Para ciertas derivaciones matemáticas, también denotamos el número de nodos de entrada como <span class="math notranslate nohighlight">\(k_{0}\)</span>; es decir <span class="math notranslate nohighlight">\(k_{0} = l\)</span>, donde <span class="math notranslate nohighlight">\(l\)</span> es la <em><strong>dimensionalidad del espacio de características de entrada</strong></em>.</p></li>
-<li><p>Sea <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{j}^{r}\)</span> denota el <em><strong>vector de los pesos sinápticos asociados a la</strong></em> <span class="math notranslate nohighlight">\(j\)</span><em><strong>-th neurona de la</strong></em> <span class="math notranslate nohighlight">\(r\)</span><em><strong>-th capa</strong></em>, con <span class="math notranslate nohighlight">\(j = 1, 2,\dots, k_{r}\)</span> y <span class="math notranslate nohighlight">\(r = 1, 2,\dots,L\)</span>, donde el término de sesgo se incluye en <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{j}^{r}\)</span> , es decir,</p></li>
+<li><p>Sea <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{j}^{r}\)</span> el <em><strong>vector de los pesos sinápticos asociados a la</strong></em> <span class="math notranslate nohighlight">\(j\)</span><em><strong>-ésima neurona de la</strong></em> <span class="math notranslate nohighlight">\(r\)</span><em><strong>-ésima capa</strong></em>, con <span class="math notranslate nohighlight">\(j = 1, 2,\dots, k_{r}\)</span> y <span class="math notranslate nohighlight">\(r = 1, 2,\dots,L\)</span>, donde el término de sesgo se incluye en <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{j}^{r}\)</span> , es decir,</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-parameters-vector-def">
 <span class="eqno">(73)<a class="headerlink" href="#equation-parameters-vector-def" title="Link to this equation">#</a></span>\[
 \boldsymbol{\theta}_{j}^{r}:=[\theta_{j0}^{r}, \theta_{j1}^{r},\dots, \theta_{jk_{r-1}}^{r}]^{T}.
 \]</div>
 <ul class="simple">
-<li><p>Los pesos sinápticos enlazan la neurona respectiva con todas las neuronas de la capa <span class="math notranslate nohighlight">\(k_{r-1}\)</span> (véase la <a class="reference internal" href="#synaptic-weights-link"><span class="std std-numref">Fig. 15</span></a>). El paso iterativo básico para el esquema de gradiente descendiente se escribe como</p></li>
+<li><p>Los <em><strong>pesos sinápticos enlazan la neurona respectiva con todas las neuronas de la capa</strong></em> <span class="math notranslate nohighlight">\(k_{r-1}\)</span> (véase la <a class="reference internal" href="#synaptic-weights-link"><span class="std std-numref">Fig. 16</span></a>). El paso iterativo básico para el esquema de gradiente descendiente se escribe como</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-update-equations-gd">
 <span class="eqno">(74)<a class="headerlink" href="#equation-update-equations-gd" title="Link to this equation">#</a></span>\[\begin{split}
@@ -805,32 +840,41 @@ f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
 \end{align*}
 \end{split}\]</div>
 <ul class="simple">
-<li><p>El parámetro <span class="math notranslate nohighlight">\(\mu\)</span> es el tamaño de paso definido por el usuario (también puede depender de la iteración) y <span class="math notranslate nohighlight">\(J\)</span> denota la función de coste.</p></li>
+<li><p>El parámetro <span class="math notranslate nohighlight">\(\mu\)</span> es el <em><strong>tamaño de paso definido por el usuario</strong></em> (<em>también puede depender de la iteración</em>) y <span class="math notranslate nohighlight">\(J\)</span> denota la función de coste.</p></li>
 </ul>
 <figure class="align-center" id="synaptic-weights-link">
 <a class="reference internal image-reference" href="_images/synaptic_weights_link.png"><img alt="_images/synaptic_weights_link.png" src="_images/synaptic_weights_link.png" style="width: 529.6px; height: 355.20000000000005px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 15 </span><span class="caption-text">Enlaces y las variables asociadas de la <span class="math notranslate nohighlight">\(j\)</span> th neurona en la <span class="math notranslate nohighlight">\(r\)</span> th capa. <span class="math notranslate nohighlight">\(y_{k}^{r-1}\)</span> es la salida de la <span class="math notranslate nohighlight">\(k\)</span> th neurona de la <span class="math notranslate nohighlight">\((r - 1)\)</span> th capa y <span class="math notranslate nohighlight">\(\theta_{jk}^{r}\)</span> es el peso respectivo que conecta estas dos neuronas.</span><a class="headerlink" href="#synaptic-weights-link" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Enlaces y las variables asociadas de la <span class="math notranslate nohighlight">\(j\)</span> th neurona en la <span class="math notranslate nohighlight">\(r\)</span> th capa. <span class="math notranslate nohighlight">\(y_{k}^{r-1}\)</span> es la salida de la <span class="math notranslate nohighlight">\(k\)</span> th neurona de la <span class="math notranslate nohighlight">\((r - 1)\)</span> th capa y <span class="math notranslate nohighlight">\(\theta_{jk}^{r}\)</span> es el peso respectivo que conecta estas dos neuronas.</span><a class="headerlink" href="#synaptic-weights-link" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
+<div class="tip admonition">
+<p class="admonition-title">Forward/Backward</p>
+<p>Las <em><strong>Ecuaciones de actualización</strong></em> <a class="reference internal" href="#equation-update-equations-gd">(74)</a> comprenden el <em><strong>esquema de gradiente descendiente</strong></em> para la optimización. Como se ha dicho anteriormente, la dificultad de las redes neuronales <em><strong>feed-forward</strong></em> surge de su estructura multicapa. Para calcular los gradientes en la Ecuación <a class="reference internal" href="#equation-update-equations-gd">(74)</a>, para todas las neuronas, en todas las capas, se deben seguir dos pasos en su cálculo</p>
 <ul>
-<li><p>Las ecuaciones de actualización <a class="reference internal" href="#equation-update-equations-gd">(74)</a> comprenden el par del esquema de gradiente descendiente  para la optimización. Como se ha dicho anteriormente, la dificultad de las redes neuronales <em><strong>feed-forward</strong></em> surge de su estructura multicapa. Para calcular los gradientes en la Ecuación <a class="reference internal" href="#equation-update-equations-gd">(74)</a>, para todas las neuronas, en todas las capas, se deben seguir dos pasos en su cálculo</p>
-<ul>
-<li><p><em><strong>Forward computations</strong></em>: Para un vector de entrada dado <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n}, n = 1, 2,\dots, N\)</span>, se utilizan las estimaciones actuales de los parámetros (pesos sinápticos) (<span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{j}^{r}(old)\)</span>) y calcula todas las salidas de todas las neuronas en todas las capas, denotadas como <span class="math notranslate nohighlight">\(y_{nj}^{r}\)</span>; en la <a class="reference internal" href="#synaptic-weights-link"><span class="std std-numref">Fig. 15</span></a>, se ha suprimido el índice <span class="math notranslate nohighlight">\(n\)</span> para no afectar la notación.</p></li>
-<li><p><em><strong>Backward computations</strong></em>: Utilizando las salidas neuronales calculadas anteriormente junto con los valores objetivo conocidos, <span class="math notranslate nohighlight">\(y_{nk}\)</span>, de la capa de salida, se calculan los gradientes de la función de coste. Esto implica <span class="math notranslate nohighlight">\(L\)</span> pasos, es decir, tantos como el número de capas. La secuencia de los pasos algorítmicos se indica a continuación:</p>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Forward</span> <span class="pre">computations</span></code></strong></em>: Para un vector de entrada dado <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n}, n = 1, 2,\dots, N\)</span>, se utilizan las estimaciones actuales de los parámetros (<em>pesos sinápticos</em>) (<span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{j}^{r}(old)\)</span>) y <em><strong>calcula todas las salidas de todas las neuronas en todas las capas</strong></em>, denotadas como <span class="math notranslate nohighlight">\(y_{nj}^{r}\)</span>; en la <a class="reference internal" href="#synaptic-weights-link"><span class="std std-numref">Fig. 16</span></a>, se ha suprimido el índice <span class="math notranslate nohighlight">\(n\)</span> para no afectar la notación.</p></li>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Backward</span> <span class="pre">computations</span></code></strong></em>: Utilizando las salidas neuronales calculadas anteriormente junto con los valores objetivo conocidos, <span class="math notranslate nohighlight">\(y_{nk}\)</span>, de la capa de salida, se <em><strong>calculan los gradientes de la función de coste</strong></em>. Esto implica <span class="math notranslate nohighlight">\(L\)</span> pasos, es decir, tantos como el número de capas. La secuencia de los pasos algorítmicos se indica a continuación:</p>
 <ul>
 <li><p>Calcular el gradiente de la función de coste con respecto a los parámetros de las neuronas de la última capa, es decir, <span class="math notranslate nohighlight">\(\displaystyle{\frac{\partial J}{\partial\boldsymbol{\theta}_{j}^{L}}, j = 1, 2,\dots, k_{L}}\)</span>.</p></li>
 <li><p><strong>For</strong> <span class="math notranslate nohighlight">\(r = L-1\)</span> to <span class="math notranslate nohighlight">\(1\)</span>, <strong>Do</strong></p>
-<p>Calcular los gradientes con respecto a los parámetros asociados a las neuronas de la <span class="math notranslate nohighlight">\(r\)</span> th capa, es decir, <span class="math notranslate nohighlight">\(\displaystyle{\frac{\partial J}{\partial\boldsymbol{\theta}_{k}^{r}}, k= 1, 2,\dots, k_{r}}\)</span> basado en todos los gradientes <span class="math notranslate nohighlight">\(\displaystyle{\frac{\partial J}{\partial\boldsymbol{\theta}_{j}^{r+1}}, j= 1, 2,\dots, k_{r+1}}\)</span>, con respecto a los parámetros de la capa <span class="math notranslate nohighlight">\(r + 1\)</span> que se han calculado en el paso anterior.</p>
+<p>Calcular los gradientes con respecto a los parámetros asociados a las neuronas de la <span class="math notranslate nohighlight">\(r\)</span> th capa, es decir, <span class="math notranslate nohighlight">\(\displaystyle{\frac{\partial J}{\partial\boldsymbol{\theta}_{k}^{r}}, k= 1, 2,\dots, k_{r}}\)</span> basado en todos los gradientes <span class="math notranslate nohighlight">\(\displaystyle{\frac{\partial J}{\partial\boldsymbol{\theta}_{j}^{r+1}}}\)</span>, <span class="math notranslate nohighlight">\(j= 1, 2,\dots, k_{r+1}\)</span>, con respecto a los parámetros de la capa <span class="math notranslate nohighlight">\(r + 1\)</span> que se han calculado en el paso anterior.</p>
 </li>
 <li><p><strong>End For</strong></p></li>
 </ul>
 </li>
 </ul>
-</li>
+</div>
+<ul class="simple">
+<li><p>El esquema de cálculo hacia atrás <em><strong>backpropagation</strong></em> es una aplicación directa de la <em><strong>regla de la cadena para las derivadas</strong></em>, y comienza con el paso inicial de <em><strong>calcular las derivadas asociadas a la última capa (de salida)</strong></em>, que resulta ser sencillo.</p></li>
 </ul>
+<div class="tip admonition">
+<p class="admonition-title">Observación</p>
+<ul class="simple">
+<li><p>La última derivada en el algoritmo de retropropagación es sencilla porque <em><strong>se calcula directamente a partir de la función de pérdida y las salidas de la red</strong></em>, sin necesidad de propagar errores hacia atrás a través de múltiples capas</p></li>
+</ul>
+</div>
 <ul>
-<li><p>El esquema de cálculo hacia atrás <em><strong>backpropagation</strong></em> es una aplicación directa de la <em><strong>regla de la cadena para las derivadas</strong></em>, y comienza con el paso inicial de <em><strong>calcular las derivadas asociadas a la última capa (de salida)</strong></em>, que resulta ser sencillo. A continuación, el algoritmo “fluye” hacia atrás en la jerarquía de capas. Esto se debe a la naturaleza de la red multicapa, donde las <em><strong>salidas, capa tras capa, se forman como funciones de funciones</strong></em>. En efecto, centrémonos en la salida <span class="math notranslate nohighlight">\(y_{k}^{r}\)</span> de la neurona <span class="math notranslate nohighlight">\(k\)</span> en la capa <span class="math notranslate nohighlight">\(r\)</span>. Entonces tenemos</p>
+<li><p>A continuación, el algoritmo “fluye” hacia atrás en la jerarquía de capas. Esto se debe a la naturaleza de la red multicapa, donde las <em><strong>salidas, capa tras capa, se forman como funciones de funciones</strong></em>. En efecto, centrémonos en la salida <span class="math notranslate nohighlight">\(y_{k}^{r}\)</span> de la neurona <span class="math notranslate nohighlight">\(k\)</span> en la capa <span class="math notranslate nohighlight">\(r\)</span>. Entonces tenemos</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
     \\[1mm]
@@ -855,7 +899,8 @@ f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
 </li>
 </ul>
 <ul class="simple">
-<li><p>Nótese que obtuvimos <em><strong>evaluación de “una función interna bajo una función externa”</strong></em>. Claramente, esto continúa a medida que avanzamos en la jerarquía. Esta <em><strong>estructura de evaluación de funciones internas por funciones externas</strong></em>, es el subproducto de la <em><strong>naturaleza multicapa de las redes neuronales, la cual es una operación altamente no lineal</strong></em>, que da lugar a la dificultad de calcular los gradientes, a diferencia de otros modelos, como por ejemplo <em><strong>SVM</strong></em>. Sin embargo, se puede observar fácilmente que <strong><code class="docutils literal notranslate"><span class="pre">el</span> <span class="pre">cálculo</span> <span class="pre">de</span> <span class="pre">los</span> <span class="pre">gradientes</span> <span class="pre">con</span> <span class="pre">respecto</span> <span class="pre">a</span> <span class="pre">los</span> <span class="pre">parámetros</span> <span class="pre">que</span> <span class="pre">definen</span> <span class="pre">la</span> <span class="pre">capa</span> <span class="pre">de</span> <span class="pre">salida</span> <span class="pre">no</span> <span class="pre">plantea</span> <span class="pre">ninguna</span> <span class="pre">dificultad</span></code></strong>. En efecto, la salida de la <span class="math notranslate nohighlight">\(j\)</span> th neurona de la última capa (que es en realidad la respectiva estimación de salida actual) se escribe como:</p></li>
+<li><p>Nótese que obtuvimos <em><strong>evaluación de “una función interna bajo una función externa”</strong></em>. Claramente, esto continúa a medida que avanzamos en la jerarquía. Esta <em><strong>estructura de evaluación de funciones internas por funciones externas</strong></em>, es el subproducto de la <em><strong>naturaleza multicapa de las redes neuronales, la cual es una operación altamente no lineal</strong></em>, que da lugar a la dificultad de calcular los gradientes, a diferencia de otros modelos, como por ejemplo <em><strong>SVM</strong></em>.</p></li>
+<li><p>Sin embargo, se puede observar fácilmente que <strong><code class="docutils literal notranslate"><span class="pre">el</span> <span class="pre">cálculo</span> <span class="pre">de</span> <span class="pre">los</span> <span class="pre">gradientes</span> <span class="pre">con</span> <span class="pre">respecto</span> <span class="pre">a</span> <span class="pre">los</span> <span class="pre">parámetros</span> <span class="pre">que</span> <span class="pre">definen</span> <span class="pre">la</span> <span class="pre">capa</span> <span class="pre">de</span> <span class="pre">salida</span> <span class="pre">no</span> <span class="pre">plantea</span> <span class="pre">ninguna</span> <span class="pre">dificultad</span></code></strong>. En efecto, la salida de la <span class="math notranslate nohighlight">\(j\)</span> th neurona de la última capa (que es en realidad la respectiva estimación de salida actual) se escribe como:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -877,7 +922,7 @@ f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
 <section id="calculo-de-gradientes">
 <h2>Cálculo de gradientes<a class="headerlink" href="#calculo-de-gradientes" title="Link to this heading">#</a></h2>
 <ul>
-<li><p>Sea <span class="math notranslate nohighlight">\(z_{nj}^{r}\)</span> la <em><strong>salida del combinador lineal</strong></em> de la <span class="math notranslate nohighlight">\(j\)</span>-th neurona en la capa <span class="math notranslate nohighlight">\(r\)</span> en el <em><strong>instante de tiempo</strong></em> <span class="math notranslate nohighlight">\(n\)</span>, cuando se aplica el patrón <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n}\)</span> en los nodos de entrada (véase la <a class="reference internal" href="#synaptic-weights-link"><span class="std std-numref">Fig. 15</span></a>). Entonces, para <span class="math notranslate nohighlight">\(n, j\)</span> fijos, podemos escribir</p>
+<li><p>Sea <span class="math notranslate nohighlight">\(z_{nj}^{r}\)</span> la <em><strong>salida del combinador lineal</strong></em> de la <span class="math notranslate nohighlight">\(j\)</span>-th neurona en la capa <span class="math notranslate nohighlight">\(r\)</span> en el <em><strong>instante de tiempo</strong></em> <span class="math notranslate nohighlight">\(n\)</span>, cuando se aplica el patrón <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n}\)</span> en los nodos de entrada (véase la <a class="reference internal" href="#synaptic-weights-link"><span class="std std-numref">Fig. 16</span></a>). Entonces, para <span class="math notranslate nohighlight">\(n, j\)</span> fijos, podemos escribir</p>
 <div class="math notranslate nohighlight" id="equation-eq-znj">
 <span class="eqno">(76)<a class="headerlink" href="#equation-eq-znj" title="Link to this equation">#</a></span>\[
     z_{nj}^{r}=\sum_{m=1}^{k_{r-1}}\theta_{jm}^{r}y_{nm}^{r-1}+\theta_{j0}^{r}=\sum_{m=0}^{k_{r-1}}\theta_{jm}^{r}y_{nm}^{r-1}=\boldsymbol{\theta}_{j}^{r^{T}}\boldsymbol{y}_{n}^{r-1},
@@ -1092,12 +1137,12 @@ Calcule <span class="math notranslate nohighlight">\(y_{nj}^{r}=f(z_{nj}^{r})\)<
 <figure class="align-center" id="recurrent-neural-network-arch-numref">
 <a class="reference internal image-reference" href="_images/recurrent_neural_network_arch.png"><img alt="_images/recurrent_neural_network_arch.png" src="_images/recurrent_neural_network_arch.png" style="width: 552.0px; height: 304.8px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Arquitectura de una <em><strong>Red Neuronal Recurrente</strong></em>. Fuente <span id="id8">[<a class="reference internal" href="biblio.html#id31" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#recurrent-neural-network-arch-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Arquitectura de una <em><strong>Red Neuronal Recurrente</strong></em>. Fuente <span id="id8">[<a class="reference internal" href="biblio.html#id31" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#recurrent-neural-network-arch-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
 <li><p>De las ecuaciones anteriores se deduce que las <em><strong>matrices y vectores de parámetros se comparten en todos los instantes temporales</strong></em>. Durante el entrenamiento, <em><strong>se inicializan mediante números aleatorios</strong></em>. El modelo gráfico
-asociado con Eq. <a class="reference internal" href="#equation-rnn-system-eq">(80)</a> se muestra en la <a class="reference internal" href="#recurrent-neural-network-arch-numref"><span class="std std-numref">Fig. 16</span></a>A. En la <a class="reference internal" href="#recurrent-neural-network-arch-numref"><span class="std std-numref">Fig. 16</span></a>B, <em><strong>el gráfico se despliega sobre los distintos instantes de tiempo</strong></em> para los que se dispone de observaciones. Por ejemplo, <em><strong>si la secuencia de interés es una frase de 10 palabras</strong></em>, entonces <span class="math notranslate nohighlight">\(N\)</span> se establece igual a 10, mientras que <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n}\)</span> es el <em><strong>vector que codifica las respectivas palabras de entrada</strong></em>.</p></li>
+asociado con Eq. <a class="reference internal" href="#equation-rnn-system-eq">(80)</a> se muestra en la <a class="reference internal" href="#recurrent-neural-network-arch-numref"><span class="std std-numref">Fig. 17</span></a>A. En la <a class="reference internal" href="#recurrent-neural-network-arch-numref"><span class="std std-numref">Fig. 17</span></a>B, <em><strong>el gráfico se despliega sobre los distintos instantes de tiempo</strong></em> para los que se dispone de observaciones. Por ejemplo, <em><strong>si la secuencia de interés es una frase de 10 palabras</strong></em>, entonces <span class="math notranslate nohighlight">\(N\)</span> se establece igual a 10, mientras que <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n}\)</span> es el <em><strong>vector que codifica las respectivas palabras de entrada</strong></em>.</p></li>
 </ul>
 <section id="backpropagation-en-tiempo">
 <h3>Backpropagation en tiempo<a class="headerlink" href="#backpropagation-en-tiempo" title="Link to this heading">#</a></h3>
@@ -1246,12 +1291,12 @@ J(U, W, V, \boldsymbol{b}, \boldsymbol{c})=\sum_{n=1}^{N}J_{n}(U, W, V, \boldsym
 </div><figure class="align-center" id="lstm-arch-rnn-numref">
 <a class="reference internal image-reference" href="_images/lstm_arch_rnn.png"><img alt="_images/lstm_arch_rnn.png" src="_images/lstm_arch_rnn.png" style="width: 664.8000000000001px; height: 332.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Arquitectura de unidad LSTM. Fuente <span id="id12">[<a class="reference internal" href="biblio.html#id31" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#lstm-arch-rnn-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Arquitectura de unidad LSTM. Fuente <span id="id12">[<a class="reference internal" href="biblio.html#id31" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#lstm-arch-rnn-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
 <li><p>En otras palabras, <em><strong>la ponderación (control) de la información</strong></em> tiene lugar en el contexto. Según este razonamiento, <em><strong>la red tiene la agilidad de olvidar la información que ya ha sido utilizada y ya no es necesaria</strong></em>. La <em><strong>célula/unidad LSTM básica</strong></em> se
-se muestra en la <a class="reference internal" href="#lstm-arch-rnn-numref"><span class="std std-numref">Fig. 17</span></a>. Se construye en torno a <em><strong>dos conjuntos de variables, apiladas en el vector</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{s}\)</span>, que se conoce como el <em><strong>estado de la célula o unidad</strong></em>, y el vector <span class="math notranslate nohighlight">\(\boldsymbol{h}\)</span>, que se conoce como el <em><strong>vector de variables ocultas</strong></em>. Una <em><strong>red LSTM</strong></em> se construye a partir de la <em><strong>concatenación sucesiva de esta unidad básica</strong></em>. La unidad correspondiente al tiempo <span class="math notranslate nohighlight">\(n\)</span>, además del vector de entrada, <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n}\)</span>, recibe <span class="math notranslate nohighlight">\(\boldsymbol{s}_{n-1}\)</span> y <span class="math notranslate nohighlight">\(\boldsymbol{h}_{n-1}\)</span> de la etapa anterior y pasa <span class="math notranslate nohighlight">\(\boldsymbol{s}_{n}\)</span> y <span class="math notranslate nohighlight">\(\boldsymbol{h}_{n}\)</span> a la siguiente.</p></li>
+se muestra en la <a class="reference internal" href="#lstm-arch-rnn-numref"><span class="std std-numref">Fig. 18</span></a>. Se construye en torno a <em><strong>dos conjuntos de variables, apiladas en el vector</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{s}\)</span>, que se conoce como el <em><strong>estado de la célula o unidad</strong></em>, y el vector <span class="math notranslate nohighlight">\(\boldsymbol{h}\)</span>, que se conoce como el <em><strong>vector de variables ocultas</strong></em>. Una <em><strong>red LSTM</strong></em> se construye a partir de la <em><strong>concatenación sucesiva de esta unidad básica</strong></em>. La unidad correspondiente al tiempo <span class="math notranslate nohighlight">\(n\)</span>, además del vector de entrada, <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n}\)</span>, recibe <span class="math notranslate nohighlight">\(\boldsymbol{s}_{n-1}\)</span> y <span class="math notranslate nohighlight">\(\boldsymbol{h}_{n-1}\)</span> de la etapa anterior y pasa <span class="math notranslate nohighlight">\(\boldsymbol{s}_{n}\)</span> y <span class="math notranslate nohighlight">\(\boldsymbol{h}_{n}\)</span> a la siguiente.</p></li>
 </ul>
 <ul>
 <li><p>A continuación se resumen las <em><strong>ecuaciones de actualización asociadas</strong></em>,</p>
@@ -1341,21 +1386,21 @@ y_{t}=f(y_{t-1}, y_{t-2}, \dots, y_{t-p}).
 </li>
 </ul>
 <ul class="simple">
-<li><p>En el caso de una <em><strong>red neuronal de una sola capa oculta</strong></em>, como se muestra en <a class="reference internal" href="#single-hidden-layer"><span class="std std-numref">Fig. 18</span></a>, la salida de cada neurona se pasa a la capa de salida, que aplica una <em><strong>transformación lineal y función de activación para generar la predicción de la variable objetivo</strong></em>, que, en el caso de la predicción de series temporales, es el valor predicho de la serie en el tiempo <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p>En el caso de una <em><strong>red neuronal de una sola capa oculta</strong></em>, como se muestra en <a class="reference internal" href="#single-hidden-layer"><span class="std std-numref">Fig. 19</span></a>, la salida de cada neurona se pasa a la capa de salida, que aplica una <em><strong>transformación lineal y función de activación para generar la predicción de la variable objetivo</strong></em>, que, en el caso de la predicción de series temporales, es el valor predicho de la serie en el tiempo <span class="math notranslate nohighlight">\(t\)</span></p></li>
 </ul>
 <figure class="align-center" id="single-hidden-layer">
 <a class="reference internal image-reference" href="_images/single_hidden_layer.png"><img alt="_images/single_hidden_layer.png" src="_images/single_hidden_layer.png" style="width: 360.0px; height: 320.4px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Red neuronal con una sola capa oculta.</span><a class="headerlink" href="#single-hidden-layer" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Red neuronal con una sola capa oculta.</span><a class="headerlink" href="#single-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>En un <code class="docutils literal notranslate"><span class="pre">MLP</span></code> (ver <a class="reference internal" href="#multiple-hidden-layer"><span class="std std-numref">Fig. 19</span></a>), se agrupan varias capas ocultas. <em><strong>La salida de las neuronas de una capa oculta se introduce en la siguiente capa oculta</strong></em>. Las neuronas de esta capa transforman la entrada y la pasan a la siguiente capa oculta. Finalmente, <em><strong>la última capa oculta alimenta la capa de salida</strong></em></p></li>
+<li><p>En un <code class="docutils literal notranslate"><span class="pre">MLP</span></code> (ver <a class="reference internal" href="#multiple-hidden-layer"><span class="std std-numref">Fig. 20</span></a>), se agrupan varias capas ocultas. <em><strong>La salida de las neuronas de una capa oculta se introduce en la siguiente capa oculta</strong></em>. Las neuronas de esta capa transforman la entrada y la pasan a la siguiente capa oculta. Finalmente, <em><strong>la última capa oculta alimenta la capa de salida</strong></em></p></li>
 </ul>
 <figure class="align-center" id="multiple-hidden-layer">
 <a class="reference internal image-reference" href="_images/multiple_hidden_layer.png"><img alt="_images/multiple_hidden_layer.png" src="_images/multiple_hidden_layer.png" style="width: 570.0px; height: 335.16px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 19 </span><span class="caption-text">Red neuronal con múltiples capas ocultas.</span><a class="headerlink" href="#multiple-hidden-layer" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Red neuronal con múltiples capas ocultas.</span><a class="headerlink" href="#multiple-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -1389,26 +1434,26 @@ p\times n_{1}+n_{1}\times n_{2}+n_{2}\times n_{3}+n_{3}.
 <figure class="align-center" id="twoinput-single-hidden-layer">
 <a class="reference internal image-reference" href="_images/twoinput_single_hidden_layer.png"><img alt="_images/twoinput_single_hidden_layer.png" src="_images/twoinput_single_hidden_layer.png" style="width: 300.0px; height: 207.60000000000002px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Red neuronal con una sola capa oculta y dos entradas.</span><a class="headerlink" href="#twoinput-single-hidden-layer" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Red neuronal con una sola capa oculta y dos entradas.</span><a class="headerlink" href="#twoinput-single-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>La red realiza una serie de <em><strong>sumas, multiplicaciones y un par evaluaciones de funciones sigmoidales para transformar la entrada en una predicción</strong></em>. La transformación de la entrada en una predicción se denomina paso hacia delante de la red neuronal. La <a class="reference internal" href="#forwardprop-single-hidden-layer"><span class="std std-numref">Fig. 21</span></a> muestra cómo se consigue un pase hacia adelante mediante un grafo computacional para un par de entrada <span class="math notranslate nohighlight">\([-1, 2]\)</span>. Cada cálculo da como resultado una salida intermedia <span class="math notranslate nohighlight">\(p_{i}\)</span>. <em><strong>Los resultados intermedios</strong></em> <span class="math notranslate nohighlight">\(p_{7}\)</span> <em><strong>y</strong></em> <span class="math notranslate nohighlight">\(p_{8}\)</span> <em><strong>son la salida de las neuronas ocultas</strong></em> <span class="math notranslate nohighlight">\(g_{1}\)</span> y <span class="math notranslate nohighlight">\(g_{2}\)</span>. Durante el entrenamiento, la función de pérdida <span class="math notranslate nohighlight">\(L\)</span> también se calcula en el paso hacia delante</p></li>
+<li><p>La red realiza una serie de <em><strong>sumas, multiplicaciones y un par evaluaciones de funciones sigmoidales para transformar la entrada en una predicción</strong></em>. La transformación de la entrada en una predicción se denomina paso hacia delante de la red neuronal. La <a class="reference internal" href="#forwardprop-single-hidden-layer"><span class="std std-numref">Fig. 22</span></a> muestra cómo se consigue un pase hacia adelante mediante un grafo computacional para un par de entrada <span class="math notranslate nohighlight">\([-1, 2]\)</span>. Cada cálculo da como resultado una salida intermedia <span class="math notranslate nohighlight">\(p_{i}\)</span>. <em><strong>Los resultados intermedios</strong></em> <span class="math notranslate nohighlight">\(p_{7}\)</span> <em><strong>y</strong></em> <span class="math notranslate nohighlight">\(p_{8}\)</span> <em><strong>son la salida de las neuronas ocultas</strong></em> <span class="math notranslate nohighlight">\(g_{1}\)</span> y <span class="math notranslate nohighlight">\(g_{2}\)</span>. Durante el entrenamiento, la función de pérdida <span class="math notranslate nohighlight">\(L\)</span> también se calcula en el paso hacia delante</p></li>
 </ul>
 <figure class="align-center" id="forwardprop-single-hidden-layer">
 <img alt="_images/forwardprop_single_hidden_layer.png" src="_images/forwardprop_single_hidden_layer.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Gráfico computacional de un perceptrón con una capa y dos neuronas ocultas.</span><a class="headerlink" href="#forwardprop-single-hidden-layer" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Gráfico computacional de un perceptrón con una capa y dos neuronas ocultas.</span><a class="headerlink" href="#forwardprop-single-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
 <li><p>En este punto, <em><strong>se aplica el algoritmo de backpropagation para calcular las derivadas parciales entre dos nodos conectados por una arista</strong></em>. El recorrido hacia atrás en el grafo para calcular la derivada parcial también se conoce como paso hacia atrás (<em><strong>backward pass</strong></em>). <em><strong>El operador de diferenciación parcial se aplica en cada nodo y las derivadas parciales se asignan a las respectivas aristas que conectan el nodo descendente a lo largo del grafo computacional</strong></em>.</p></li>
-<li><p>Siguiendo la regla de la cadena la derivada parcial <span class="math notranslate nohighlight">\(\partial_{\omega} L\)</span> se calcula <em><strong>multiplicando las derivadas parciales en todas las aristas que conectan el nodo de peso y el nodo de pérdida</strong></em>. Si existen varios caminos entre un nodo de peso y el nodo de pérdida, las derivadas parciales a lo largo de cada camino se suman para obtener la <em><strong>derivada parcial total de la pérdida con respecto al peso</strong></em>. Esta técnica gráfica de implementar los pasos hacia delante y hacia atrás es la técnica computacional subyacente utilizada en potentes bibliotecas de aprendizaje profundo. El paso hacia atrás se ilustra en <a class="reference internal" href="#partialderivates-single-hidden-layer"><span class="std std-numref">Fig. 22</span></a></p></li>
+<li><p>Siguiendo la regla de la cadena la derivada parcial <span class="math notranslate nohighlight">\(\partial_{\omega} L\)</span> se calcula <em><strong>multiplicando las derivadas parciales en todas las aristas que conectan el nodo de peso y el nodo de pérdida</strong></em>. Si existen varios caminos entre un nodo de peso y el nodo de pérdida, las derivadas parciales a lo largo de cada camino se suman para obtener la <em><strong>derivada parcial total de la pérdida con respecto al peso</strong></em>. Esta técnica gráfica de implementar los pasos hacia delante y hacia atrás es la técnica computacional subyacente utilizada en potentes bibliotecas de aprendizaje profundo. El paso hacia atrás se ilustra en <a class="reference internal" href="#partialderivates-single-hidden-layer"><span class="std std-numref">Fig. 23</span></a></p></li>
 </ul>
 <figure class="align-center" id="partialderivates-single-hidden-layer">
 <img alt="_images/partialderivates_single_hidden_layer.png" src="_images/partialderivates_single_hidden_layer.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Cálculo de derivadas parciales en un grafo computacional.</span><a class="headerlink" href="#partialderivates-single-hidden-layer" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Cálculo de derivadas parciales en un grafo computacional.</span><a class="headerlink" href="#partialderivates-single-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -1432,7 +1477,7 @@ p\times n_{1}+n_{1}\times n_{2}+n_{2}\times n_{3}+n_{3}.
 <figure class="align-center" id="forward-backward-single-hidden-layer">
 <img alt="_images/forward_backward_single_hidden_layer.png" src="_images/forward_backward_single_hidden_layer.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Pasos hacia delante (en azul) y hacia atrás (en rojo) sobre un grafo computacional.</span><a class="headerlink" href="#forward-backward-single-hidden-layer" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 24 </span><span class="caption-text">Pasos hacia delante (en azul) y hacia atrás (en rojo) sobre un grafo computacional.</span><a class="headerlink" href="#forward-backward-single-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -1743,7 +1788,7 @@ w_{5} = 0.07 - 0.01\times -0.384 = 0.0738.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9375994072b95a60d4a5fdfbc168c0daf18896601b7ae5404493caacd2a21b94.png" src="_images/9375994072b95a60d4a5fdfbc168c0daf18896601b7ae5404493caacd2a21b94.png" />
+<img alt="_images/ab6f25c840c49d054947b9e49f1cf4604af4b56a1effd78478560960a8634e2b.png" src="_images/ab6f25c840c49d054947b9e49f1cf4604af4b56a1effd78478560960a8634e2b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1767,7 +1812,7 @@ w_{5} = 0.07 - 0.01\times -0.384 = 0.0738.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/109d4cabf2e4035792ecaea5dd3f3cc8223f8b2399b3c1b86838b716f154aef7.png" src="_images/109d4cabf2e4035792ecaea5dd3f3cc8223f8b2399b3c1b86838b716f154aef7.png" />
+<img alt="_images/99d5e1eefe76040b0a847d5185401895e37538677f31b55764303ad81f9729a9.png" src="_images/99d5e1eefe76040b0a847d5185401895e37538677f31b55764303ad81f9729a9.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2149,7 +2194,7 @@ Shape of test: (8760, 9)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/52fed10808f1e3a9ad6e32c0bf50d7240b62329d897f926d2335931e57331e38.png" src="_images/52fed10808f1e3a9ad6e32c0bf50d7240b62329d897f926d2335931e57331e38.png" />
+<img alt="_images/e7107026d361f61e2cb0ef905e0dab13752302571bd53285f500fe23ab0504f6.png" src="_images/e7107026d361f61e2cb0ef905e0dab13752302571bd53285f500fe23ab0504f6.png" />
 </div>
 </div>
 <div class="tip admonition">
@@ -2313,31 +2358,70 @@ Shape of test: (8760, 9)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "functional_1"</span>
-</pre>
-</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
-┃<span style="font-weight: bold"> Layer (type)                         </span>┃<span style="font-weight: bold"> Output Shape                </span>┃<span style="font-weight: bold">         Param # </span>┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
-│ input_layer (<span style="color: #0087ff; text-decoration-color: #0087ff">InputLayer</span>)             │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">7</span>)                   │               <span style="color: #00af00; text-decoration-color: #00af00">0</span> │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dense (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                        │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">32</span>)                  │             <span style="color: #00af00; text-decoration-color: #00af00">256</span> │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dense_1 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                      │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">16</span>)                  │             <span style="color: #00af00; text-decoration-color: #00af00">528</span> │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dense_2 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                      │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">16</span>)                  │             <span style="color: #00af00; text-decoration-color: #00af00">272</span> │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dropout (<span style="color: #0087ff; text-decoration-color: #0087ff">Dropout</span>)                    │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">16</span>)                  │               <span style="color: #00af00; text-decoration-color: #00af00">0</span> │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dense_3 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                      │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">1</span>)                   │              <span style="color: #00af00; text-decoration-color: #00af00">17</span> │
-└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
-</pre>
-</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Total params: </span><span style="color: #00af00; text-decoration-color: #00af00">1,073</span> (4.19 KB)
-</pre>
-</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Trainable params: </span><span style="color: #00af00; text-decoration-color: #00af00">1,073</span> (4.19 KB)
-</pre>
-</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Non-trainable params: </span><span style="color: #00af00; text-decoration-color: #00af00">0</span> (0.00 B)
-</pre>
-</div></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>_________________________________________________________________
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Layer (type)                Output Shape              Param #   
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=================================================================
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> input_1 (InputLayer)        [(None, 7)]               0         
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dense (Dense)               (None, 32)                256       
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dense_1 (Dense)             (None, 16)                528       
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dense_2 (Dense)             (None, 16)                272       
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dropout (Dropout)           (None, 16)                0         
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dense_3 (Dense)             (None, 1)                 17        
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=================================================================
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total params: 1,073
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trainable params: 1,073
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Non-trainable params: 0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>_________________________________________________________________
+</pre></div>
+</div>
+</div>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
@@ -2385,15 +2469,49 @@ Shape of test: (8760, 9)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">  1/274</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">12s</span> 47ms/step
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">175/274</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 361us/step
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">274/274</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 345us/step
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">29</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">best_model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;keras_models&#39;</span><span class="p">,</span> <span class="s1">&#39;PRSA_data_Air_Pressure_MLP_weights.05-0.0001.keras&#39;</span><span class="p">),</span> <span class="nb">compile</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">preds</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">pred_PRES</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span>
+
+<span class="nn">File ~\Anaconda3\envs\ml_tf\lib\site-packages\keras\utils\traceback_utils.py:70,</span> in <span class="ni">filter_traceback.&lt;locals&gt;.error_handler</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span>     <span class="n">filtered_tb</span> <span class="o">=</span> <span class="n">_process_traceback_frames</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">__traceback__</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span>     <span class="c1"># To get the full stack trace, call:</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>     <span class="c1"># `tf.debugging.disable_traceback_filtering()`</span>
+<span class="ne">---&gt; </span><span class="mi">70</span>     <span class="k">raise</span> <span class="n">e</span><span class="o">.</span><span class="n">with_traceback</span><span class="p">(</span><span class="n">filtered_tb</span><span class="p">)</span> <span class="kn">from</span> <span class="kc">None</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span>     <span class="k">del</span> <span class="n">filtered_tb</span>
+
+<span class="nn">File ~\Anaconda3\envs\ml_tf\lib\site-packages\h5py\_hl\files.py:567,</span> in <span class="ni">File.__init__</span><span class="nt">(self, name, mode, driver, libver, userblock_size, swmr, rdcc_nslots, rdcc_nbytes, rdcc_w0, track_order, fs_strategy, fs_persist, fs_threshold, fs_page_size, page_buf_size, min_meta_keep, min_raw_keep, locking, alignment_threshold, alignment_interval, meta_block_size, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">558</span>     <span class="n">fapl</span> <span class="o">=</span> <span class="n">make_fapl</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">libver</span><span class="p">,</span> <span class="n">rdcc_nslots</span><span class="p">,</span> <span class="n">rdcc_nbytes</span><span class="p">,</span> <span class="n">rdcc_w0</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">559</span>                      <span class="n">locking</span><span class="p">,</span> <span class="n">page_buf_size</span><span class="p">,</span> <span class="n">min_meta_keep</span><span class="p">,</span> <span class="n">min_raw_keep</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">560</span>                      <span class="n">alignment_threshold</span><span class="o">=</span><span class="n">alignment_threshold</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">561</span>                      <span class="n">alignment_interval</span><span class="o">=</span><span class="n">alignment_interval</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">562</span>                      <span class="n">meta_block_size</span><span class="o">=</span><span class="n">meta_block_size</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">563</span>                      <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">564</span>     <span class="n">fcpl</span> <span class="o">=</span> <span class="n">make_fcpl</span><span class="p">(</span><span class="n">track_order</span><span class="o">=</span><span class="n">track_order</span><span class="p">,</span> <span class="n">fs_strategy</span><span class="o">=</span><span class="n">fs_strategy</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">565</span>                      <span class="n">fs_persist</span><span class="o">=</span><span class="n">fs_persist</span><span class="p">,</span> <span class="n">fs_threshold</span><span class="o">=</span><span class="n">fs_threshold</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">566</span>                      <span class="n">fs_page_size</span><span class="o">=</span><span class="n">fs_page_size</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">567</span>     <span class="n">fid</span> <span class="o">=</span> <span class="n">make_fid</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">userblock_size</span><span class="p">,</span> <span class="n">fapl</span><span class="p">,</span> <span class="n">fcpl</span><span class="p">,</span> <span class="n">swmr</span><span class="o">=</span><span class="n">swmr</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">569</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">libver</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">570</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_libver</span> <span class="o">=</span> <span class="n">libver</span>
+
+<span class="nn">File ~\Anaconda3\envs\ml_tf\lib\site-packages\h5py\_hl\files.py:231,</span> in <span class="ni">make_fid</span><span class="nt">(name, mode, userblock_size, fapl, fcpl, swmr)</span>
+<span class="g g-Whitespace">    </span><span class="mi">229</span>     <span class="k">if</span> <span class="n">swmr</span> <span class="ow">and</span> <span class="n">swmr_support</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">230</span>         <span class="n">flags</span> <span class="o">|=</span> <span class="n">h5f</span><span class="o">.</span><span class="n">ACC_SWMR_READ</span>
+<span class="ne">--&gt; </span><span class="mi">231</span>     <span class="n">fid</span> <span class="o">=</span> <span class="n">h5f</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">flags</span><span class="p">,</span> <span class="n">fapl</span><span class="o">=</span><span class="n">fapl</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">232</span> <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;r+&#39;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">233</span>     <span class="n">fid</span> <span class="o">=</span> <span class="n">h5f</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">h5f</span><span class="o">.</span><span class="n">ACC_RDWR</span><span class="p">,</span> <span class="n">fapl</span><span class="o">=</span><span class="n">fapl</span><span class="p">)</span>
+
+<span class="nn">File h5py\_objects.pyx:54,</span> in <span class="ni">h5py._objects.with_phil.wrapper</span><span class="nt">()</span>
+
+<span class="nn">File h5py\_objects.pyx:55,</span> in <span class="ni">h5py._objects.with_phil.wrapper</span><span class="nt">()</span>
+
+<span class="nn">File h5py\h5f.pyx:106,</span> in <span class="ni">h5py.h5f.open</span><span class="nt">()</span>
+
+<span class="ne">OSError</span>: Unable to open file (file signature not found)
 </pre></div>
 </div>
 </div>
@@ -2402,11 +2520,6 @@ Shape of test: (8760, 9)
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">df_val</span><span class="p">[</span><span class="s1">&#39;PRES&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">7</span><span class="p">:],</span> <span class="n">pred_PRES</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;R-squared for the validation set:&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">r2</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R-squared for the validation set: 0.9955
 </pre></div>
 </div>
 </div>
@@ -2422,9 +2535,6 @@ Shape of test: (8760, 9)
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Index&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/f69141173a42e6618059571280d3d4214f47f24b8f9bf476e013385c7c128520.png" src="_images/f69141173a42e6618059571280d3d4214f47f24b8f9bf476e013385c7c128520.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2443,11 +2553,6 @@ Shape of test: (8760, 9)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of the dataframe: (43824, 7)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2455,88 +2560,6 @@ Shape of test: (8760, 9)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>No</th>
-      <th>year</th>
-      <th>month</th>
-      <th>day</th>
-      <th>hour</th>
-      <th>pm2.5</th>
-      <th>PRES</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>2010</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>NaN</td>
-      <td>1021.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>2010</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>NaN</td>
-      <td>1020.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>2010</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2</td>
-      <td>NaN</td>
-      <td>1019.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>2010</td>
-      <td>1</td>
-      <td>1</td>
-      <td>3</td>
-      <td>NaN</td>
-      <td>1019.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>2010</td>
-      <td>1</td>
-      <td>1</td>
-      <td>4</td>
-      <td>NaN</td>
-      <td>1018.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <ul class="simple">
 <li><p>Las <em><strong>filas con valores NaN</strong></em> en la columna pm2.5 <em><strong>se eliminan</strong></em></p></li>
@@ -2579,9 +2602,6 @@ Shape of test: (8760, 9)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/7b455a4d3c546c2789d26c120b7f28170858583ffa7e24742a67918e0997f5de.png" src="_images/7b455a4d3c546c2789d26c120b7f28170858583ffa7e24742a67918e0997f5de.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2603,9 +2623,6 @@ Shape of test: (8760, 9)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/421eba76e525cfc286c11027fe72b291445d468f252b44ce80853961d36baaab.png" src="_images/421eba76e525cfc286c11027fe72b291445d468f252b44ce80853961d36baaab.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2625,12 +2642,6 @@ Shape of test: (8760, 9)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of train: (33096, 9)
-Shape of test: (8661, 9)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2638,100 +2649,6 @@ Shape of test: (8661, 9)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>No</th>
-      <th>year</th>
-      <th>month</th>
-      <th>day</th>
-      <th>hour</th>
-      <th>pm2.5</th>
-      <th>PRES</th>
-      <th>datetime</th>
-      <th>scaled_pm2.5</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>25</td>
-      <td>2010</td>
-      <td>1</td>
-      <td>2</td>
-      <td>0</td>
-      <td>129.0</td>
-      <td>1020.0</td>
-      <td>2010-01-02 00:00:00</td>
-      <td>0.129779</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>26</td>
-      <td>2010</td>
-      <td>1</td>
-      <td>2</td>
-      <td>1</td>
-      <td>148.0</td>
-      <td>1020.0</td>
-      <td>2010-01-02 01:00:00</td>
-      <td>0.148893</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>27</td>
-      <td>2010</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-      <td>159.0</td>
-      <td>1021.0</td>
-      <td>2010-01-02 02:00:00</td>
-      <td>0.159960</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>28</td>
-      <td>2010</td>
-      <td>1</td>
-      <td>2</td>
-      <td>3</td>
-      <td>181.0</td>
-      <td>1022.0</td>
-      <td>2010-01-02 03:00:00</td>
-      <td>0.182093</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>29</td>
-      <td>2010</td>
-      <td>1</td>
-      <td>2</td>
-      <td>4</td>
-      <td>138.0</td>
-      <td>1022.0</td>
-      <td>2010-01-02 04:00:00</td>
-      <td>0.138833</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2739,100 +2656,6 @@ Shape of test: (8661, 9)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>No</th>
-      <th>year</th>
-      <th>month</th>
-      <th>day</th>
-      <th>hour</th>
-      <th>pm2.5</th>
-      <th>PRES</th>
-      <th>datetime</th>
-      <th>scaled_pm2.5</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>33096</th>
-      <td>35065</td>
-      <td>2014</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>24.0</td>
-      <td>1014.0</td>
-      <td>2014-01-01 00:00:00</td>
-      <td>0.024145</td>
-    </tr>
-    <tr>
-      <th>33097</th>
-      <td>35066</td>
-      <td>2014</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>53.0</td>
-      <td>1013.0</td>
-      <td>2014-01-01 01:00:00</td>
-      <td>0.053320</td>
-    </tr>
-    <tr>
-      <th>33098</th>
-      <td>35067</td>
-      <td>2014</td>
-      <td>1</td>
-      <td>1</td>
-      <td>2</td>
-      <td>65.0</td>
-      <td>1013.0</td>
-      <td>2014-01-01 02:00:00</td>
-      <td>0.065392</td>
-    </tr>
-    <tr>
-      <th>33099</th>
-      <td>35068</td>
-      <td>2014</td>
-      <td>1</td>
-      <td>1</td>
-      <td>3</td>
-      <td>70.0</td>
-      <td>1013.0</td>
-      <td>2014-01-01 03:00:00</td>
-      <td>0.070423</td>
-    </tr>
-    <tr>
-      <th>33100</th>
-      <td>35069</td>
-      <td>2014</td>
-      <td>1</td>
-      <td>1</td>
-      <td>4</td>
-      <td>79.0</td>
-      <td>1012.0</td>
-      <td>2014-01-01 04:00:00</td>
-      <td>0.079477</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2861,22 +2684,10 @@ Shape of test: (8661, 9)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/925b5c6eda295e2ea40312c770bcc89c44ba2dcada7ec6e9b7c64d1510736b72.png" src="_images/925b5c6eda295e2ea40312c770bcc89c44ba2dcada7ec6e9b7c64d1510736b72.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">makeXy</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;scaled_pm2.5&#39;</span><span class="p">],</span> <span class="mi">7</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 6 7
-1 7 8
-2 8 9
-3 9 10
-4 10 11
 </pre></div>
 </div>
 </div>
@@ -2887,11 +2698,6 @@ Shape of test: (8661, 9)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of train arrays: (33089, 7) (33089,)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2899,24 +2705,10 @@ Shape of test: (8661, 9)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 6 7
-1 7 8
-2 8 9
-3 9 10
-4 10 11
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of validation arrays:&#39;</span><span class="p">,</span> <span class="n">X_val</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_val</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of validation arrays: (8654, 7) (8654,)
 </pre></div>
 </div>
 </div>
@@ -2964,32 +2756,6 @@ Shape of test: (8661, 9)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "functional_3"</span>
-</pre>
-</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
-┃<span style="font-weight: bold"> Layer (type)                         </span>┃<span style="font-weight: bold"> Output Shape                </span>┃<span style="font-weight: bold">         Param # </span>┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
-│ input_layer_1 (<span style="color: #0087ff; text-decoration-color: #0087ff">InputLayer</span>)           │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">7</span>)                   │               <span style="color: #00af00; text-decoration-color: #00af00">0</span> │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dense_4 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                      │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">32</span>)                  │             <span style="color: #00af00; text-decoration-color: #00af00">256</span> │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dense_5 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                      │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">16</span>)                  │             <span style="color: #00af00; text-decoration-color: #00af00">528</span> │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dense_6 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                      │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">16</span>)                  │             <span style="color: #00af00; text-decoration-color: #00af00">272</span> │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dropout_1 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dropout</span>)                  │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">16</span>)                  │               <span style="color: #00af00; text-decoration-color: #00af00">0</span> │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dense_7 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                      │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">1</span>)                   │              <span style="color: #00af00; text-decoration-color: #00af00">17</span> │
-└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
-</pre>
-</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Total params: </span><span style="color: #00af00; text-decoration-color: #00af00">1,073</span> (4.19 KB)
-</pre>
-</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Trainable params: </span><span style="color: #00af00; text-decoration-color: #00af00">1,073</span> (4.19 KB)
-</pre>
-</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Non-trainable params: </span><span style="color: #00af00; text-decoration-color: #00af00">0</span> (0.00 B)
-</pre>
-</div></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">save_weights_at</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;keras_models&#39;</span><span class="p">,</span> <span class="s1">&#39;PRSA_data_PM2.5_MLP_weights.</span><span class="si">{epoch:02d}</span><span class="s1">-</span><span class="si">{val_loss:.4f}</span><span class="s1">.keras&#39;</span><span class="p">)</span>
 <span class="n">save_best</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">save_weights_at</span><span class="p">,</span> <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
@@ -3013,41 +2779,11 @@ Shape of test: (8661, 9)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">  1/271</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">33s</span> 125ms/step
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold"> 88/271</span> <span class=" -Color -Color-Green">━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 723us/step 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">180/271</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 700us/step
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">270/271</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━</span> <span class=" -Color -Color-Bold">0s</span> 700us/step
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">271/271</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">271/271</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">df_val</span><span class="p">[</span><span class="s1">&#39;pm2.5&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">7</span><span class="p">:],</span> <span class="n">pred_pm25</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MAE for the validation set:&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">mae</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MAE for the validation set: 11.5359
 </pre></div>
 </div>
 </div>
@@ -3067,9 +2803,6 @@ Shape of test: (8661, 9)
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/6b68983f1bce3ac670d40f9152290bbf3b95c901eebf2b3baa8143c6f9052271.png" src="_images/6b68983f1bce3ac670d40f9152290bbf3b95c901eebf2b3baa8143c6f9052271.png" />
-</div>
 </div>
 </section>
 <section id="lstm-para-la-prediccion-de-series-de-tiempo">
@@ -3085,11 +2818,6 @@ Shape of test: (8661, 9)
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">X_val</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">X_val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X_val</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape of 3D arrays:&#39;</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_val</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shape of 3D arrays: (33089, 7, 1) (8654, 7, 1)
 </pre></div>
 </div>
 </div>
@@ -3160,30 +2888,6 @@ características:</p></li>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "functional_5"</span>
-</pre>
-</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
-┃<span style="font-weight: bold"> Layer (type)                         </span>┃<span style="font-weight: bold"> Output Shape                </span>┃<span style="font-weight: bold">         Param # </span>┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
-│ input_layer_2 (<span style="color: #0087ff; text-decoration-color: #0087ff">InputLayer</span>)           │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">7</span>, <span style="color: #00af00; text-decoration-color: #00af00">1</span>)                │               <span style="color: #00af00; text-decoration-color: #00af00">0</span> │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ lstm (<span style="color: #0087ff; text-decoration-color: #0087ff">LSTM</span>)                          │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">7</span>, <span style="color: #00af00; text-decoration-color: #00af00">64</span>)               │          <span style="color: #00af00; text-decoration-color: #00af00">16,896</span> │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ lstm_1 (<span style="color: #0087ff; text-decoration-color: #0087ff">LSTM</span>)                        │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">32</span>)                  │          <span style="color: #00af00; text-decoration-color: #00af00">12,416</span> │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dropout_2 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dropout</span>)                  │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">32</span>)                  │               <span style="color: #00af00; text-decoration-color: #00af00">0</span> │
-├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
-│ dense_8 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                      │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">1</span>)                   │              <span style="color: #00af00; text-decoration-color: #00af00">33</span> │
-└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
-</pre>
-</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Total params: </span><span style="color: #00af00; text-decoration-color: #00af00">29,345</span> (114.63 KB)
-</pre>
-</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Trainable params: </span><span style="color: #00af00; text-decoration-color: #00af00">29,345</span> (114.63 KB)
-</pre>
-</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Non-trainable params: </span><span style="color: #00af00; text-decoration-color: #00af00">0</span> (0.00 B)
-</pre>
-</div></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">save_weights_at</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;keras_models&#39;</span><span class="p">,</span> <span class="s1">&#39;PRSA_data_PM2.5_LSTM_weights.</span><span class="si">{epoch:02d}</span><span class="s1">-</span><span class="si">{val_loss:.4f}</span><span class="s1">.keras&#39;</span><span class="p">)</span>
 <span class="n">save_best</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="n">save_weights_at</span><span class="p">,</span> <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
@@ -3213,31 +2917,6 @@ características:</p></li>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">  1/271</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">29s</span> 110ms/step
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold"> 74/271</span> <span class=" -Color -Color-Green">━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 855us/step 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">168/271</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 748us/step
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">266/271</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━</span><span class=" -Color -Color-White">━</span> <span class=" -Color -Color-Bold">0s</span> 710us/step
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">271/271</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step  
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">271/271</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3250,11 +2929,6 @@ características:</p></li>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">df_val</span><span class="p">[</span><span class="s1">&#39;pm2.5&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">7</span><span class="p">:],</span> <span class="n">pred_pm25</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MAE for the validation set:&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">mae</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MAE for the validation set: 11.5265
 </pre></div>
 </div>
 </div>
@@ -3274,9 +2948,6 @@ características:</p></li>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="_images/f087f0b47f75f138a3eb45b24387df0f8379810aebcc1b95792886a02b8d119d.png" src="_images/f087f0b47f75f138a3eb45b24387df0f8379810aebcc1b95792886a02b8d119d.png" />
-</div>
 </div>
 </section>
 </section>
@@ -3290,16 +2961,16 @@ características:</p></li>
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "tensorflow"
+            mode: "ml_tf"
         },
         kernelOptions: {
-            name: "tensorflow",
+            name: "ml_tf",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'tensorflow'</script>
+    <script>kernelName = 'ml_tf'</script>
 
                 </article>
               
