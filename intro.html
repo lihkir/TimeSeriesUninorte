@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Análisis y Predicción de Series de Tiempo &#8212; Análisis y Predicción de Series de Tiempo</title>
+    <title>Profesor: Dr. Lihki Rubio &#8212; Análisis y Predicción de Series de Tiempo</title>
   
   
   
@@ -28,7 +28,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
@@ -36,6 +36,8 @@
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=530fe47d" />
+    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/custom-checkpoint.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
@@ -62,9 +64,11 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/custom.js?v=14184634"></script>
+    <script src="_static/.ipynb_checkpoints/custom-checkpoint.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introducción a las Series de Tiempo" href="statistical_background.html" />
+    <link rel="next" title="1. Introducción a las Series de Tiempo" href="statistical_background.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -155,8 +159,8 @@
       
     
     
-    <img src="_static/logo-uninorte.png" class="logo__image only-light" alt="Análisis y Predicción de Series de Tiempo - Home"/>
-    <script>document.write(`<img src="_static/logo-uninorte.png" class="logo__image only-dark" alt="Análisis y Predicción de Series de Tiempo - Home"/>`);</script>
+    <img src="_static/fotolihki.jpg" class="logo__image only-light" alt="Análisis y Predicción de Series de Tiempo - Home"/>
+    <script>document.write(`<img src="_static/fotolihki.jpg" class="logo__image only-dark" alt="Análisis y Predicción de Series de Tiempo - Home"/>`);</script>
   
   
 </a></div>
@@ -177,18 +181,16 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Análisis y Predicción de Series de Tiempo
+                    Profesor: Dr. Lihki Rubio
                 </a>
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="statistical_background.html">Introducción a las Series de Tiempo</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="exponential_smoothing.html">Métodos de Suavización Exponencial</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="arima_model.html">Modelos autorregresivos integrados de media móvil</a></li>
-<li class="toctree-l1"><a class="reference internal" href="deep_learning.html">Deep Learning para la predicción de series temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliografía</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statistical_background.html">1. Introducción a las Series de Tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exponential_smoothing.html">2. Métodos de Suavización Exponencial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arima_model.html">3. Modelos autorregresivos integrados de media móvil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deep_learning.html">4. Deep Learning para la predicción de series temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">5. Bibliografía</a></li>
 </ul>
 
     </div>
@@ -230,53 +232,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
 
 
 
@@ -372,7 +327,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Análisis y Predicción de Series de Tiempo</h1>
+    <h1>Profesor: Dr. Lihki Rubio</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -386,12 +341,19 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="analisis-y-prediccion-de-series-de-tiempo">
-<h1>Análisis y Predicción de Series de Tiempo<a class="headerlink" href="#analisis-y-prediccion-de-series-de-tiempo" title="Link to this heading">#</a></h1>
+  <center> 
+<h1>
+Análisis y Predicción de Series de Tiempo
+</h1>
+</center>
+<a class="reference internal image-reference" href="_images/time_series_logo.jpg"><img alt="_images/time_series_logo.jpg" class="align-center" src="_images/time_series_logo.jpg" style="width: 500px;" /></a>
+</br>
+<section class="tex2jax_ignore mathjax_ignore" id="profesor-dr-lihki-rubio">
+<h1>Profesor: Dr. Lihki Rubio<a class="headerlink" href="#profesor-dr-lihki-rubio" title="Link to this heading">#</a></h1>
 <div class="tip admonition">
 <p class="admonition-title"><em><strong>Introducción</strong></em></p>
 <ul class="simple">
-<li><p>La <em><strong>predicción de series temporales</strong></em> es el proceso de <em><strong>análisis de datos de series temporales mediante estadísticas y modelos para hacer predicciones y fundamentar la toma de decisiones estratégicas</strong></em>. No siempre se trata de una predicción exacta, y la probabilidad de las previsiones puede variar enormemente, especialmente cuando se trata de las variables que suelen fluctuar en los datos de las series temporales, así como de factores que se escapan de nuestro control. Sin embargo, la <em><strong>predicción permite saber qué resultados son más -o menos- probables que otros posibles</strong></em>.</p></li>
+<li><p>La <em><strong>predicción de series temporales</strong></em> es el proceso de <em><strong>análisis de datos de series temporales mediante estadísticas y modelos para hacer predicciones y fundamentar la toma de decisiones estratégicas</strong></em>. No siempre se trata de una predicción exacta, y la probabilidad de las previsiones puede variar enormemente, especialmente cuando se trata de las variables que suelen fluctuar en los datos de las series temporales, así como de factores que se escapan de nuestro control. Sin embargo, la <em><strong>predicción permite saber qué resultados son más —o menos— probables que otros posibles</strong></em>.</p></li>
 <li><p>A menudo, <em><strong>cuanto más amplios sean los datos con los que disponemos, más precisas pueden ser las predicciones</strong></em>. La predicción de series temporales se utiliza a menudo junto con el análisis de series temporales. El <em><strong>análisis de series temporales implica el desarrollo de modelos para comprender los datos y entender las causas subyacentes</strong></em>. El análisis puede <em><strong>proporcionar el “por qué” de los resultados que se observan</strong></em>. La predicción da el siguiente paso de qué hacer con ese conocimiento y las extrapolaciones predecibles de lo que podría ocurrir en el futuro.</p></li>
 <li><p>Las predicciones con series de tiempo tienen una serie de aplicaciones en diversos sectores. <em><strong>Tiene un gran número de aplicaciones prácticas</strong></em>, entre las que se incluyen: <em><strong>las predicciones meteorológicas, climáticas, económicas, sanitarias, de ingeniería, financieras, comerciales, de estudios medioambientales, de estudios sociales, etc</strong></em>.</p></li>
 <li><p>Básicamente, <em><strong>cualquiera que disponga de datos históricos consistentes puede analizar esos datos con métodos de análisis de series temporales</strong></em> y, a continuación, <em><strong>modelar, pronosticar y predecir</strong></em>. En algunos sectores, el objetivo del análisis de series temporales es facilitar la predicción. Algunas tecnologías, como la analítica aumentada, pueden incluso seleccionar automáticamente la predicción entre otros algoritmos estadísticos si ofrece la mayor certeza.</p></li>
@@ -460,7 +422,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introducción a las Series de Tiempo</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Introducción a las Series de Tiempo</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -482,7 +444,7 @@ document.write(`
   <div class="footer-item">
     
 <p class="component-author">
-By Lihki Rubio PhD in Mathematical Engineering
+By Lihki Rubio, Ph.D.
 </p>
 
   </div>
@@ -492,7 +454,7 @@ By Lihki Rubio PhD in Mathematical Engineering
 
   <p class="copyright">
     
-      © Copyright Lihki Rubio PhD.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -505,6 +467,9 @@ By Lihki Rubio PhD in Mathematical Engineering
   
   <div class="footer-item">
     
+<div class="extra_footer">
+  <p>Lihki Rubio, Ph.D. All rights reserved.</p>
+</div>
   </div>
   
 </div>

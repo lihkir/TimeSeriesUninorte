@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Introducción a las Series de Tiempo &#8212; Análisis y Predicción de Series de Tiempo</title>
+    <title>1. Introducción a las Series de Tiempo &#8212; Análisis y Predicción de Series de Tiempo</title>
   
   
   
@@ -28,14 +28,16 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=ca93fcec" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f26cb4c5" />
+    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/custom-checkpoint.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
@@ -62,10 +64,12 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'statistical_background';</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/custom.js?v=14184634"></script>
+    <script src="_static/.ipynb_checkpoints/custom-checkpoint.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Métodos de Suavización Exponencial" href="exponential_smoothing.html" />
-    <link rel="prev" title="Análisis y Predicción de Series de Tiempo" href="intro.html" />
+    <link rel="next" title="2. Métodos de Suavización Exponencial" href="exponential_smoothing.html" />
+    <link rel="prev" title="Profesor: Dr. Lihki Rubio" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -154,8 +158,8 @@
       
     
     
-    <img src="_static/logo-uninorte.png" class="logo__image only-light" alt="Análisis y Predicción de Series de Tiempo - Home"/>
-    <script>document.write(`<img src="_static/logo-uninorte.png" class="logo__image only-dark" alt="Análisis y Predicción de Series de Tiempo - Home"/>`);</script>
+    <img src="_static/fotolihki.jpg" class="logo__image only-light" alt="Análisis y Predicción de Series de Tiempo - Home"/>
+    <script>document.write(`<img src="_static/fotolihki.jpg" class="logo__image only-dark" alt="Análisis y Predicción de Series de Tiempo - Home"/>`);</script>
   
   
 </a></div>
@@ -176,18 +180,16 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="intro.html">
-                    Análisis y Predicción de Series de Tiempo
+                    Profesor: Dr. Lihki Rubio
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introducción a las Series de Tiempo</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="exponential_smoothing.html">Métodos de Suavización Exponencial</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="arima_model.html">Modelos autorregresivos integrados de media móvil</a></li>
-<li class="toctree-l1"><a class="reference internal" href="deep_learning.html">Deep Learning para la predicción de series temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="biblio.html">Bibliografía</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Introducción a las Series de Tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exponential_smoothing.html">2. Métodos de Suavización Exponencial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arima_model.html">3. Modelos autorregresivos integrados de media móvil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deep_learning.html">4. Deep Learning para la predicción de series temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">5. Bibliografía</a></li>
 </ul>
 
     </div>
@@ -229,53 +231,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-source-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
-    <i class="fab fa-github"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
-   class="btn btn-sm btn-source-repository-button dropdown-item"
-   title="Source repository"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="btn__text-container">Repository</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fstatistical_background.html&body=Your%20issue%20content%20here." target="_blank"
-   class="btn btn-sm btn-source-issues-button dropdown-item"
-   title="Open an issue"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="btn__text-container">Open issue</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
 
 
 
@@ -383,51 +338,45 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introducción a las Series de Tiempo</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diferentes-tipos-de-datos">Diferentes tipos de datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-transversales">Datos transversales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-series-temporales">Datos de series temporales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-panel">Datos de panel</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructuras-internas-de-las-series-temporales">Estructuras internas de las series temporales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tendencia-general">Tendencia general</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estacionalidad">Estacionalidad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-secuencia-de-series">Gráfico de secuencia de series</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-subserie-estacional">Gráfico de subserie estacional</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-cajas-multiples">Gráficos de cajas múltiples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cambios-ciclicos">Cambios cíclicos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#componentes-irregulares">Componentes irregulares</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-analisis-de-series-temporales">Modelos de análisis de series temporales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-media-cero">Modelos de media cero</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#camino-aleatorio">Camino aleatorio</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-tendencia">Modelos de tendencia</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-estacionalidad">Modelos de estacionalidad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelacion-y-autocorrelacion-parcial">Autocorrelación y autocorrelación parcial</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimentos-numericos-acf">Experimentos numéricos ACF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diferentes-tipos-de-datos">1.1. Diferentes tipos de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-transversales">1.2. Datos transversales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-series-temporales">1.3. Datos de series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-panel">1.4. Datos de panel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructuras-internas-de-las-series-temporales">1.5. Estructuras internas de las series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tendencia-general">1.6. Tendencia general</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estacionalidad">1.7. Estacionalidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-secuencia-de-series">1.8. Gráfico de secuencia de series</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-subserie-estacional">1.9. Gráfico de subserie estacional</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-cajas-multiples">1.10. Gráficos de cajas múltiples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cambios-ciclicos">1.11. Cambios cíclicos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#componentes-irregulares">1.12. Componentes irregulares</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-analisis-de-series-temporales">1.13. Modelos de análisis de series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-media-cero">1.14. Modelos de media cero</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#camino-aleatorio">1.15. Camino aleatorio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-tendencia">1.16. Modelos de tendencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-estacionalidad">1.17. Modelos de estacionalidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelacion-y-autocorrelacion-parcial">1.18. Autocorrelación y autocorrelación parcial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimentos-numericos-acf">1.19. Experimentos numéricos ACF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-datos-de-series-temporales">1.20. Análisis de datos de series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesamiento-avanzado-y-visualizacion-de-datos-de-series-temporales">1.21. Procesamiento avanzado y visualización de datos de series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remuestreo-de-datos-de-series-temporales">1.22. Remuestreo de datos de series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agregacion-por-grupos">1.23. Agregación por grupos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estadisticos-moviles">1.24. Estadísticos móviles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesos-estacionarios">1.25. Procesos estacionarios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformacion-de-datos-y-ajustes">1.26. Transformación de datos y ajustes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ajustes-estacionales-y-de-tendencia">1.27. Ajustes estacionales y de tendencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diferenciacion">1.28. Diferenciación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-de-dickey-fuller">1.29. Prueba de Dickey-Fuller</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-series-temporales">1.30. Descomposición de series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medias-moviles-y-efectos-de-suavizacion">1.31. Medias móviles y efectos de suavización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ajuste-estacional-mediante-media-movil">1.32. Ajuste estacional mediante media móvil</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#media-movil-ponderada">1.33. Media móvil ponderada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-series-temporales-mediante-medias-moviles">1.34. Descomposición de series temporales mediante medias móviles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-series-temporales-mediante-statsmodels-tsa">1.35. Descomposición de series temporales mediante <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-y-error-de-prediccion">1.36. Residual y error de predicción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluando-y-monitoreando-el-desempeno-del-modelo-predictivo">1.37. Evaluando y monitoreando el desempeño del modelo predictivo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elegir-entre-modelos-que-compiten">1.38. Elegir entre modelos que compiten</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-datos-de-series-temporales">Análisis de datos de series temporales</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesamiento-avanzado-y-visualizacion-de-datos-de-series-temporales">Procesamiento avanzado y visualización de datos de series temporales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remuestreo-de-datos-de-series-temporales">Remuestreo de datos de series temporales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agregacion-por-grupos">Agregación por grupos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estadisticos-moviles">Estadísticos móviles</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesos-estacionarios">Procesos estacionarios</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformacion-de-datos-y-ajustes">Transformación de datos y ajustes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ajustes-estacionales-y-de-tendencia">Ajustes estacionales y de tendencia</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diferenciacion">Diferenciación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-de-dickey-fuller">Prueba de Dickey-Fuller</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-series-temporales">Descomposición de series temporales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medias-moviles-y-efectos-de-suavizacion">Medias móviles y efectos de suavización</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ajuste-estacional-mediante-media-movil">Ajuste estacional mediante media móvil</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#media-movil-ponderada">Media móvil ponderada</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-series-temporales-mediante-medias-moviles">Descomposición de series temporales mediante medias móviles</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-series-temporales-mediante-statsmodels-tsa">Descomposición de series temporales mediante <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-y-error-de-prediccion">Residual y error de predicción</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluando-y-monitoreando-el-desempeno-del-modelo-predictivo">Evaluando y monitoreando el desempeño del modelo predictivo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elegir-entre-modelos-que-compiten">Elegir entre modelos que compiten</a></li>
-</ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -439,13 +388,13 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduccion-a-las-series-de-tiempo">
-<h1>Introducción a las Series de Tiempo<a class="headerlink" href="#introduccion-a-las-series-de-tiempo" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">1. </span>Introducción a las Series de Tiempo<a class="headerlink" href="#introduccion-a-las-series-de-tiempo" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p>En esta sección se presentan algunos métodos estadísticos básicos, los cuales son esenciales para <em><strong>modelar, analizar y predecir datos de series temporales</strong></em>. Se presentan gráficos y resúmenes numéricos de las propiedades de los datos de series temporales. También se analiza el uso de <em><strong>transformaciones y ajustes de datos en la predicción</strong></em> y algunos métodos ampliamente utilizados para caracterizar y controlar el rendimiento de un modelo predictivo.</p></li>
 <li><p>Algunos aspectos de como las medidas de rendimiento pueden usarse para <em><strong>seleccionar entre técnicas de predicción</strong></em> son presentados. Las predicciones se basan en datos u observaciones sobre la variable de interés. Estos datos suelen adoptar la forma de una serie temporal.</p></li>
 </ul>
 <section id="diferentes-tipos-de-datos">
-<h2>Diferentes tipos de datos<a class="headerlink" href="#diferentes-tipos-de-datos" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.1. </span>Diferentes tipos de datos<a class="headerlink" href="#diferentes-tipos-de-datos" title="Link to this heading">#</a></h2>
 <p>Los analistas de negocio y científicos de datos se encuentran con <em><strong>diferentes tipos de datos en sus proyectos de análisis</strong></em>. La mayoría de los datos que se suelen encontrar en proyectos académicos e industriales se pueden clasificar a grandes rasgos en las siguientes categorías:</p>
 <ul class="simple">
 <li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Datos</span> <span class="pre">transversales</span></code></strong></em></p></li>
@@ -455,7 +404,7 @@ document.write(`
 <p>Comprender qué tipo de datos se necesitan para resolver un problema y qué tipo de datos pueden obtenerse de las fuentes disponibles es importante para formular el problema y elegir el tipo de modelo más adecuado.</p>
 </section>
 <section id="datos-transversales">
-<h2>Datos transversales<a class="headerlink" href="#datos-transversales" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.2. </span>Datos transversales<a class="headerlink" href="#datos-transversales" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Los datos transversales o de corte transversal de una población <em><strong>se obtienen tomando observaciones de múltiples individuos en el mismo momento</strong></em>. Los datos transversales <em>pueden incluir observaciones tomadas en distintos momentos, pero en estos casos el tiempo no desempeña ningún papel significativo en el análisis</em>. Los resultados de la selectividad de los estudiantes es un ejemplo de datos transversales. El <em><strong>producto interno bruto de los países y los datos para el análisis de pérdida de clientes</strong></em> es otro ejemplo de datos transversales.</p></li>
 </ul>
@@ -984,13 +933,12 @@ Sample does not look Normal (reject H0)
 <p><strong><code class="docutils literal notranslate"><span class="pre">Prueba</span></code></strong> <span class="math notranslate nohighlight">\(K^2\)</span> <strong><code class="docutils literal notranslate"><span class="pre">de</span> <span class="pre">D'Agostino</span></code></strong></p>
 <ul class="simple">
 <li><p>La prueba <span class="math notranslate nohighlight">\(K^2\)</span> de D’Agostino calcula los estadísticos de resumen de los datos, es decir, <em><strong>la curtosis y la asimetría, para determinar si la distribución de los datos se aparta de la distribución normal</strong></em>, llamada así por <code class="docutils literal notranslate"><span class="pre">Ralph</span> <span class="pre">D'Agostino</span></code>. La asimetría (<code class="docutils literal notranslate"><span class="pre">skew</span></code>) es una cuantificación del grado en que una distribución se desplaza hacia la izquierda o hacia la derecha, es una <em><strong>medida de la asimetría de la distribución</strong></em>.</p></li>
-<li><p>La curtosis (<code class="docutils literal notranslate"><span class="pre">kurtosis</span></code>) <em><strong>cuantifica la proporción de la distribución que se encuentra en cierta cola lateral</strong></em> (ver <a class="reference internal" href="#kurtosis-fig"><span class="std std-numref">Fig. 1</span></a>). Es una prueba estadística de normalidad sencilla y de uso común. La prueba <span class="math notranslate nohighlight">\(K^2\)</span> de D’Agostino está disponible a través de la función <code class="docutils literal notranslate"><span class="pre">SciPy</span> <span class="pre">normaltest()</span></code> y devuelve el estadístico de la prueba y el <span class="math notranslate nohighlight">\(p\)</span>-value</p></li>
+<li><p>La curtosis (<code class="docutils literal notranslate"><span class="pre">kurtosis</span></code>) <em><strong>cuantifica la proporción de la distribución que se encuentra en cierta cola lateral</strong></em> (ver <a class="reference internal" href="#kurtosis-fig"><span class="std std-numref">Fig. 1.1</span></a>). Es una prueba estadística de normalidad sencilla y de uso común. La prueba <span class="math notranslate nohighlight">\(K^2\)</span> de D’Agostino está disponible a través de la función <code class="docutils literal notranslate"><span class="pre">SciPy</span> <span class="pre">normaltest()</span></code> y devuelve el estadístico de la prueba y el <span class="math notranslate nohighlight">\(p\)</span>-value</p></li>
 </ul>
 <figure class="align-center" id="kurtosis-fig">
-<a class="reference internal image-reference" href="_images/kurtosis.png"><img alt="_images/kurtosis.png" src="_images/kurtosis.png" style="width: 512.0px; height: 384.0px;" />
-</a>
+<a class="reference internal image-reference" href="_images/kurtosis.png"><img alt="_images/kurtosis.png" src="_images/kurtosis.png" style="width: 512.0px; height: 384.0px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Diferentes distribuciones asociadas a multiples valores de <code class="docutils literal notranslate"><span class="pre">kurtosis</span></code>.</span><a class="headerlink" href="#kurtosis-fig" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Diferentes distribuciones asociadas a multiples valores de <code class="docutils literal notranslate"><span class="pre">kurtosis</span></code>.</span><a class="headerlink" href="#kurtosis-fig" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -1063,7 +1011,7 @@ Skew=1.916
 </div>
 </section>
 <section id="datos-de-series-temporales">
-<h2>Datos de series temporales<a class="headerlink" href="#datos-de-series-temporales" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.3. </span>Datos de series temporales<a class="headerlink" href="#datos-de-series-temporales" title="Link to this heading">#</a></h2>
 <div class="admonition-introduccion admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
@@ -1661,7 +1609,7 @@ dtype: float64
 </div>
 </section>
 <section id="datos-de-panel">
-<h2>Datos de panel<a class="headerlink" href="#datos-de-panel" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.4. </span>Datos de panel<a class="headerlink" href="#datos-de-panel" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
@@ -1947,7 +1895,7 @@ dtype: object
 </div>
 </section>
 <section id="estructuras-internas-de-las-series-temporales">
-<h2>Estructuras internas de las series temporales<a class="headerlink" href="#estructuras-internas-de-las-series-temporales" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.5. </span>Estructuras internas de las series temporales<a class="headerlink" href="#estructuras-internas-de-las-series-temporales" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>En esta sección, explicaremos conceptualmente las siguientes <em><strong>características especiales de los datos de series temporales</strong></em> que requieren un tratamiento matemático especial</p>
 <ul>
@@ -1971,7 +1919,7 @@ dtype: object
 </ul>
 </section>
 <section id="tendencia-general">
-<h2>Tendencia general<a class="headerlink" href="#tendencia-general" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.6. </span>Tendencia general<a class="headerlink" href="#tendencia-general" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Cuando una serie temporal presenta un <em><strong>movimiento ascendente o descendente a largo plazo, se dice que tiene tendencia general</strong></em>. Una forma rápida de comprobar la presencia de una tendencia general es trazar la serie temporal como en la siguiente figura, que muestra las <em><strong>concentraciones de CO2 en el aire</strong></em> medidas durante 1974 hasta 1987</p></li>
 </ul>
@@ -2667,7 +2615,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </section>
 <section id="estacionalidad">
-<h2>Estacionalidad<a class="headerlink" href="#estacionalidad" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.7. </span>Estacionalidad<a class="headerlink" href="#estacionalidad" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
@@ -2683,7 +2631,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </section>
 <section id="grafico-de-secuencia-de-series">
-<h2>Gráfico de secuencia de series<a class="headerlink" href="#grafico-de-secuencia-de-series" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.8. </span>Gráfico de secuencia de series<a class="headerlink" href="#grafico-de-secuencia-de-series" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Un simple <em><strong>gráfico de secuencia de ejecución de la serie temporal original</strong></em> con el tiempo en el eje <span class="math notranslate nohighlight">\(x\)</span> y la variable en el eje <span class="math notranslate nohighlight">\(y\)</span> sirve para indicar las siguientes propiedades de la serie temporal:</p>
 <ul>
@@ -2705,7 +2653,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </ul>
 </section>
 <section id="grafico-de-subserie-estacional">
-<h2>Gráfico de subserie estacional<a class="headerlink" href="#grafico-de-subserie-estacional" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.9. </span>Gráfico de subserie estacional<a class="headerlink" href="#grafico-de-subserie-estacional" title="Link to this heading">#</a></h2>
 <div class="admonition-subseries-estacionales admonition">
 <p class="admonition-title">Subseries estacionales</p>
 <ul class="simple">
@@ -2917,7 +2865,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </section>
 <section id="graficos-de-cajas-multiples">
-<h2>Gráficos de cajas múltiples<a class="headerlink" href="#graficos-de-cajas-multiples" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.10. </span>Gráficos de cajas múltiples<a class="headerlink" href="#graficos-de-cajas-multiples" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Boxplot</p>
 <ul class="simple">
@@ -2941,7 +2889,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </section>
 <section id="cambios-ciclicos">
-<h2>Cambios cíclicos<a class="headerlink" href="#cambios-ciclicos" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.11. </span>Cambios cíclicos<a class="headerlink" href="#cambios-ciclicos" title="Link to this heading">#</a></h2>
 <div class="admonition-cambios-ciclicos admonition">
 <p class="admonition-title">Cambios cíclicos</p>
 <ul class="simple">
@@ -3044,7 +2992,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </ul>
 </section>
 <section id="componentes-irregulares">
-<h2>Componentes irregulares<a class="headerlink" href="#componentes-irregulares" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.12. </span>Componentes irregulares<a class="headerlink" href="#componentes-irregulares" title="Link to this heading">#</a></h2>
 <div class="admonition-variaciones-irregulares admonition">
 <p class="admonition-title">Variaciones irregulares</p>
 <ul class="simple">
@@ -3054,7 +3002,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </section>
 <section id="modelos-de-analisis-de-series-temporales">
-<h2>Modelos de análisis de series temporales<a class="headerlink" href="#modelos-de-analisis-de-series-temporales" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.13. </span>Modelos de análisis de series temporales<a class="headerlink" href="#modelos-de-analisis-de-series-temporales" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
@@ -3071,7 +3019,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </section>
 <section id="modelos-de-media-cero">
-<h2>Modelos de media cero<a class="headerlink" href="#modelos-de-media-cero" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.14. </span>Modelos de media cero<a class="headerlink" href="#modelos-de-media-cero" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Definición</p>
 <ul class="simple">
@@ -3131,7 +3079,7 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 </ul>
 </section>
 <section id="camino-aleatorio">
-<h2>Camino aleatorio<a class="headerlink" href="#camino-aleatorio" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.15. </span>Camino aleatorio<a class="headerlink" href="#camino-aleatorio" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Definición</p>
 <ul>
@@ -3176,7 +3124,7 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 </div>
 </section>
 <section id="modelos-de-tendencia">
-<h2>Modelos de tendencia<a class="headerlink" href="#modelos-de-tendencia" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.16. </span>Modelos de tendencia<a class="headerlink" href="#modelos-de-tendencia" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Introducción</p>
 <ul>
@@ -3196,7 +3144,7 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 </ul>
 </section>
 <section id="modelos-de-estacionalidad">
-<h2>Modelos de estacionalidad<a class="headerlink" href="#modelos-de-estacionalidad" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.17. </span>Modelos de estacionalidad<a class="headerlink" href="#modelos-de-estacionalidad" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Definición</p>
 <ul>
@@ -3234,7 +3182,7 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 </ul>
 </section>
 <section id="autocorrelacion-y-autocorrelacion-parcial">
-<h2>Autocorrelación y autocorrelación parcial<a class="headerlink" href="#autocorrelacion-y-autocorrelacion-parcial" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.18. </span>Autocorrelación y autocorrelación parcial<a class="headerlink" href="#autocorrelacion-y-autocorrelacion-parcial" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
@@ -3305,11 +3253,11 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 <li><p>Para abordar el cálculo de este error, <em><strong>Bartlett</strong></em> considera el <em><strong>proceso estocástico discreto AR</strong></em> <span class="math notranslate nohighlight">\(y_{t+1}=\phi y_{t}+\varepsilon_{t+1}\)</span>. Para este propósito, utiliza la siguiente expresión para la <em><strong>varianza aproximada del coeficiente de autocorrelación</strong></em> estimado de un proceso normal estacionario dada por</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-error-variance-acf">
-<span class="eqno">(1)<a class="headerlink" href="#equation-error-variance-acf" title="Link to this equation">#</a></span>\[
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-error-variance-acf" title="Link to this equation">#</a></span>\[
 \textsf{Var}(r_{k})\cong\frac{1}{T}\sum_{v=-\infty}^{\infty}(\rho_{v}^{2}+\rho_{v+k}\rho_{v-k}-4\rho_{k}\rho_{v}\rho_{v-k}+2\rho_{v}^{2}\rho_{k}^{2}).
 \]</div>
 <ul class="simple">
-<li><p>Por ejemplo, si <span class="math notranslate nohighlight">\(\rho_{k}=\phi^{|k|},~(-1&lt;\phi&lt;1)\)</span>, es decir, la función de <em><strong>autocorrelación se reduce exponencialmente</strong></em>, entonces la Ecuación <a class="reference internal" href="#equation-error-variance-acf">(1)</a> se convierte en (<strong><code class="docutils literal notranslate"><span class="pre">verifíquelo</span></code></strong>)</p></li>
+<li><p>Por ejemplo, si <span class="math notranslate nohighlight">\(\rho_{k}=\phi^{|k|},~(-1&lt;\phi&lt;1)\)</span>, es decir, la función de <em><strong>autocorrelación se reduce exponencialmente</strong></em>, entonces la Ecuación <a class="reference internal" href="#equation-error-variance-acf">(1.1)</a> se convierte en (<strong><code class="docutils literal notranslate"><span class="pre">verifíquelo</span></code></strong>)</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -3324,7 +3272,7 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 \]</div>
 </section>
 <section id="experimentos-numericos-acf">
-<h2>Experimentos numéricos ACF<a class="headerlink" href="#experimentos-numericos-acf" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.19. </span>Experimentos numéricos ACF<a class="headerlink" href="#experimentos-numericos-acf" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>La presencia de autocorrelación puede identificarse <em><strong>trazando los valores observados de la función de autocorrelación (ACF) de una serie temporal determinada</strong></em>. Este gráfico suele denominarse <code class="docutils literal notranslate"><span class="pre">ACF</span></code>. Ilustremos cómo el trazado de los valores observados de la <code class="docutils literal notranslate"><span class="pre">ACF</span></code> puede ayudar a <em><strong>detectar la presencia de autocorrelación</strong></em>.</p></li>
 <li><p>Para ello, trazaremos primero el valor diario del <a class="reference external" href="https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average">Dow Jones Industrial Average (DJIA)</a> <em><strong>observado durante enero de 2016 a diciembre de 2016</strong></em></p></li>
@@ -3531,9 +3479,8 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 <li><p>La primera <em><strong>autocorrelación parcial en el retardo cero es siempre 1.0</strong></em>. Como se observa en el gráfico anterior, la <em><strong>autocorrelación parcial solo en el retardo uno es estadísticamente significativa</strong></em>, mientras que para el resto de los rezagos está dentro de los intervalos de confianza del 95%. Por lo tanto, para los valores de cierre del <code class="docutils literal notranslate"><span class="pre">DJIA</span></code> el <em><strong>orden de los modelos</strong></em> <span class="math notranslate nohighlight">\(AR\)</span> <em><strong>es uno</strong></em> (usar <span class="math notranslate nohighlight">\(AR(1)\)</span>).</p></li>
 </ul>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="analisis-de-datos-de-series-temporales">
-<h1>Análisis de datos de series temporales<a class="headerlink" href="#analisis-de-datos-de-series-temporales" title="Link to this heading">#</a></h1>
+<section id="analisis-de-datos-de-series-temporales">
+<h2><span class="section-number">1.20. </span>Análisis de datos de series temporales<a class="headerlink" href="#analisis-de-datos-de-series-temporales" title="Link to this heading">#</a></h2>
 <div class="admonition-observacion admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
@@ -3542,11 +3489,11 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 </ul>
 </div>
 <figure class="align-center" id="fig1-chapter1">
-<a class="reference internal image-reference" href="_images/fig1_chapter1.png"><img alt="_images/fig1_chapter1.png" src="_images/fig1_chapter1.png" style="width: 320.0px; height: 362.40000000000003px;" />
-</a>
+<a class="reference internal image-reference" href="_images/fig1_chapter1.png"><img alt="_images/fig1_chapter1.png" src="_images/fig1_chapter1.png" style="width: 320.0px; height: 362.40000000000003px;" /></a>
 </figure>
+</section>
 <section id="procesamiento-avanzado-y-visualizacion-de-datos-de-series-temporales">
-<h2>Procesamiento avanzado y visualización de datos de series temporales<a class="headerlink" href="#procesamiento-avanzado-y-visualizacion-de-datos-de-series-temporales" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.21. </span>Procesamiento avanzado y visualización de datos de series temporales<a class="headerlink" href="#procesamiento-avanzado-y-visualizacion-de-datos-de-series-temporales" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
@@ -3556,7 +3503,7 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 </div>
 </section>
 <section id="remuestreo-de-datos-de-series-temporales">
-<h2>Remuestreo de datos de series temporales<a class="headerlink" href="#remuestreo-de-datos-de-series-temporales" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.22. </span>Remuestreo de datos de series temporales<a class="headerlink" href="#remuestreo-de-datos-de-series-temporales" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>La técnica de <em><strong>remuestreo</strong></em> se ilustra utilizando una <em><strong>serie temporal sobre concentraciones químicas tomadas cada dos horas entre el 1 de enero de 1975 y el 17 de enero de 1975</strong></em>. El conjunto de datos se ha descargado de <a class="reference external" href="http://datamarket.com">datamarket</a>.</p></li>
 </ul>
@@ -3739,7 +3686,7 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 </div>
 </section>
 <section id="agregacion-por-grupos">
-<h2>Agregación por grupos<a class="headerlink" href="#agregacion-por-grupos" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.23. </span>Agregación por grupos<a class="headerlink" href="#agregacion-por-grupos" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Para demostrar la <em><strong>agregación por grupos</strong></em>, utilizaremos la <em><strong>serie temporal de la temperatura media diaria del río Fisher en Texas, Estados Unidos</strong></em>. La serie temporal tiene observaciones tomadas <em><strong>entre el 1 de enero de 1988 y el 31 de diciembre de 1991</strong></em>.</p></li>
 </ul>
@@ -4104,7 +4051,7 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 </div>
 </section>
 <section id="estadisticos-moviles">
-<h2>Estadísticos móviles<a class="headerlink" href="#estadisticos-moviles" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.24. </span>Estadísticos móviles<a class="headerlink" href="#estadisticos-moviles" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
@@ -4171,7 +4118,7 @@ P(Y_{1}=y_{1}, Y_{2}=y_{2}, \dots, Y_{T}=y_{T})=f(Y_{1}=y_{1})f(Y_{2}=y_{2})\cdo
 </div>
 </div>
 <div class="proof theorem admonition" id="th_moving_average">
-<p class="admonition-title"><span class="caption-number">Theorem 1 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 1.1 </span></p>
 <section class="theorem-content" id="proof-content">
 <ul class="simple">
 <li><p>Una <em><strong>media móvil simple</strong></em> de longitud <span class="math notranslate nohighlight">\(N\)</span> asigna ponderaciones <span class="math notranslate nohighlight">\(1/N\)</span> a las observaciones más recientes <span class="math notranslate nohighlight">\(y_{T}, y_{T-1},\dots, y_{T-N+1}\)</span>, y peso cero a todas las demás observaciones. Si <span class="math notranslate nohighlight">\(M_{T}\)</span> es la media móvil, la media móvil de <span class="math notranslate nohighlight">\(N\)</span> intervalos en el período <span class="math notranslate nohighlight">\(T\)</span> es</p></li>
@@ -4222,7 +4169,7 @@ M_{T}=\frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{T}y_{t
 <ul>
 <li><p>Una desventaja obvia de un filtro lineal como una <em><strong>media móvil</strong></em> es que un <em><strong>punto de datos inusual o erróneo o un valor atípico dominará las medias móviles que contengan esa observación</strong></em>, contaminando las medias durante un periodo de tiempo igual al intervalo del filtro. Por ejemplo, consideremos la secuencia de observaciones</p>
 <div class="math notranslate nohighlight" id="equation-unusual-data-value">
-<span class="eqno">(2)<a class="headerlink" href="#equation-unusual-data-value" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-unusual-data-value" title="Link to this equation">#</a></span>\[\begin{split}
     \\[1mm]
     \{15, 18, 13, 12, 16, 14, 16, 17, 18, 15, 18, 200, 19, 14, 21, 24, 19, 25\}
     \end{split}\]</div>
@@ -4231,7 +4178,7 @@ M_{T}=\frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{T}y_{t
 <li><p>Cualquier versión suavizada razonable de los datos también debería aumentar de forma constante de 15 a 25 y <em><strong>no hacer hincapié en el valor 200</strong></em>. Ahora, incluso si 200 es una observación legítima, y no el <em><strong>resultado de un error de registro de datos (¡quizás debería ser 20!)</strong></em>, es tan inusual que <em><strong>merece una atención especial y probablemente no debería analizarse junto con el resto de los datos</strong></em>.</p></li>
 </ul>
 <div class="proof definition admonition" id="moving_median">
-<p class="admonition-title"><span class="caption-number">Definition 1 </span> (Medianas moviles corridas)</p>
+<p class="admonition-title"><span class="caption-number">Definition 1.1 </span> (Medianas moviles corridas)</p>
 <section class="definition-content" id="proof-content">
 <ul>
 <li><p>Las medianas móviles impares (también denominadas <em><strong>medianas móviles corridas</strong></em>) son una <em><strong>alternativa a las medias móviles que suavizan eficazmente los datos cuando la serie puede estar contaminada con valores inusuales o valores atípicos</strong></em>. La mediana de intervalo <span class="math notranslate nohighlight">\(N\)</span> se define como</p>
@@ -4250,7 +4197,7 @@ M_{T}=\frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{T}y_{t
 </ul>
 </section>
 </div><ul class="simple">
-<li><p>Este suavizador procesaría los datos de tres en tres, y <em><strong>sustituiría las tres observaciones originales por su mediana</strong></em>. Si aplicamos este suavizador a los datos anteriores (ver datos <a class="reference internal" href="#equation-unusual-data-value">(2)</a>), obtenemos</p></li>
+<li><p>Este suavizador procesaría los datos de tres en tres, y <em><strong>sustituiría las tres observaciones originales por su mediana</strong></em>. Si aplicamos este suavizador a los datos anteriores (ver datos <a class="reference internal" href="#equation-unusual-data-value">(1.2)</a>), obtenemos</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -4277,13 +4224,13 @@ M_{T}=\frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{T}y_{t
 </ul>
 </section>
 <section id="procesos-estacionarios">
-<h2>Procesos estacionarios<a class="headerlink" href="#procesos-estacionarios" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.25. </span>Procesos estacionarios<a class="headerlink" href="#procesos-estacionarios" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>La <em><strong>estacionariedad es un supuesto fundamental en la teoría estadística y el análisis de series temporales</strong></em>. Asegura que los <em><strong>estadísticos muestrales, como la media y la varianza, se mantengan constantes a lo largo del tiempo</strong></em>, lo que permite su uso como <em><strong>estimaciones confiables para futuras ocurrencias</strong></em>.</p></li>
 <li><p>En el contexto de series temporales, la <em><strong>estacionariedad implica que las propiedades de la serie, como: la media, la varianza y la autocorrelación, no cambien con el tiempo</strong></em>. En resumen, la estacionariedad requiere que la serie tenga una <em><strong>media y una varianza constantes</strong></em>, <em>sin patrones predecibles o repetitivos</em>.</p></li>
 </ul>
 <div class="proof definition admonition" id="def_stationarity">
-<p class="admonition-title"><span class="caption-number">Definition 2 </span> (Serie temporal estacionaria)</p>
+<p class="admonition-title"><span class="caption-number">Definition 1.2 </span> (Serie temporal estacionaria)</p>
 <section class="definition-content" id="proof-content">
 <ul>
 <li><p>Una serie de tiempo se dice que es <em><strong>estrictamente estacionaria si sus propiedades no se ven afectadas por un cambio en el origen temporal</strong></em>. Es decir, si la <em><strong>distribución de probabilidad conjunta de las observaciones</strong></em> <span class="math notranslate nohighlight">\(y_{t}, y_{t+1}, y_{t+2}, \dots, y_{t+n}\)</span> <em><strong>es exactamente igual a la distribución de las observaciones</strong></em> <span class="math notranslate nohighlight">\(y_{t+k}, y_{t+k+1}, y_{t+k+2}, \dots, y_{t+k+n}\)</span> entonces la es estrictamente estacionaria.</p></li>
@@ -4307,11 +4254,11 @@ M_{T}=\frac{y_{T}+y_{T-1}+\cdots+y_{T-N+1}}{N}=\frac{1}{N}\sum_{t=T-N+1}^{T}y_{t
     \]</div>
 <p>y la <em><strong>varianza muestral</strong></em> es</p>
 <div class="math notranslate nohighlight" id="equation-sample-variance-t">
-<span class="eqno">(3)<a class="headerlink" href="#equation-sample-variance-t" title="Link to this equation">#</a></span>\[
+<span class="eqno">(1.3)<a class="headerlink" href="#equation-sample-variance-t" title="Link to this equation">#</a></span>\[
     s^{2}=\hat{\sigma}_{y}^{2}=\frac{1}{T}\sum_{t=1}^{T}(y_{t}-\overline{y})^{2}.
     \]</div>
 </li>
-<li><p>Obsérvese que el divisor en la Ecuación <a class="reference internal" href="#equation-sample-variance-t">(3)</a> es <span class="math notranslate nohighlight">\(T\)</span> en lugar del más familiar <span class="math notranslate nohighlight">\(T-1\)</span>. Esta es la convención común en muchas aplicaciones de series temporales, <em><strong>como</strong></em> <span class="math notranslate nohighlight">\(T\)</span> <em><strong>no suele ser pequeño, habrá poca diferencia entre utilizar</strong></em> <span class="math notranslate nohighlight">\(T\)</span> <em><strong>en lugar de</strong></em> <span class="math notranslate nohighlight">\(T-1\)</span>.</p></li>
+<li><p>Obsérvese que el divisor en la Ecuación <a class="reference internal" href="#equation-sample-variance-t">(1.3)</a> es <span class="math notranslate nohighlight">\(T\)</span> en lugar del más familiar <span class="math notranslate nohighlight">\(T-1\)</span>. Esta es la convención común en muchas aplicaciones de series temporales, <em><strong>como</strong></em> <span class="math notranslate nohighlight">\(T\)</span> <em><strong>no suele ser pequeño, habrá poca diferencia entre utilizar</strong></em> <span class="math notranslate nohighlight">\(T\)</span> <em><strong>en lugar de</strong></em> <span class="math notranslate nohighlight">\(T-1\)</span>.</p></li>
 </ul>
 </section>
 </div><ul class="simple">
@@ -4390,12 +4337,12 @@ dtype: float64
 </ul>
 </section>
 <section id="transformacion-de-datos-y-ajustes">
-<h2>Transformación de datos y ajustes<a class="headerlink" href="#transformacion-de-datos-y-ajustes" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.26. </span>Transformación de datos y ajustes<a class="headerlink" href="#transformacion-de-datos-y-ajustes" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Las <em><strong>transformaciones de datos</strong></em> son comunes en estadística y se utilizan principalmente para <em><strong>estabilizar la varianza de los datos</strong></em>. La <em><strong>varianza no constante, conocida como <code class="docutils literal notranslate"><span class="pre">heteroscedasticidad</span></code>, es frecuente en series temporales</strong></em>. Para abordar esto, se emplean modelos como <code class="docutils literal notranslate"><span class="pre">GARCH</span></code>. Ejemplos incluyen <em><strong>series relacionadas con la volatilidad de acciones como Tesla o la criptomoneda BTC</strong></em>, donde una transformación logarítmica puede reducir la varianza.</p></li>
 </ul>
 <div class="proof definition admonition" id="definition-3">
-<p class="admonition-title"><span class="caption-number">Definition 3 </span> (Transformaciones de potencia)</p>
+<p class="admonition-title"><span class="caption-number">Definition 1.3 </span> (Transformaciones de potencia)</p>
 <section class="definition-content" id="proof-content">
 <ul>
 <li><p>Un tipo muy popular de transformación de datos para tratar con la varianza es la <em><strong>familia de transformaciones de potencia</strong></em>, dada por</p>
@@ -4448,13 +4395,13 @@ x_{t}=\frac{100(y_{t}-y_{t-1})}{y_{t-1}}.
 </ul>
 </section>
 <section id="ajustes-estacionales-y-de-tendencia">
-<h2>Ajustes estacionales y de tendencia<a class="headerlink" href="#ajustes-estacionales-y-de-tendencia" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.27. </span>Ajustes estacionales y de tendencia<a class="headerlink" href="#ajustes-estacionales-y-de-tendencia" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Los <em><strong>ajustes de tendencia y estacionales son esenciales en el modelado y la predicción de series temporales</strong></em>. Una serie temporal con tendencia se considera no estacionaria. Para simplificar el análisis, es común <em><strong>eliminar la tendencia ajustando los datos a un modelo de regresión y luego sustraerlo de las observaciones originales</strong></em>, dejando residuos sin tendencia.</p></li>
 </ul>
 </section>
 <section id="diferenciacion">
-<h2>Diferenciación<a class="headerlink" href="#diferenciacion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.28. </span>Diferenciación<a class="headerlink" href="#diferenciacion" title="Link to this heading">#</a></h2>
 <ul>
 <li><p>Otro enfoque para <em><strong>eliminar la tendencia es mediante la diferenciación de los datos</strong></em>; es decir, <em><strong>aplicando el operador de diferencia a la serie temporal original para obtener una nueva serie temporal</strong></em>, digamos,</p>
 <div class="math notranslate nohighlight">
@@ -5142,11 +5089,11 @@ Freq: ME, Name: Mean_Temperature, dtype: float64
 </ul>
 </section>
 <section id="prueba-de-dickey-fuller">
-<h2>Prueba de Dickey-Fuller<a class="headerlink" href="#prueba-de-dickey-fuller" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.29. </span>Prueba de Dickey-Fuller<a class="headerlink" href="#prueba-de-dickey-fuller" title="Link to this heading">#</a></h2>
 <ul>
 <li><p>Dada serie temporal generada por un proceso con una estructura <em><strong>Autorregresiva de Primer Orden, AR(1)</strong></em>, también conocida como proceso de primer orden de Markov, y es ampliamente utilizada en diversas disciplinas</p>
 <div class="math notranslate nohighlight" id="equation-ar1-dickey-fuller">
-<span class="eqno">(4)<a class="headerlink" href="#equation-ar1-dickey-fuller" title="Link to this equation">#</a></span>\[
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-ar1-dickey-fuller" title="Link to this equation">#</a></span>\[
   y_{t}=\phi y_{t-1}+\varepsilon_{t},
   \]</div>
 <p>donde <span class="math notranslate nohighlight">\(\phi\)</span> es un término de perturbación estacionario o <em><strong>coeficiente de autocorrelación</strong></em>, y <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span> es una <em><strong>variable aleatoria estacionaria e independiente</strong></em>.</p>
@@ -5156,7 +5103,7 @@ Freq: ME, Name: Mean_Temperature, dtype: float64
 <li><p>Si <span class="math notranslate nohighlight">\(\phi=1\)</span>, la <em><strong>ecuación característica del proceso</strong></em> tiene una raíz unitaria, lo que <em><strong>indica que el proceso es no estacionario</strong></em>. Mientras <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span> sea estacionario, las primeras diferencias de <span class="math notranslate nohighlight">\(y_{t}\)</span> son estacionarias. La serie <span class="math notranslate nohighlight">\(y_{t}\)</span> es de <em><strong>integración de primer orden</strong></em>. Si <span class="math notranslate nohighlight">\(\phi&lt;1\)</span>, la serie temporal <span class="math notranslate nohighlight">\(\phi_{t}\)</span> <em><strong>es estacionaria</strong></em> en el sentido de que es una <em><strong>integración de orden cero</strong></em>.</p></li>
 </ul>
 <ul>
-<li><p>La prueba de DF <span id="id3">[<a class="reference internal" href="biblio.html#id22" title="David A Dickey and Wayne A Fuller. Distribution of the estimators for autoregressive time series with a unit root. Journal of the American statistical association, 74(366a):427–431, 1979.">Dickey and Fuller, 1979</a>]</span> consiste en la <em><strong>hipótesis nula de que en un modelo, representado por la</strong></em> Ecuación <a class="reference internal" href="#equation-ar1-dickey-fuller">(4)</a> para <span class="math notranslate nohighlight">\(\delta=\phi-1\)</span> como sigue</p>
+<li><p>La prueba de DF <span id="id3">[<a class="reference internal" href="biblio.html#id22" title="David A Dickey and Wayne A Fuller. Distribution of the estimators for autoregressive time series with a unit root. Journal of the American statistical association, 74(366a):427–431, 1979.">Dickey and Fuller, 1979</a>]</span> consiste en la <em><strong>hipótesis nula de que en un modelo, representado por la</strong></em> Ecuación <a class="reference internal" href="#equation-ar1-dickey-fuller">(1.4)</a> para <span class="math notranslate nohighlight">\(\delta=\phi-1\)</span> como sigue</p>
 <div class="math notranslate nohighlight">
 \[
   \Delta y_{t}=\delta y_{t-1}+\varepsilon_{t}.
@@ -5322,7 +5269,7 @@ Freq: ME, Name: Mean_Temperature, dtype: float64
 </ul>
 </section>
 <section id="descomposicion-de-series-temporales">
-<h2>Descomposición de series temporales<a class="headerlink" href="#descomposicion-de-series-temporales" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.30. </span>Descomposición de series temporales<a class="headerlink" href="#descomposicion-de-series-temporales" title="Link to this heading">#</a></h2>
 <ul>
 <li><p>También existe un <em><strong>enfoque “clásico” para la descomposición de una serie de tiempo en componentes de tendencia y estacionales</strong></em> (de hecho, hay muchos algoritmos de descomposición diferentes; aquí explicamos un enfoque muy simple pero útil). El modelo matemático general para esta descomposición es</p>
 <div class="math notranslate nohighlight">
@@ -5382,7 +5329,7 @@ T_{t}=\beta_{0}+\beta_{1}t.
 </ul>
 </section>
 <section id="medias-moviles-y-efectos-de-suavizacion">
-<h2>Medias móviles y efectos de suavización<a class="headerlink" href="#medias-moviles-y-efectos-de-suavizacion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.31. </span>Medias móviles y efectos de suavización<a class="headerlink" href="#medias-moviles-y-efectos-de-suavizacion" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Las <em><strong>medias móviles (MA)</strong></em> en un índice temporal <span class="math notranslate nohighlight">\(t\)</span> <em><strong>estiman el componente de ciclo de tendencia media</strong></em> <span class="math notranslate nohighlight">\(M_{t}\)</span> y se calcula sacando la <em><strong>media a lo largo del periodo de tiempo</strong></em> <span class="math notranslate nohighlight">\(t\pm k\)</span>, donde <span class="math notranslate nohighlight">\(k\)</span> es el rango de la <strong>MA</strong></p></li>
 </ul>
@@ -5677,7 +5624,7 @@ T_{t}=\beta_{0}+\beta_{1}t.
 </div>
 </section>
 <section id="ajuste-estacional-mediante-media-movil">
-<h2>Ajuste estacional mediante media móvil<a class="headerlink" href="#ajuste-estacional-mediante-media-movil" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.32. </span>Ajuste estacional mediante media móvil<a class="headerlink" href="#ajuste-estacional-mediante-media-movil" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>La propiedad de <em><strong>media ponderada</strong></em> de las <span class="math notranslate nohighlight">\(\overline{\widehat{M}_{t}^{(m)}}^{(t-i, t+j)}\hspace{-6mm},i,j\in\{0,1,2,\dots\}\)</span> <em><strong>medias móviles</strong></em> tiene aplicación en <em><strong>suavizar datos con estacionalidad para generar estimaciones de ciclos de tendencia</strong></em>. Por ejemplo, dadas las <em><strong>observaciones trimestrales</strong></em> podemos aplicar la <strong>MA</strong>: <span class="math notranslate nohighlight">\(\overline{\widehat{M}_{t}^{(4)}}^{(t, t+1)}\)</span> para suavizar los datos.</p></li>
 <li><p>El enfoque de utilizar <strong>MA</strong> ponderado de la forma <span class="math notranslate nohighlight">\(\overline{\widehat{M}_{t}^{(4)}}^{(t, t+1)}\)</span> se ilustra utilizando los datos de <em><strong>producción de cerveza de Australia</strong></em>. La serie temporal representa la <em><strong>producción trimestral de cerveza desde marzo de 1956 a junio de 1994</strong></em>. La serie temporal original y una serie de <strong>MA</strong> <span class="math notranslate nohighlight">\(\overline{\widehat{M}_{t}^{(4)}}^{(t, t+1)}\)</span> son dibujadas.</p></li>
@@ -5943,7 +5890,7 @@ Shape after removing missing values: (154, 2)
 </ul>
 </section>
 <section id="media-movil-ponderada">
-<h2>Media móvil ponderada<a class="headerlink" href="#media-movil-ponderada" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.33. </span>Media móvil ponderada<a class="headerlink" href="#media-movil-ponderada" title="Link to this heading">#</a></h2>
 <ul>
 <li><p>En la sección anterior, expresamos las <em><strong>medias móviles de la forma</strong></em> <span class="math notranslate nohighlight">\(\overline{\widehat{M}_{t}^{(4)}}^{(t-i, t+j)}\)</span> como <em><strong>suma ponderada de las observaciones de la serie temporal original</strong></em>. Vimos cómo las <em><strong>ponderaciones caen para observaciones alejadas del índice temporal</strong></em> en el que se calcula la <strong>MA</strong>. La noción de <em><strong>medias móviles ponderadas</strong></em>, que es simétrica, puede generalizarse para cualquier aplicación de la siguiente manera:</p>
 <div class="math notranslate nohighlight">
@@ -5954,7 +5901,7 @@ Shape after removing missing values: (154, 2)
 </ul>
 </section>
 <section id="descomposicion-de-series-temporales-mediante-medias-moviles">
-<h2>Descomposición de series temporales mediante medias móviles<a class="headerlink" href="#descomposicion-de-series-temporales-mediante-medias-moviles" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.34. </span>Descomposición de series temporales mediante medias móviles<a class="headerlink" href="#descomposicion-de-series-temporales-mediante-medias-moviles" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Las medias móviles se utilizan para <em><strong>suavizar la serie original y estimar el componente de ciclo de la tendencia</strong></em>. La elección de los parámetros es crucial, siendo la periodicidad de los datos un factor determinante. En el caso de una periodicidad par, se ajusta para obtener una mejor estimación. La <em><strong>estimación del componente estacional se genera a partir de la media estacional de los residuos</strong></em>. Los <em><strong>cálculos difieren entre modelos aditivos y multiplicativos</strong></em>.</p></li>
 <li><p>Finalmente, las <em><strong>variaciones irregulares</strong></em> se obtienen mediante <em><strong>ajustes adicionales de la serie original</strong></em>. Se ilustra este enfoque con la serie temporal de los <em><strong>kilómetros mensuales de las aeronaves voladas por US Airlines</strong></em>, aplicando <em><strong>modelos aditivos y multiplicativos</strong></em></p></li>
@@ -6292,7 +6239,7 @@ Shape after removing missing values: (154, 2)
 </div>
 </section>
 <section id="descomposicion-de-series-temporales-mediante-statsmodels-tsa">
-<h2>Descomposición de series temporales mediante <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa</span></code><a class="headerlink" href="#descomposicion-de-series-temporales-mediante-statsmodels-tsa" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.35. </span>Descomposición de series temporales mediante <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa</span></code><a class="headerlink" href="#descomposicion-de-series-temporales-mediante-statsmodels-tsa" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Analizamos el uso de <em><strong>MA para estimar tendencias y estacionalidad en series temporales</strong></em>. Sin embargo, para <em><strong>patrones más complejos</strong></em>, como cambios en la estacionalidad, <em><strong>recurrimos al método</strong></em> <a class="reference external" href="https://www.statsmodels.org/devel/generated/statsmodels.tsa.seasonal.STL.html">STL</a> <span id="id4">[<a class="reference internal" href="biblio.html#id27" title="Robert B Cleveland, William S Cleveland, Jean E McRae, Irma Terpenning, and others. Stl: a seasonal-trend decomposition. J. Off. Stat, 6(1):3–73, 1990.">Cleveland <em>et al.</em>, 1990</a>]</span> en que se usa <a class="reference external" href="https://es.wikipedia.org/wiki/Regresi%C3%B3n_local">Regresión Local (LOESS)</a> en el proceso de suavización. En esta sección, emplearemos <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa</span></code> en <code class="docutils literal notranslate"><span class="pre">Python</span></code> para <em><strong>estimar tendencias, ciclos y estacionalidad</strong></em>, luego <em><strong>aplicaremos la prueba ADF para verificar la estacionariedad de los datos</strong></em>.</p></li>
 </ul>
@@ -6550,9 +6497,9 @@ Shape after removing missing values: (154, 2)
 </div>
 </section>
 <section id="residual-y-error-de-prediccion">
-<h2>Residual y error de predicción<a class="headerlink" href="#residual-y-error-de-prediccion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.36. </span>Residual y error de predicción<a class="headerlink" href="#residual-y-error-de-prediccion" title="Link to this heading">#</a></h2>
 <div class="proof definition admonition" id="forecast_error">
-<p class="admonition-title"><span class="caption-number">Definition 4 </span></p>
+<p class="admonition-title"><span class="caption-number">Definition 1.4 </span></p>
 <section class="definition-content" id="proof-content">
 <ul>
 <li><p>Supongamos que se dispone de <span class="math notranslate nohighlight">\(T\)</span> <em><strong>periodos de datos disponibles</strong></em>, siendo el periodo <span class="math notranslate nohighlight">\(T\)</span> <em><strong>el más reciente</strong></em>. Denotemos por <span class="math notranslate nohighlight">\(y_{t}\)</span> la <em><strong>observación de esta variable en el periodo de tiempo</strong></em> <span class="math notranslate nohighlight">\(t,~t = 1,2,\dots, T\)</span>.</p></li>
@@ -6588,7 +6535,7 @@ e_{t}=y_{t}-\hat{y}_{t}.
 </div>
 </section>
 <section id="evaluando-y-monitoreando-el-desempeno-del-modelo-predictivo">
-<h2>Evaluando y monitoreando el desempeño del modelo predictivo<a class="headerlink" href="#evaluando-y-monitoreando-el-desempeno-del-modelo-predictivo" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.37. </span>Evaluando y monitoreando el desempeño del modelo predictivo<a class="headerlink" href="#evaluando-y-monitoreando-el-desempeno-del-modelo-predictivo" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
@@ -6665,7 +6612,7 @@ e_{t}=y_{t}-\hat{y}_{t}.
 <ul>
 <li><p>Por lo tanto, podríamos <em><strong>probar la hipótesis</strong></em> <span class="math notranslate nohighlight">\(H_{0}:~\rho_{k} = 0\)</span> utilizando el <em><strong>estadístico de prueba</strong></em></p>
 <div class="math notranslate nohighlight" id="equation-test-statistic-acf-normal-dist">
-<span class="eqno">(5)<a class="headerlink" href="#equation-test-statistic-acf-normal-dist" title="Link to this equation">#</a></span>\[
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-test-statistic-acf-normal-dist" title="Link to this equation">#</a></span>\[
   Z_{0}=\frac{r_{k}}{\sqrt{1/T}}=r_{k}\sqrt{T}.
   \]</div>
 </li>
@@ -6676,7 +6623,7 @@ e_{t}=y_{t}-\hat{y}_{t}.
 <div class="tip admonition">
 <p class="admonition-title">Box-Pierce test</p>
 <ul>
-<li><p>Considera el <em><strong>cuadrado del estadístico de prueba</strong></em> <span class="math notranslate nohighlight">\(Z_{0}\)</span> en la Ecuación <a class="reference internal" href="#equation-test-statistic-acf-normal-dist">(5)</a>. La distribución de <span class="math notranslate nohighlight">\(Z_{0}^{2} = r_{k}^{2}T\)</span> es <em><strong>aproximadamente chi-cuadrado</strong></em> con <em><strong>un grado de libertad</strong></em>. El <em><strong>estadístico de Box-Pierce</strong></em></p>
+<li><p>Considera el <em><strong>cuadrado del estadístico de prueba</strong></em> <span class="math notranslate nohighlight">\(Z_{0}\)</span> en la Ecuación <a class="reference internal" href="#equation-test-statistic-acf-normal-dist">(1.5)</a>. La distribución de <span class="math notranslate nohighlight">\(Z_{0}^{2} = r_{k}^{2}T\)</span> es <em><strong>aproximadamente chi-cuadrado</strong></em> con <em><strong>un grado de libertad</strong></em>. El <em><strong>estadístico de Box-Pierce</strong></em></p>
 <div class="math notranslate nohighlight">
 \[
   Q_{BP}=T\sum_{k=1}^{K}r_{k}^{2}
@@ -6698,7 +6645,7 @@ e_{t}=y_{t}-\hat{y}_{t}.
 </ul>
 </section>
 <section id="elegir-entre-modelos-que-compiten">
-<h2>Elegir entre modelos que compiten<a class="headerlink" href="#elegir-entre-modelos-que-compiten" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.38. </span>Elegir entre modelos que compiten<a class="headerlink" href="#elegir-entre-modelos-que-compiten" title="Link to this heading">#</a></h2>
 <div class="admonition-introduccion admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
@@ -6718,13 +6665,13 @@ e_{t}=y_{t}-\hat{y}_{t}.
 <ul>
 <li><p>Otro criterio es el <em><strong>estadístico</strong></em> <span class="math notranslate nohighlight">\(R\)</span><em><strong>-cuadrado</strong></em></p>
 <div class="math notranslate nohighlight" id="equation-r2-test-goodnessoffit">
-<span class="eqno">(6)<a class="headerlink" href="#equation-r2-test-goodnessoffit" title="Link to this equation">#</a></span>\[
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-r2-test-goodnessoffit" title="Link to this equation">#</a></span>\[
   R^{2}=1-\frac{\displaystyle{\sum_{t=1}^{T}e_{t}^{2}}}{\displaystyle{\sum_{t=1}^{T}(y_{t}-\overline{y})^{2}}}
   \]</div>
 </li>
 </ul>
 <ul class="simple">
-<li><p>El <em><strong>denominador</strong></em> de la Ecuación <a class="reference internal" href="#equation-r2-test-goodnessoffit">(6)</a> es simplemente la <em><strong>suma total de cuadrados de las observaciones</strong></em>, que es constante (<em>no depende del modelo</em>), y el <em><strong>numerador</strong></em> es simplemente la <em><strong>suma residual de cuadrados</strong></em>.</p></li>
+<li><p>El <em><strong>denominador</strong></em> de la Ecuación <a class="reference internal" href="#equation-r2-test-goodnessoffit">(1.6)</a> es simplemente la <em><strong>suma total de cuadrados de las observaciones</strong></em>, que es constante (<em>no depende del modelo</em>), y el <em><strong>numerador</strong></em> es simplemente la <em><strong>suma residual de cuadrados</strong></em>.</p></li>
 </ul>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
@@ -6831,7 +6778,7 @@ e_{t}=y_{t}-\hat{y}_{t}.
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Análisis y Predicción de Series de Tiempo</p>
+        <p class="prev-next-title">Profesor: Dr. Lihki Rubio</p>
       </div>
     </a>
     <a class="right-next"
@@ -6839,7 +6786,7 @@ e_{t}=y_{t}-\hat{y}_{t}.
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Métodos de Suavización Exponencial</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Métodos de Suavización Exponencial</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -6859,51 +6806,45 @@ e_{t}=y_{t}-\hat{y}_{t}.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introducción a las Series de Tiempo</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diferentes-tipos-de-datos">Diferentes tipos de datos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-transversales">Datos transversales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-series-temporales">Datos de series temporales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-panel">Datos de panel</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructuras-internas-de-las-series-temporales">Estructuras internas de las series temporales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tendencia-general">Tendencia general</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estacionalidad">Estacionalidad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-secuencia-de-series">Gráfico de secuencia de series</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-subserie-estacional">Gráfico de subserie estacional</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-cajas-multiples">Gráficos de cajas múltiples</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cambios-ciclicos">Cambios cíclicos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#componentes-irregulares">Componentes irregulares</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-analisis-de-series-temporales">Modelos de análisis de series temporales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-media-cero">Modelos de media cero</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#camino-aleatorio">Camino aleatorio</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-tendencia">Modelos de tendencia</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-estacionalidad">Modelos de estacionalidad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelacion-y-autocorrelacion-parcial">Autocorrelación y autocorrelación parcial</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimentos-numericos-acf">Experimentos numéricos ACF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diferentes-tipos-de-datos">1.1. Diferentes tipos de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-transversales">1.2. Datos transversales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-series-temporales">1.3. Datos de series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-panel">1.4. Datos de panel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructuras-internas-de-las-series-temporales">1.5. Estructuras internas de las series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tendencia-general">1.6. Tendencia general</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estacionalidad">1.7. Estacionalidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-secuencia-de-series">1.8. Gráfico de secuencia de series</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-subserie-estacional">1.9. Gráfico de subserie estacional</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graficos-de-cajas-multiples">1.10. Gráficos de cajas múltiples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cambios-ciclicos">1.11. Cambios cíclicos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#componentes-irregulares">1.12. Componentes irregulares</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-analisis-de-series-temporales">1.13. Modelos de análisis de series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-media-cero">1.14. Modelos de media cero</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#camino-aleatorio">1.15. Camino aleatorio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-tendencia">1.16. Modelos de tendencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-estacionalidad">1.17. Modelos de estacionalidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelacion-y-autocorrelacion-parcial">1.18. Autocorrelación y autocorrelación parcial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimentos-numericos-acf">1.19. Experimentos numéricos ACF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-datos-de-series-temporales">1.20. Análisis de datos de series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesamiento-avanzado-y-visualizacion-de-datos-de-series-temporales">1.21. Procesamiento avanzado y visualización de datos de series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remuestreo-de-datos-de-series-temporales">1.22. Remuestreo de datos de series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agregacion-por-grupos">1.23. Agregación por grupos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estadisticos-moviles">1.24. Estadísticos móviles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesos-estacionarios">1.25. Procesos estacionarios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformacion-de-datos-y-ajustes">1.26. Transformación de datos y ajustes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ajustes-estacionales-y-de-tendencia">1.27. Ajustes estacionales y de tendencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diferenciacion">1.28. Diferenciación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-de-dickey-fuller">1.29. Prueba de Dickey-Fuller</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-series-temporales">1.30. Descomposición de series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medias-moviles-y-efectos-de-suavizacion">1.31. Medias móviles y efectos de suavización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ajuste-estacional-mediante-media-movil">1.32. Ajuste estacional mediante media móvil</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#media-movil-ponderada">1.33. Media móvil ponderada</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-series-temporales-mediante-medias-moviles">1.34. Descomposición de series temporales mediante medias móviles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-series-temporales-mediante-statsmodels-tsa">1.35. Descomposición de series temporales mediante <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-y-error-de-prediccion">1.36. Residual y error de predicción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluando-y-monitoreando-el-desempeno-del-modelo-predictivo">1.37. Evaluando y monitoreando el desempeño del modelo predictivo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elegir-entre-modelos-que-compiten">1.38. Elegir entre modelos que compiten</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-datos-de-series-temporales">Análisis de datos de series temporales</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesamiento-avanzado-y-visualizacion-de-datos-de-series-temporales">Procesamiento avanzado y visualización de datos de series temporales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remuestreo-de-datos-de-series-temporales">Remuestreo de datos de series temporales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agregacion-por-grupos">Agregación por grupos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estadisticos-moviles">Estadísticos móviles</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesos-estacionarios">Procesos estacionarios</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformacion-de-datos-y-ajustes">Transformación de datos y ajustes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ajustes-estacionales-y-de-tendencia">Ajustes estacionales y de tendencia</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diferenciacion">Diferenciación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-de-dickey-fuller">Prueba de Dickey-Fuller</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-series-temporales">Descomposición de series temporales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#medias-moviles-y-efectos-de-suavizacion">Medias móviles y efectos de suavización</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ajuste-estacional-mediante-media-movil">Ajuste estacional mediante media móvil</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#media-movil-ponderada">Media móvil ponderada</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-series-temporales-mediante-medias-moviles">Descomposición de series temporales mediante medias móviles</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-series-temporales-mediante-statsmodels-tsa">Descomposición de series temporales mediante <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-y-error-de-prediccion">Residual y error de predicción</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluando-y-monitoreando-el-desempeno-del-modelo-predictivo">Evaluando y monitoreando el desempeño del modelo predictivo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elegir-entre-modelos-que-compiten">Elegir entre modelos que compiten</a></li>
-</ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
@@ -6917,7 +6858,7 @@ e_{t}=y_{t}-\hat{y}_{t}.
   <div class="footer-item">
     
 <p class="component-author">
-By Lihki Rubio PhD in Mathematical Engineering
+By Lihki Rubio, Ph.D.
 </p>
 
   </div>
@@ -6927,7 +6868,7 @@ By Lihki Rubio PhD in Mathematical Engineering
 
   <p class="copyright">
     
-      © Copyright Lihki Rubio PhD.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -6940,6 +6881,9 @@ By Lihki Rubio PhD in Mathematical Engineering
   
   <div class="footer-item">
     
+<div class="extra_footer">
+  <p>Lihki Rubio, Ph.D. All rights reserved.</p>
+</div>
   </div>
   
 </div>
